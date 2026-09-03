@@ -1,0 +1,23 @@
+{
+    "source_file": "Priya varma HR.pdf",
+    "status": "success",
+    "skill_extraction": {
+        "total_skills": 2,
+        "skills": [
+            {
+                "skill": "Negotiation",
+                "category": "soft",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Recruitment",
+                "category": "business",
+                "source": "WORK EXPERIENCE",
+                "match_type": "exact",
+                "confidence": 0.85
+            }
+        ]
+    }
+}

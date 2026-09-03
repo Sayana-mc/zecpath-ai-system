@@ -1,0 +1,79 @@
+{
+    "source_file": "Reshma Pillai data analyst .pdf",
+    "status": "success",
+    "skill_extraction": {
+        "total_skills": 10,
+        "skills": [
+            {
+                "skill": "Python",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "SQL",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Pandas",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "NumPy",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Power BI",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Excel",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Communication",
+                "category": "soft",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Market Research",
+                "category": "business",
+                "source": "WORK EXPERIENCE",
+                "match_type": "exact",
+                "confidence": 0.85
+            },
+            {
+                "skill": "Sales",
+                "category": "business",
+                "source": "WORK EXPERIENCE",
+                "match_type": "exact",
+                "confidence": 0.85
+            },
+            {
+                "skill": "Leadership",
+                "category": "soft",
+                "source": "WORK EXPERIENCE",
+                "match_type": "exact",
+                "confidence": 0.85
+            }
+        ]
+    }
+}

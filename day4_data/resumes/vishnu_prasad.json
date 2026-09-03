@@ -1,0 +1,95 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C003",
+    "name": "Vishnu Prasad",
+    "email": "vishnu.prasad@example.com",
+    "phone": "96330XXXXX",
+    "location": "Kozhikode, Kerala",
+    "current_designation": "Regional Sales Manager",
+    "total_experience_years": 9
+  },
+  "skills": [
+    {
+      "skill_name": "Salesforce CRM",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Sales Forecasting",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Territory Planning",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Trade Promotion Management",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "MS Excel",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "PowerPoint",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Team Leadership",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "B2B Negotiation",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Client Relationship Management",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Coaching & Performance Management",
+      "category": "Soft Skill"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Regional Sales Manager",
+      "company": "Meridian FMCG Distributors",
+      "location": "Kozhikode",
+      "start_date": "Apr 2022",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Senior Sales Executive",
+      "company": "Coastal Traders Ltd",
+      "location": "Kozhikode",
+      "start_date": "May 2019",
+      "end_date": "Mar 2022"
+    },
+    {
+      "designation": "Sales Executive",
+      "company": "Coastal Traders Ltd",
+      "location": "Kannur",
+      "start_date": "Jun 2015",
+      "end_date": "Apr 2019"
+    }
+  ],
+  "education": [
+    {
+      "degree": "BBA",
+      "field": "Business Administration",
+      "institution": "University of Calicut",
+      "start_year": 2012,
+      "end_year": 2015,
+      "grade": null
+    }
+  ],
+  "certifications": [
+    "Certified Professional Sales Leader (CPSL)"
+  ],
+  "languages": [
+    "English",
+    "Malayalam",
+    "Tamil"
+  ],
+  "domain": "Sales"
+}

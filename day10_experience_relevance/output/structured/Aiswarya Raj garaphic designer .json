@@ -1,0 +1,49 @@
+{
+    "source_file": "Aiswarya Raj garaphic designer .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 7.25,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Senior Graphic Designer - Studio Kanvas, Kollam",
+                "company": "Kollam",
+                "start_date": "2023-05-01",
+                "end_date": "2026-08-01",
+                "duration_months": 40
+            },
+            {
+                "job_title": "Graphic Designer - Palette Creative Agency, Kochi",
+                "company": "Kochi",
+                "start_date": "2021-06-01",
+                "end_date": "2023-04-01",
+                "duration_months": 23
+            },
+            {
+                "job_title": "Junior Designer - Palette Creative Agency, Kochi",
+                "company": "Kochi",
+                "start_date": "2019-06-01",
+                "end_date": "2021-05-01",
+                "duration_months": 24
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Senior Graphic Designer - Studio Kanvas, Kollam",
+                "role_2": "Graphic Designer - Palette Creative Agency, Kochi",
+                "overlap": true
+            },
+            {
+                "role_1": "Graphic Designer - Palette Creative Agency, Kochi",
+                "role_2": "Junior Designer - Palette Creative Agency, Kochi",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

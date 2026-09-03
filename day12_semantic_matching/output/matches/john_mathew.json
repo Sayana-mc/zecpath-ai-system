@@ -1,0 +1,41 @@
+{
+    "source_file": "john_mathew.docx",
+    "status": "success",
+    "matches": [
+        {
+            "resume_file": "john_mathew.docx",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "similarity_score": 0.3763,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "john_mathew.docx",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "similarity_score": 0.3403,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "john_mathew.docx",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "similarity_score": 0.3109,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "john_mathew.docx",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "similarity_score": 0.277,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "john_mathew.docx",
+            "job_id": "JOB005",
+            "job_title": "HR Executive",
+            "similarity_score": 0.2176,
+            "match_level": "LOW"
+        }
+    ]
+}

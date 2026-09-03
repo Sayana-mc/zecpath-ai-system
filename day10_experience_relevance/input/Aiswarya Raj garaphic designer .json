@@ -1,0 +1,33 @@
+{
+    "source_file": "Aiswarya Raj garaphic designer .pdf",
+    "file_type": ".pdf",
+    "status": "success",
+    "segmentation": {
+        "sections": {
+            "SKILLS": "- Figma\n- Adobe Photoshop\n- Adobe Illustrator\n- Adobe InDesign\n- Basic motion graphics (After\nEffects)\n- Brand storytelling\n- Client presentation\n- Typography & layout\n- Creative direction",
+            "WORK EXPERIENCE": "Senior Graphic Designer - Studio Kanvas, Kollam\nMay 2023 - Present\n- Design brand identities for 8 D2C clients, from logo through\npackaging and guidelines\n- Create 200+ social media assets monthly across 6 client accounts\n- Lead client-facing brand presentations, translating feedback into\ndesign decisions\n- Mentor a junior designer on typography and layout fundamentals\nGraphic Designer - Palette Creative Agency, Kochi\nJun 2021 - Apr 2023\n- Produced print collateral (menus, brochures, signage) for 15+\nhospitality clients\n- Supported senior designers on 3 major rebranding projects end to\nend\n- Built a reusable social media template system, cutting turnaround\ntime by 30%\nJunior Designer - Palette Creative Agency, Kochi\nJun 2019 - May 2021\n- Assisted with print production files and pre-press checks\n- Designed digital ad creatives for 5 e-commerce clients\nKEY ACHIEVEMENTS\n- Rebranded a regional restaurant chain's visual identity, later\nadopted across 12 outlets\n- Design featured in a regional design showcase blog, 2022\nADDITIONAL INFORMATION\n- Freelance illustration work for 2 independent publishing projects\n(2021 - present)",
+            "EDUCATION": "B.Des, Communication Design,\nNational Institute of Design\n(associate program) (2015 -\n2019)",
+            "CERTIFICATIONS": "- Google UX Design Certificate\n(2022)\n- Adobe Certified Professional\n- Illustrator (2020)\nLANGUAGES\nEnglish (fluent)\nMalayalam (native)\nSUMMARY\nGraphic designer with 5 years of experience across branding,\nsocial media, and print design for D2C and hospitality clients.\nComfortable owning a brand identity from concept through final\ndelivery, and collaborating directly with founders and marketing\nteams.",
+            "PROJECTS": "",
+            "OTHER": "Aiswarya Raj\nBrand & Graphic Designer\nCONTACT\nKollam, Kerala\naiswarya.raj@example.com\n95390XXXXX"
+        },
+        "detected_headings": [
+            {
+                "heading": "SKILLS",
+                "section": "SKILLS"
+            },
+            {
+                "heading": "EDUCATION",
+                "section": "EDUCATION"
+            },
+            {
+                "heading": "CERTIFICATIONS",
+                "section": "CERTIFICATIONS"
+            },
+            {
+                "heading": "EXPERIENCE",
+                "section": "WORK EXPERIENCE"
+            }
+        ]
+    }
+}

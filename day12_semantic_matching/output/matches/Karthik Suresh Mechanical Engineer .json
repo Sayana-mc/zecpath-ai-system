@@ -1,0 +1,41 @@
+{
+    "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+    "status": "success",
+    "matches": [
+        {
+            "resume_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "similarity_score": 0.4077,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "similarity_score": 0.3056,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "job_id": "JOB005",
+            "job_title": "HR Executive",
+            "similarity_score": 0.2612,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "similarity_score": 0.2532,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "similarity_score": 0.2197,
+            "match_level": "LOW"
+        }
+    ]
+}

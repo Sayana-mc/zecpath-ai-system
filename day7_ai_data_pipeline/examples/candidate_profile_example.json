@@ -1,0 +1,33 @@
+﻿{
+    "candidate_id": "CAND001",
+    "application_id": "APP001",
+    "profile_version": "v1",
+    "created_at": "2026-08-17T18:05:00+05:30",
+    "updated_at": "2026-08-17T18:05:00+05:30",
+    "personal_information": {
+        "name": "Example Candidate",
+        "email": "candidate@example.com",
+        "location": "Kochi, Kerala"
+    },
+    "career_information": {
+        "current_role": "Python Developer",
+        "experience_years": 2
+    },
+    "skills": [
+        "Python",
+        "SQL",
+        "FastAPI",
+        "Git",
+        "Pandas"
+    ],
+    "education": [
+        {
+            "degree": "M.Sc Data Science",
+            "field": "Data Science"
+        }
+    ],
+    "certifications": [],
+    "projects": [],
+    "source": "day5_resume_extraction",
+    "model_version": "N/A"
+}

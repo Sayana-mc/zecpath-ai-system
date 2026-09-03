@@ -1,0 +1,42 @@
+{
+    "source_file": "Aiswarya Raj garaphic designer .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "B.Des, Communication Design,",
+                "field_of_study": "Communication Design",
+                "institution": "",
+                "graduation_year": null
+            }
+        ],
+        "certifications": [
+            {
+                "name": "- Google UX Design Certificate",
+                "category": "CREATIVE",
+                "year": null
+            },
+            {
+                "name": "- Adobe Certified Professional",
+                "category": "CREATIVE",
+                "year": null
+            },
+            {
+                "name": "- Illustrator (2020)",
+                "category": "CREATIVE",
+                "year": 2020
+            },
+            {
+                "name": "Graphic designer with 5 years of experience across branding,",
+                "category": "CREATIVE",
+                "year": null
+            }
+        ],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

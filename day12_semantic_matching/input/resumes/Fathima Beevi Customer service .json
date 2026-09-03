@@ -1,0 +1,27 @@
+{
+    "source_file": "Fathima Beevi Customer service .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "B.Com - University of Calicut (2016 - 2019), 68%",
+                "field_of_study": "",
+                "institution": "B.Com -",
+                "graduation_year": 2019
+            }
+        ],
+        "certifications": [
+            {
+                "name": "- Voice & Accent Training Certificate (2019)",
+                "category": "OTHER",
+                "year": 2019
+            }
+        ],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

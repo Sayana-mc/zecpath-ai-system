@@ -1,0 +1,103 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C006",
+    "name": "Priya Varma",
+    "email": "priya.varma@example.com",
+    "phone": "97460XXXXX",
+    "location": "Thrissur, Kerala",
+    "current_designation": "Senior Talent Acquisition Specialist",
+    "total_experience_years": 7
+  },
+  "skills": [
+    {
+      "skill_name": "Applicant Tracking Systems",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Greenhouse",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Zoho Recruit",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Boolean Sourcing",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "LinkedIn",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Naukri",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "HRIS Tools",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Offer & Compensation Benchmarking",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Interview Coordination",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Stakeholder Management",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Employee Relations",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Negotiation",
+      "category": "Soft Skill"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Senior Recruiter",
+      "company": "TalentBridge HR Solutions",
+      "location": "Thrissur",
+      "start_date": "Feb 2023",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Recruiter",
+      "company": "NextGen Staffing",
+      "location": "Kochi",
+      "start_date": "Jan 2020",
+      "end_date": "Jan 2023"
+    },
+    {
+      "designation": "HR Executive",
+      "company": "Meadow HR Consultancy",
+      "location": "Thrissur",
+      "start_date": "Jun 2017",
+      "end_date": "Dec 2019"
+    }
+  ],
+  "education": [
+    {
+      "degree": "MBA",
+      "field": "Human Resources",
+      "institution": "Bharathiar University",
+      "start_year": 2015,
+      "end_year": 2017,
+      "grade": "7.6 CGPA"
+    }
+  ],
+  "certifications": [
+    "SHRM-CP",
+    "LinkedIn Certified Recruiter"
+  ],
+  "languages": [
+    "English",
+    "Malayalam"
+  ],
+  "domain": "Human Resources"
+}

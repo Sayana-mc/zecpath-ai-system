@@ -1,0 +1,35 @@
+{
+    "source_file": "Priya varma HR.pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "MASTER",
+                "degree_name": "MBA, Human Resources - Bharathiar University (2015 - 2017), 7.6 CGPA",
+                "field_of_study": "Human Resources",
+                "institution": "MBA, Human Resources - Bharathiar",
+                "graduation_year": 2017
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "ADDITIONAL INFORMATION & LANGUAGES",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "Languages: English (fluent), Malayalam (native)",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            }
+        ],
+        "certifications": [],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

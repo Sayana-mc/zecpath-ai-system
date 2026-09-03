@@ -1,0 +1,44 @@
+{
+    "source_file": "vishnu prasad sales manager .pdf",
+    "status": "success",
+    "skill_extraction": {
+        "total_skills": 5,
+        "skills": [
+            {
+                "skill": "Excel",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Sales",
+                "category": "business",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "CRM",
+                "category": "business",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Leadership",
+                "category": "soft",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Negotiation",
+                "category": "soft",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            }
+        ]
+    }
+}

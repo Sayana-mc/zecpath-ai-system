@@ -1,0 +1,16 @@
+{
+    "source_file": "Lakshmi Devi School Teacher .pdf",
+    "status": "success",
+    "skill_extraction": {
+        "total_skills": 1,
+        "skills": [
+            {
+                "skill": "Excel",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            }
+        ]
+    }
+}

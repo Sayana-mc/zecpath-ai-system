@@ -1,0 +1,98 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C010",
+    "name": "Lakshmi Devi",
+    "email": "lakshmi.devi@example.com",
+    "phone": "90370XXXXX",
+    "location": "Kannur, Kerala",
+    "current_designation": "Senior Secondary Mathematics Teacher",
+    "total_experience_years": 8
+  },
+  "skills": [
+    {
+      "skill_name": "Curriculum Design",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Google Classroom",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Learning Management Systems",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Student Assessment Design",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Excel",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Classroom Management",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Parent-Teacher Coordination",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Mentoring",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Lesson Planning",
+      "category": "Technical"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Mathematics Teacher (Senior Secondary)",
+      "company": "St. Xavier's Higher Secondary School",
+      "location": "Kannur",
+      "start_date": "Jun 2021",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Mathematics Teacher (Secondary)",
+      "company": "Bharath Vidya Bhavan",
+      "location": "Kannur",
+      "start_date": "Jun 2018",
+      "end_date": "May 2021"
+    },
+    {
+      "designation": "Assistant Teacher",
+      "company": "Bharath Vidya Bhavan",
+      "location": "Kannur",
+      "start_date": "Jun 2016",
+      "end_date": "May 2018"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Ed",
+      "field": "Education",
+      "institution": "Kannur University",
+      "start_year": 2015,
+      "end_year": 2016,
+      "grade": null
+    },
+    {
+      "degree": "M.Sc",
+      "field": "Mathematics",
+      "institution": "Kannur University",
+      "start_year": 2013,
+      "end_year": 2015,
+      "grade": "7.5 CGPA"
+    }
+  ],
+  "certifications": [
+    "Kerala TET (Teacher Eligibility Test)"
+  ],
+  "languages": [
+    "English",
+    "Malayalam"
+  ],
+  "domain": "Education"
+}

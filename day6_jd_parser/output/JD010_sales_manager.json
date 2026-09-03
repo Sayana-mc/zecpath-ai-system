@@ -1,0 +1,55 @@
+{
+    "job_id": "JD010",
+    "role": {
+        "title": "Sales Manager",
+        "department": "Sales",
+        "domain": "Sales and Business Development",
+        "job_type": "Non-Technical"
+    },
+    "experience": {
+        "required_years": "3-6"
+    },
+    "education": [
+        "Bachelor's Degree / MBA in Marketing or related field"
+    ],
+    "skills": {
+        "required": [
+            "Sales Management",
+            "Business Development",
+            "CRM",
+            "Lead Generation",
+            "Sales Forecasting",
+            "Negotiation"
+        ],
+        "preferred": [
+            "Salesforce",
+            "HubSpot",
+            "Digital Marketing",
+            "Market Research"
+        ],
+        "soft_skills": [
+            "Leadership",
+            "Communication",
+            "Negotiation",
+            "CRM",
+            "Decision Making"
+        ]
+    },
+    "responsibilities": [
+        "Develop sales strategies",
+        "Manage sales targets",
+        "Generate new business opportunities",
+        "Maintain customer relationships",
+        "Monitor sales performance",
+        "Prepare sales reports",
+        "Lead sales team"
+    ],
+    "location": "Kochi, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Sales Manager",
+        "required_skill_count": 6,
+        "preferred_skill_count": 4,
+        "soft_skill_count": 5
+    }
+}

@@ -1,0 +1,96 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C005",
+    "name": "Sandeep Kumar",
+    "email": "sandeep.kumar@example.com",
+    "phone": "88480XXXXX",
+    "location": "Ernakulam, Kerala",
+    "current_designation": "Senior Financial Analyst",
+    "total_experience_years": 6
+  },
+  "skills": [
+    {
+      "skill_name": "Financial Modeling",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Advanced Excel",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "SAP FICO",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Power BI",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Variance Analysis",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "GST Compliance",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Statutory Compliance",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Cross-department Coordination",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Leadership Presentation",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Process Documentation",
+      "category": "Soft Skill"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Senior Financial Analyst",
+      "company": "Trident Manufacturing Ltd",
+      "location": "Ernakulam",
+      "start_date": "Aug 2022",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Financial Analyst",
+      "company": "Trident Manufacturing Ltd",
+      "location": "Ernakulam",
+      "start_date": "Jul 2020",
+      "end_date": "Jul 2022"
+    },
+    {
+      "designation": "Junior Accountant",
+      "company": "Vertex Accounting Services",
+      "location": "Kochi",
+      "start_date": "Jul 2018",
+      "end_date": "Jun 2020"
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.Com",
+      "field": "Finance",
+      "institution": "Mahatma Gandhi University",
+      "start_year": 2016,
+      "end_year": 2018,
+      "grade": "8.0 CGPA"
+    }
+  ],
+  "certifications": [
+    "CMA (US) - Part 1 Cleared",
+    "Advanced Excel for Finance"
+  ],
+  "languages": [
+    "English",
+    "Malayalam",
+    "Hindi"
+  ],
+  "domain": "Finance"
+}

@@ -1,0 +1,56 @@
+﻿{
+    "metadata_standard_version": "v1.0",
+    "candidate_id": {
+        "format": "CAND + numeric sequence",
+        "example": "CAND001",
+        "purpose": "Unique identifier for a candidate"
+    },
+    "job_id": {
+        "format": "JD + numeric sequence",
+        "example": "JD001",
+        "purpose": "Unique identifier for a job description"
+    },
+    "application_id": {
+        "format": "APP + numeric sequence",
+        "example": "APP001",
+        "purpose": "Unique identifier for a candidate-job application"
+    },
+    "interview_id": {
+        "format": "INT + numeric sequence",
+        "example": "INT001",
+        "purpose": "Unique identifier for an interview"
+    },
+    "model_version": {
+        "format": "model-name-vMAJOR.MINOR",
+        "example": "ats-model-v1.0",
+        "purpose": "Identifies the AI model used"
+    },
+    "pipeline_version": {
+        "format": "vMAJOR.MINOR",
+        "example": "v1.0",
+        "purpose": "Identifies the data pipeline version"
+    },
+    "data_version": {
+        "format": "vMAJOR",
+        "example": "v1",
+        "purpose": "Identifies the data schema version"
+    },
+    "timestamp": {
+        "format": "ISO 8601",
+        "example": "2026-08-17T18:00:00+05:30",
+        "purpose": "Records the time of a data processing event"
+    },
+    "status": {
+        "allowed_values": [
+            "uploaded",
+            "processing",
+            "completed",
+            "failed",
+            "shortlisted",
+            "rejected",
+            "selected",
+            "on_hold"
+        ],
+        "purpose": "Tracks the lifecycle state"
+    }
+}

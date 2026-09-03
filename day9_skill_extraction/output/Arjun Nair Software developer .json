@@ -1,0 +1,79 @@
+{
+    "source_file": "Arjun Nair Software developer .pdf",
+    "status": "success",
+    "skill_extraction": {
+        "total_skills": 10,
+        "skills": [
+            {
+                "skill": "JavaScript",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "TypeScript",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "React",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Node.js",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "GitHub",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Docker",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "AWS",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "MongoDB",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "PostgreSQL",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "REST API",
+                "category": "technical",
+                "source": "WORK EXPERIENCE",
+                "match_type": "alias",
+                "confidence": 0.8
+            }
+        ]
+    }
+}

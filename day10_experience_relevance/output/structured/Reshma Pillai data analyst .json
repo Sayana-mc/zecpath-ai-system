@@ -1,0 +1,73 @@
+{
+    "source_file": "Reshma Pillai data analyst .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 11.75,
+        "employment_count": 4,
+        "employment_history": [
+            {
+                "job_title": "Senior Data Analyst - Insight Analytics Pvt Ltd, Thiruvananthapuram",
+                "company": "Thiruvananthapuram",
+                "start_date": "2023-06-01",
+                "end_date": "2026-08-01",
+                "duration_months": 39
+            },
+            {
+                "job_title": "Data Analyst - DataCore Solutions, Kochi",
+                "company": "Kochi",
+                "start_date": "2021-01-01",
+                "end_date": "2023-05-01",
+                "duration_months": 29
+            },
+            {
+                "job_title": "Junior Data Analyst - MetricWorks Analytics, Kochi",
+                "company": "Kochi",
+                "start_date": "2019-08-01",
+                "end_date": "2020-12-01",
+                "duration_months": 17
+            },
+            {
+                "job_title": "▸ Built a self-serve dashboard template later adopted as the company standard across all analyst teams",
+                "company": "▸ Reduced a client's month-end close reporting time from 3 days to 4 hours through automation",
+                "start_date": "2022-01-01",
+                "end_date": "2026-08-01",
+                "duration_months": 56
+            }
+        ],
+        "employment_gaps": [
+            {
+                "from": "2020-01-01",
+                "to": "2021-01-01",
+                "gap_months": 11
+            }
+        ],
+        "overlapping_roles": [
+            {
+                "role_1": "Senior Data Analyst - Insight Analytics Pvt Ltd, Thiruvananthapuram",
+                "role_2": "Data Analyst - DataCore Solutions, Kochi",
+                "overlap": true
+            },
+            {
+                "role_1": "Senior Data Analyst - Insight Analytics Pvt Ltd, Thiruvananthapuram",
+                "role_2": "▸ Built a self-serve dashboard template later adopted as the company standard across all analyst teams",
+                "overlap": true
+            },
+            {
+                "role_1": "Data Analyst - DataCore Solutions, Kochi",
+                "role_2": "▸ Built a self-serve dashboard template later adopted as the company standard across all analyst teams",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 33.33,
+            "relevant_roles": [
+                {
+                    "job_title": "Data Analyst - DataCore Solutions, Kochi",
+                    "company": "Kochi",
+                    "similarity_score": 33.33
+                }
+            ]
+        }
+    }
+}

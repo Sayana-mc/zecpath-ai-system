@@ -1,0 +1,55 @@
+{
+    "job_id": "JD001",
+    "role": {
+        "title": "Python Developer",
+        "department": "Engineering",
+        "domain": "Software Development",
+        "job_type": "Technical"
+    },
+    "experience": {
+        "required_years": "0-2"
+    },
+    "education": [
+        "B.Tech / B.E / B.Sc / MCA / M.Sc in Computer Science or related field"
+    ],
+    "skills": {
+        "required": [
+            "Python",
+            "OOP",
+            "SQL",
+            "REST APIs",
+            "Git",
+            "FastAPI",
+            "Django"
+        ],
+        "preferred": [
+            "Docker",
+            "AWS",
+            "PostgreSQL",
+            "MongoDB"
+        ],
+        "soft_skills": [
+            "Problem Solving",
+            "Communication",
+            "Teamwork",
+            "Time Management"
+        ]
+    },
+    "responsibilities": [
+        "Develop and maintain Python applications",
+        "Build REST APIs",
+        "Write clean and reusable code",
+        "Work with SQL and NoSQL databases",
+        "Debug and fix application issues",
+        "Collaborate with development teams",
+        "Use Git for version control"
+    ],
+    "location": "Kochi, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Python Developer",
+        "required_skill_count": 7,
+        "preferred_skill_count": 4,
+        "soft_skill_count": 4
+    }
+}

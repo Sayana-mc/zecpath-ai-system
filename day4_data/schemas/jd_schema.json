@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Job Description Schema",
+  "description": "Structured schema for job description data in the ZECpath AI System",
+  "type": "object",
+  "required": [
+    "job_descriptions"
+  ],
+  "properties": {
+    "job_descriptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "job_id",
+          "job_title",
+          "department",
+          "required_skills",
+          "preferred_skills",
+          "responsibilities",
+          "education",
+          "experience_required",
+          "soft_skills"
+        ],
+        "properties": {
+          "job_id": {
+            "type": "string"
+          },
+          "job_title": {
+            "type": "string"
+          },
+          "department": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "employment_type": {
+            "type": "string"
+          },
+          "required_skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "preferred_skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "responsibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "education": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "experience_required": {
+            "type": "string"
+          },
+          "certifications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "soft_skills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

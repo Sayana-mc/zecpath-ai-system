@@ -1,0 +1,58 @@
+{
+    "source_file": "Aiswarya Raj garaphic designer .pdf",
+    "status": "success",
+    "skill_extraction": {
+        "total_skills": 7,
+        "skills": [
+            {
+                "skill": "Figma",
+                "category": "creative",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Adobe Photoshop",
+                "category": "creative",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Adobe Illustrator",
+                "category": "creative",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Adobe InDesign",
+                "category": "creative",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "Typography",
+                "category": "creative",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "UX Design",
+                "category": "creative",
+                "source": "CERTIFICATIONS",
+                "match_type": "exact",
+                "confidence": 0.8
+            },
+            {
+                "skill": "Branding",
+                "category": "creative",
+                "source": "CERTIFICATIONS",
+                "match_type": "exact",
+                "confidence": 0.8
+            }
+        ]
+    }
+}

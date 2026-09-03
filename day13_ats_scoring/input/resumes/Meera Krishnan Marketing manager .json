@@ -1,0 +1,49 @@
+{
+    "source_file": "Meera Krishnan Marketing manager .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "MASTER",
+                "degree_name": "MBA, Marketing - Kerala University (2015 - 2017), 7.9 CGPA",
+                "field_of_study": "Marketing",
+                "institution": "MBA, Marketing - Kerala",
+                "graduation_year": 2017
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "ADDITIONAL INFORMATION",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "Certifications: Google Ads Certification (2023); HubSpot Content Marketing Certification (2021)",
+                "field_of_study": "Marketing",
+                "institution": "",
+                "graduation_year": 2021
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "Languages: English (fluent), Malayalam (native)",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            },
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "Additional Information: Guest lecturer on digital marketing basics for local BBA/MBA colleges (2022 - present)",
+                "field_of_study": "Marketing",
+                "institution": "",
+                "graduation_year": 2022
+            }
+        ],
+        "certifications": [],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

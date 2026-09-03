@@ -1,0 +1,23 @@
+{
+    "source_file": "Fathima Beevi Customer service .pdf",
+    "status": "success",
+    "skill_extraction": {
+        "total_skills": 2,
+        "skills": [
+            {
+                "skill": "Excel",
+                "category": "technical",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            },
+            {
+                "skill": "CRM",
+                "category": "business",
+                "source": "SKILLS",
+                "match_type": "exact",
+                "confidence": 0.9
+            }
+        ]
+    }
+}

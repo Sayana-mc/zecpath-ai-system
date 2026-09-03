@@ -1,0 +1,49 @@
+{
+    "source_file": "Lakshmi Devi School Teacher .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 10.25,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Mathematics Teacher (Senior Secondary) - St. Xavier's Higher Secondary School, Kannur",
+                "company": "Kannur",
+                "start_date": "2021-06-01",
+                "end_date": "2026-08-01",
+                "duration_months": 63
+            },
+            {
+                "job_title": "Mathematics Teacher (Secondary) - Bharath Vidya Bhavan, Kannur",
+                "company": "Kannur",
+                "start_date": "2018-06-01",
+                "end_date": "2021-05-01",
+                "duration_months": 36
+            },
+            {
+                "job_title": "Assistant Teacher - Bharath Vidya Bhavan, Kannur",
+                "company": "Kannur",
+                "start_date": "2016-06-01",
+                "end_date": "2018-05-01",
+                "duration_months": 24
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Mathematics Teacher (Senior Secondary) - St. Xavier's Higher Secondary School, Kannur",
+                "role_2": "Mathematics Teacher (Secondary) - Bharath Vidya Bhavan, Kannur",
+                "overlap": true
+            },
+            {
+                "role_1": "Mathematics Teacher (Secondary) - Bharath Vidya Bhavan, Kannur",
+                "role_2": "Assistant Teacher - Bharath Vidya Bhavan, Kannur",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

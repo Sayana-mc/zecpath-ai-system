@@ -1,0 +1,53 @@
+{
+    "job_id": "JD008",
+    "role": {
+        "title": "Customer Support Executive",
+        "department": "Customer Service",
+        "domain": "Customer Support",
+        "job_type": "Non-Technical"
+    },
+    "experience": {
+        "required_years": "0-2"
+    },
+    "education": [
+        "Any Bachelor's Degree"
+    ],
+    "skills": {
+        "required": [
+            "Customer Support",
+            "CRM",
+            "Ticketing Systems",
+            "Email Support",
+            "Voice Support",
+            "Chat Support"
+        ],
+        "preferred": [
+            "Zendesk",
+            "Freshdesk",
+            "Excel"
+        ],
+        "soft_skills": [
+            "Communication",
+            "Active Listening",
+            "Patience",
+            "Conflict Resolution",
+            "Empathy"
+        ]
+    },
+    "responsibilities": [
+        "Handle customer queries",
+        "Resolve customer complaints",
+        "Respond to emails and chats",
+        "Maintain customer records",
+        "Follow up on customer issues",
+        "Meet customer service targets"
+    ],
+    "location": "Kozhikode, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Customer Support Executive",
+        "required_skill_count": 6,
+        "preferred_skill_count": 3,
+        "soft_skill_count": 5
+    }
+}

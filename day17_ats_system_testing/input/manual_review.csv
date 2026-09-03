@@ -1,0 +1,56 @@
+job_id,job_title,candidate_name,ai_score,ai_decision,ai_rank,manual_decision,profile_category,review_notes
+JOB001,Data Analyst,Reshma Pillai data analyst,43.51,REVIEW,1,SHORTLISTED,fresher,Relevant profile for the job.
+JOB001,Data Analyst,john_mathew,40.76,REVIEW,2,SHORTLISTED,senior,Relevant profile for the job.
+JOB001,Data Analyst,Sandeep Kumar financial analyst,20.04,REJECTED,3,SHORTLISTED,tech,Manual reviewer identified a different decision from AI.
+JOB001,Data Analyst,Arjun Nair Software developer,17.85,REJECTED,4,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB001,Data Analyst,vishnu prasad sales manager,15.82,REJECTED,5,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB001,Data Analyst,Lakshmi Devi School Teacher,15.15,REJECTED,6,REJECTED,senior,Profile does not sufficiently match the job.
+JOB001,Data Analyst,Fathima Beevi Customer service,14.74,REJECTED,7,REJECTED,tech,Profile does not sufficiently match the job.
+JOB001,Data Analyst,Aiswarya Raj garaphic designer,13.24,REJECTED,8,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB001,Data Analyst,Priya varma HR,12.9,REJECTED,9,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB001,Data Analyst,Meera Krishnan Marketing manager,11.79,REJECTED,10,SHORTLISTED,non-tech,Manual reviewer identified a different decision from AI.
+JOB001,Data Analyst,Karthik Suresh Mechanical Engineer,11.09,REJECTED,11,REJECTED,tech,Profile does not sufficiently match the job.
+JOB002,Python Developer,john_mathew,49.86,REVIEW,1,SHORTLISTED,non-tech,Relevant profile for the job.
+JOB002,Python Developer,Arjun Nair Software developer,28.53,REJECTED,2,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB002,Python Developer,Reshma Pillai data analyst,25.08,REJECTED,3,REJECTED,senior,Profile does not sufficiently match the job.
+JOB002,Python Developer,Aiswarya Raj garaphic designer,11.83,REJECTED,4,REVIEW,fresher,Manual review required because AI decision differs.
+JOB002,Python Developer,Karthik Suresh Mechanical Engineer,10.6,REJECTED,5,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB002,Python Developer,Priya varma HR,9.11,REJECTED,6,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB002,Python Developer,Lakshmi Devi School Teacher,8.94,REJECTED,7,REJECTED,senior,Profile does not sufficiently match the job.
+JOB002,Python Developer,vishnu prasad sales manager,8.8,REJECTED,8,REJECTED,tech,Profile does not sufficiently match the job.
+JOB002,Python Developer,Fathima Beevi Customer service,8.44,REJECTED,9,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB002,Python Developer,Meera Krishnan Marketing manager,7.79,REJECTED,10,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB002,Python Developer,Sandeep Kumar financial analyst,7.42,REJECTED,11,REJECTED,senior,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,john_mathew,37.77,REJECTED,1,REJECTED,tech,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Reshma Pillai data analyst,30.91,REJECTED,2,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Karthik Suresh Mechanical Engineer,14.69,REJECTED,3,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Aiswarya Raj garaphic designer,13.41,REJECTED,4,REJECTED,senior,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Priya varma HR,13.12,REJECTED,5,REJECTED,tech,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Arjun Nair Software developer,10.89,REJECTED,6,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Fathima Beevi Customer service,10.54,REJECTED,7,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Meera Krishnan Marketing manager,10.26,REJECTED,8,REJECTED,senior,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Lakshmi Devi School Teacher,9.81,REJECTED,9,REJECTED,tech,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,Sandeep Kumar financial analyst,9.33,REJECTED,10,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB003,Machine Learning Engineer,vishnu prasad sales manager,8.5,REJECTED,11,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Aiswarya Raj garaphic designer,55.81,REVIEW,1,SHORTLISTED,senior,Relevant profile for the job.
+JOB004,Graphic Designer,john_mathew,18.31,REJECTED,2,REJECTED,tech,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Reshma Pillai data analyst,12.57,REJECTED,3,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Karthik Suresh Mechanical Engineer,12.17,REJECTED,4,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Priya varma HR,12.07,REJECTED,5,REJECTED,senior,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Meera Krishnan Marketing manager,11.57,REJECTED,6,REJECTED,tech,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Lakshmi Devi School Teacher,9.89,REJECTED,7,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Arjun Nair Software developer,9.73,REJECTED,8,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,vishnu prasad sales manager,7.79,REJECTED,9,REJECTED,senior,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Fathima Beevi Customer service,7.22,REJECTED,10,REJECTED,tech,Profile does not sufficiently match the job.
+JOB004,Graphic Designer,Sandeep Kumar financial analyst,7.17,REJECTED,11,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB005,HR Executive,Priya varma HR,25.16,REJECTED,1,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB005,HR Executive,john_mathew,20.44,REJECTED,2,REJECTED,senior,Profile does not sufficiently match the job.
+JOB005,HR Executive,Reshma Pillai data analyst,18.43,REJECTED,3,REJECTED,tech,Profile does not sufficiently match the job.
+JOB005,HR Executive,Karthik Suresh Mechanical Engineer,11.03,REJECTED,4,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB005,HR Executive,Aiswarya Raj garaphic designer,10.66,REJECTED,5,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB005,HR Executive,Sandeep Kumar financial analyst,9.86,REJECTED,6,REJECTED,senior,Profile does not sufficiently match the job.
+JOB005,HR Executive,Meera Krishnan Marketing manager,9.46,REJECTED,7,REJECTED,tech,Profile does not sufficiently match the job.
+JOB005,HR Executive,Arjun Nair Software developer,8.98,REJECTED,8,REJECTED,non-tech,Profile does not sufficiently match the job.
+JOB005,HR Executive,vishnu prasad sales manager,8.95,REJECTED,9,REJECTED,fresher,Profile does not sufficiently match the job.
+JOB005,HR Executive,Lakshmi Devi School Teacher,8.12,REJECTED,10,REJECTED,senior,Profile does not sufficiently match the job.
+JOB005,HR Executive,Fathima Beevi Customer service,7.48,REJECTED,11,REJECTED,tech,Profile does not sufficiently match the job.

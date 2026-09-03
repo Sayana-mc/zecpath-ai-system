@@ -1,0 +1,15 @@
+{
+    "candidate_id": "CAND001",
+    "job_id": "JD001",
+    "model_version": "v1.0",
+    "timestamp": "2026-08-18T13:50:07.092491+00:00",
+    "score": 85,
+    "matched_skills": [
+        "Python",
+        "SQL",
+        "FastAPI"
+    ],
+    "missing_skills": [
+        "Django"
+    ]
+}

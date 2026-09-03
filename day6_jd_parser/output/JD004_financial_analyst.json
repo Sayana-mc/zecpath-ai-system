@@ -1,0 +1,53 @@
+{
+    "job_id": "JD004",
+    "role": {
+        "title": "Financial Analyst",
+        "department": "Finance",
+        "domain": "Finance",
+        "job_type": "Technical"
+    },
+    "experience": {
+        "required_years": "1-3"
+    },
+    "education": [
+        "B.Com / M.Com / MBA Finance / CA / CMA"
+    ],
+    "skills": {
+        "required": [
+            "Financial Analysis",
+            "Advanced Excel",
+            "Financial Modeling",
+            "Budgeting",
+            "Forecasting",
+            "Variance Analysis"
+        ],
+        "preferred": [
+            "Power BI",
+            "SAP FICO",
+            "SQL",
+            "GST"
+        ],
+        "soft_skills": [
+            "Analytical Thinking",
+            "Attention to Detail",
+            "Communication",
+            "Decision Making"
+        ]
+    },
+    "responsibilities": [
+        "Prepare financial reports",
+        "Analyze financial performance",
+        "Prepare budgets and forecasts",
+        "Perform variance analysis",
+        "Create financial models",
+        "Support management decision making"
+    ],
+    "location": "Ernakulam, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Financial Analyst",
+        "required_skill_count": 6,
+        "preferred_skill_count": 4,
+        "soft_skill_count": 4
+    }
+}

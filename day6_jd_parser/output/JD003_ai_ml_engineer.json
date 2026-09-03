@@ -1,0 +1,58 @@
+{
+    "job_id": "JD003",
+    "role": {
+        "title": "AI/ML Engineer",
+        "department": "Artificial Intelligence",
+        "domain": "Artificial Intelligence and Machine Learning",
+        "job_type": "Technical"
+    },
+    "experience": {
+        "required_years": "1-3"
+    },
+    "education": [
+        "B.Tech / M.Tech / M.Sc / MCA in Computer Science, Data Science, Artificial Intelligence or related field"
+    ],
+    "skills": {
+        "required": [
+            "Python",
+            "Machine Learning",
+            "Deep Learning",
+            "NumPy",
+            "Pandas",
+            "Scikit-learn",
+            "TensorFlow",
+            "PyTorch"
+        ],
+        "preferred": [
+            "LLMs",
+            "RAG",
+            "Generative AI",
+            "FastAPI",
+            "Docker",
+            "Cloud"
+        ],
+        "soft_skills": [
+            "Problem Solving",
+            "Research Skills",
+            "Communication",
+            "Teamwork"
+        ]
+    },
+    "responsibilities": [
+        "Develop machine learning models",
+        "Prepare and preprocess datasets",
+        "Train and evaluate models",
+        "Implement AI solutions",
+        "Optimize model performance",
+        "Deploy machine learning applications",
+        "Work with software engineering teams"
+    ],
+    "location": "Bangalore, Karnataka",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "AI/ML Engineer",
+        "required_skill_count": 8,
+        "preferred_skill_count": 6,
+        "soft_skill_count": 4
+    }
+}

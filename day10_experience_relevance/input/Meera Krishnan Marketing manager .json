@@ -1,0 +1,25 @@
+{
+    "source_file": "Meera Krishnan Marketing manager .pdf",
+    "file_type": ".pdf",
+    "status": "success",
+    "segmentation": {
+        "sections": {
+            "SKILLS": "",
+            "WORK EXPERIENCE": "Marketing Manager - Vantara Consumer Brands, Kochi\nMar 2023 - Present\n- Lead a team of 4 across SEO, paid media, and content for a D2C skincare brand\n- Grew organic traffic by 60% over 12 months through a full SEO overhaul\n- Manage an annual digital ad budget of ₹45 lakh across Google and Meta\n- Launched an influencer partnership program that drove 15% of new customer acquisition\nMarketing Executive - Spectrum Digital Agency, Kochi\nJul 2019 - Feb 2023\n- Ran paid campaigns for 10+ client accounts spanning retail, hospitality, and education\n- Improved average client campaign ROI by 25% through continuous A/B testing\n- Built monthly performance reports that became the agency's client-reporting template\nMarketing Associate - Spectrum Digital Agency, Kochi\nAug 2017 - Jun 2019\n- Supported campaign setup and reporting for 5 client accounts\n- Wrote blog and social content for 3 hospitality clients\nKEY ACHIEVEMENTS\n- Grew a client's Instagram following from 8,000 to 65,000 in 14 months through organic content strategy\n- Recognized as 'Top Campaign Manager' at Spectrum Digital Agency, 2021",
+            "EDUCATION": "MBA, Marketing - Kerala University (2015 - 2017), 7.9 CGPA\nADDITIONAL INFORMATION\nCertifications: Google Ads Certification (2023); HubSpot Content Marketing Certification (2021)\nLanguages: English (fluent), Malayalam (native)\nAdditional Information: Guest lecturer on digital marketing basics for local BBA/MBA colleges (2022 - present)",
+            "CERTIFICATIONS": "",
+            "PROJECTS": "",
+            "OTHER": "Meera Krishnan\nDigital Marketing Manager\nKochi, Kerala | meera.krishnan@example.com | 90720XXXXX\nSUMMARY\nMarketing manager with 7 years of experience across digital campaigns, brand strategy, and content, including 2\nyears leading a team of 4. Skilled at turning a limited budget into measurable growth, with a strong record of\nimproving organic traffic and campaign ROI for consumer brands.\nAREAS OF EXPERTISE\nSEO / SEM - Google Ads & Analytics - Meta Ads Manager - HubSpot - Content strategy -\nMarketing automation - Team management - Budget planning - Brand storytelling - Cross-functional\ncoordination"
+        },
+        "detected_headings": [
+            {
+                "heading": "CAREER HISTORY",
+                "section": "WORK EXPERIENCE"
+            },
+            {
+                "heading": "EDUCATION",
+                "section": "EDUCATION"
+            }
+        ]
+    }
+}

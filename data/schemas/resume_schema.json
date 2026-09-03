@@ -1,0 +1,12 @@
+{
+    "candidate_id": "CAND001",
+    "application_id": "APP001",
+    "file_name": "candidate_resume.pdf",
+    "file_type": "pdf",
+    "file_path": "storage/resumes/CAND001/candidate_resume.pdf",
+    "file_size_bytes": 245678,
+    "upload_timestamp": "2026-08-17T10:30:00+05:30",
+    "extraction_status": "success",
+    "extractor_version": "1.0.0",
+    "data_version": "v1"
+}

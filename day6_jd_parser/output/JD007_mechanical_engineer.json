@@ -1,0 +1,53 @@
+{
+    "job_id": "JD007",
+    "role": {
+        "title": "Mechanical Engineer",
+        "department": "Engineering",
+        "domain": "Mechanical Engineering",
+        "job_type": "Technical"
+    },
+    "experience": {
+        "required_years": "0-3"
+    },
+    "education": [
+        "B.Tech / B.E in Mechanical Engineering"
+    ],
+    "skills": {
+        "required": [
+            "AutoCAD",
+            "SolidWorks",
+            "Mechanical Design",
+            "Manufacturing Processes",
+            "Engineering Drawing",
+            "Quality Control"
+        ],
+        "preferred": [
+            "Six Sigma",
+            "CNC",
+            "ANSYS",
+            "Production Planning"
+        ],
+        "soft_skills": [
+            "Problem Solving",
+            "Teamwork",
+            "Communication",
+            "Attention to Detail"
+        ]
+    },
+    "responsibilities": [
+        "Prepare engineering drawings",
+        "Support product design",
+        "Analyze manufacturing processes",
+        "Coordinate with production teams",
+        "Perform quality checks",
+        "Maintain technical documentation"
+    ],
+    "location": "Palakkad, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Mechanical Engineer",
+        "required_skill_count": 6,
+        "preferred_skill_count": 4,
+        "soft_skill_count": 4
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "source_file": "vishnu prasad sales manager .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 11.25,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Regional Sales Manager - Meridian FMCG Distributors,",
+                "company": "Kozhikode",
+                "start_date": "2022-04-01",
+                "end_date": "2026-08-01",
+                "duration_months": 53
+            },
+            {
+                "job_title": "Senior Sales Executive - Coastal Traders Ltd, Kozhikode",
+                "company": "Kozhikode",
+                "start_date": "2019-05-01",
+                "end_date": "2022-03-01",
+                "duration_months": 35
+            },
+            {
+                "job_title": "Sales Executive - Coastal Traders Ltd, Kannur",
+                "company": "Kannur",
+                "start_date": "2015-06-01",
+                "end_date": "2019-04-01",
+                "duration_months": 47
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Regional Sales Manager - Meridian FMCG Distributors,",
+                "role_2": "Senior Sales Executive - Coastal Traders Ltd, Kozhikode",
+                "overlap": true
+            },
+            {
+                "role_1": "Senior Sales Executive - Coastal Traders Ltd, Kozhikode",
+                "role_2": "Sales Executive - Coastal Traders Ltd, Kannur",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

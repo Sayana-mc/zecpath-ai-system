@@ -1,0 +1,198 @@
+{
+  "job_descriptions": [
+    {
+      "job_id": "JD001",
+      "job_title": "Python Developer",
+      "job_type": "Technical",
+      "department": "Software Development",
+      "location": "Kochi, Kerala",
+      "experience_required": "0-2 years",
+      "education": "Bachelor's degree in Computer Science, Information Technology or related field",
+      "required_skills": [
+        "Python",
+        "Object-Oriented Programming",
+        "REST APIs",
+        "Git",
+        "SQL",
+        "FastAPI or Flask"
+      ],
+      "preferred_skills": [
+        "Docker",
+        "AWS",
+        "pytest"
+      ],
+      "responsibilities": [
+        "Develop and maintain Python applications",
+        "Build and integrate REST APIs",
+        "Write clean and maintainable code",
+        "Work with databases and SQL queries",
+        "Write unit tests and debug applications",
+        "Collaborate with development team members"
+      ],
+      "certifications": [],
+      "soft_skills": [
+        "Problem solving",
+        "Communication",
+        "Teamwork",
+        "Time management"
+      ]
+    },
+    {
+      "job_id": "JD002",
+      "job_title": "Data Analyst",
+      "job_type": "Technical",
+      "department": "Data Analytics",
+      "location": "Thiruvananthapuram, Kerala",
+      "experience_required": "1-3 years",
+      "education": "Bachelor's or Master's degree in Statistics, Mathematics, Computer Science, Data Science or related field",
+      "required_skills": [
+        "SQL",
+        "Python",
+        "Excel",
+        "Power BI",
+        "Data Cleaning",
+        "Data Visualization",
+        "Statistical Analysis"
+      ],
+      "preferred_skills": [
+        "Tableau",
+        "Power Query",
+        "DAX"
+      ],
+      "responsibilities": [
+        "Collect and clean data from multiple sources",
+        "Analyze datasets and identify trends",
+        "Create dashboards and reports",
+        "Write SQL queries for data extraction",
+        "Present analytical findings to stakeholders",
+        "Support data-driven decision making"
+      ],
+      "certifications": [
+        "Microsoft Power BI certification is preferred"
+      ],
+      "soft_skills": [
+        "Analytical thinking",
+        "Communication",
+        "Presentation skills",
+        "Attention to detail"
+      ]
+    },
+    {
+      "job_id": "JD003",
+      "job_title": "AI/ML Engineer",
+      "job_type": "Technical",
+      "department": "Artificial Intelligence",
+      "location": "Bengaluru, Karnataka",
+      "experience_required": "1-3 years",
+      "education": "Bachelor's or Master's degree in Computer Science, Data Science, Artificial Intelligence or related field",
+      "required_skills": [
+        "Python",
+        "Machine Learning",
+        "Deep Learning",
+        "Scikit-learn",
+        "TensorFlow or PyTorch",
+        "Pandas",
+        "NumPy",
+        "SQL"
+      ],
+      "preferred_skills": [
+        "LLMs",
+        "RAG",
+        "FastAPI",
+        "Docker",
+        "Cloud platforms"
+      ],
+      "responsibilities": [
+        "Develop and train machine learning models",
+        "Prepare and preprocess datasets",
+        "Evaluate model performance",
+        "Build AI-based applications",
+        "Deploy machine learning models",
+        "Collaborate with software and data teams"
+      ],
+      "certifications": [],
+      "soft_skills": [
+        "Problem solving",
+        "Research mindset",
+        "Communication",
+        "Teamwork"
+      ]
+    },
+    {
+      "job_id": "JD004",
+      "job_title": "HR Recruiter",
+      "job_type": "Non-Technical",
+      "department": "Human Resources",
+      "location": "Kochi, Kerala",
+      "experience_required": "0-2 years",
+      "education": "Bachelor's or Master's degree in Human Resources, Business Administration or related field",
+      "required_skills": [
+        "Candidate sourcing",
+        "Interview coordination",
+        "Resume screening",
+        "Job portal usage",
+        "Communication",
+        "Recruitment process"
+      ],
+      "preferred_skills": [
+        "LinkedIn Recruiter",
+        "Applicant Tracking Systems",
+        "Boolean search"
+      ],
+      "responsibilities": [
+        "Source candidates through job portals and professional networks",
+        "Screen resumes based on job requirements",
+        "Coordinate interviews with candidates and hiring managers",
+        "Maintain candidate records",
+        "Communicate with candidates throughout the hiring process",
+        "Support onboarding activities"
+      ],
+      "certifications": [],
+      "soft_skills": [
+        "Communication",
+        "Negotiation",
+        "Interpersonal skills",
+        "Organization",
+        "Time management"
+      ]
+    },
+    {
+      "job_id": "JD005",
+      "job_title": "Sales Executive",
+      "job_type": "Non-Technical",
+      "department": "Sales",
+      "location": "Kozhikode, Kerala",
+      "experience_required": "1-3 years",
+      "education": "Bachelor's degree in Business Administration, Marketing or related field",
+      "required_skills": [
+        "Sales",
+        "Lead generation",
+        "Customer relationship management",
+        "Negotiation",
+        "MS Excel",
+        "Presentation skills"
+      ],
+      "preferred_skills": [
+        "Salesforce",
+        "CRM tools",
+        "B2B sales experience"
+      ],
+      "responsibilities": [
+        "Generate and qualify new sales leads",
+        "Maintain relationships with existing customers",
+        "Conduct product presentations",
+        "Achieve monthly and quarterly sales targets",
+        "Update customer information in CRM systems",
+        "Prepare sales reports"
+      ],
+      "certifications": [],
+      "soft_skills": [
+        "Communication",
+        "Negotiation",
+        "Persuasion",
+        "Customer relationship management",
+        "Teamwork"
+      ]
+    }
+  ]
+}

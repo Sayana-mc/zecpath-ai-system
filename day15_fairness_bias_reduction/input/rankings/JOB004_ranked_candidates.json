@@ -1,0 +1,748 @@
+{
+    "job_id": "JOB004",
+    "job_title": "Graphic Designer",
+    "total_candidates": 11,
+    "shortlisted_count": 0,
+    "review_count": 1,
+    "rejected_count": 10,
+    "top_candidates": [
+        {
+            "candidate_name": "Aiswarya Raj garaphic designer",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 55.81,
+            "classification": "MODERATE",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 85.71,
+                    "weight": 0.4,
+                    "weighted_contribution": 34.29
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 61.75,
+                    "weight": 0.3,
+                    "weighted_contribution": 18.53
+                }
+            },
+            "source_file": "Aiswarya Raj garaphic designer .pdf",
+            "rank": 1,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 34.29,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 18.53
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 18.31,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 10.0
+                },
+                "semantic_similarity": {
+                    "score": 27.7,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.31
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 2,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 10.0,
+                "semantic_similarity": 8.31
+            },
+            "strongest_area": "education_alignment"
+        },
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 12.57,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.2,
+                    "weighted_contribution": 6.67
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 9.68,
+                    "weight": 0.3,
+                    "weighted_contribution": 2.9
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 6.67,
+                "education_alignment": 3.0,
+                "semantic_similarity": 2.9
+            },
+            "strongest_area": "experience_relevance"
+        },
+        {
+            "candidate_name": "Karthik Suresh Mechanical Engineer",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 12.17,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 30.56,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.17
+                }
+            },
+            "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 9.17
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 12.07,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 30.24,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.07
+                }
+            },
+            "source_file": "Priya varma HR.pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 9.07
+            },
+            "strongest_area": "semantic_similarity"
+        }
+    ],
+    "ranked_candidates": [
+        {
+            "candidate_name": "Aiswarya Raj garaphic designer",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 55.81,
+            "classification": "MODERATE",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 85.71,
+                    "weight": 0.4,
+                    "weighted_contribution": 34.29
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 61.75,
+                    "weight": 0.3,
+                    "weighted_contribution": 18.53
+                }
+            },
+            "source_file": "Aiswarya Raj garaphic designer .pdf",
+            "rank": 1,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 34.29,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 18.53
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 18.31,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 10.0
+                },
+                "semantic_similarity": {
+                    "score": 27.7,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.31
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 2,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 10.0,
+                "semantic_similarity": 8.31
+            },
+            "strongest_area": "education_alignment"
+        },
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 12.57,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.2,
+                    "weighted_contribution": 6.67
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 9.68,
+                    "weight": 0.3,
+                    "weighted_contribution": 2.9
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 6.67,
+                "education_alignment": 3.0,
+                "semantic_similarity": 2.9
+            },
+            "strongest_area": "experience_relevance"
+        },
+        {
+            "candidate_name": "Karthik Suresh Mechanical Engineer",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 12.17,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 30.56,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.17
+                }
+            },
+            "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 9.17
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 12.07,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 30.24,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.07
+                }
+            },
+            "source_file": "Priya varma HR.pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 9.07
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Meera Krishnan Marketing manager",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 11.57,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 28.57,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.57
+                }
+            },
+            "source_file": "Meera Krishnan Marketing manager .pdf",
+            "rank": 6,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 8.57
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 9.89,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 22.96,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.89
+                }
+            },
+            "source_file": "Lakshmi Devi School Teacher .pdf",
+            "rank": 7,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 6.89
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 9.73,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 22.44,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.73
+                }
+            },
+            "source_file": "Arjun Nair Software developer .pdf",
+            "rank": 8,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 6.73
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "vishnu prasad sales manager",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 7.79,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 15.98,
+                    "weight": 0.3,
+                    "weighted_contribution": 4.79
+                }
+            },
+            "source_file": "vishnu prasad sales manager .pdf",
+            "rank": 9,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 4.79
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Fathima Beevi Customer service",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 7.22,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 14.07,
+                    "weight": 0.3,
+                    "weighted_contribution": 4.22
+                }
+            },
+            "source_file": "Fathima Beevi Customer service .pdf",
+            "rank": 10,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 4.22
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Sandeep Kumar financial analyst",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 7.17,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 12.5,
+                    "weight": 0.2,
+                    "weighted_contribution": 2.5
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 5.57,
+                    "weight": 0.3,
+                    "weighted_contribution": 1.67
+                }
+            },
+            "source_file": "Sandeep Kumar financial analyst .pdf",
+            "rank": 11,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 2.5,
+                "education_alignment": 3.0,
+                "semantic_similarity": 1.67
+            },
+            "strongest_area": "education_alignment"
+        }
+    ]
+}

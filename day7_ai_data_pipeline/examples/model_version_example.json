@@ -1,0 +1,9 @@
+﻿{
+    "model_name": "ats-model",
+    "model_version": "ats-model-v1.0",
+    "dataset_version": "dataset-v1",
+    "pipeline_version": "v1.0",
+    "training_date": "2026-08-17",
+    "evaluation_status": "planned",
+    "deployment_status": "development"
+}

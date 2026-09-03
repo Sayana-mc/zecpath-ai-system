@@ -1,0 +1,49 @@
+{
+    "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 10.17,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Senior Engineer - Production - Anantha Auto Components, Palakkad",
+                "company": "Palakkad",
+                "start_date": "2022-06-01",
+                "end_date": "2026-08-01",
+                "duration_months": 51
+            },
+            {
+                "job_title": "Engineer - Production - Anantha Auto Components, Palakkad",
+                "company": "Palakkad",
+                "start_date": "2019-07-01",
+                "end_date": "2022-05-01",
+                "duration_months": 35
+            },
+            {
+                "job_title": "Graduate Engineer Trainee - Anantha Auto Components, Palakkad",
+                "company": "Palakkad",
+                "start_date": "2016-07-01",
+                "end_date": "2019-06-01",
+                "duration_months": 36
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Senior Engineer - Production - Anantha Auto Components, Palakkad",
+                "role_2": "Engineer - Production - Anantha Auto Components, Palakkad",
+                "overlap": true
+            },
+            {
+                "role_1": "Engineer - Production - Anantha Auto Components, Palakkad",
+                "role_2": "Graduate Engineer Trainee - Anantha Auto Components, Palakkad",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

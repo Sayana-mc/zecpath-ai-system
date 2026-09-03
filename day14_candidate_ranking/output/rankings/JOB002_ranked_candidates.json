@@ -1,0 +1,748 @@
+{
+    "job_id": "JOB002",
+    "job_title": "Python Developer",
+    "total_candidates": 11,
+    "shortlisted_count": 0,
+    "review_count": 1,
+    "rejected_count": 10,
+    "top_candidates": [
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 49.86,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 71.43,
+                    "weight": 0.4,
+                    "weighted_contribution": 28.57
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 10.0
+                },
+                "semantic_similarity": {
+                    "score": 37.63,
+                    "weight": 0.3,
+                    "weighted_contribution": 11.29
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 1,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 28.57,
+                "experience_relevance": 0.0,
+                "education_alignment": 10.0,
+                "semantic_similarity": 11.29
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 28.53,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 42.86,
+                    "weight": 0.4,
+                    "weighted_contribution": 17.14
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 27.95,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.38
+                }
+            },
+            "source_file": "Arjun Nair Software developer .pdf",
+            "rank": 2,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 17.14,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 8.38
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 25.08,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 28.57,
+                    "weight": 0.4,
+                    "weighted_contribution": 11.43
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.2,
+                    "weighted_contribution": 6.67
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 13.27,
+                    "weight": 0.3,
+                    "weighted_contribution": 3.98
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 11.43,
+                "experience_relevance": 6.67,
+                "education_alignment": 3.0,
+                "semantic_similarity": 3.98
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Aiswarya Raj garaphic designer",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 11.83,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 29.45,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.83
+                }
+            },
+            "source_file": "Aiswarya Raj garaphic designer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 8.83
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Karthik Suresh Mechanical Engineer",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 10.6,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 25.32,
+                    "weight": 0.3,
+                    "weighted_contribution": 7.6
+                }
+            },
+            "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 7.6
+            },
+            "strongest_area": "semantic_similarity"
+        }
+    ],
+    "ranked_candidates": [
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 49.86,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 71.43,
+                    "weight": 0.4,
+                    "weighted_contribution": 28.57
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 10.0
+                },
+                "semantic_similarity": {
+                    "score": 37.63,
+                    "weight": 0.3,
+                    "weighted_contribution": 11.29
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 1,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 28.57,
+                "experience_relevance": 0.0,
+                "education_alignment": 10.0,
+                "semantic_similarity": 11.29
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 28.53,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 42.86,
+                    "weight": 0.4,
+                    "weighted_contribution": 17.14
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 27.95,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.38
+                }
+            },
+            "source_file": "Arjun Nair Software developer .pdf",
+            "rank": 2,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 17.14,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 8.38
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 25.08,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 28.57,
+                    "weight": 0.4,
+                    "weighted_contribution": 11.43
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.2,
+                    "weighted_contribution": 6.67
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 13.27,
+                    "weight": 0.3,
+                    "weighted_contribution": 3.98
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 11.43,
+                "experience_relevance": 6.67,
+                "education_alignment": 3.0,
+                "semantic_similarity": 3.98
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Aiswarya Raj garaphic designer",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 11.83,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 29.45,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.83
+                }
+            },
+            "source_file": "Aiswarya Raj garaphic designer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 8.83
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Karthik Suresh Mechanical Engineer",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 10.6,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 25.32,
+                    "weight": 0.3,
+                    "weighted_contribution": 7.6
+                }
+            },
+            "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 7.6
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 9.11,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 20.37,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.11
+                }
+            },
+            "source_file": "Priya varma HR.pdf",
+            "rank": 6,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 6.11
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 8.94,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 19.81,
+                    "weight": 0.3,
+                    "weighted_contribution": 5.94
+                }
+            },
+            "source_file": "Lakshmi Devi School Teacher .pdf",
+            "rank": 7,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 5.94
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "vishnu prasad sales manager",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 8.8,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 19.35,
+                    "weight": 0.3,
+                    "weighted_contribution": 5.81
+                }
+            },
+            "source_file": "vishnu prasad sales manager .pdf",
+            "rank": 8,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 5.81
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Fathima Beevi Customer service",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 8.44,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 18.12,
+                    "weight": 0.3,
+                    "weighted_contribution": 5.44
+                }
+            },
+            "source_file": "Fathima Beevi Customer service .pdf",
+            "rank": 9,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 5.44
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Meera Krishnan Marketing manager",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 7.79,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 15.98,
+                    "weight": 0.3,
+                    "weighted_contribution": 4.79
+                }
+            },
+            "source_file": "Meera Krishnan Marketing manager .pdf",
+            "rank": 10,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 3.0,
+                "semantic_similarity": 4.79
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Sandeep Kumar financial analyst",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 7.42,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 12.5,
+                    "weight": 0.2,
+                    "weighted_contribution": 2.5
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 6.41,
+                    "weight": 0.3,
+                    "weighted_contribution": 1.92
+                }
+            },
+            "source_file": "Sandeep Kumar financial analyst .pdf",
+            "rank": 11,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 2.5,
+                "education_alignment": 3.0,
+                "semantic_similarity": 1.92
+            },
+            "strongest_area": "education_alignment"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "source_file": "Meera Krishnan Marketing manager .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 9.08,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Marketing Manager - Vantara Consumer Brands, Kochi",
+                "company": "Kochi",
+                "start_date": "2023-03-01",
+                "end_date": "2026-08-01",
+                "duration_months": 42
+            },
+            {
+                "job_title": "Marketing Executive - Spectrum Digital Agency, Kochi",
+                "company": "Kochi",
+                "start_date": "2019-07-01",
+                "end_date": "2023-02-01",
+                "duration_months": 44
+            },
+            {
+                "job_title": "Marketing Associate - Spectrum Digital Agency, Kochi",
+                "company": "Kochi",
+                "start_date": "2017-08-01",
+                "end_date": "2019-06-01",
+                "duration_months": 23
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Marketing Manager - Vantara Consumer Brands, Kochi",
+                "role_2": "Marketing Executive - Spectrum Digital Agency, Kochi",
+                "overlap": true
+            },
+            {
+                "role_1": "Marketing Executive - Spectrum Digital Agency, Kochi",
+                "role_2": "Marketing Associate - Spectrum Digital Agency, Kochi",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

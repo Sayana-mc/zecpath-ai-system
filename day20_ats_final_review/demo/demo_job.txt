@@ -1,0 +1,21 @@
+JOB TITLE: Data Analyst
+
+REQUIRED SKILLS:
+Python
+SQL
+Power BI
+Excel
+Pandas
+
+EXPERIENCE:
+2+ years
+
+EDUCATION:
+Bachelor's or Master's degree
+
+RESPONSIBILITIES:
+- Analyze business data
+- Prepare dashboards
+- Generate reports
+- Perform data cleaning
+- Provide data-driven insights

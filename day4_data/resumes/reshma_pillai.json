@@ -1,0 +1,111 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C002",
+    "name": "Reshma Pillai",
+    "email": "reshma.pillai@example.com",
+    "phone": "94950XXXXX",
+    "location": "Thiruvananthapuram, Kerala",
+    "current_designation": "Senior Data Analyst",
+    "total_experience_years": 5
+  },
+  "skills": [
+    {
+      "skill_name": "SQL",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Python",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Pandas",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "NumPy",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Power BI",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "DAX",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Excel",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "VBA",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Statistical Analysis",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "ETL Pipelines",
+      "category": "Data Engineering"
+    },
+    {
+      "skill_name": "Stakeholder Communication",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Data Storytelling",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Requirement Gathering",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Cross-team Collaboration",
+      "category": "Soft Skill"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Senior Data Analyst",
+      "company": "Insight Analytics Pvt Ltd",
+      "location": "Thiruvananthapuram",
+      "start_date": "Jun 2023",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Data Analyst",
+      "company": "DataCore Solutions",
+      "location": "Kochi",
+      "start_date": "Jan 2021",
+      "end_date": "May 2023"
+    },
+    {
+      "designation": "Junior Data Analyst",
+      "company": "MetricWorks Analytics",
+      "location": "Kochi",
+      "start_date": "Aug 2019",
+      "end_date": "Dec 2020"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Sc",
+      "field": "Statistics",
+      "institution": "Kannur University",
+      "start_year": 2016,
+      "end_year": 2019,
+      "grade": "8.1 CGPA"
+    }
+  ],
+  "certifications": [
+    "Google Data Analytics Professional Certificate",
+    "Microsoft Certified: Power BI Data Analyst Associate"
+  ],
+  "languages": [
+    "English",
+    "Malayalam"
+  ],
+  "domain": "Data Analytics"
+}

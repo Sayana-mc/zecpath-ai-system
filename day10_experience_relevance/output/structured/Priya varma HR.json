@@ -1,0 +1,50 @@
+{
+    "source_file": "Priya varma HR.pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 9.25,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Senior Recruiter - TalentBridge HR Solutions, Thrissur",
+                "company": "Thrissur",
+                "start_date": "2023-02-01",
+                "end_date": "2026-08-01",
+                "duration_months": 43
+            },
+            {
+                "job_title": "Recruiter - NextGen Staffing, Kochi",
+                "company": "Kochi",
+                "start_date": "2020-01-01",
+                "end_date": "2023-01-01",
+                "duration_months": 37
+            },
+            {
+                "job_title": "HR Executive - Meadow HR Consultancy, Thrissur",
+                "company": "Thrissur",
+                "start_date": "2017-06-01",
+                "end_date": "2019-12-01",
+                "duration_months": 31
+            }
+        ],
+        "employment_gaps": [
+            {
+                "from": "2019-01-01",
+                "to": "2020-01-01",
+                "gap_months": 11
+            }
+        ],
+        "overlapping_roles": [
+            {
+                "role_1": "Senior Recruiter - TalentBridge HR Solutions, Thrissur",
+                "role_2": "Recruiter - NextGen Staffing, Kochi",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

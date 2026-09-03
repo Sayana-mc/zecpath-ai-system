@@ -1,0 +1,60 @@
+﻿{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Zecpath ATS Score Schema",
+    "type": "object",
+    "required": [
+        "candidate_id",
+        "job_id",
+        "application_id",
+        "created_at",
+        "model_version",
+        "scores",
+        "recommendation"
+    ],
+    "properties": {
+        "candidate_id": {
+            "type": "string"
+        },
+        "job_id": {
+            "type": "string"
+        },
+        "application_id": {
+            "type": "string"
+        },
+        "score_version": {
+            "type": "string"
+        },
+        "created_at": {
+            "type": "string"
+        },
+        "model_version": {
+            "type": "string"
+        },
+        "scores": {
+            "type": "object",
+            "properties": {
+                "overall_score": {
+                    "type": "number"
+                },
+                "skill_match_score": {
+                    "type": "number"
+                },
+                "experience_match_score": {
+                    "type": "number"
+                },
+                "education_match_score": {
+                    "type": "number"
+                }
+            }
+        },
+        "matched_skills": {
+            "type": "array"
+        },
+        "missing_skills": {
+            "type": "array"
+        },
+        "recommendation": {
+            "type": "string"
+        }
+    }
+}

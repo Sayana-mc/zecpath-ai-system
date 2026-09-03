@@ -1,0 +1,181 @@
+{
+    "source_file": "Lakshmi Devi School Teacher .pdf",
+    "status": "success",
+    "matches": [
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 9.89,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 22.96,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.89
+                }
+            }
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 15.15,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 22.55,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.76
+                }
+            }
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 9.81,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 21.23,
+                    "weight": 0.25,
+                    "weighted_contribution": 5.31
+                }
+            }
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 8.94,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 19.81,
+                    "weight": 0.3,
+                    "weighted_contribution": 5.94
+                }
+            }
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB005",
+            "job_title": "HR Executive",
+            "final_ats_score": 8.12,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.3,
+                "experience_relevance": 0.3,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.3,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.3,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 14.5,
+                    "weight": 0.25,
+                    "weighted_contribution": 3.62
+                }
+            }
+        }
+    ]
+}

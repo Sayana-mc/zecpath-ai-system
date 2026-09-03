@@ -1,0 +1,49 @@
+{
+    "candidate_id": {
+        "format": "CAND + numeric sequence",
+        "example": "CAND001",
+        "purpose": "Unique candidate identifier"
+    },
+    "job_id": {
+        "format": "JD + numeric sequence",
+        "example": "JD001",
+        "purpose": "Unique job identifier"
+    },
+    "application_id": {
+        "format": "APP + numeric sequence",
+        "example": "APP001",
+        "purpose": "Unique application identifier"
+    },
+    "model_version": {
+        "format": "model-name-vMAJOR.MINOR",
+        "example": "ats-model-v1.0",
+        "purpose": "Track AI model used"
+    },
+    "pipeline_version": {
+        "format": "vMAJOR.MINOR",
+        "example": "v1.0",
+        "purpose": "Track processing pipeline version"
+    },
+    "timestamp": {
+        "format": "ISO 8601",
+        "example": "2026-08-17T11:30:00+05:30",
+        "purpose": "Track event or processing time"
+    },
+    "data_version": {
+        "format": "vMAJOR",
+        "example": "v1",
+        "purpose": "Track data structure version"
+    },
+    "status": {
+        "allowed_values": [
+            "uploaded",
+            "processing",
+            "completed",
+            "failed",
+            "shortlisted",
+            "rejected",
+            "selected"
+        ],
+        "purpose": "Track processing lifecycle"
+    }
+}

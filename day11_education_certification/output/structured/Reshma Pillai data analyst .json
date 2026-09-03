@@ -1,0 +1,21 @@
+{
+    "source_file": "Reshma Pillai data analyst .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "B.Sc, Statistics - Kannur University (2016 - 2019), 8.1 CGPA",
+                "field_of_study": "",
+                "institution": "B.Sc, Statistics - Kannur",
+                "graduation_year": 2019
+            }
+        ],
+        "certifications": [],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

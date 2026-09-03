@@ -1,0 +1,8 @@
+job_id,job_title,candidate_name,ai_score,ai_decision,manual_decision,profile_category,review_notes
+JOB001,Data Analyst,Reshma Pillai data analyst,43.51,REVIEW,SHORTLISTED,fresher,Relevant profile for the job.
+JOB001,Data Analyst,john_mathew,40.76,REVIEW,SHORTLISTED,senior,Relevant profile for the job.
+JOB001,Data Analyst,Sandeep Kumar financial analyst,20.04,REJECTED,SHORTLISTED,tech,Manual reviewer identified a different decision from AI.
+JOB001,Data Analyst,Meera Krishnan Marketing manager,11.79,REJECTED,SHORTLISTED,non-tech,Manual reviewer identified a different decision from AI.
+JOB002,Python Developer,john_mathew,49.86,REVIEW,SHORTLISTED,non-tech,Relevant profile for the job.
+JOB002,Python Developer,Aiswarya Raj garaphic designer,11.83,REJECTED,REVIEW,fresher,Manual review required because AI decision differs.
+JOB004,Graphic Designer,Aiswarya Raj garaphic designer,55.81,REVIEW,SHORTLISTED,senior,Relevant profile for the job.

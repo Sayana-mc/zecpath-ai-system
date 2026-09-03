@@ -1,0 +1,748 @@
+{
+    "job_id": "JOB003",
+    "job_title": "Machine Learning Engineer",
+    "total_candidates": 11,
+    "shortlisted_count": 0,
+    "review_count": 0,
+    "rejected_count": 11,
+    "top_candidates": [
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 37.77,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 42.86,
+                    "weight": 0.35,
+                    "weighted_contribution": 15.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 15.0
+                },
+                "semantic_similarity": {
+                    "score": 31.09,
+                    "weight": 0.25,
+                    "weighted_contribution": 7.77
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 1,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 15.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 15.0,
+                "semantic_similarity": 7.77
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 30.91,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 42.86,
+                    "weight": 0.35,
+                    "weighted_contribution": 15.0
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.25,
+                    "weighted_contribution": 8.33
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 12.32,
+                    "weight": 0.25,
+                    "weighted_contribution": 3.08
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 2,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 15.0,
+                "experience_relevance": 8.33,
+                "education_alignment": 4.5,
+                "semantic_similarity": 3.08
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Karthik Suresh Mechanical Engineer",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 14.69,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 40.77,
+                    "weight": 0.25,
+                    "weighted_contribution": 10.19
+                }
+            },
+            "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 10.19
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Aiswarya Raj garaphic designer",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 13.41,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 35.62,
+                    "weight": 0.25,
+                    "weighted_contribution": 8.91
+                }
+            },
+            "source_file": "Aiswarya Raj garaphic designer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 8.91
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 13.12,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 34.5,
+                    "weight": 0.25,
+                    "weighted_contribution": 8.62
+                }
+            },
+            "source_file": "Priya varma HR.pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 8.62
+            },
+            "strongest_area": "semantic_similarity"
+        }
+    ],
+    "ranked_candidates": [
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 37.77,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 42.86,
+                    "weight": 0.35,
+                    "weighted_contribution": 15.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 15.0
+                },
+                "semantic_similarity": {
+                    "score": 31.09,
+                    "weight": 0.25,
+                    "weighted_contribution": 7.77
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 1,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 15.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 15.0,
+                "semantic_similarity": 7.77
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 30.91,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 42.86,
+                    "weight": 0.35,
+                    "weighted_contribution": 15.0
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.25,
+                    "weighted_contribution": 8.33
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 12.32,
+                    "weight": 0.25,
+                    "weighted_contribution": 3.08
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 2,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 15.0,
+                "experience_relevance": 8.33,
+                "education_alignment": 4.5,
+                "semantic_similarity": 3.08
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Karthik Suresh Mechanical Engineer",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 14.69,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 40.77,
+                    "weight": 0.25,
+                    "weighted_contribution": 10.19
+                }
+            },
+            "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 10.19
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Aiswarya Raj garaphic designer",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 13.41,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 35.62,
+                    "weight": 0.25,
+                    "weighted_contribution": 8.91
+                }
+            },
+            "source_file": "Aiswarya Raj garaphic designer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 8.91
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 13.12,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 34.5,
+                    "weight": 0.25,
+                    "weighted_contribution": 8.62
+                }
+            },
+            "source_file": "Priya varma HR.pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 8.62
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 10.89,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 25.56,
+                    "weight": 0.25,
+                    "weighted_contribution": 6.39
+                }
+            },
+            "source_file": "Arjun Nair Software developer .pdf",
+            "rank": 6,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 6.39
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Fathima Beevi Customer service",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 10.54,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 24.17,
+                    "weight": 0.25,
+                    "weighted_contribution": 6.04
+                }
+            },
+            "source_file": "Fathima Beevi Customer service .pdf",
+            "rank": 7,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 6.04
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Meera Krishnan Marketing manager",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 10.26,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 23.05,
+                    "weight": 0.25,
+                    "weighted_contribution": 5.76
+                }
+            },
+            "source_file": "Meera Krishnan Marketing manager .pdf",
+            "rank": 8,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 5.76
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 9.81,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 21.23,
+                    "weight": 0.25,
+                    "weighted_contribution": 5.31
+                }
+            },
+            "source_file": "Lakshmi Devi School Teacher .pdf",
+            "rank": 9,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 5.31
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Sandeep Kumar financial analyst",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 9.33,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 12.5,
+                    "weight": 0.25,
+                    "weighted_contribution": 3.12
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 6.83,
+                    "weight": 0.25,
+                    "weighted_contribution": 1.71
+                }
+            },
+            "source_file": "Sandeep Kumar financial analyst .pdf",
+            "rank": 10,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 3.12,
+                "education_alignment": 4.5,
+                "semantic_similarity": 1.71
+            },
+            "strongest_area": "education_alignment"
+        },
+        {
+            "candidate_name": "vishnu prasad sales manager",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 8.5,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 16.01,
+                    "weight": 0.25,
+                    "weighted_contribution": 4.0
+                }
+            },
+            "source_file": "vishnu prasad sales manager .pdf",
+            "rank": 11,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 4.0
+            },
+            "strongest_area": "education_alignment"
+        }
+    ]
+}

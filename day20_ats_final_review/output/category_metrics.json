@@ -1,0 +1,46 @@
+{
+    "fresher": {
+        "total_cases": 15,
+        "accuracy": 0.9333,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1_score": 0.6667,
+        "true_positive": 1,
+        "true_negative": 13,
+        "false_positive": 0,
+        "false_negative": 1
+    },
+    "senior": {
+        "total_cases": 13,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "true_positive": 2,
+        "true_negative": 11,
+        "false_positive": 0,
+        "false_negative": 0
+    },
+    "tech": {
+        "total_cases": 13,
+        "accuracy": 0.9231,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "true_positive": 0,
+        "true_negative": 12,
+        "false_positive": 0,
+        "false_negative": 1
+    },
+    "non-tech": {
+        "total_cases": 14,
+        "accuracy": 0.9286,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1_score": 0.6667,
+        "true_positive": 1,
+        "true_negative": 12,
+        "false_positive": 0,
+        "false_negative": 1
+    }
+}

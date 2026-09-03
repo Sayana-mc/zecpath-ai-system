@@ -1,0 +1,53 @@
+{
+    "job_id": "JD006",
+    "role": {
+        "title": "Graphic Designer",
+        "department": "Creative",
+        "domain": "Graphic Design",
+        "job_type": "Creative"
+    },
+    "experience": {
+        "required_years": "1-3"
+    },
+    "education": [
+        "B.Des / Diploma in Graphic Design / Visual Communication or related field"
+    ],
+    "skills": {
+        "required": [
+            "Adobe Photoshop",
+            "Adobe Illustrator",
+            "Figma",
+            "Typography",
+            "Layout Design",
+            "Branding"
+        ],
+        "preferred": [
+            "Adobe InDesign",
+            "After Effects",
+            "Motion Graphics",
+            "UI Design"
+        ],
+        "soft_skills": [
+            "Creativity",
+            "Communication",
+            "Time Management",
+            "Attention to Detail"
+        ]
+    },
+    "responsibilities": [
+        "Create digital and print designs",
+        "Develop branding materials",
+        "Design social media creatives",
+        "Create marketing materials",
+        "Work with marketing teams",
+        "Maintain brand consistency"
+    ],
+    "location": "Kollam, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Graphic Designer",
+        "required_skill_count": 6,
+        "preferred_skill_count": 4,
+        "soft_skill_count": 4
+    }
+}

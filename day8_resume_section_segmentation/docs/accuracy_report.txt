@@ -1,0 +1,265 @@
+DAY 8 – RESUME SECTION SEGMENTATION
+SECTION DETECTION ACCURACY REPORT
+
+Project:
+Zecpath – AI-Powered Job Portal & Automated Hiring Assistant
+
+Module:
+Resume Section Segmentation
+
+Date:
+18 August 2026
+
+
+1. OBJECTIVE
+
+The objective of this module is to automatically identify and separate major sections of resumes so that downstream AI and NLP models can work with structured and meaningful resume content.
+
+
+2. TARGET SECTIONS
+
+The system detects and classifies the following major resume sections:
+
+1. Skills
+2. Work Experience
+3. Education
+4. Certifications
+5. Projects
+
+Content that does not belong to one of the supported sections is stored under:
+
+OTHER
+
+
+3. IMPLEMENTATION APPROACH
+
+The section segmentation system uses a rule-based heading detection approach.
+
+The processing flow is:
+
+Resume JSON
+    ↓
+Extract cleaned text
+    ↓
+Split text into lines
+    ↓
+Normalize heading text
+    ↓
+Match heading against section patterns
+    ↓
+Classify section
+    ↓
+Assign subsequent text to current section
+    ↓
+Generate labeled JSON output
+
+
+4. TEST DATA
+
+A total of 11 resume files were processed.
+
+Input source:
+
+Day 5 Resume Text Extraction Engine output
+
+Number of input resumes:
+11
+
+Number of successfully processed resumes:
+11
+
+Number of generated labeled JSON files:
+11
+
+
+5. AUTOMATED TEST RESULTS
+
+Seven automated tests were executed.
+
+Test results:
+
+test_heading_normalization              PASSED
+test_skill_heading                      PASSED
+test_experience_heading                 PASSED
+test_education_heading                 PASSED
+test_certification_heading              PASSED
+test_project_heading                    PASSED
+test_section_segmentation               PASSED
+
+Total tests:
+7
+
+Passed:
+7
+
+Failed:
+0
+
+
+6. TEST SUCCESS RATE
+
+Test Success Rate = (Passed Tests / Total Tests) × 100
+
+Test Success Rate = (7 / 7) × 100
+
+Test Success Rate = 100%
+
+
+7. RESUME PROCESSING RESULT
+
+Total resumes:
+11
+
+Successfully processed:
+11
+
+Failed:
+0
+
+Processing success rate:
+
+(11 / 11) × 100 = 100%
+
+
+8. DETECTED SECTION EXAMPLE
+
+Sample resume:
+
+Aiswarya Raj – Graphic Designer
+
+Detected sections:
+
+SKILLS
+WORK EXPERIENCE
+EDUCATION
+CERTIFICATIONS
+PROJECTS
+OTHER
+
+
+Detected headings included:
+
+SKILLS → SKILLS
+
+EDUCATION → EDUCATION
+
+CERTIFICATIONS → CERTIFICATIONS
+
+EXPERIENCE → WORK EXPERIENCE
+
+
+9. HANDLING HEADING VARIATIONS
+
+The classifier supports variations of common headings.
+
+Examples:
+
+Skills → SKILLS
+
+Technical Skills → SKILLS
+
+Experience → WORK EXPERIENCE
+
+Work Experience → WORK EXPERIENCE
+
+Professional Experience → WORK EXPERIENCE
+
+Education → EDUCATION
+
+Academic Background → EDUCATION
+
+Certifications → CERTIFICATIONS
+
+Certificates → CERTIFICATIONS
+
+Projects → PROJECTS
+
+Academic Projects → PROJECTS
+
+
+10. OUTPUT FORMAT
+
+Each processed resume is stored as a structured JSON file.
+
+Example structure:
+
+{
+    "source_file": "resume.pdf",
+    "file_type": ".pdf",
+    "status": "success",
+    "segmentation": {
+        "sections": {
+            "SKILLS": "...",
+            "WORK EXPERIENCE": "...",
+            "EDUCATION": "...",
+            "CERTIFICATIONS": "...",
+            "PROJECTS": "...",
+            "OTHER": "..."
+        },
+        "detected_headings": []
+    }
+}
+
+
+11. OBSERVATION
+
+The system successfully identifies the five target resume sections.
+
+Additional resume sections such as:
+
+SUMMARY
+LANGUAGES
+KEY ACHIEVEMENTS
+ADDITIONAL INFORMATION
+CONTACT
+
+are currently retained in OTHER or associated with the nearest detected section because they are outside the current target-section classification scope.
+
+
+12. LIMITATIONS
+
+The current implementation is primarily rule-based.
+
+Some resumes may contain:
+
+- Missing section headings
+- Unusual heading names
+- Multi-column layouts
+- Tables
+- Image-based text
+- Sections with mixed content
+- Additional sections not included in the current taxonomy
+
+These cases may require additional NLP-based classification or layout-aware processing in future versions.
+
+
+13. FUTURE IMPROVEMENTS
+
+Future improvements can include:
+
+- NLP-based section classification
+- Machine learning-based heading classification
+- OCR for image-based resumes
+- Table and column detection
+- Additional section categories
+- Confidence scores for detected sections
+- Layout-aware PDF processing
+- Transformer-based section classification
+
+
+14. CONCLUSION
+
+The Day 8 Resume Section Segmentation module was successfully implemented and tested.
+
+The system processed 11 resumes and generated 11 labeled JSON outputs.
+
+All 7 automated tests passed successfully.
+
+The module provides structured resume sections that can be consumed by downstream AI components such as:
+
+- Candidate profile generation
+- Skill extraction
+- ATS scoring
+- Resume-job matching
+- Candidate screening
+- Interview preparation

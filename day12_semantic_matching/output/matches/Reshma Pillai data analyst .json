@@ -1,0 +1,41 @@
+{
+    "source_file": "Reshma Pillai data analyst .pdf",
+    "status": "success",
+    "matches": [
+        {
+            "resume_file": "Reshma Pillai data analyst .pdf",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "similarity_score": 0.3002,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Reshma Pillai data analyst .pdf",
+            "job_id": "JOB005",
+            "job_title": "HR Executive",
+            "similarity_score": 0.1573,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Reshma Pillai data analyst .pdf",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "similarity_score": 0.1327,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Reshma Pillai data analyst .pdf",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "similarity_score": 0.1232,
+            "match_level": "LOW"
+        },
+        {
+            "resume_file": "Reshma Pillai data analyst .pdf",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "similarity_score": 0.0968,
+            "match_level": "LOW"
+        }
+    ]
+}

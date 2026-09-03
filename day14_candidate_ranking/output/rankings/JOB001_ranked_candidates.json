@@ -1,0 +1,748 @@
+{
+    "job_id": "JOB001",
+    "job_title": "Data Analyst",
+    "total_candidates": 11,
+    "shortlisted_count": 0,
+    "review_count": 2,
+    "rejected_count": 9,
+    "top_candidates": [
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 43.51,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 66.67,
+                    "weight": 0.35,
+                    "weighted_contribution": 23.33
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.2,
+                    "weighted_contribution": 6.67
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 30.02,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.01
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 1,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 23.33,
+                "experience_relevance": 6.67,
+                "education_alignment": 4.5,
+                "semantic_similarity": 9.01
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 40.76,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 44.44,
+                    "weight": 0.35,
+                    "weighted_contribution": 15.56
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 15.0
+                },
+                "semantic_similarity": {
+                    "score": 34.03,
+                    "weight": 0.3,
+                    "weighted_contribution": 10.21
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 2,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 15.56,
+                "experience_relevance": 0.0,
+                "education_alignment": 15.0,
+                "semantic_similarity": 10.21
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Sandeep Kumar financial analyst",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 20.04,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 22.22,
+                    "weight": 0.35,
+                    "weighted_contribution": 7.78
+                },
+                "experience_relevance": {
+                    "score": 12.5,
+                    "weight": 0.2,
+                    "weighted_contribution": 2.5
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 17.53,
+                    "weight": 0.3,
+                    "weighted_contribution": 5.26
+                }
+            },
+            "source_file": "Sandeep Kumar financial analyst .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 7.78,
+                "experience_relevance": 2.5,
+                "education_alignment": 4.5,
+                "semantic_similarity": 5.26
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 17.85,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 31.54,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.46
+                }
+            },
+            "source_file": "Arjun Nair Software developer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 3.89,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 9.46
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "vishnu prasad sales manager",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 15.82,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 24.76,
+                    "weight": 0.3,
+                    "weighted_contribution": 7.43
+                }
+            },
+            "source_file": "vishnu prasad sales manager .pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 3.89,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 7.43
+            },
+            "strongest_area": "semantic_similarity"
+        }
+    ],
+    "ranked_candidates": [
+        {
+            "candidate_name": "Reshma Pillai data analyst",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 43.51,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 66.67,
+                    "weight": 0.35,
+                    "weighted_contribution": 23.33
+                },
+                "experience_relevance": {
+                    "score": 33.33,
+                    "weight": 0.2,
+                    "weighted_contribution": 6.67
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 30.02,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.01
+                }
+            },
+            "source_file": "Reshma Pillai data analyst .pdf",
+            "rank": 1,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 23.33,
+                "experience_relevance": 6.67,
+                "education_alignment": 4.5,
+                "semantic_similarity": 9.01
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "john_mathew",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 40.76,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 44.44,
+                    "weight": 0.35,
+                    "weighted_contribution": 15.56
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 100.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 15.0
+                },
+                "semantic_similarity": {
+                    "score": 34.03,
+                    "weight": 0.3,
+                    "weighted_contribution": 10.21
+                }
+            },
+            "source_file": "john_mathew.pdf",
+            "rank": 2,
+            "decision": "REVIEW",
+            "recommendation": "Potential candidate. Recruiter review is recommended before final decision.",
+            "score_contributions": {
+                "skill_match": 15.56,
+                "experience_relevance": 0.0,
+                "education_alignment": 15.0,
+                "semantic_similarity": 10.21
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Sandeep Kumar financial analyst",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 20.04,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 22.22,
+                    "weight": 0.35,
+                    "weighted_contribution": 7.78
+                },
+                "experience_relevance": {
+                    "score": 12.5,
+                    "weight": 0.2,
+                    "weighted_contribution": 2.5
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 17.53,
+                    "weight": 0.3,
+                    "weighted_contribution": 5.26
+                }
+            },
+            "source_file": "Sandeep Kumar financial analyst .pdf",
+            "rank": 3,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 7.78,
+                "experience_relevance": 2.5,
+                "education_alignment": 4.5,
+                "semantic_similarity": 5.26
+            },
+            "strongest_area": "skill_match"
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 17.85,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 31.54,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.46
+                }
+            },
+            "source_file": "Arjun Nair Software developer .pdf",
+            "rank": 4,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 3.89,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 9.46
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "vishnu prasad sales manager",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 15.82,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 24.76,
+                    "weight": 0.3,
+                    "weighted_contribution": 7.43
+                }
+            },
+            "source_file": "vishnu prasad sales manager .pdf",
+            "rank": 5,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 3.89,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 7.43
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Lakshmi Devi School Teacher",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 15.15,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 22.55,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.76
+                }
+            },
+            "source_file": "Lakshmi Devi School Teacher .pdf",
+            "rank": 6,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 3.89,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 6.76
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Fathima Beevi Customer service",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 14.74,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 21.18,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.35
+                }
+            },
+            "source_file": "Fathima Beevi Customer service .pdf",
+            "rank": 7,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 3.89,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 6.35
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Aiswarya Raj garaphic designer",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 13.24,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 29.13,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.74
+                }
+            },
+            "source_file": "Aiswarya Raj garaphic designer .pdf",
+            "rank": 8,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 8.74
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 12.9,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 27.99,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.4
+                }
+            },
+            "source_file": "Priya varma HR.pdf",
+            "rank": 9,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 8.4
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Meera Krishnan Marketing manager",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 11.79,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 24.31,
+                    "weight": 0.3,
+                    "weighted_contribution": 7.29
+                }
+            },
+            "source_file": "Meera Krishnan Marketing manager .pdf",
+            "rank": 10,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 7.29
+            },
+            "strongest_area": "semantic_similarity"
+        },
+        {
+            "candidate_name": "Karthik Suresh Mechanical Engineer",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 11.09,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 21.97,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.59
+                }
+            },
+            "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+            "rank": 11,
+            "decision": "REJECTED",
+            "recommendation": "Current job match score is below the shortlist threshold.",
+            "score_contributions": {
+                "skill_match": 0.0,
+                "experience_relevance": 0.0,
+                "education_alignment": 4.5,
+                "semantic_similarity": 6.59
+            },
+            "strongest_area": "semantic_similarity"
+        }
+    ]
+}

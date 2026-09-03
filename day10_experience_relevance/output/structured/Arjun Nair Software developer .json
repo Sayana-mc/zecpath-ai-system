@@ -1,0 +1,49 @@
+{
+    "source_file": "Arjun Nair Software developer .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 7.33,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Senior Software Developer - Brightloop Technologies, Kochi",
+                "company": "Kochi",
+                "start_date": "2023-07-01",
+                "end_date": "2026-08-01",
+                "duration_months": 38
+            },
+            {
+                "job_title": "Software Developer - PixelForge Softwares, Kochi",
+                "company": "Kochi",
+                "start_date": "2021-06-01",
+                "end_date": "2023-06-01",
+                "duration_months": 25
+            },
+            {
+                "job_title": "Junior Software Developer - CodeNest Labs, Thiruvananthapuram",
+                "company": "Thiruvananthapuram",
+                "start_date": "2019-05-01",
+                "end_date": "2021-05-01",
+                "duration_months": 25
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Senior Software Developer - Brightloop Technologies, Kochi",
+                "role_2": "Software Developer - PixelForge Softwares, Kochi",
+                "overlap": true
+            },
+            {
+                "role_1": "Software Developer - PixelForge Softwares, Kochi",
+                "role_2": "Junior Software Developer - CodeNest Labs, Thiruvananthapuram",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

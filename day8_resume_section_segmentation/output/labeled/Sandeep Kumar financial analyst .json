@@ -1,0 +1,33 @@
+{
+    "source_file": "Sandeep Kumar financial analyst .pdf",
+    "file_type": ".pdf",
+    "status": "success",
+    "segmentation": {
+        "sections": {
+            "SKILLS": "Technical: Financial modeling - Excel (advanced) - SAP FICO - Power BI - Variance analysis - GST & statutory\ncompliance\nAdditional: Cross-department coordination - Presentation to leadership - Process documentation",
+            "WORK EXPERIENCE": "Senior Financial Analyst - Trident Manufacturing Ltd, Ernakulam\nAug 2022 - Present\n- Prepare monthly financial reports and variance analysis for senior management\n- Built a rolling 13-week cash forecast model that improved budget accuracy by 18%\n- Lead the annual budgeting process across 4 departments\n- Support statutory audit and GST filing cycles, closing audits with zero major findings\nFinancial Analyst - Trident Manufacturing Ltd, Ernakulam\nJul 2020 - Jul 2022\n- Maintained cost center reporting for 6 production units\n- Automated a manual month-end reconciliation process, saving 2 days per close cycle\nJunior Accountant - Vertex Accounting Services, Kochi\nJul 2018 - Jun 2020\n- Handled accounts payable/receivable for 15+ SME clients\n- Assisted in monthly bank reconciliations and vendor payment cycles\nKey Achievements\n- Identified a billing discrepancy that recovered ₹12 lakh in overbilled vendor charges\n- Built the finance team's first standardized monthly reporting template, adopted company-wide",
+            "EDUCATION": "M.Com, Finance - Mahatma Gandhi University (2016 - 2018), 8.0 CGPA",
+            "CERTIFICATIONS": "- CMA (US) - Part 1 cleared (2023)\n- Advanced Excel for Finance, Coursera (2021)\nLANGUAGES\nEnglish (fluent) - Malayalam (native) - Hindi (working proficiency)\nProfessional Memberships\n- Student member, Institute of Cost Accountants of India",
+            "PROJECTS": "",
+            "OTHER": "Sandeep Kumar\nFinancial Analyst\nErnakulam, Kerala | sandeep.kumar@example.com | 88480XXXXX\nSUMMARY\nFinance professional with 6 years of experience in financial reporting, budgeting, and variance analysis for mid-\nsize manufacturing firms. Known for building forecasting models that hold up under scrutiny and for clearly\nexplaining financial results to non-finance stakeholders."
+        },
+        "detected_headings": [
+            {
+                "heading": "SKILLS",
+                "section": "SKILLS"
+            },
+            {
+                "heading": "EXPERIENCE",
+                "section": "WORK EXPERIENCE"
+            },
+            {
+                "heading": "EDUCATION",
+                "section": "EDUCATION"
+            },
+            {
+                "heading": "CERTIFICATIONS",
+                "section": "CERTIFICATIONS"
+            }
+        ]
+    }
+}

@@ -1,0 +1,95 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C007",
+    "name": "Aiswarya Raj",
+    "email": "aiswarya.raj@example.com",
+    "phone": "95390XXXXX",
+    "location": "Kollam, Kerala",
+    "current_designation": "Senior Graphic Designer",
+    "total_experience_years": 5
+  },
+  "skills": [
+    {
+      "skill_name": "Figma",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Adobe Photoshop",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Adobe Illustrator",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Adobe InDesign",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "After Effects",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Basic Motion Graphics",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Brand Storytelling",
+      "category": "Creative"
+    },
+    {
+      "skill_name": "Client Presentation",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Typography & Layout",
+      "category": "Creative"
+    },
+    {
+      "skill_name": "Creative Direction",
+      "category": "Creative"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Senior Graphic Designer",
+      "company": "Studio Kanvas",
+      "location": "Kollam",
+      "start_date": "May 2023",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Graphic Designer",
+      "company": "Palette Creative Agency",
+      "location": "Kochi",
+      "start_date": "Jun 2021",
+      "end_date": "Apr 2023"
+    },
+    {
+      "designation": "Junior Designer",
+      "company": "Palette Creative Agency",
+      "location": "Kochi",
+      "start_date": "Jun 2019",
+      "end_date": "May 2021"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Des",
+      "field": "Communication Design",
+      "institution": "National Institute of Design",
+      "start_year": 2015,
+      "end_year": 2019,
+      "grade": null
+    }
+  ],
+  "certifications": [
+    "Google UX Design Certificate",
+    "Adobe Certified Professional - Illustrator"
+  ],
+  "languages": [
+    "English",
+    "Malayalam"
+  ],
+  "domain": "Graphic Design"
+}

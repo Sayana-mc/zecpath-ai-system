@@ -1,0 +1,78 @@
+{
+    "total_candidate_job_records": 55,
+    "jobs_processed": 5,
+    "average_fairness_score": 17.61,
+    "configuration": {
+        "score_min": 0,
+        "score_max": 100,
+        "keyword_weight_limit": 0.35,
+        "semantic_weight": 0.65,
+        "bias_gap_warning": 0.2,
+        "mask_personal_attributes": true,
+        "personal_attributes": [
+            "candidate_name",
+            "name",
+            "email",
+            "phone",
+            "mobile",
+            "address",
+            "date_of_birth",
+            "dob",
+            "gender",
+            "age",
+            "photo",
+            "nationality",
+            "religion",
+            "marital_status"
+        ]
+    },
+    "bias_indicators": {
+        "JOB001": {
+            "candidate_count": 11,
+            "average_score": 25.8,
+            "minimum_score": 8.06,
+            "maximum_score": 74.71,
+            "score_gap": 0.6665,
+            "bias_warning": true
+        },
+        "JOB002": {
+            "candidate_count": 11,
+            "average_score": 18.23,
+            "minimum_score": 0.51,
+            "maximum_score": 87.77,
+            "score_gap": 0.8726,
+            "bias_warning": true
+        },
+        "JOB003": {
+            "candidate_count": 11,
+            "average_score": 16.89,
+            "minimum_score": 2.73,
+            "maximum_score": 62.91,
+            "score_gap": 0.6018,
+            "bias_warning": true
+        },
+        "JOB004": {
+            "candidate_count": 11,
+            "average_score": 15.97,
+            "minimum_score": 0.0,
+            "maximum_score": 100.0,
+            "score_gap": 1.0,
+            "bias_warning": true
+        },
+        "JOB005": {
+            "candidate_count": 11,
+            "average_score": 11.16,
+            "minimum_score": 0.64,
+            "maximum_score": 36.99,
+            "score_gap": 0.3635,
+            "bias_warning": true
+        }
+    },
+    "fairness_method": [
+        "Resume/candidate field normalization",
+        "Keyword dependence reduction",
+        "Score normalization",
+        "Non-essential personal attribute masking",
+        "Bias indicator calculation"
+    ]
+}

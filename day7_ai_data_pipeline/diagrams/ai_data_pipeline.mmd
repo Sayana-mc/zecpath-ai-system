@@ -1,0 +1,49 @@
+﻿flowchart TD
+
+    A[Candidate Resume Upload<br/>PDF / DOCX]
+    B[Resume Storage]
+    C[Resume Text Extraction<br/>Day 5]
+    D[Candidate Profile]
+    E[Job Description]
+    F[JD Parser<br/>Day 6]
+    G[Structured Job Profile]
+    H[Candidate - Job Matching]
+    I[ATS Score]
+    J[AI Screening]
+    K[Screening Report]
+    L[Interview]
+    M[Interview Result]
+    N[Hiring Decision]
+    O[Versioned Dataset]
+    P[Model Evaluation / Retraining]
+
+    A --> B
+    B --> C
+    C --> D
+
+    E --> F
+    F --> G
+
+    D --> H
+    G --> H
+
+    H --> I
+    I --> J
+    J --> K
+    K --> L
+    L --> M
+    M --> N
+
+    M --> O
+    K --> O
+    O --> P
+    P --> I
+
+    Q[Metadata Layer<br/>Candidate ID<br/>Job ID<br/>Application ID<br/>Model Version<br/>Pipeline Version<br/>Timestamp<br/>Data Version]
+
+    Q -.-> B
+    Q -.-> D
+    Q -.-> I
+    Q -.-> K
+    Q -.-> M
+    Q -.-> O

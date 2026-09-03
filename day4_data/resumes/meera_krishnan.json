@@ -1,0 +1,103 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C004",
+    "name": "Meera Krishnan",
+    "email": "meera.krishnan@example.com",
+    "phone": "90720XXXXX",
+    "location": "Kochi, Kerala",
+    "current_designation": "Marketing Manager",
+    "total_experience_years": 7
+  },
+  "skills": [
+    {
+      "skill_name": "SEO",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "SEM",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Google Ads",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Google Analytics",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Meta Ads Manager",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "HubSpot",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Content Strategy",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Marketing Automation",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Team Management",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Budget Planning",
+      "category": "Management"
+    },
+    {
+      "skill_name": "Brand Storytelling",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Cross-functional Coordination",
+      "category": "Soft Skill"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Marketing Manager",
+      "company": "Vantara Consumer Brands",
+      "location": "Kochi",
+      "start_date": "Mar 2023",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Marketing Executive",
+      "company": "Spectrum Digital Agency",
+      "location": "Kochi",
+      "start_date": "Jul 2019",
+      "end_date": "Feb 2023"
+    },
+    {
+      "designation": "Marketing Associate",
+      "company": "Spectrum Digital Agency",
+      "location": "Kochi",
+      "start_date": "Aug 2017",
+      "end_date": "Jun 2019"
+    }
+  ],
+  "education": [
+    {
+      "degree": "MBA",
+      "field": "Marketing",
+      "institution": "Kerala University",
+      "start_year": 2015,
+      "end_year": 2017,
+      "grade": "7.9 CGPA"
+    }
+  ],
+  "certifications": [
+    "Google Ads Certification",
+    "HubSpot Content Marketing Certification"
+  ],
+  "languages": [
+    "English",
+    "Malayalam"
+  ],
+  "domain": "Digital Marketing"
+}

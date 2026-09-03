@@ -1,0 +1,25 @@
+{
+    "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+    "file_type": ".pdf",
+    "status": "success",
+    "segmentation": {
+        "sections": {
+            "SKILLS": "",
+            "WORK EXPERIENCE": "Senior Engineer - Production - Anantha Auto Components, Palakkad\nJun 2022 - Present\n- Lead production planning for a line producing 15,000 units per month\n- Reduced scrap rate by 12% through a Six Sigma improvement project\n- Supervise a shop-floor team of 10 technicians across 2 shifts\n- Redesigned 3 tooling fixtures, cutting cycle time by 8%\nEngineer - Production - Anantha Auto Components, Palakkad\nJul 2019 - May 2022\n- Rotated across design, quality, and production functions during the trainee program\n- Investigated and closed 40+ non-conformance reports with root-cause corrective actions\n- Coordinated with suppliers to resolve 3 recurring component-quality issues\nGraduate Engineer Trainee - Anantha Auto Components, Palakkad\nJul 2016 - Jun 2019\n- Supported line engineers on daily production troubleshooting\n- Assisted in the rollout of a new inventory tracking system\nKEY ACHIEVEMENTS\n- Six Sigma project saved the plant an estimated ₹8 lakh annually in scrap and rework costs\n- Recognized with the plant's 'Continuous Improvement Award' in 2023",
+            "EDUCATION": "B.Tech, Mechanical Engineering - College of Engineering Trivandrum (2012 - 2016), 7.8 CGPA\nADDITIONAL INFORMATION\nCertifications: Six Sigma Green Belt (2021); SolidWorks Associate Certification (2018)\nLanguages: English (fluent), Malayalam (native), Tamil (conversational)\nAdditional Information: Internal trainer for new shop-floor hires on GD&T fundamentals",
+            "CERTIFICATIONS": "",
+            "PROJECTS": "",
+            "OTHER": "Karthik Suresh\nMechanical Engineer - Production\nPalakkad, Kerala | karthik.suresh@example.com | 89430XXXXX\nSUMMARY\nMechanical engineer with 8 years of experience in production planning and process improvement within\nautomotive component manufacturing. Skilled at applying Six Sigma methods to reduce scrap and improve line\nefficiency, with hands-on experience across design, quality, and production functions.\nAREAS OF EXPERTISE\nAutoCAD - SolidWorks - GD&T - Production planning (MRP) - Six Sigma (Green Belt) - Root\ncause analysis (5-Why, Fishbone) - Shop-floor team supervision - Cross-functional coordination -\nProcess documentation"
+        },
+        "detected_headings": [
+            {
+                "heading": "CAREER HISTORY",
+                "section": "WORK EXPERIENCE"
+            },
+            {
+                "heading": "EDUCATION",
+                "section": "EDUCATION"
+            }
+        ]
+    }
+}

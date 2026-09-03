@@ -1,0 +1,71 @@
+============================================================
+             ZECpath AI - ATS ARCHITECTURE
+============================================================
+
+                    RESUME INPUT
+                         |
+                         v
+              +----------------------+
+              | Text Extraction      |
+              | optimized_extractor  |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | Text Normalization   |
+              | noisy_resume_handler |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | Resume Sections      |
+              | Summary / Skills     |
+              | Experience / Education|
+              | Projects / Certs     |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | Entity Detection     |
+              | Skills / Experience |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | Candidate-Job        |
+              | Matching             |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | ATS Scoring          |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | Candidate Ranking    |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | AI Decision          |
+              | SHORTLISTED          |
+              | REVIEW               |
+              | REJECTED             |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | ATS Testing          |
+              | Accuracy / Precision |
+              | Recall / F1          |
+              +----------------------+
+                         |
+                         v
+              +----------------------+
+              | Optimization         |
+              | Caching / Prompt     |
+              | Performance / Memory |
+              +----------------------+
+
+============================================================

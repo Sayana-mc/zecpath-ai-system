@@ -1,0 +1,104 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C008",
+    "name": "Karthik Suresh",
+    "email": "karthik.suresh@example.com",
+    "phone": "89430XXXXX",
+    "location": "Palakkad, Kerala",
+    "current_designation": "Senior Engineer - Production",
+    "total_experience_years": 8
+  },
+  "skills": [
+    {
+      "skill_name": "AutoCAD",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "SolidWorks",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "GD&T",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Production Planning",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "MRP",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Six Sigma",
+      "category": "Quality"
+    },
+    {
+      "skill_name": "Root Cause Analysis",
+      "category": "Quality"
+    },
+    {
+      "skill_name": "5-Why",
+      "category": "Quality"
+    },
+    {
+      "skill_name": "Fishbone Analysis",
+      "category": "Quality"
+    },
+    {
+      "skill_name": "Shop-floor Team Supervision",
+      "category": "Management"
+    },
+    {
+      "skill_name": "Cross-functional Coordination",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Process Documentation",
+      "category": "Technical"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Senior Engineer - Production",
+      "company": "Anantha Auto Components",
+      "location": "Palakkad",
+      "start_date": "Jun 2022",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Engineer - Production",
+      "company": "Anantha Auto Components",
+      "location": "Palakkad",
+      "start_date": "Jul 2019",
+      "end_date": "May 2022"
+    },
+    {
+      "designation": "Graduate Engineer Trainee",
+      "company": "Anantha Auto Components",
+      "location": "Palakkad",
+      "start_date": "Jul 2016",
+      "end_date": "Jun 2019"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech",
+      "field": "Mechanical Engineering",
+      "institution": "College of Engineering Trivandrum",
+      "start_year": 2012,
+      "end_year": 2016,
+      "grade": "7.8 CGPA"
+    }
+  ],
+  "certifications": [
+    "Six Sigma Green Belt",
+    "SolidWorks Associate Certification"
+  ],
+  "languages": [
+    "English",
+    "Malayalam",
+    "Tamil"
+  ],
+  "domain": "Mechanical Engineering"
+}

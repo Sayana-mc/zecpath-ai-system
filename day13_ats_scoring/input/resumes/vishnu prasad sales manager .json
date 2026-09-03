@@ -1,0 +1,27 @@
+{
+    "source_file": "vishnu prasad sales manager .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "BBA, University of Calicut",
+                "field_of_study": "",
+                "institution": "BBA",
+                "graduation_year": null
+            }
+        ],
+        "certifications": [
+            {
+                "name": "- Certified Professional Sales",
+                "category": "OTHER",
+                "year": null
+            }
+        ],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

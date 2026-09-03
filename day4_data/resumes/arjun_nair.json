@@ -1,0 +1,116 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C001",
+    "name": "Arjun Nair",
+    "email": "arjun.nair@example.com",
+    "phone": "98470XXXXX",
+    "location": "Kochi, Kerala",
+    "current_designation": "Senior Software Developer",
+    "total_experience_years": 6
+  },
+  "skills": [
+    {
+      "skill_name": "JavaScript",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "TypeScript",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "React",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Redux",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Node.js",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Express",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "MongoDB",
+      "category": "Database"
+    },
+    {
+      "skill_name": "PostgreSQL",
+      "category": "Database"
+    },
+    {
+      "skill_name": "REST APIs",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "GraphQL",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Docker",
+      "category": "DevOps"
+    },
+    {
+      "skill_name": "AWS",
+      "category": "Cloud"
+    },
+    {
+      "skill_name": "CI/CD",
+      "category": "DevOps"
+    },
+    {
+      "skill_name": "Technical Mentoring",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Agile/Scrum",
+      "category": "Soft Skill"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Senior Software Developer",
+      "company": "Brightloop Technologies",
+      "location": "Kochi",
+      "start_date": "Jul 2023",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Software Developer",
+      "company": "PixelForge Softwares",
+      "location": "Kochi",
+      "start_date": "Jun 2021",
+      "end_date": "Jun 2023"
+    },
+    {
+      "designation": "Junior Software Developer",
+      "company": "CodeNest Labs",
+      "location": "Thiruvananthapuram",
+      "start_date": "May 2019",
+      "end_date": "May 2021"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech",
+      "field": "Computer Science",
+      "institution": "Cochin University of Science and Technology",
+      "start_year": 2015,
+      "end_year": 2019,
+      "grade": "8.3 CGPA"
+    }
+  ],
+  "certifications": [
+    "AWS Certified Cloud Practitioner",
+    "MongoDB Certified Developer Associate"
+  ],
+  "languages": [
+    "English",
+    "Malayalam",
+    "Hindi"
+  ],
+  "domain": "Software Development"
+}

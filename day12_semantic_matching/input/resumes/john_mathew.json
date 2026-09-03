@@ -1,0 +1,48 @@
+{
+    "source_file": "john_mathew.docx",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "B.Tech in Computer Science 2020 - 2024",
+                "field_of_study": "Computer Science",
+                "institution": "",
+                "graduation_year": 2024
+            },
+            {
+                "degree_type": "HIGH_SCHOOL",
+                "degree_name": "Higher Secondary Education (Science) 2018 - 2020",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": 2020
+            },
+            {
+                "degree_type": "HIGH_SCHOOL",
+                "degree_name": "Board of Higher Secondary Examinations, Kerala",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            }
+        ],
+        "certifications": [
+            {
+                "name": "Python",
+                "category": "TECHNICAL",
+                "year": null
+            },
+            {
+                "name": "SQL",
+                "category": "TECHNICAL",
+                "year": null
+            }
+        ],
+        "education_relevance": {
+            "score": 1.0,
+            "matched_fields": [
+                "Computer Science"
+            ],
+            "relevance": "HIGH"
+        }
+    }
+}

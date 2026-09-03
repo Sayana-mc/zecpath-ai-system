@@ -1,0 +1,49 @@
+{
+    "source_file": "Sandeep Kumar financial analyst .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 8.17,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Senior Financial Analyst - Trident Manufacturing Ltd, Ernakulam",
+                "company": "Ernakulam",
+                "start_date": "2022-08-01",
+                "end_date": "2026-08-01",
+                "duration_months": 49
+            },
+            {
+                "job_title": "Financial Analyst - Trident Manufacturing Ltd, Ernakulam",
+                "company": "Ernakulam",
+                "start_date": "2020-07-01",
+                "end_date": "2022-07-01",
+                "duration_months": 25
+            },
+            {
+                "job_title": "Junior Accountant - Vertex Accounting Services, Kochi",
+                "company": "Kochi",
+                "start_date": "2018-07-01",
+                "end_date": "2020-06-01",
+                "duration_months": 24
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Senior Financial Analyst - Trident Manufacturing Ltd, Ernakulam",
+                "role_2": "Financial Analyst - Trident Manufacturing Ltd, Ernakulam",
+                "overlap": true
+            },
+            {
+                "role_1": "Financial Analyst - Trident Manufacturing Ltd, Ernakulam",
+                "role_2": "Junior Accountant - Vertex Accounting Services, Kochi",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 12.5,
+            "relevant_roles": []
+        }
+    }
+}

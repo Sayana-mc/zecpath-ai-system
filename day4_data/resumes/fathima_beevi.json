@@ -1,0 +1,100 @@
+{
+  "candidate_profile": {
+    "candidate_id": "C009",
+    "name": "Fathima Beevi",
+    "email": "fathima.beevi@example.com",
+    "phone": "91880XXXXX",
+    "location": "Malappuram, Kerala",
+    "current_designation": "Customer Support Team Lead",
+    "total_experience_years": 6
+  },
+  "skills": [
+    {
+      "skill_name": "Zendesk",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Freshdesk",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "CRM Tools",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Ticketing Tools",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Voice Support",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Chat Support",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Excel",
+      "category": "Technical"
+    },
+    {
+      "skill_name": "Conflict Resolution",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Team Coordination",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Coaching & Feedback",
+      "category": "Soft Skill"
+    },
+    {
+      "skill_name": "Active Listening",
+      "category": "Soft Skill"
+    }
+  ],
+  "experience": [
+    {
+      "designation": "Team Lead - Customer Support",
+      "company": "ConnectSphere BPO",
+      "location": "Kozhikode",
+      "start_date": "Sep 2023",
+      "end_date": "Present"
+    },
+    {
+      "designation": "Senior Associate - Customer Support",
+      "company": "ConnectSphere BPO",
+      "location": "Kozhikode",
+      "start_date": "Aug 2021",
+      "end_date": "Aug 2023"
+    },
+    {
+      "designation": "Associate - Customer Support",
+      "company": "ConnectSphere BPO",
+      "location": "Kozhikode",
+      "start_date": "Jul 2019",
+      "end_date": "Jul 2021"
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Com",
+      "field": "Commerce",
+      "institution": "University of Calicut",
+      "start_year": 2016,
+      "end_year": 2019,
+      "grade": "68%"
+    }
+  ],
+  "certifications": [
+    "Voice & Accent Training Certificate",
+    "Customer Service Excellence Workshop"
+  ],
+  "languages": [
+    "English",
+    "Malayalam",
+    "Hindi"
+  ],
+  "domain": "Customer Support"
+}

@@ -1,0 +1,49 @@
+{
+    "source_file": "Lakshmi Devi School Teacher .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "B.Ed - Kannur University (2015 - 2016)",
+                "field_of_study": "",
+                "institution": "B.Ed - Kannur",
+                "graduation_year": 2016
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "M.Sc, Mathematics - Kannur University (2013 - 2015), 7.5 CGPA",
+                "field_of_study": "",
+                "institution": "M.Sc, Mathematics - Kannur",
+                "graduation_year": 2015
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "ADDITIONAL INFORMATION & LANGUAGES",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "Languages: English (fluent), Malayalam (native)",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "▸ Conducts free weekend math tutoring for underprivileged students in the community",
+                "field_of_study": "The Community",
+                "institution": "",
+                "graduation_year": null
+            }
+        ],
+        "certifications": [],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "source_file": "Sandeep Kumar financial analyst .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "MASTER",
+                "degree_name": "M.Com, Finance - Mahatma Gandhi University (2016 - 2018), 8.0 CGPA",
+                "field_of_study": "Finance",
+                "institution": "M.Com, Finance - Mahatma Gandhi",
+                "graduation_year": 2018
+            }
+        ],
+        "certifications": [],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

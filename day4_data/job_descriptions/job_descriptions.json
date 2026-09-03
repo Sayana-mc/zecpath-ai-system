@@ -1,0 +1,429 @@
+{
+  "job_descriptions": [
+    {
+      "job_id": "JD001",
+      "job_title": "Python Developer",
+      "department": "Engineering",
+      "domain": "Software Development",
+      "job_type": "Technical",
+      "experience_required_years": "0-2",
+      "location": "Kochi, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "B.Tech / B.E / B.Sc / MCA / M.Sc in Computer Science or related field"
+      ],
+      "required_skills": [
+        "Python",
+        "OOP",
+        "SQL",
+        "REST APIs",
+        "Git",
+        "FastAPI",
+        "Django"
+      ],
+      "preferred_skills": [
+        "Docker",
+        "AWS",
+        "PostgreSQL",
+        "MongoDB"
+      ],
+      "responsibilities": [
+        "Develop and maintain Python applications",
+        "Build REST APIs",
+        "Write clean and reusable code",
+        "Work with SQL and NoSQL databases",
+        "Debug and fix application issues",
+        "Collaborate with development teams",
+        "Use Git for version control"
+      ],
+      "soft_skills": [
+        "Problem Solving",
+        "Communication",
+        "Teamwork",
+        "Time Management"
+      ]
+    },
+    {
+      "job_id": "JD002",
+      "job_title": "Data Analyst",
+      "department": "Analytics",
+      "domain": "Data Science and Analytics",
+      "job_type": "Technical",
+      "experience_required_years": "0-2",
+      "location": "Bangalore, Karnataka",
+      "employment_type": "Full-time",
+      "education": [
+        "B.Sc / BCA / B.Tech / M.Sc / MCA in Data Science, Statistics, Mathematics, Computer Science or related field"
+      ],
+      "required_skills": [
+        "SQL",
+        "Excel",
+        "Python",
+        "Pandas",
+        "Data Cleaning",
+        "Data Visualization",
+        "Power BI"
+      ],
+      "preferred_skills": [
+        "Tableau",
+        "Statistics",
+        "Machine Learning",
+        "R"
+      ],
+      "responsibilities": [
+        "Collect and clean datasets",
+        "Perform exploratory data analysis",
+        "Create dashboards and reports",
+        "Write SQL queries",
+        "Identify trends and patterns",
+        "Prepare business insights",
+        "Collaborate with business teams"
+      ],
+      "soft_skills": [
+        "Analytical Thinking",
+        "Communication",
+        "Problem Solving",
+        "Attention to Detail"
+      ]
+    },
+    {
+      "job_id": "JD003",
+      "job_title": "AI/ML Engineer",
+      "department": "Artificial Intelligence",
+      "domain": "Artificial Intelligence and Machine Learning",
+      "job_type": "Technical",
+      "experience_required_years": "1-3",
+      "location": "Bangalore, Karnataka",
+      "employment_type": "Full-time",
+      "education": [
+        "B.Tech / M.Tech / M.Sc / MCA in Computer Science, Data Science, Artificial Intelligence or related field"
+      ],
+      "required_skills": [
+        "Python",
+        "Machine Learning",
+        "Deep Learning",
+        "NumPy",
+        "Pandas",
+        "Scikit-learn",
+        "TensorFlow",
+        "PyTorch"
+      ],
+      "preferred_skills": [
+        "LLMs",
+        "RAG",
+        "Generative AI",
+        "FastAPI",
+        "Docker",
+        "Cloud"
+      ],
+      "responsibilities": [
+        "Develop machine learning models",
+        "Prepare and preprocess datasets",
+        "Train and evaluate models",
+        "Implement AI solutions",
+        "Optimize model performance",
+        "Deploy machine learning applications",
+        "Work with software engineering teams"
+      ],
+      "soft_skills": [
+        "Problem Solving",
+        "Research Skills",
+        "Communication",
+        "Teamwork"
+      ]
+    },
+    {
+      "job_id": "JD004",
+      "job_title": "Financial Analyst",
+      "department": "Finance",
+      "domain": "Finance",
+      "job_type": "Technical",
+      "experience_required_years": "1-3",
+      "location": "Ernakulam, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "B.Com / M.Com / MBA Finance / CA / CMA"
+      ],
+      "required_skills": [
+        "Financial Analysis",
+        "Advanced Excel",
+        "Financial Modeling",
+        "Budgeting",
+        "Forecasting",
+        "Variance Analysis"
+      ],
+      "preferred_skills": [
+        "Power BI",
+        "SAP FICO",
+        "SQL",
+        "GST"
+      ],
+      "responsibilities": [
+        "Prepare financial reports",
+        "Analyze financial performance",
+        "Prepare budgets and forecasts",
+        "Perform variance analysis",
+        "Create financial models",
+        "Support management decision making"
+      ],
+      "soft_skills": [
+        "Analytical Thinking",
+        "Attention to Detail",
+        "Communication",
+        "Decision Making"
+      ]
+    },
+    {
+      "job_id": "JD005",
+      "job_title": "HR Executive",
+      "department": "Human Resources",
+      "domain": "Human Resources",
+      "job_type": "Non-Technical",
+      "experience_required_years": "0-2",
+      "location": "Thrissur, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "MBA / PGDM in Human Resources or related field"
+      ],
+      "required_skills": [
+        "Recruitment",
+        "Employee Relations",
+        "Interview Coordination",
+        "HR Operations",
+        "MS Excel",
+        "HR Documentation"
+      ],
+      "preferred_skills": [
+        "HRIS",
+        "Payroll",
+        "LinkedIn Recruiter",
+        "Applicant Tracking Systems"
+      ],
+      "responsibilities": [
+        "Coordinate recruitment activities",
+        "Screen candidate applications",
+        "Schedule interviews",
+        "Maintain employee records",
+        "Support onboarding activities",
+        "Prepare HR reports",
+        "Coordinate with employees and managers"
+      ],
+      "soft_skills": [
+        "Communication",
+        "Interpersonal Skills",
+        "Organization",
+        "Confidentiality",
+        "Teamwork"
+      ]
+    },
+    {
+      "job_id": "JD006",
+      "job_title": "Graphic Designer",
+      "department": "Creative",
+      "domain": "Graphic Design",
+      "job_type": "Creative",
+      "experience_required_years": "1-3",
+      "location": "Kollam, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "B.Des / Diploma in Graphic Design / Visual Communication or related field"
+      ],
+      "required_skills": [
+        "Adobe Photoshop",
+        "Adobe Illustrator",
+        "Figma",
+        "Typography",
+        "Layout Design",
+        "Branding"
+      ],
+      "preferred_skills": [
+        "Adobe InDesign",
+        "After Effects",
+        "Motion Graphics",
+        "UI Design"
+      ],
+      "responsibilities": [
+        "Create digital and print designs",
+        "Develop branding materials",
+        "Design social media creatives",
+        "Create marketing materials",
+        "Work with marketing teams",
+        "Maintain brand consistency"
+      ],
+      "soft_skills": [
+        "Creativity",
+        "Communication",
+        "Time Management",
+        "Attention to Detail"
+      ]
+    },
+    {
+      "job_id": "JD007",
+      "job_title": "Mechanical Engineer",
+      "department": "Engineering",
+      "domain": "Mechanical Engineering",
+      "job_type": "Technical",
+      "experience_required_years": "0-3",
+      "location": "Palakkad, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "B.Tech / B.E in Mechanical Engineering"
+      ],
+      "required_skills": [
+        "AutoCAD",
+        "SolidWorks",
+        "Mechanical Design",
+        "Manufacturing Processes",
+        "Engineering Drawing",
+        "Quality Control"
+      ],
+      "preferred_skills": [
+        "Six Sigma",
+        "CNC",
+        "ANSYS",
+        "Production Planning"
+      ],
+      "responsibilities": [
+        "Prepare engineering drawings",
+        "Support product design",
+        "Analyze manufacturing processes",
+        "Coordinate with production teams",
+        "Perform quality checks",
+        "Maintain technical documentation"
+      ],
+      "soft_skills": [
+        "Problem Solving",
+        "Teamwork",
+        "Communication",
+        "Attention to Detail"
+      ]
+    },
+    {
+      "job_id": "JD008",
+      "job_title": "Customer Support Executive",
+      "department": "Customer Service",
+      "domain": "Customer Support",
+      "job_type": "Non-Technical",
+      "experience_required_years": "0-2",
+      "location": "Kozhikode, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "Any Bachelor's Degree"
+      ],
+      "required_skills": [
+        "Customer Support",
+        "CRM",
+        "Ticketing Systems",
+        "Email Support",
+        "Voice Support",
+        "Chat Support"
+      ],
+      "preferred_skills": [
+        "Zendesk",
+        "Freshdesk",
+        "MS Excel"
+      ],
+      "responsibilities": [
+        "Handle customer queries",
+        "Resolve customer complaints",
+        "Respond to emails and chats",
+        "Maintain customer records",
+        "Follow up on customer issues",
+        "Meet customer service targets"
+      ],
+      "soft_skills": [
+        "Communication",
+        "Active Listening",
+        "Patience",
+        "Conflict Resolution",
+        "Empathy"
+      ]
+    },
+    {
+      "job_id": "JD009",
+      "job_title": "Mathematics Teacher",
+      "department": "Education",
+      "domain": "Education",
+      "job_type": "Non-Technical",
+      "experience_required_years": "1-5",
+      "location": "Kannur, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "M.Sc Mathematics",
+        "B.Ed"
+      ],
+      "required_skills": [
+        "Mathematics",
+        "Lesson Planning",
+        "Student Assessment",
+        "Classroom Management",
+        "Google Classroom",
+        "Learning Management Systems"
+      ],
+      "preferred_skills": [
+        "Digital Teaching",
+        "Educational Technology",
+        "Online Assessment"
+      ],
+      "responsibilities": [
+        "Prepare mathematics lessons",
+        "Teach students according to curriculum",
+        "Evaluate student performance",
+        "Prepare assessments",
+        "Maintain student records",
+        "Communicate with parents",
+        "Provide student mentoring"
+      ],
+      "soft_skills": [
+        "Communication",
+        "Patience",
+        "Leadership",
+        "Mentoring",
+        "Classroom Management"
+      ]
+    },
+    {
+      "job_id": "JD010",
+      "job_title": "Sales Manager",
+      "department": "Sales",
+      "domain": "Sales and Business Development",
+      "job_type": "Non-Technical",
+      "experience_required_years": "3-6",
+      "location": "Kochi, Kerala",
+      "employment_type": "Full-time",
+      "education": [
+        "Bachelor's Degree / MBA in Marketing or related field"
+      ],
+      "required_skills": [
+        "Sales Management",
+        "Business Development",
+        "CRM",
+        "Lead Generation",
+        "Sales Forecasting",
+        "Negotiation"
+      ],
+      "preferred_skills": [
+        "Salesforce",
+        "HubSpot",
+        "Digital Marketing",
+        "Market Research"
+      ],
+      "responsibilities": [
+        "Develop sales strategies",
+        "Manage sales targets",
+        "Generate new business opportunities",
+        "Maintain customer relationships",
+        "Monitor sales performance",
+        "Prepare sales reports",
+        "Lead sales team"
+      ],
+      "soft_skills": [
+        "Leadership",
+        "Communication",
+        "Negotiation",
+        "Relationship Management",
+        "Decision Making"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+    "job_id": "JD005",
+    "role": {
+        "title": "HR Executive",
+        "department": "Human Resources",
+        "domain": "Human Resources",
+        "job_type": "Non-Technical"
+    },
+    "experience": {
+        "required_years": "0-2"
+    },
+    "education": [
+        "MBA / PGDM in Human Resources or related field"
+    ],
+    "skills": {
+        "required": [
+            "Recruitment",
+            "Employee Relations",
+            "Interview Coordination",
+            "HR Operations",
+            "Excel",
+            "HR Documentation"
+        ],
+        "preferred": [
+            "HRIS",
+            "Payroll",
+            "LinkedIn Recruiter",
+            "Applicant Tracking Systems"
+        ],
+        "soft_skills": [
+            "Communication",
+            "Interpersonal Skills",
+            "Organization",
+            "Confidentiality",
+            "Teamwork"
+        ]
+    },
+    "responsibilities": [
+        "Coordinate recruitment activities",
+        "Screen candidate applications",
+        "Schedule interviews",
+        "Maintain employee records",
+        "Support onboarding activities",
+        "Prepare HR reports",
+        "Coordinate with employees and managers"
+    ],
+    "location": "Thrissur, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "HR Executive",
+        "required_skill_count": 6,
+        "preferred_skill_count": 4,
+        "soft_skill_count": 5
+    }
+}

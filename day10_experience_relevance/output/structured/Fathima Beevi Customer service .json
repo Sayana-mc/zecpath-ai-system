@@ -1,0 +1,49 @@
+{
+    "source_file": "Fathima Beevi Customer service .pdf",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 7.17,
+        "employment_count": 3,
+        "employment_history": [
+            {
+                "job_title": "Team Lead - Customer Support - ConnectSphere BPO, Kozhikode",
+                "company": "Kozhikode",
+                "start_date": "2023-09-01",
+                "end_date": "2026-08-01",
+                "duration_months": 36
+            },
+            {
+                "job_title": "Senior Associate - Customer Support - ConnectSphere BPO, Kozhikode",
+                "company": "Kozhikode",
+                "start_date": "2021-08-01",
+                "end_date": "2023-08-01",
+                "duration_months": 25
+            },
+            {
+                "job_title": "Associate - Customer Support - ConnectSphere BPO, Kozhikode",
+                "company": "Kozhikode",
+                "start_date": "2019-07-01",
+                "end_date": "2021-07-01",
+                "duration_months": 25
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [
+            {
+                "role_1": "Team Lead - Customer Support - ConnectSphere BPO, Kozhikode",
+                "role_2": "Senior Associate - Customer Support - ConnectSphere BPO, Kozhikode",
+                "overlap": true
+            },
+            {
+                "role_1": "Senior Associate - Customer Support - ConnectSphere BPO, Kozhikode",
+                "role_2": "Associate - Customer Support - ConnectSphere BPO, Kozhikode",
+                "overlap": true
+            }
+        ],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

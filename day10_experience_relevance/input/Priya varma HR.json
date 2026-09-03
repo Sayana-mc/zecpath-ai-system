@@ -1,0 +1,29 @@
+{
+    "source_file": "Priya varma HR.pdf",
+    "file_type": ".pdf",
+    "status": "success",
+    "segmentation": {
+        "sections": {
+            "SKILLS": "Technical: Applicant tracking systems (Greenhouse, Zoho Recruit), Boolean sourcing (LinkedIn, Naukri), HRIS tools,\nOffer & compensation benchmarking\nInterpersonal: Interview coordination, Stakeholder management, Employee relations, Negotiation",
+            "WORK EXPERIENCE": "Senior Recruiter - TalentBridge HR Solutions, Thrissur\nFeb 2023 - Present\n▸ Close an average of 12 positions per month across tech and operations roles\n▸ Reduced average time-to-hire from 32 to 21 days through a streamlined interview process\n▸ Manage onboarding for all new hires across 2 client accounts\n▸ Built a referral program that now sources 25% of all new hires\nRecruiter - NextGen Staffing, Kochi\nJan 2020 - Jan 2023\n▸ Sourced and screened candidates for 20+ concurrent job openings across sectors\n▸ Coordinated interview scheduling for hiring managers across 3 departments\n▸ Maintained an 85%+ offer-acceptance rate over 3 years\nHR Executive - Meadow HR Consultancy, Thrissur\nJun 2017 - Dec 2019\n▸ Supported end-to-end recruitment for entry-level and mid-level roles\n▸ Coordinated new-hire documentation and induction sessions\nKEY ACHIEVEMENTS\n▸ Built a hiring pipeline for a hard-to-fill technical role that closed in 14 days versus a typical 45\n▸ Recognized as 'Recruiter of the Quarter' at TalentBridge HR Solutions, Q3 2024",
+            "EDUCATION": "MBA, Human Resources - Bharathiar University (2015 - 2017), 7.6 CGPA\nSHRM-CP (2023)\nLinkedIn Certified Recruiter (2022)\nADDITIONAL INFORMATION & LANGUAGES\nLanguages: English (fluent), Malayalam (native)\n▸ Regular panelist for HR meetups and campus placement drives in Thrissur",
+            "CERTIFICATIONS": "",
+            "PROJECTS": "",
+            "OTHER": "PRIYA VARMA\nSenior Talent Acquisition Specialist\nThrissur, Kerala · priya.varma@example.com · 97460XXXXX\nSUMMARY\nHR professional with 7 years of experience in end-to-end recruitment, from sourcing to onboarding, across IT\nand non-IT roles. Track record of reducing time-to-hire while maintaining a strong candidate experience, and of\nbuilding sourcing pipelines for hard-to-fill technical roles."
+        },
+        "detected_headings": [
+            {
+                "heading": "CORE COMPETENCIES",
+                "section": "SKILLS"
+            },
+            {
+                "heading": "EXPERIENCE",
+                "section": "WORK EXPERIENCE"
+            },
+            {
+                "heading": "EDUCATION & CERTIFICATIONS",
+                "section": "EDUCATION"
+            }
+        ]
+    }
+}

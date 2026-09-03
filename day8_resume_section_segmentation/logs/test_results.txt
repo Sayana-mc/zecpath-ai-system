@@ -1,0 +1,16 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.4, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\sayan\Documents\zecpath-ai-system\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\sayan\Documents\zecpath-ai-system\day8_resume_section_segmentation
+configfile: pytest.ini
+collecting ... collected 7 items
+
+tests/test_section_classifier.py::test_heading_normalization PASSED      [ 14%]
+tests/test_section_classifier.py::test_skill_heading PASSED              [ 28%]
+tests/test_section_classifier.py::test_experience_heading PASSED         [ 42%]
+tests/test_section_classifier.py::test_education_heading PASSED          [ 57%]
+tests/test_section_classifier.py::test_certification_heading PASSED      [ 71%]
+tests/test_section_classifier.py::test_project_heading PASSED            [ 85%]
+tests/test_section_classifier.py::test_section_segmentation PASSED       [100%]
+
+============================== 7 passed in 0.05s ==============================

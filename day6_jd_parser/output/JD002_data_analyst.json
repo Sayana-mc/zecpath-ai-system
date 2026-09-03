@@ -1,0 +1,55 @@
+{
+    "job_id": "JD002",
+    "role": {
+        "title": "Data Analyst",
+        "department": "Analytics",
+        "domain": "Data Science and Analytics",
+        "job_type": "Technical"
+    },
+    "experience": {
+        "required_years": "0-2"
+    },
+    "education": [
+        "B.Sc / BCA / B.Tech / M.Sc / MCA in Data Science, Statistics, Mathematics, Computer Science or related field"
+    ],
+    "skills": {
+        "required": [
+            "SQL",
+            "Excel",
+            "Python",
+            "Pandas",
+            "Data Cleaning",
+            "Data Visualization",
+            "Power BI"
+        ],
+        "preferred": [
+            "Tableau",
+            "Statistics",
+            "Machine Learning",
+            "R"
+        ],
+        "soft_skills": [
+            "Analytical Thinking",
+            "Communication",
+            "Problem Solving",
+            "Attention to Detail"
+        ]
+    },
+    "responsibilities": [
+        "Collect and clean datasets",
+        "Perform exploratory data analysis",
+        "Create dashboards and reports",
+        "Write SQL queries",
+        "Identify trends and patterns",
+        "Prepare business insights",
+        "Collaborate with business teams"
+    ],
+    "location": "Bangalore, Karnataka",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Data Analyst",
+        "required_skill_count": 7,
+        "preferred_skill_count": 4,
+        "soft_skill_count": 4
+    }
+}

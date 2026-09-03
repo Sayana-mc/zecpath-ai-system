@@ -1,0 +1,33 @@
+{
+    "source_file": "vishnu prasad sales manager .pdf",
+    "file_type": ".pdf",
+    "status": "success",
+    "segmentation": {
+        "sections": {
+            "SKILLS": "- Salesforce CRM\n- Sales forecasting\n- Territory planning\n- Trade promotion management\n- MS Excel & PowerPoint\n- Team leadership\n- B2B negotiation\n- Client relationship\nmanagement\n- Coaching & performance\nmanagement",
+            "WORK EXPERIENCE": "Regional Sales Manager - Meridian FMCG Distributors,\nKozhikode\nApr 2022 - Present\n- Manage a team of 8 sales executives across the Malabar region,\ncovering 400+ retail accounts\n- Grew regional revenue by 22% year-on-year against a flat market\n- Redesigned the lead qualification process, improving conversion\nby 15%\n- Introduced a monthly performance review cadence that cut\nexecutive attrition by half\nSenior Sales Executive - Coastal Traders Ltd, Kozhikode\nMay 2019 - Mar 2022\n- Managed a portfolio of 60+ retail accounts across 3 districts\n- Ranked #2 sales performer company-wide in 2021 out of 45\nexecutives\n- Negotiated exclusive shelf-placement deals with 12 key accounts\nSales Executive - Coastal Traders Ltd, Kannur\nJun 2015 - Apr 2019\n- Onboarded 30+ new retail partners in the first year on the job\n- Achieved 110% of assigned sales target for 3 consecutive years\nKEY ACHIEVEMENTS\n- Winner, 'Regional Manager of the Year' - Meridian FMCG\nDistributors (2023)\n- Designed a territory-mapping framework later rolled out across 3\nother regions\nADDITIONAL INFORMATION\n- Regularly invited to mentor first-year sales executives during\ncompany induction",
+            "EDUCATION": "BBA, University of Calicut\n(2012 - 2015)",
+            "CERTIFICATIONS": "- Certified Professional Sales\nLeader (CPSL), Sales\nManagement Association (2021)\nLANGUAGES\nEnglish (fluent)\nMalayalam (native)\nTamil (conversational)\nSUMMARY\nResults-driven sales professional with 9 years of experience in\nFMCG distribution, including 4 years leading a regional sales\nteam of 8. Consistently exceeded quarterly revenue targets and\nbuilt processes that improved lead conversion and account\nretention across a competitive regional market.",
+            "PROJECTS": "",
+            "OTHER": "Vishnu Prasad\nRegional Sales Manager\nCONTACT\nKozhikode, Kerala\nvishnu.prasad@example.com\n96330XXXXX"
+        },
+        "detected_headings": [
+            {
+                "heading": "SKILLS",
+                "section": "SKILLS"
+            },
+            {
+                "heading": "EDUCATION",
+                "section": "EDUCATION"
+            },
+            {
+                "heading": "CERTIFICATIONS",
+                "section": "CERTIFICATIONS"
+            },
+            {
+                "heading": "EXPERIENCE",
+                "section": "WORK EXPERIENCE"
+            }
+        ]
+    }
+}

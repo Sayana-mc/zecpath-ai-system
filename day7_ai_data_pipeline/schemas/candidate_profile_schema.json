@@ -1,0 +1,57 @@
+﻿{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Zecpath Candidate Profile Schema",
+    "type": "object",
+    "required": [
+        "candidate_id",
+        "application_id",
+        "profile_version",
+        "created_at",
+        "skills",
+        "education"
+    ],
+    "properties": {
+        "candidate_id": {
+            "type": "string"
+        },
+        "application_id": {
+            "type": "string"
+        },
+        "profile_version": {
+            "type": "string"
+        },
+        "created_at": {
+            "type": "string"
+        },
+        "updated_at": {
+            "type": "string"
+        },
+        "personal_information": {
+            "type": "object"
+        },
+        "career_information": {
+            "type": "object"
+        },
+        "skills": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "education": {
+            "type": "array"
+        },
+        "certifications": {
+            "type": "array"
+        },
+        "projects": {
+            "type": "array"
+        },
+        "source": {
+            "type": "string"
+        },
+        "model_version": {
+            "type": "string"
+        }
+    }
+}

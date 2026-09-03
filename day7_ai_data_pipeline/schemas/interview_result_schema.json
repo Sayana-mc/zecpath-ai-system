@@ -1,0 +1,56 @@
+﻿{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Zecpath Interview Result Schema",
+    "type": "object",
+    "required": [
+        "candidate_id",
+        "job_id",
+        "application_id",
+        "interview_id",
+        "interview_date",
+        "model_version",
+        "overall_score",
+        "recommendation"
+    ],
+    "properties": {
+        "candidate_id": {
+            "type": "string"
+        },
+        "job_id": {
+            "type": "string"
+        },
+        "application_id": {
+            "type": "string"
+        },
+        "interview_id": {
+            "type": "string"
+        },
+        "interview_version": {
+            "type": "string"
+        },
+        "interview_date": {
+            "type": "string"
+        },
+        "model_version": {
+            "type": "string"
+        },
+        "technical_score": {
+            "type": "number"
+        },
+        "communication_score": {
+            "type": "number"
+        },
+        "problem_solving_score": {
+            "type": "number"
+        },
+        "overall_score": {
+            "type": "number"
+        },
+        "recommendation": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        }
+    }
+}

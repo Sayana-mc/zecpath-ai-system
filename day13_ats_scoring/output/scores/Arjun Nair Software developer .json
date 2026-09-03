@@ -1,0 +1,181 @@
+{
+    "source_file": "Arjun Nair Software developer .pdf",
+    "status": "success",
+    "matches": [
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 17.85,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 11.11,
+                    "weight": 0.35,
+                    "weighted_contribution": 3.89
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 31.54,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.46
+                }
+            }
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 28.53,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 42.86,
+                    "weight": 0.4,
+                    "weighted_contribution": 17.14
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 27.95,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.38
+                }
+            }
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 10.89,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 25.56,
+                    "weight": 0.25,
+                    "weighted_contribution": 6.39
+                }
+            }
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 9.73,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 22.44,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.73
+                }
+            }
+        },
+        {
+            "candidate_name": "Arjun Nair Software developer",
+            "job_id": "JOB005",
+            "job_title": "HR Executive",
+            "final_ats_score": 8.98,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.3,
+                "experience_relevance": 0.3,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.3,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.3,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 17.93,
+                    "weight": 0.25,
+                    "weighted_contribution": 4.48
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,181 @@
+{
+    "source_file": "Priya varma HR.pdf",
+    "status": "success",
+    "matches": [
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB005",
+            "job_title": "HR Executive",
+            "final_ats_score": 25.16,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.3,
+                "experience_relevance": 0.3,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 33.33,
+                    "weight": 0.3,
+                    "weighted_contribution": 10.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.3,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 42.63,
+                    "weight": 0.25,
+                    "weighted_contribution": 10.66
+                }
+            }
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB003",
+            "job_title": "Machine Learning Engineer",
+            "final_ats_score": 13.12,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.25,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.25
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.25,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 34.5,
+                    "weight": 0.25,
+                    "weighted_contribution": 8.62
+                }
+            }
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB004",
+            "job_title": "Graphic Designer",
+            "final_ats_score": 12.07,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 30.24,
+                    "weight": 0.3,
+                    "weighted_contribution": 9.07
+                }
+            }
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB001",
+            "job_title": "Data Analyst",
+            "final_ats_score": 12.9,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.35,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.15,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.35,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.15,
+                    "weighted_contribution": 4.5
+                },
+                "semantic_similarity": {
+                    "score": 27.99,
+                    "weight": 0.3,
+                    "weighted_contribution": 8.4
+                }
+            }
+        },
+        {
+            "candidate_name": "Priya varma HR",
+            "job_id": "JOB002",
+            "job_title": "Python Developer",
+            "final_ats_score": 9.11,
+            "classification": "LOW",
+            "weights": {
+                "skill_match": 0.4,
+                "experience_relevance": 0.2,
+                "education_alignment": 0.1,
+                "semantic_similarity": 0.3
+            },
+            "breakdown": {
+                "skill_match": {
+                    "score": 0.0,
+                    "weight": 0.4,
+                    "weighted_contribution": 0.0
+                },
+                "experience_relevance": {
+                    "score": 0.0,
+                    "weight": 0.2,
+                    "weighted_contribution": 0.0
+                },
+                "education_alignment": {
+                    "score": 30.0,
+                    "weight": 0.1,
+                    "weighted_contribution": 3.0
+                },
+                "semantic_similarity": {
+                    "score": 20.37,
+                    "weight": 0.3,
+                    "weighted_contribution": 6.11
+                }
+            }
+        }
+    ]
+}

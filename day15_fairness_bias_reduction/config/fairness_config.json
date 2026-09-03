@@ -1,0 +1,24 @@
+{
+    "score_min": 0,
+    "score_max": 100,
+    "keyword_weight_limit": 0.35,
+    "semantic_weight": 0.65,
+    "bias_gap_warning": 0.20,
+    "mask_personal_attributes": true,
+    "personal_attributes": [
+        "candidate_name",
+        "name",
+        "email",
+        "phone",
+        "mobile",
+        "address",
+        "date_of_birth",
+        "dob",
+        "gender",
+        "age",
+        "photo",
+        "nationality",
+        "religion",
+        "marital_status"
+    ]
+}

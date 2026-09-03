@@ -1,0 +1,15 @@
+﻿{
+    "candidate_id": "CAND001",
+    "job_id": "JD001",
+    "application_id": "APP001",
+    "interview_id": "INT001",
+    "interview_version": "v1",
+    "interview_date": "2026-08-20T10:00:00+05:30",
+    "model_version": "interview-model-v1.0",
+    "technical_score": 85,
+    "communication_score": 80,
+    "problem_solving_score": 88,
+    "overall_score": 84,
+    "recommendation": "Hire",
+    "status": "completed"
+}

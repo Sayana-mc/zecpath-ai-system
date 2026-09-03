@@ -1,0 +1,49 @@
+﻿{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Zecpath Screening Report Schema",
+    "type": "object",
+    "required": [
+        "candidate_id",
+        "job_id",
+        "application_id",
+        "created_at",
+        "model_version",
+        "screening_score",
+        "recommendation"
+    ],
+    "properties": {
+        "candidate_id": {
+            "type": "string"
+        },
+        "job_id": {
+            "type": "string"
+        },
+        "application_id": {
+            "type": "string"
+        },
+        "report_version": {
+            "type": "string"
+        },
+        "created_at": {
+            "type": "string"
+        },
+        "model_version": {
+            "type": "string"
+        },
+        "screening_score": {
+            "type": "number"
+        },
+        "strengths": {
+            "type": "array"
+        },
+        "weaknesses": {
+            "type": "array"
+        },
+        "recommendation": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        }
+    }
+}

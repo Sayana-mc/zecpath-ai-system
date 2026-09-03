@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resume Schema",
+  "description": "Standard structured schema for candidate resume data in the Zecpath AI System.",
+  "type": "object",
+  "required": [
+    "candidate_profile",
+    "skills",
+    "experience",
+    "education",
+    "certifications",
+    "languages"
+  ],
+  "properties": {
+    "candidate_profile": {
+      "type": "object",
+      "required": [
+        "name",
+        "email",
+        "phone",
+        "location",
+        "current_designation",
+        "summary"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "current_designation": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        }
+      }
+    },
+    "skills": {
+      "type": "object",
+      "properties": {
+        "technical": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "soft_skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "designation",
+          "company",
+          "location",
+          "start_date",
+          "end_date",
+          "responsibilities"
+        ],
+        "properties": {
+          "designation": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "responsibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "degree",
+          "institution",
+          "start_year",
+          "end_year"
+        ],
+        "properties": {
+          "degree": {
+            "type": "string"
+          },
+          "institution": {
+            "type": "string"
+          },
+          "start_year": {
+            "type": "string"
+          },
+          "end_year": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "year": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string"
+          },
+          "proficiency": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

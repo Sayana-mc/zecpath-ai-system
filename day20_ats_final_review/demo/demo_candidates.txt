@@ -1,0 +1,28 @@
+CANDIDATE 1
+
+Name: Alex Kumar
+Role: Data Analyst
+Skills: Python, SQL, Power BI, Excel, Pandas
+Experience: 3 years
+Education: MSc Data Science
+Projects: Sales Dashboard, Customer Analysis
+
+
+CANDIDATE 2
+
+Name: Priya Nair
+Role: Data Analyst
+Skills: Python, SQL, Tableau, Excel
+Experience: 2 years
+Education: MSc Statistics
+Projects: Customer Segmentation
+
+
+CANDIDATE 3
+
+Name: Rahul Thomas
+Role: Data Analyst
+Skills: Java, HTML, CSS
+Experience: 1 year
+Education: BTech Computer Science
+Projects: Web Application

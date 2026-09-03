@@ -1,0 +1,49 @@
+{
+    "source_file": "Karthik Suresh Mechanical Engineer .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "B.Tech, Mechanical Engineering - College of Engineering Trivandrum (2012 - 2016), 7.8 CGPA",
+                "field_of_study": "Mechanical Engineering",
+                "institution": "B.Tech, Mechanical Engineering -",
+                "graduation_year": 2016
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "ADDITIONAL INFORMATION",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "Certifications: Six Sigma Green Belt (2021); SolidWorks Associate Certification (2018)",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": 2018
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "Languages: English (fluent), Malayalam (native), Tamil (conversational)",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            },
+            {
+                "degree_type": "MASTER",
+                "degree_name": "Additional Information: Internal trainer for new shop-floor hires on GD&T fundamentals",
+                "field_of_study": "",
+                "institution": "",
+                "graduation_year": null
+            }
+        ],
+        "certifications": [],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

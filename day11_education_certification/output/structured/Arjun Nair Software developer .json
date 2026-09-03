@@ -1,0 +1,32 @@
+{
+    "source_file": "Arjun Nair Software developer .pdf",
+    "status": "success",
+    "academic_profile": {
+        "education": [
+            {
+                "degree_type": "BACHELOR",
+                "degree_name": "B.Tech, Computer Science - Cochin University of Science and Technology (2015 - 2019), 8.3 CGPA",
+                "field_of_study": "",
+                "institution": "B.Tech, Computer Science - Cochin",
+                "graduation_year": 2019
+            }
+        ],
+        "certifications": [
+            {
+                "name": "AWS Certified",
+                "category": "TECHNICAL",
+                "year": 2023
+            },
+            {
+                "name": "- MongoDB Certified Developer Associate (2022)",
+                "category": "OTHER",
+                "year": 2022
+            }
+        ],
+        "education_relevance": {
+            "score": 0.3,
+            "matched_fields": [],
+            "relevance": "LOW"
+        }
+    }
+}

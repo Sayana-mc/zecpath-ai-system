@@ -1,0 +1,24 @@
+{
+    "source_file": "john_mathew.docx",
+    "status": "success",
+    "experience_analysis": {
+        "total_experience_years": 1.08,
+        "employment_count": 1,
+        "employment_history": [
+            {
+                "job_title": "Collaborated with a team of 5 engineers in an Agile environment, participating in sprint planning, code reviews, and daily stand-ups.",
+                "company": "participating in sprint planning, code reviews, and daily stand-ups.",
+                "start_date": "2023-01-01",
+                "end_date": "2024-01-01",
+                "duration_months": 13
+            }
+        ],
+        "employment_gaps": [],
+        "overlapping_roles": [],
+        "relevance_analysis": {
+            "target_role": "Data Analyst",
+            "relevance_score": 0.0,
+            "relevant_roles": []
+        }
+    }
+}

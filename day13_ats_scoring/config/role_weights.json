@@ -1,0 +1,32 @@
+{
+    "data analyst": {
+        "skill_match": 0.35,
+        "experience_relevance": 0.20,
+        "education_alignment": 0.15,
+        "semantic_similarity": 0.30
+    },
+    "python developer": {
+        "skill_match": 0.40,
+        "experience_relevance": 0.25,
+        "education_alignment": 0.10,
+        "semantic_similarity": 0.25
+    },
+    "machine learning engineer": {
+        "skill_match": 0.35,
+        "experience_relevance": 0.25,
+        "education_alignment": 0.15,
+        "semantic_similarity": 0.25
+    },
+    "graphic designer": {
+        "skill_match": 0.40,
+        "experience_relevance": 0.25,
+        "education_alignment": 0.10,
+        "semantic_similarity": 0.25
+    },
+    "hr executive": {
+        "skill_match": 0.30,
+        "experience_relevance": 0.30,
+        "education_alignment": 0.15,
+        "semantic_similarity": 0.25
+    }
+}

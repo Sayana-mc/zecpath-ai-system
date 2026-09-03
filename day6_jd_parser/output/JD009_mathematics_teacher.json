@@ -1,0 +1,55 @@
+{
+    "job_id": "JD009",
+    "role": {
+        "title": "Mathematics Teacher",
+        "department": "Education",
+        "domain": "Education",
+        "job_type": "Non-Technical"
+    },
+    "experience": {
+        "required_years": "1-5"
+    },
+    "education": [
+        "M.Sc Mathematics",
+        "B.Ed"
+    ],
+    "skills": {
+        "required": [
+            "Mathematics",
+            "Lesson Planning",
+            "Student Assessment",
+            "Classroom Management",
+            "Google Classroom",
+            "Learning Management Systems"
+        ],
+        "preferred": [
+            "Digital Teaching",
+            "Educational Technology",
+            "Online Assessment"
+        ],
+        "soft_skills": [
+            "Communication",
+            "Patience",
+            "Leadership",
+            "Mentoring",
+            "Classroom Management"
+        ]
+    },
+    "responsibilities": [
+        "Prepare mathematics lessons",
+        "Teach students according to curriculum",
+        "Evaluate student performance",
+        "Prepare assessments",
+        "Maintain student records",
+        "Communicate with parents",
+        "Provide student mentoring"
+    ],
+    "location": "Kannur, Kerala",
+    "employment_type": "Full-time",
+    "ai_metadata": {
+        "canonical_role": "Mathematics Teacher",
+        "required_skill_count": 6,
+        "preferred_skill_count": 3,
+        "soft_skill_count": 5
+    }
+}

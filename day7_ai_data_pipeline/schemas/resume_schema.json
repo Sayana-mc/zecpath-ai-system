@@ -1,0 +1,50 @@
+﻿{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Zecpath Resume Storage Schema",
+    "type": "object",
+    "required": [
+        "candidate_id",
+        "application_id",
+        "file_name",
+        "file_type",
+        "upload_timestamp",
+        "extraction_status",
+        "data_version"
+    ],
+    "properties": {
+        "candidate_id": {
+            "type": "string"
+        },
+        "application_id": {
+            "type": "string"
+        },
+        "file_name": {
+            "type": "string"
+        },
+        "file_type": {
+            "type": "string",
+            "enum": [
+                "pdf",
+                "docx"
+            ]
+        },
+        "file_path": {
+            "type": "string"
+        },
+        "file_size_bytes": {
+            "type": "integer"
+        },
+        "upload_timestamp": {
+            "type": "string"
+        },
+        "extraction_status": {
+            "type": "string"
+        },
+        "extractor_version": {
+            "type": "string"
+        },
+        "data_version": {
+            "type": "string"
+        }
+    }
+}

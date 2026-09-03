@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resume Schema",
+  "description": "Structured schema for candidate resume data in the ZECpath AI System",
+  "type": "object",
+  "required": [
+    "candidate_profile",
+    "skills",
+    "experience",
+    "education",
+    "certifications",
+    "languages"
+  ],
+  "properties": {
+    "candidate_profile": {
+      "type": "object",
+      "required": [
+        "candidate_id",
+        "name",
+        "email",
+        "location",
+        "current_designation",
+        "total_experience_years"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "current_designation": {
+          "type": "string"
+        },
+        "total_experience_years": {
+          "type": "number"
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "skill_name",
+          "category"
+        ],
+        "properties": {
+          "skill_name": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "designation",
+          "company",
+          "start_date",
+          "end_date"
+        ],
+        "properties": {
+          "designation": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "degree",
+          "field",
+          "institution"
+        ],
+        "properties": {
+          "degree": {
+            "type": "string"
+          },
+          "field": {
+            "type": "string"
+          },
+          "institution": {
+            "type": "string"
+          },
+          "start_year": {
+            "type": "integer"
+          },
+          "end_year": {
+            "type": "integer"
+          },
+          "grade": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "domain": {
+      "type": "string"
+    }
+  }
+}
