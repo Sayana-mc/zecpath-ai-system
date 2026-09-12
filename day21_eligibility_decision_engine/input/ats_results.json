@@ -1,0 +1,52 @@
+[
+    {
+        "candidate_id": "C001",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 82,
+        "skills": [
+            "Python",
+            "SQL",
+            "Power BI",
+            "Excel"
+        ],
+        "experience_years": 2,
+        "location": "Bengaluru"
+    },
+    {
+        "candidate_id": "C002",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 58,
+        "skills": [
+            "Python",
+            "SQL"
+        ],
+        "experience_years": 2,
+        "location": "Bengaluru"
+    },
+    {
+        "candidate_id": "C003",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 75,
+        "skills": [
+            "Python",
+            "Excel"
+        ],
+        "experience_years": 2,
+        "location": "Bengaluru"
+    },
+    {
+        "candidate_id": "C004",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 80,
+        "skills": [
+            "Python",
+            "SQL"
+        ],
+        "experience_years": 2,
+        "location": "Kochi"
+    }
+]

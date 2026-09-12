@@ -1,0 +1,32 @@
+{
+    "Data Analyst": {
+        "minimum_ats_score": 65,
+        "mandatory_skills": [
+            "Python",
+            "SQL"
+        ],
+        "minimum_experience": 0,
+        "maximum_experience": 5,
+        "allowed_locations": [
+            "Bengaluru",
+            "Hyderabad",
+            "Remote"
+        ]
+    },
+    "Software Developer": {
+        "minimum_ats_score": 65,
+        "mandatory_skills": [
+            "JavaScript",
+            "React",
+            "Node.js"
+        ],
+        "minimum_experience": 1,
+        "maximum_experience": 6,
+        "allowed_locations": [
+            "Bengaluru",
+            "Kochi",
+            "Hyderabad",
+            "Remote"
+        ]
+    }
+}

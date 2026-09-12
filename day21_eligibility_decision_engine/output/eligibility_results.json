@@ -1,0 +1,40 @@
+[
+    {
+        "candidate_id": "C001",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 82,
+        "eligibility_status": "ELIGIBLE",
+        "reason": "Candidate passed all eligibility rules"
+    },
+    {
+        "candidate_id": "C002",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 58,
+        "eligibility_status": "REJECTED",
+        "reason": "ATS score below minimum threshold",
+        "failed_rule": "minimum_ats_score"
+    },
+    {
+        "candidate_id": "C003",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 75,
+        "eligibility_status": "REVIEW",
+        "reason": "Mandatory skills missing",
+        "failed_rule": "mandatory_skills",
+        "missing_skills": [
+            "sql"
+        ]
+    },
+    {
+        "candidate_id": "C004",
+        "job_id": "JD001",
+        "job_title": "Data Analyst",
+        "ats_score": 80,
+        "eligibility_status": "REVIEW",
+        "reason": "Location does not match configured constraints",
+        "failed_rule": "location"
+    }
+]
