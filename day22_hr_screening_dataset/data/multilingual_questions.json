@@ -1,0 +1,32 @@
+[
+    {
+        "question_id": "HR001",
+        "language": "en",
+        "question": "Please introduce yourself and briefly describe your background."
+    },
+    {
+        "question_id": "HR001",
+        "language": "ml",
+        "question": "ദയവായി നിങ്ങളെക്കുറിച്ചും നിങ്ങളുടെ പശ്ചാത്തലത്തെക്കുറിച്ചും ചുരുക്കമായി പരിചയപ്പെടുത്തുക."
+    },
+    {
+        "question_id": "HR001",
+        "language": "hi",
+        "question": "कृपया अपना परिचय दें और अपनी पृष्ठभूमि के बारे में संक्षेप में बताएं।"
+    },
+    {
+        "question_id": "HR006",
+        "language": "en",
+        "question": "Where are you currently located?"
+    },
+    {
+        "question_id": "HR006",
+        "language": "ml",
+        "question": "നിങ്ങൾ ഇപ്പോൾ എവിടെയാണ് താമസിക്കുന്നത്?"
+    },
+    {
+        "question_id": "HR006",
+        "language": "hi",
+        "question": "आप वर्तमान में कहाँ स्थित हैं?"
+    }
+]

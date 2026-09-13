@@ -1,0 +1,29 @@
+{
+    "Introduction": [
+        "Please introduce yourself and briefly describe your {background}.",
+        "Why are you interested in this {role}?"
+    ],
+    "Education": [
+        "Can you tell me about your {education}?",
+        "What is your highest educational qualification?"
+    ],
+    "Experience": [
+        "Can you describe your previous {experience}?",
+        "How many years of relevant experience do you have?"
+    ],
+    "Skills": [
+        "What technical skills do you have that are relevant to this role?",
+        "Which tools or technologies are you most comfortable working with?"
+    ],
+    "Location": [
+        "Where are you currently located?",
+        "Are you willing to relocate if required?"
+    ],
+    "Salary": [
+        "What are your salary expectations for this position?"
+    ],
+    "Notice Period": [
+        "What is your current notice period?",
+        "How soon can you join the organization?"
+    ]
+}

@@ -1,0 +1,197 @@
+{
+    "dataset_name": "HR Screening Question Bank",
+    "version": "1.0",
+    "total_questions": 17,
+    "valid_questions": 17,
+    "invalid_questions": 0,
+    "questions": [
+        {
+            "question_id": "HR001",
+            "role": "Data Analyst",
+            "category": "Introduction",
+            "question": "Please introduce yourself and briefly describe your background.",
+            "expected_answer_type": "text",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "Please introduce yourself and briefly describe your background."
+        },
+        {
+            "question_id": "HR002",
+            "role": "Data Analyst",
+            "category": "Education",
+            "question": "Can you tell me about your educational background?",
+            "expected_answer_type": "text",
+            "mandatory": true,
+            "scoring_importance": "medium",
+            "language": "en",
+            "template": "Can you tell me about your educational background?"
+        },
+        {
+            "question_id": "HR003",
+            "role": "Data Analyst",
+            "category": "Experience",
+            "question": "Can you describe your previous work or internship experience?",
+            "expected_answer_type": "text",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "Can you describe your previous work or internship experience?"
+        },
+        {
+            "question_id": "HR004",
+            "role": "Data Analyst",
+            "category": "Skills",
+            "question": "What technical skills do you have that are relevant to this role?",
+            "expected_answer_type": "list",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "What technical skills do you have that are relevant to this role?"
+        },
+        {
+            "question_id": "HR005",
+            "role": "Data Analyst",
+            "category": "Skills",
+            "question": "Which tools or technologies are you most comfortable working with?",
+            "expected_answer_type": "list",
+            "mandatory": false,
+            "scoring_importance": "medium",
+            "language": "en",
+            "template": "Which tools or technologies are you most comfortable working with?"
+        },
+        {
+            "question_id": "HR006",
+            "role": "Data Analyst",
+            "category": "Location",
+            "question": "Where are you currently located?",
+            "expected_answer_type": "location",
+            "mandatory": true,
+            "scoring_importance": "medium",
+            "language": "en",
+            "template": "Where are you currently located?"
+        },
+        {
+            "question_id": "HR007",
+            "role": "Data Analyst",
+            "category": "Location",
+            "question": "Are you willing to relocate if required for this role?",
+            "expected_answer_type": "boolean",
+            "mandatory": false,
+            "scoring_importance": "medium",
+            "language": "en",
+            "template": "Are you willing to relocate if required for this role?"
+        },
+        {
+            "question_id": "HR008",
+            "role": "Data Analyst",
+            "category": "Salary",
+            "question": "What are your salary expectations for this position?",
+            "expected_answer_type": "number_or_range",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "What are your salary expectations for this position?"
+        },
+        {
+            "question_id": "HR009",
+            "role": "Data Analyst",
+            "category": "Notice Period",
+            "question": "What is your current notice period?",
+            "expected_answer_type": "duration",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "What is your current notice period?"
+        },
+        {
+            "question_id": "HR010",
+            "role": "Data Analyst",
+            "category": "Introduction",
+            "question": "Why are you interested in this position?",
+            "expected_answer_type": "text",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "Why are you interested in this position?"
+        },
+        {
+            "question_id": "HR011",
+            "role": "Software Developer",
+            "category": "Introduction",
+            "question": "Please introduce yourself and briefly describe your technical background.",
+            "expected_answer_type": "text",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "Please introduce yourself and briefly describe your technical background."
+        },
+        {
+            "question_id": "HR012",
+            "role": "Software Developer",
+            "category": "Education",
+            "question": "What is your highest educational qualification?",
+            "expected_answer_type": "text",
+            "mandatory": true,
+            "scoring_importance": "medium",
+            "language": "en",
+            "template": "What is your highest educational qualification?"
+        },
+        {
+            "question_id": "HR013",
+            "role": "Software Developer",
+            "category": "Experience",
+            "question": "How many years of software development experience do you have?",
+            "expected_answer_type": "number",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "How many years of software development experience do you have?"
+        },
+        {
+            "question_id": "HR014",
+            "role": "Software Developer",
+            "category": "Skills",
+            "question": "Which programming languages and frameworks have you worked with?",
+            "expected_answer_type": "list",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "Which programming languages and frameworks have you worked with?"
+        },
+        {
+            "question_id": "HR015",
+            "role": "Software Developer",
+            "category": "Location",
+            "question": "Are you comfortable working from the required job location?",
+            "expected_answer_type": "boolean",
+            "mandatory": true,
+            "scoring_importance": "medium",
+            "language": "en",
+            "template": "Are you comfortable working from the required job location?"
+        },
+        {
+            "question_id": "HR016",
+            "role": "Software Developer",
+            "category": "Salary",
+            "question": "What are your expected salary requirements?",
+            "expected_answer_type": "number_or_range",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "What are your expected salary requirements?"
+        },
+        {
+            "question_id": "HR017",
+            "role": "Software Developer",
+            "category": "Notice Period",
+            "question": "How soon can you join the organization?",
+            "expected_answer_type": "duration",
+            "mandatory": true,
+            "scoring_importance": "high",
+            "language": "en",
+            "template": "How soon can you join the organization?"
+        }
+    ],
+    "validation_errors": []
+}

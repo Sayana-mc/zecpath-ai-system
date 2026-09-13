@@ -1,0 +1,47 @@
+{
+    "Introduction": {
+        "purpose": "Understand the candidate's background and motivation.",
+        "expected_answer_types": [
+            "text"
+        ]
+    },
+    "Education": {
+        "purpose": "Understand the candidate's academic background.",
+        "expected_answer_types": [
+            "text"
+        ]
+    },
+    "Experience": {
+        "purpose": "Understand relevant work and internship experience.",
+        "expected_answer_types": [
+            "text",
+            "number"
+        ]
+    },
+    "Skills": {
+        "purpose": "Identify technical and role-related skills.",
+        "expected_answer_types": [
+            "list",
+            "text"
+        ]
+    },
+    "Location": {
+        "purpose": "Check location and relocation requirements.",
+        "expected_answer_types": [
+            "location",
+            "boolean"
+        ]
+    },
+    "Salary": {
+        "purpose": "Understand candidate salary expectations.",
+        "expected_answer_types": [
+            "number_or_range"
+        ]
+    },
+    "Notice Period": {
+        "purpose": "Determine candidate availability and joining timeline.",
+        "expected_answer_types": [
+            "duration"
+        ]
+    }
+}
