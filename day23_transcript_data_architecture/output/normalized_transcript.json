@@ -1,0 +1,47 @@
+{
+  "transcript_id": "TR001",
+  "candidate_id": "C001",
+  "job_id": "DA001",
+  "session_id": "SES001",
+  "language": "en",
+  "created_at": "2026-08-23T10:30:00Z",
+  "interactions": [
+    {
+      "interaction_id": "INT001",
+      "question_id": "HR001",
+      "speaker": "interviewer",
+      "timestamp": "2026-08-23T10:30:05Z",
+      "raw_text": "Can you introduce yourself?",
+      "normalized_text": "Can you introduce yourself?",
+      "confidence_level": 0.99
+    },
+    {
+      "interaction_id": "INT002",
+      "question_id": "HR001",
+      "speaker": "candidate",
+      "timestamp": "2026-08-23T10:30:15Z",
+      "raw_text": "I am a data science graduate and I have experience with Python, SQL and Power BI.",
+      "normalized_text": "I am a data science graduate and I have experience with Python, SQL and Power BI.",
+      "confidence_level": 0.96
+    },
+    {
+      "interaction_id": "INT003",
+      "question_id": "HR004",
+      "speaker": "interviewer",
+      "timestamp": "2026-08-23T10:31:00Z",
+      "raw_text": "What technical skills do you have that are relevant to this role?",
+      "normalized_text": "What technical skills do you have that are relevant to this role?",
+      "confidence_level": 0.98
+    },
+    {
+      "interaction_id": "INT004",
+      "question_id": "HR004",
+      "speaker": "candidate",
+      "timestamp": "2026-08-23T10:31:12Z",
+      "raw_text": "I have skills in Python, SQL, Excel and Power BI.",
+      "normalized_text": "I have skills in Python, SQL, Excel and Power BI.",
+      "confidence_level": 0.97
+    }
+  ],
+  "validation_errors": []
+}

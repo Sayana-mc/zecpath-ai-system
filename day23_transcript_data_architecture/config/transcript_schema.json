@@ -1,0 +1,21 @@
+{
+  "transcript_schema": {
+    "transcript_id": "string",
+    "candidate_id": "string",
+    "job_id": "string",
+    "session_id": "string",
+    "language": "string",
+    "created_at": "ISO-8601 timestamp",
+    "interactions": [
+      {
+        "interaction_id": "string",
+        "question_id": "string",
+        "speaker": "interviewer | candidate",
+        "timestamp": "ISO-8601 timestamp",
+        "raw_text": "string",
+        "normalized_text": "string",
+        "confidence_level": "number between 0 and 1"
+      }
+    ]
+  }
+}

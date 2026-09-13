@@ -1,0 +1,39 @@
+{
+  "normalization_rules": [
+    {
+      "rule_id": "NR001",
+      "name": "Trim whitespace",
+      "description": "Remove unnecessary leading and trailing whitespace"
+    },
+    {
+      "rule_id": "NR002",
+      "name": "Normalize repeated spaces",
+      "description": "Convert multiple consecutive spaces into a single space"
+    },
+    {
+      "rule_id": "NR003",
+      "name": "Normalize line breaks",
+      "description": "Convert unnecessary line breaks into standard spacing"
+    },
+    {
+      "rule_id": "NR004",
+      "name": "Preserve meaning",
+      "description": "Do not change the meaning of the candidate's answer"
+    },
+    {
+      "rule_id": "NR005",
+      "name": "Preserve technical terms",
+      "description": "Do not alter valid technical terms, programming languages, tools or technologies"
+    },
+    {
+      "rule_id": "NR006",
+      "name": "Preserve raw transcript",
+      "description": "Keep the original transcript separately from the normalized transcript"
+    },
+    {
+      "rule_id": "NR007",
+      "name": "Confidence validation",
+      "description": "Ensure confidence values remain between 0 and 1"
+    }
+  ]
+}

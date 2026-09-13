@@ -1,0 +1,31 @@
+{
+  "metadata_standard": {
+    "candidate_id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique identifier of the candidate"
+    },
+    "job_id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique identifier of the job"
+    },
+    "question_id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique identifier of the HR screening question"
+    },
+    "timestamp": {
+      "type": "string",
+      "required": true,
+      "format": "ISO-8601",
+      "description": "Time associated with the transcript interaction"
+    },
+    "confidence_level": {
+      "type": "number",
+      "required": true,
+      "range": "0.0-1.0",
+      "description": "Speech-to-text confidence associated with the transcript"
+    }
+  }
+}
