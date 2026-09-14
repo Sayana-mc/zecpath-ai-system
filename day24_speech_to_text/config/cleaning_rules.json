@@ -1,0 +1,20 @@
+{
+    "remove_filler_words": true,
+    "filler_words": [
+        "uh",
+        "um",
+        "er",
+        "erm",
+        "ah",
+        "hmm",
+        "you know",
+        "like",
+        "basically",
+        "actually",
+        "i mean"
+    ],
+    "normalize_case": "sentence",
+    "normalize_whitespace": true,
+    "remove_repeated_words": true,
+    "minimum_partial_words": 3
+}

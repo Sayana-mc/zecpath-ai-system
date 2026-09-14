@@ -1,0 +1,20 @@
+[
+    {
+        "test_id": "STT001",
+        "audio_file": "sample_clean.wav",
+        "condition": "clean",
+        "expected_text": "Hello, my name is Sayana. I have completed my master's degree in data science and analytics."
+    },
+    {
+        "test_id": "STT002",
+        "audio_file": "sample_noise.wav",
+        "condition": "background_noise",
+        "expected_text": "I have experience with Python, SQL, Excel and Power BI."
+    },
+    {
+        "test_id": "STT003",
+        "audio_file": "speaker_indian.wav",
+        "condition": "accent_indian",
+        "expected_text": "I have completed my master's degree in data science and analytics."
+    }
+]
