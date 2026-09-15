@@ -1,0 +1,42 @@
+{
+    "intents": {
+        "skills": [
+            "skill",
+            "skills",
+            "technology",
+            "technologies",
+            "programming",
+            "tools",
+            "technical skills"
+        ],
+        "experience": [
+            "experience",
+            "work experience",
+            "worked",
+            "working",
+            "internship",
+            "internships",
+            "years of experience",
+            "previous role"
+        ],
+        "availability": [
+            "available",
+            "availability",
+            "joining",
+            "join",
+            "notice period",
+            "start date",
+            "when can you join"
+        ],
+        "salary_expectation": [
+            "salary",
+            "expected salary",
+            "salary expectation",
+            "ctc",
+            "package",
+            "compensation",
+            "pay",
+            "lpa"
+        ]
+    }
+}

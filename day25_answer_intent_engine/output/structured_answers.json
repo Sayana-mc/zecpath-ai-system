@@ -1,0 +1,138 @@
+{
+    "total_answers": 6,
+    "structured_answers": [
+        {
+            "answer_id": "ANS001",
+            "question_id": "Q_SKILLS",
+            "question": "What technical skills do you have?",
+            "raw_answer": "I have experience with Python, SQL, Excel and Power BI.",
+            "understanding": {
+                "intent": "skills",
+                "intent_confidence": 1.0,
+                "answer_status": "valid",
+                "validation": {
+                    "missing": false,
+                    "vague": false,
+                    "off_topic": false,
+                    "status": "valid"
+                },
+                "extracted_information": {
+                    "skills": [
+                        "Python",
+                        "SQL",
+                        "Excel",
+                        "Power BI"
+                    ]
+                }
+            }
+        },
+        {
+            "answer_id": "ANS002",
+            "question_id": "Q_EXPERIENCE",
+            "question": "Tell me about your experience.",
+            "raw_answer": "I have 1 year of experience including a 6 month data analyst internship.",
+            "understanding": {
+                "intent": "experience",
+                "intent_confidence": 1.0,
+                "answer_status": "valid",
+                "validation": {
+                    "missing": false,
+                    "vague": false,
+                    "off_topic": false,
+                    "status": "valid"
+                },
+                "extracted_information": {
+                    "experience": {
+                        "values": [
+                            "1",
+                            "6"
+                        ],
+                        "internship_mentioned": true
+                    }
+                }
+            }
+        },
+        {
+            "answer_id": "ANS003",
+            "question_id": "Q_AVAILABILITY",
+            "question": "When can you join?",
+            "raw_answer": "I am available to join immediately.",
+            "understanding": {
+                "intent": "availability",
+                "intent_confidence": 1.0,
+                "answer_status": "valid",
+                "validation": {
+                    "missing": false,
+                    "vague": false,
+                    "off_topic": false,
+                    "status": "valid"
+                },
+                "extracted_information": {
+                    "availability": {
+                        "status": "immediate",
+                        "notice_period": null
+                    }
+                }
+            }
+        },
+        {
+            "answer_id": "ANS004",
+            "question_id": "Q_SALARY",
+            "question": "What is your salary expectation?",
+            "raw_answer": "I am expecting around 4 LPA.",
+            "understanding": {
+                "intent": "salary_expectation",
+                "intent_confidence": 1.0,
+                "answer_status": "valid",
+                "validation": {
+                    "missing": false,
+                    "vague": false,
+                    "off_topic": false,
+                    "status": "valid"
+                },
+                "extracted_information": {
+                    "salary_expectation": {
+                        "amount": 4.0,
+                        "unit": "LPA"
+                    }
+                }
+            }
+        },
+        {
+            "answer_id": "ANS005",
+            "question_id": "Q_SKILLS",
+            "question": "What technical skills do you have?",
+            "raw_answer": "I don't know.",
+            "understanding": {
+                "intent": "unknown",
+                "intent_confidence": 0.0,
+                "answer_status": "vague",
+                "validation": {
+                    "missing": false,
+                    "vague": true,
+                    "off_topic": false,
+                    "status": "vague"
+                },
+                "extracted_information": {}
+            }
+        },
+        {
+            "answer_id": "ANS006",
+            "question_id": "Q_EXPERIENCE",
+            "question": "Tell me about your experience.",
+            "raw_answer": "I like watching movies and playing games.",
+            "understanding": {
+                "intent": "unknown",
+                "intent_confidence": 0.0,
+                "answer_status": "off_topic",
+                "validation": {
+                    "missing": false,
+                    "vague": false,
+                    "off_topic": true,
+                    "status": "off_topic"
+                },
+                "extracted_information": {}
+            }
+        }
+    ]
+}

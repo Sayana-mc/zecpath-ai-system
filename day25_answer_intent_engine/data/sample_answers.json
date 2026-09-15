@@ -1,0 +1,44 @@
+[
+    {
+        "answer_id": "ANS001",
+        "question_id": "Q_SKILLS",
+        "question_intent": "skills",
+        "question": "What technical skills do you have?",
+        "answer": "I have experience with Python, SQL, Excel and Power BI."
+    },
+    {
+        "answer_id": "ANS002",
+        "question_id": "Q_EXPERIENCE",
+        "question_intent": "experience",
+        "question": "Tell me about your experience.",
+        "answer": "I have 1 year of experience including a 6 month data analyst internship."
+    },
+    {
+        "answer_id": "ANS003",
+        "question_id": "Q_AVAILABILITY",
+        "question_intent": "availability",
+        "question": "When can you join?",
+        "answer": "I am available to join immediately."
+    },
+    {
+        "answer_id": "ANS004",
+        "question_id": "Q_SALARY",
+        "question_intent": "salary_expectation",
+        "question": "What is your salary expectation?",
+        "answer": "I am expecting around 4 LPA."
+    },
+    {
+        "answer_id": "ANS005",
+        "question_id": "Q_SKILLS",
+        "question_intent": "skills",
+        "question": "What technical skills do you have?",
+        "answer": "I don't know."
+    },
+    {
+        "answer_id": "ANS006",
+        "question_id": "Q_EXPERIENCE",
+        "question_intent": "experience",
+        "question": "Tell me about your experience.",
+        "answer": "I like watching movies and playing games."
+    }
+]
