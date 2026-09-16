@@ -1,0 +1,74 @@
+[
+    {
+        "answer_id": "ANS001",
+        "candidate_id": "C001",
+        "question_id": "Q001",
+        "question": "What technical skills do you have?",
+        "answer": "I have experience with Python, SQL, Excel and Power BI. I have used Python and SQL for data analysis projects.",
+        "expected_intent": "skills",
+        "previous_information": {
+            "skills": [
+                "Python",
+                "SQL",
+                "Excel",
+                "Power BI"
+            ]
+        }
+    },
+    {
+        "answer_id": "ANS002",
+        "candidate_id": "C001",
+        "question_id": "Q002",
+        "question": "Tell me about your experience.",
+        "answer": "I have one year of experience including a six month data analyst internship where I worked with Python, SQL and Power BI.",
+        "expected_intent": "experience",
+        "previous_information": {
+            "experience_years": 1
+        }
+    },
+    {
+        "answer_id": "ANS003",
+        "candidate_id": "C001",
+        "question_id": "Q003",
+        "question": "When can you join?",
+        "answer": "I am available to join immediately.",
+        "expected_intent": "availability",
+        "previous_information": {
+            "availability": "immediate"
+        }
+    },
+    {
+        "answer_id": "ANS004",
+        "candidate_id": "C001",
+        "question_id": "Q004",
+        "question": "What are your salary expectations?",
+        "answer": "I am expecting around 4 LPA.",
+        "expected_intent": "salary_expectation",
+        "previous_information": {
+            "salary_lpa": 4
+        }
+    },
+    {
+        "answer_id": "ANS005",
+        "candidate_id": "C001",
+        "question_id": "Q005",
+        "question": "Why are you interested in this role?",
+        "answer": "I don't know.",
+        "expected_intent": "unknown",
+        "previous_information": {}
+    },
+    {
+        "answer_id": "ANS006",
+        "candidate_id": "C001",
+        "question_id": "Q006",
+        "question": "What technical skills do you have?",
+        "answer": "I like watching movies and playing games.",
+        "expected_intent": "skills",
+        "previous_information": {
+            "skills": [
+                "Python",
+                "SQL"
+            ]
+        }
+    }
+]

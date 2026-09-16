@@ -1,0 +1,24 @@
+{
+    "score_range": {
+        "minimum": 0,
+        "maximum": 5
+    },
+    "parameters": {
+        "clarity": {
+            "weight": 0.25,
+            "description": "Measures how clearly the candidate communicates the answer."
+        },
+        "relevance": {
+            "weight": 0.30,
+            "description": "Measures how directly the answer addresses the question."
+        },
+        "completeness": {
+            "weight": 0.25,
+            "description": "Measures whether the answer contains sufficient information."
+        },
+        "consistency": {
+            "weight": 0.20,
+            "description": "Measures whether the answer is consistent with the available candidate information."
+        }
+    }
+}
