@@ -1,0 +1,65 @@
+[
+    {
+        "answer_id": "ANS001",
+        "question_id": "Q001",
+        "question": "What technical skills do you have?",
+        "transcript": "I am confident with Python, SQL, Excel and Power BI. I enjoy working with data.",
+        "duration_seconds": 15,
+        "expected_information": {
+            "skills": [
+                "Python",
+                "SQL",
+                "Excel",
+                "Power BI"
+            ]
+        }
+    },
+    {
+        "answer_id": "ANS002",
+        "question_id": "Q002",
+        "question": "Tell me about your experience.",
+        "transcript": "Um, I think I have around one year of experience, including an internship.",
+        "duration_seconds": 14,
+        "expected_information": {
+            "experience_years": 1
+        }
+    },
+    {
+        "answer_id": "ANS003",
+        "question_id": "Q003",
+        "question": "When can you join?",
+        "transcript": "I am available to join immediately.",
+        "duration_seconds": 5,
+        "expected_information": {
+            "availability": "immediate"
+        }
+    },
+    {
+        "answer_id": "ANS004",
+        "question_id": "Q004",
+        "question": "What is your salary expectation?",
+        "transcript": "Maybe around 4 LPA. I am not completely sure.",
+        "duration_seconds": 8,
+        "expected_information": {
+            "salary_lpa": 4
+        }
+    },
+    {
+        "answer_id": "ANS005",
+        "question_id": "Q005",
+        "question": "What do you enjoy doing?",
+        "transcript": "I love learning new technologies and I am excited about data science.",
+        "duration_seconds": 10,
+        "expected_information": {}
+    },
+    {
+        "answer_id": "ANS006",
+        "question_id": "Q006",
+        "question": "How much experience do you have?",
+        "transcript": "I have two years of experience.",
+        "duration_seconds": 6,
+        "expected_information": {
+            "experience_years": 1
+        }
+    }
+]

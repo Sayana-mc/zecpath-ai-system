@@ -1,0 +1,60 @@
+{
+    "confidence": {
+        "base_score": 50,
+        "hesitation_penalty": 5,
+        "uncertainty_penalty": 5,
+        "contradiction_penalty": 10,
+        "clear_response_bonus": 5,
+        "maximum_score": 100,
+        "minimum_score": 0
+    },
+    "response_length": {
+        "short_word_limit": 5,
+        "medium_word_limit": 15
+    },
+    "pace": {
+        "fast_wpm": 180,
+        "slow_wpm": 90
+    },
+    "sentiment": {
+        "positive_words": [
+            "confident",
+            "interested",
+            "excited",
+            "enjoy",
+            "love",
+            "good",
+            "strong",
+            "happy",
+            "motivated"
+        ],
+        "negative_words": [
+            "difficult",
+            "hate",
+            "bad",
+            "worried",
+            "problem",
+            "dislike",
+            "frustrated"
+        ]
+    },
+    "patterns": {
+        "hesitation_words": [
+            "um",
+            "uh",
+            "hmm",
+            "actually",
+            "maybe",
+            "well",
+            "you know"
+        ],
+        "uncertainty_phrases": [
+            "i think",
+            "not sure",
+            "probably",
+            "maybe",
+            "i guess",
+            "as far as i know"
+        ]
+    }
+}

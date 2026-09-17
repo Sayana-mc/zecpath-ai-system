@@ -1,0 +1,241 @@
+{
+    "total_answers": 6,
+    "behavioral_indicators": [
+        {
+            "answer_id": "ANS001",
+            "question_id": "Q001",
+            "question": "What technical skills do you have?",
+            "transcript": "I am confident with Python, SQL, Excel and Power BI. I enjoy working with data.",
+            "confidence_analysis": {
+                "confidence_score": 55,
+                "hesitation": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "uncertainty": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "response_length": {
+                    "word_count": 15,
+                    "category": "medium"
+                },
+                "pace": {
+                    "words_per_minute": 60.0,
+                    "pace": "slow"
+                },
+                "contradiction_detected": false
+            },
+            "sentiment_analysis": {
+                "sentiment": "positive",
+                "sentiment_score": 100.0,
+                "positive_count": 2,
+                "negative_count": 0,
+                "positive_indicators": [
+                    "confident",
+                    "enjoy"
+                ],
+                "negative_indicators": []
+            },
+            "communication_strength": "moderate"
+        },
+        {
+            "answer_id": "ANS002",
+            "question_id": "Q002",
+            "question": "Tell me about your experience.",
+            "transcript": "Um, I think I have around one year of experience, including an internship.",
+            "confidence_analysis": {
+                "confidence_score": 30,
+                "hesitation": {
+                    "detected": true,
+                    "count": 1,
+                    "patterns": [
+                        "um"
+                    ]
+                },
+                "uncertainty": {
+                    "detected": true,
+                    "count": 1,
+                    "patterns": [
+                        "i think"
+                    ]
+                },
+                "response_length": {
+                    "word_count": 13,
+                    "category": "medium"
+                },
+                "pace": {
+                    "words_per_minute": 55.71,
+                    "pace": "slow"
+                },
+                "contradiction_detected": true
+            },
+            "sentiment_analysis": {
+                "sentiment": "neutral",
+                "sentiment_score": 0,
+                "positive_count": 0,
+                "negative_count": 0,
+                "positive_indicators": [],
+                "negative_indicators": []
+            },
+            "communication_strength": "needs_review"
+        },
+        {
+            "answer_id": "ANS003",
+            "question_id": "Q003",
+            "question": "When can you join?",
+            "transcript": "I am available to join immediately.",
+            "confidence_analysis": {
+                "confidence_score": 55,
+                "hesitation": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "uncertainty": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "response_length": {
+                    "word_count": 6,
+                    "category": "medium"
+                },
+                "pace": {
+                    "words_per_minute": 72.0,
+                    "pace": "slow"
+                },
+                "contradiction_detected": false
+            },
+            "sentiment_analysis": {
+                "sentiment": "neutral",
+                "sentiment_score": 0,
+                "positive_count": 0,
+                "negative_count": 0,
+                "positive_indicators": [],
+                "negative_indicators": []
+            },
+            "communication_strength": "moderate"
+        },
+        {
+            "answer_id": "ANS004",
+            "question_id": "Q004",
+            "question": "What is your salary expectation?",
+            "transcript": "Maybe around 4 LPA. I am not completely sure.",
+            "confidence_analysis": {
+                "confidence_score": 40,
+                "hesitation": {
+                    "detected": true,
+                    "count": 1,
+                    "patterns": [
+                        "maybe"
+                    ]
+                },
+                "uncertainty": {
+                    "detected": true,
+                    "count": 1,
+                    "patterns": [
+                        "maybe"
+                    ]
+                },
+                "response_length": {
+                    "word_count": 9,
+                    "category": "medium"
+                },
+                "pace": {
+                    "words_per_minute": 67.5,
+                    "pace": "slow"
+                },
+                "contradiction_detected": false
+            },
+            "sentiment_analysis": {
+                "sentiment": "neutral",
+                "sentiment_score": 0,
+                "positive_count": 0,
+                "negative_count": 0,
+                "positive_indicators": [],
+                "negative_indicators": []
+            },
+            "communication_strength": "needs_review"
+        },
+        {
+            "answer_id": "ANS005",
+            "question_id": "Q005",
+            "question": "What do you enjoy doing?",
+            "transcript": "I love learning new technologies and I am excited about data science.",
+            "confidence_analysis": {
+                "confidence_score": 55,
+                "hesitation": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "uncertainty": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "response_length": {
+                    "word_count": 12,
+                    "category": "medium"
+                },
+                "pace": {
+                    "words_per_minute": 72.0,
+                    "pace": "slow"
+                },
+                "contradiction_detected": false
+            },
+            "sentiment_analysis": {
+                "sentiment": "positive",
+                "sentiment_score": 100.0,
+                "positive_count": 2,
+                "negative_count": 0,
+                "positive_indicators": [
+                    "love",
+                    "excited"
+                ],
+                "negative_indicators": []
+            },
+            "communication_strength": "moderate"
+        },
+        {
+            "answer_id": "ANS006",
+            "question_id": "Q006",
+            "question": "How much experience do you have?",
+            "transcript": "I have two years of experience.",
+            "confidence_analysis": {
+                "confidence_score": 45,
+                "hesitation": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "uncertainty": {
+                    "detected": false,
+                    "count": 0,
+                    "patterns": []
+                },
+                "response_length": {
+                    "word_count": 6,
+                    "category": "medium"
+                },
+                "pace": {
+                    "words_per_minute": 60.0,
+                    "pace": "slow"
+                },
+                "contradiction_detected": true
+            },
+            "sentiment_analysis": {
+                "sentiment": "neutral",
+                "sentiment_score": 0,
+                "positive_count": 0,
+                "negative_count": 0,
+                "positive_indicators": [],
+                "negative_indicators": []
+            },
+            "communication_strength": "needs_review"
+        }
+    ]
+}
