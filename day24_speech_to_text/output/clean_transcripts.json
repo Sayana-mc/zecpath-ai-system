@@ -1,0 +1,42 @@
+[
+    {
+        "audio_file": "sample_clean.wav",
+        "speech_to_text": {
+            "language": "en",
+            "language_probability": 1,
+            "text": "Hello, my name is Sana, I am C. I have completed my master's degree in data science and analytics. I have experience with SQL, Excel, Python and Power BI.",
+            "segments": [
+                {
+                    "start": 0.75,
+                    "end": 7.75,
+                    "text": "Hello, my name is Sana, I am C. I have completed my master's degree in data science and analytics."
+                },
+                {
+                    "start": 7.75,
+                    "end": 13.75,
+                    "text": "I have experience with SQL, Excel, Python and Power BI."
+                }
+            ]
+        },
+        "normalized_transcript": {
+            "raw_text": "Hello, my name is Sana, I am C. I have completed my master's degree in data science and analytics. I have experience with SQL, Excel, Python and Power BI.",
+            "clean_text": "Hello, my name is Sana, I am C. I have completed my master's degree in data science and analytics. I have experience with SQL, Excel, Python and Power BI.",
+            "language": "en",
+            "language_probability": 1,
+            "segments": [
+                {
+                    "start": 0.75,
+                    "end": 7.75,
+                    "text": "Hello, my name is Sana, I am C. I have completed my master's degree in data science and analytics."
+                },
+                {
+                    "start": 7.75,
+                    "end": 13.75,
+                    "text": "I have experience with SQL, Excel, Python and Power BI."
+                }
+            ],
+            "partial_answer": false,
+            "segment_count": 2
+        }
+    }
+]

@@ -1,0 +1,69 @@
+{
+    "report_metadata": {
+        "candidate_id": "C001",
+        "candidate_name": "Sample Candidate",
+        "job_id": "DA001",
+        "job_title": "Data Analyst"
+    },
+    "screening_summary": {
+        "total_score": 84.17,
+        "questions_evaluated": 6
+    },
+    "key_answers": [
+        {
+            "question_id": "Q001",
+            "question": "What technical skills do you have?",
+            "answer": "I have experience with Python, SQL, Excel and Power BI.",
+            "intent": "skills"
+        },
+        {
+            "question_id": "Q002",
+            "question": "Tell me about your experience.",
+            "answer": "I have 1 year of experience including a 6 month data analyst internship.",
+            "intent": "experience"
+        },
+        {
+            "question_id": "Q003",
+            "question": "When can you join?",
+            "answer": "I am available to join immediately.",
+            "intent": "availability"
+        },
+        {
+            "question_id": "Q004",
+            "question": "What is your salary expectation?",
+            "answer": "I am expecting around 4 LPA.",
+            "intent": "salary_expectation"
+        }
+    ],
+    "strengths": [
+        "Candidate confirmed technical skills: Python, SQL, Excel, Power BI",
+        "Candidate reported 1 year(s) of experience.",
+        "Overall response sentiment was positive.",
+        "Communication strength: moderate"
+    ],
+    "risks": [
+        "Q005: Candidate provided a vague answer.",
+        "Q006: Candidate provided an off-topic answer."
+    ],
+    "missing_data": [
+        "Q005 requires clarification"
+    ],
+    "highlights": {
+        "skill_confirmations": [
+            "Python",
+            "SQL",
+            "Excel",
+            "Power BI"
+        ],
+        "availability": "immediate",
+        "salary_expectation": 4.0
+    },
+    "behavioral_summary": {
+        "communication_strength": "moderate",
+        "hesitation_count": 2,
+        "uncertainty_count": 1,
+        "average_response_length": 12,
+        "sentiment": "positive",
+        "contradictions_detected": false
+    }
+}

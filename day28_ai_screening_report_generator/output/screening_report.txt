@@ -1,0 +1,50 @@
+============================================================
+AI SCREENING REPORT
+============================================================
+
+CANDIDATE INFORMATION
+----------------------------------------
+Candidate ID : C001
+Candidate    : Sample Candidate
+Job ID       : DA001
+Job Title    : Data Analyst
+
+SCREENING SUMMARY
+----------------------------------------
+Total Score        : 84.17
+Questions Evaluated: 6
+
+KEY HIGHLIGHTS
+----------------------------------------
+Confirmed Skills: Python, SQL, Excel, Power BI
+Availability: immediate
+Salary Expectation: 4.0 LPA
+
+STRENGTHS
+----------------------------------------
+- Candidate confirmed technical skills: Python, SQL, Excel, Power BI
+- Candidate reported 1 year(s) of experience.
+- Overall response sentiment was positive.
+- Communication strength: moderate
+
+RISKS
+----------------------------------------
+- Q005: Candidate provided a vague answer.
+- Q006: Candidate provided an off-topic answer.
+
+MISSING DATA
+----------------------------------------
+- Q005 requires clarification
+
+BEHAVIORAL INDICATORS
+----------------------------------------
+Communication Strength: moderate
+Hesitation Count: 2
+Uncertainty Count: 1
+Average Response Length: 12
+Sentiment: positive
+Contradictions Detected: False
+
+============================================================
+END OF AI SCREENING REPORT
+============================================================

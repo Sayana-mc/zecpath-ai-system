@@ -1,0 +1,8 @@
+{
+  "extraPaths": [
+    "day23_transcript_data_architecture/src",
+    "day24_speech_to_text/src",
+    "day25_answer_intent_engine/src",
+    "day26_screening_scoring_engine/src"
+  ]
+}

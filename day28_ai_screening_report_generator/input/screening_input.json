@@ -1,0 +1,91 @@
+{
+    "candidate_id": "C001",
+    "candidate_name": "Sample Candidate",
+    "job_id": "DA001",
+    "job_title": "Data Analyst",
+
+    "screening_score": {
+        "total_score": 84.17,
+        "questions_evaluated": 6
+    },
+
+    "answers": [
+        {
+            "question_id": "Q001",
+            "question": "What technical skills do you have?",
+            "answer": "I have experience with Python, SQL, Excel and Power BI.",
+            "intent": "skills",
+            "confidence": 0.9,
+            "status": "valid",
+            "extracted_information": {
+                "skills": [
+                    "Python",
+                    "SQL",
+                    "Excel",
+                    "Power BI"
+                ]
+            }
+        },
+        {
+            "question_id": "Q002",
+            "question": "Tell me about your experience.",
+            "answer": "I have 1 year of experience including a 6 month data analyst internship.",
+            "intent": "experience",
+            "confidence": 1.0,
+            "status": "valid",
+            "extracted_information": {
+                "experience_years": 1,
+                "internship": true
+            }
+        },
+        {
+            "question_id": "Q003",
+            "question": "When can you join?",
+            "answer": "I am available to join immediately.",
+            "intent": "availability",
+            "confidence": 1.0,
+            "status": "valid",
+            "extracted_information": {
+                "availability": "immediate"
+            }
+        },
+        {
+            "question_id": "Q004",
+            "question": "What is your salary expectation?",
+            "answer": "I am expecting around 4 LPA.",
+            "intent": "salary_expectation",
+            "confidence": 1.0,
+            "status": "valid",
+            "extracted_information": {
+                "salary_lpa": 4.0
+            }
+        },
+        {
+            "question_id": "Q005",
+            "question": "What additional skills do you have?",
+            "answer": "I don't know.",
+            "intent": "unknown",
+            "confidence": 0.0,
+            "status": "vague",
+            "extracted_information": {}
+        },
+        {
+            "question_id": "Q006",
+            "question": "Tell me about your experience.",
+            "answer": "I like watching movies and playing games.",
+            "intent": "unknown",
+            "confidence": 0.0,
+            "status": "off_topic",
+            "extracted_information": {}
+        }
+    ],
+
+    "behavioral_analysis": {
+        "communication_strength": "moderate",
+        "hesitation_count": 2,
+        "uncertainty_count": 1,
+        "average_response_length": 12,
+        "sentiment": "positive",
+        "contradictions_detected": false
+    }
+}
