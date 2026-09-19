@@ -1,0 +1,82 @@
+[
+    {
+        "input": null,
+        "result": {
+            "state": "asking",
+            "action": "ask_question",
+            "message": "Could you please tell me about your experience?"
+        }
+    },
+    {
+        "response_id": "R001",
+        "response": "",
+        "decision": {
+            "condition": "silence",
+            "next_action": "retry"
+        },
+        "flow_result": {
+            "state": "waiting",
+            "action": "handle_silence",
+            "message": "Take your time. Please answer when you are ready."
+        }
+    },
+    {
+        "response_id": "R002",
+        "response": "I don't understand the question.",
+        "decision": {
+            "condition": "confusion",
+            "next_action": "clarification"
+        },
+        "flow_result": {
+            "state": "clarification",
+            "action": "clarify",
+            "message": "Sure. Let me explain the question more clearly. Could you describe your previous work experience?"
+        }
+    },
+    {
+        "response_id": "R003",
+        "response": "Python development.",
+        "decision": {
+            "condition": "short_answer",
+            "next_action": "follow_up"
+        },
+        "flow_result": {
+            "state": "follow_up",
+            "action": "follow_up",
+            "message": "Could you please provide a little more detail?"
+        }
+    },
+    {
+        "response_id": "R004",
+        "response": "I have two years of experience working with Python and SQL.",
+        "decision": {
+            "condition": "valid_answer",
+            "next_action": "continue"
+        },
+        "flow_result": {
+            "state": "asking",
+            "action": "continue",
+            "message": "Thank you. Let's continue with the next question."
+        }
+    },
+    {
+        "response_id": "R005",
+        "response": "I have two years of experience working with Python and SQL.",
+        "decision": {
+            "condition": "valid_answer",
+            "next_action": "continue"
+        },
+        "flow_result": {
+            "state": "retry",
+            "action": "retry_question",
+            "message": "Thank you. Could you provide a little more detail about your answer?"
+        }
+    },
+    {
+        "result": {
+            "state": "completed",
+            "action": "complete",
+            "message": "Thank you for completing the screening."
+        }
+    }
+]
