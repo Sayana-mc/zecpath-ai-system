@@ -1,0 +1,152 @@
+{
+    "total_cases": 6,
+    "results": [
+        {
+            "case_id": "CASE001",
+            "input": {
+                "id": "CASE001",
+                "transcript": "",
+                "confidence": 0.95,
+                "language": "en",
+                "background_noise": false
+            },
+            "edge_case_analysis": {
+                "case_type": "missing_answer",
+                "severity": "medium",
+                "action": "clarify",
+                "message": "I didn't receive an answer. Could you please answer the question?",
+                "retry_allowed": true
+            },
+            "retry_logic": {
+                "action": "retry",
+                "retry_count": 1,
+                "message": "Could you please repeat your answer?"
+            },
+            "clarification": {
+                "action": "clarify",
+                "message": "I didn't receive an answer. Could you please answer the question?"
+            }
+        },
+        {
+            "case_id": "CASE002",
+            "input": {
+                "id": "CASE002",
+                "transcript": "I have Python experience.",
+                "confidence": 0.35,
+                "language": "en",
+                "background_noise": false
+            },
+            "edge_case_analysis": {
+                "case_type": "poor_audio",
+                "severity": "high",
+                "action": "retry",
+                "message": "I'm sorry, I couldn't hear that clearly. Could you please repeat your answer?",
+                "retry_allowed": true
+            },
+            "retry_logic": {
+                "action": "retry",
+                "retry_count": 1,
+                "message": "Could you please repeat your answer?"
+            },
+            "clarification": null
+        },
+        {
+            "case_id": "CASE003",
+            "input": {
+                "id": "CASE003",
+                "transcript": "I have experience",
+                "confidence": 0.95,
+                "language": "en",
+                "background_noise": true
+            },
+            "edge_case_analysis": {
+                "case_type": "background_noise",
+                "severity": "medium",
+                "action": "retry",
+                "message": "There seems to be some background noise. Could you please repeat your answer clearly?",
+                "retry_allowed": true
+            },
+            "retry_logic": {
+                "action": "retry",
+                "retry_count": 1,
+                "message": "Could you please repeat your answer?"
+            },
+            "clarification": null
+        },
+        {
+            "case_id": "CASE004",
+            "input": {
+                "id": "CASE004",
+                "transcript": "Python aanu ente main skill.",
+                "confidence": 0.9,
+                "language": "mixed",
+                "background_noise": false
+            },
+            "edge_case_analysis": {
+                "case_type": "language_mixing",
+                "severity": "low",
+                "action": "clarify",
+                "message": "I noticed mixed-language speech. Could you please answer clearly in one language?",
+                "retry_allowed": true
+            },
+            "retry_logic": {
+                "action": "retry",
+                "retry_count": 1,
+                "message": "Could you please repeat your answer?"
+            },
+            "clarification": {
+                "action": "clarify",
+                "message": "Could you please answer clearly in one language?"
+            }
+        },
+        {
+            "case_id": "CASE005",
+            "input": {
+                "id": "CASE005",
+                "transcript": "Python",
+                "confidence": 0.95,
+                "language": "en",
+                "background_noise": false
+            },
+            "edge_case_analysis": {
+                "case_type": "incomplete_answer",
+                "severity": "medium",
+                "action": "clarify",
+                "message": "Could you please provide a little more detail?",
+                "retry_allowed": true
+            },
+            "retry_logic": {
+                "action": "retry",
+                "retry_count": 1,
+                "message": "Could you please repeat your answer?"
+            },
+            "clarification": {
+                "action": "clarify",
+                "message": "Could you please provide a little more detail?"
+            }
+        },
+        {
+            "case_id": "CASE006",
+            "input": {
+                "id": "CASE006",
+                "transcript": "I have two years of experience in data analysis.",
+                "confidence": 0.95,
+                "language": "en",
+                "background_noise": false
+            },
+            "edge_case_analysis": {
+                "case_type": "normal",
+                "severity": "none",
+                "action": "continue",
+                "message": "Thank you. Let's continue with the next question.",
+                "retry_allowed": false
+            },
+            "retry_logic": {
+                "action": "retry",
+                "retry_count": 1,
+                "message": "Could you please repeat your answer?"
+            },
+            "clarification": null
+        }
+    ]
+}

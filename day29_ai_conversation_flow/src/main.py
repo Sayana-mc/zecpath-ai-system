@@ -1,31 +1,19 @@
 import json
 from pathlib import Path
-
 from conversation_flow import ConversationFlow
 from decision_tree import ConversationDecisionTree
-
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-
 OUTPUT_DIR = PROJECT_ROOT / "output"
 OUTPUT_DIR.mkdir(exist_ok=True)
-
-
 def main():
-
     print("Starting Day 29 AI Conversation Flow Design...")
-
     flow = ConversationFlow()
     decision_tree = ConversationDecisionTree()
-
     results = []
-
     # Start conversation
     start_result = flow.start()
-
     print("\nSTART")
     print(start_result)
-
     results.append({
         "input": None,
         "result": start_result
