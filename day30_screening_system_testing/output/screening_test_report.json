@@ -1,0 +1,117 @@
+{
+    "total_test_cases": 6,
+    "correct_intents": 4,
+    "intent_accuracy": 66.67,
+    "correct_statuses": 6,
+    "status_accuracy": 100.0,
+    "results": [
+        {
+            "test_id": "TC001",
+            "question_id": "Q_SKILLS",
+            "answer": "I have experience with Python, SQL, Excel and Power BI.",
+            "expected_intent": "skills",
+            "actual_intent": "skills",
+            "intent_match": true,
+            "expected_status": "valid",
+            "actual_status": "valid",
+            "status_match": true,
+            "normalized_score": 85.0,
+            "parameter_scores": {
+                "clarity": 4,
+                "relevance": 5,
+                "completeness": 5,
+                "consistency": 3
+            }
+        },
+        {
+            "test_id": "TC002",
+            "question_id": "Q_EXPERIENCE",
+            "answer": "I have 1 year of experience including a 6 month data analyst internship.",
+            "expected_intent": "experience",
+            "actual_intent": "experience",
+            "intent_match": true,
+            "expected_status": "valid",
+            "actual_status": "valid",
+            "status_match": true,
+            "normalized_score": 85.0,
+            "parameter_scores": {
+                "clarity": 4,
+                "relevance": 5,
+                "completeness": 5,
+                "consistency": 3
+            }
+        },
+        {
+            "test_id": "TC003",
+            "question_id": "Q_AVAILABILITY",
+            "answer": "I am available to join immediately.",
+            "expected_intent": "availability",
+            "actual_intent": "availability",
+            "intent_match": true,
+            "expected_status": "valid",
+            "actual_status": "valid",
+            "status_match": true,
+            "normalized_score": 85.0,
+            "parameter_scores": {
+                "clarity": 4,
+                "relevance": 5,
+                "completeness": 5,
+                "consistency": 3
+            }
+        },
+        {
+            "test_id": "TC004",
+            "question_id": "Q_SALARY",
+            "answer": "I am expecting around 4 LPA.",
+            "expected_intent": "salary_expectation",
+            "actual_intent": "salary_expectation",
+            "intent_match": true,
+            "expected_status": "valid",
+            "actual_status": "valid",
+            "status_match": true,
+            "normalized_score": 85.0,
+            "parameter_scores": {
+                "clarity": 4,
+                "relevance": 5,
+                "completeness": 5,
+                "consistency": 3
+            }
+        },
+        {
+            "test_id": "TC005",
+            "question_id": "Q_SKILLS",
+            "answer": "I don't know.",
+            "expected_intent": "skills",
+            "actual_intent": "unknown",
+            "intent_match": false,
+            "expected_status": "vague",
+            "actual_status": "vague",
+            "status_match": true,
+            "normalized_score": 50.0,
+            "parameter_scores": {
+                "clarity": 3,
+                "relevance": 1,
+                "completeness": 3,
+                "consistency": 3
+            }
+        },
+        {
+            "test_id": "TC006",
+            "question_id": "Q_EXPERIENCE",
+            "answer": "I like watching movies and playing games.",
+            "expected_intent": "experience",
+            "actual_intent": "unknown",
+            "intent_match": false,
+            "expected_status": "off_topic",
+            "actual_status": "off_topic",
+            "status_match": true,
+            "normalized_score": 60.0,
+            "parameter_scores": {
+                "clarity": 4,
+                "relevance": 1,
+                "completeness": 4,
+                "consistency": 3
+            }
+        }
+    ]
+}
