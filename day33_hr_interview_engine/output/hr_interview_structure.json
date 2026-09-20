@@ -1,0 +1,114 @@
+{
+    "candidate_id": "C001",
+    "experience_level": "fresher",
+    "role_type": "technical",
+    "question_bank_count": 12,
+    "generated_questions": [
+        {
+            "question_id": "HR001",
+            "question": "Please introduce yourself.",
+            "category": "self_introduction",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR002",
+            "question": "Can you briefly walk me through your background?",
+            "category": "self_introduction",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR004",
+            "question": "What motivated you to start your career in this field?",
+            "category": "career_journey",
+            "role_type": "both",
+            "experience_level": "fresher"
+        },
+        {
+            "question_id": "HR005",
+            "question": "What are your main strengths?",
+            "category": "strengths_weaknesses",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR006",
+            "question": "What is one area you are currently working to improve?",
+            "category": "strengths_weaknesses",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR007",
+            "question": "How do you work with a team?",
+            "category": "teamwork_culture",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR008",
+            "question": "How do you handle disagreements with teammates?",
+            "category": "teamwork_culture",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR009",
+            "question": "What are your career goals?",
+            "category": "career_goals",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR010",
+            "question": "Where do you see yourself in the next few years?",
+            "category": "career_goals",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR011",
+            "question": "When would you be available to join?",
+            "category": "availability_commitment",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "HR012",
+            "question": "Are you comfortable committing to this role?",
+            "category": "availability_commitment",
+            "role_type": "both",
+            "experience_level": "both"
+        },
+        {
+            "question_id": "TECH001",
+            "question": "Which technical skills are most relevant to this role?",
+            "category": "role_based",
+            "role_type": "technical",
+            "experience_level": "both"
+        }
+    ],
+    "interview_state": {
+        "candidate_id": "C001",
+        "role_type": "technical",
+        "experience_level": "fresher",
+        "current_phase": "core_hr_questions",
+        "current_question_id": "HR001",
+        "response": "I am a Data Science and Analytics postgraduate.",
+        "follow_up_eligible": true,
+        "completed_questions": [
+            "HR001"
+        ]
+    },
+    "conversation_flow": {
+        "phases": [
+            "introduction",
+            "core_hr_questions",
+            "role_based_evaluation",
+            "closing"
+        ],
+        "current_phase": "introduction",
+        "phase_number": 1
+    }
+}
