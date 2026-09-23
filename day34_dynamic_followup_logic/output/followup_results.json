@@ -1,0 +1,77 @@
+{
+    "total_conversations": 4,
+    "results": [
+        {
+            "question_id": "Q001",
+            "question": "What are your strengths?",
+            "response": "I am hardworking.",
+            "response_quality": "incomplete",
+            "confidence": "normal",
+            "follow_up": {
+                "trigger": "clarification",
+                "follow_up_question": "Could you please provide a little more detail about your answer to: What are your strengths?",
+                "reason": "incomplete"
+            },
+            "difficulty_level": "simple",
+            "adaptive_question": "Can you explain your experience with What are your strengths??",
+            "decision": {
+                "action": "clarification",
+                "reason": "Candidate response is incomplete"
+            }
+        },
+        {
+            "question_id": "Q002",
+            "question": "Tell me about a project you worked on.",
+            "response": "I don't know.",
+            "response_quality": "vague",
+            "confidence": "low",
+            "follow_up": {
+                "trigger": "example_based",
+                "follow_up_question": "Could you explain your answer with a specific example from your experience?",
+                "reason": "vague"
+            },
+            "difficulty_level": "simple",
+            "adaptive_question": "Can you explain your experience with Tell me about a project you worked on.?",
+            "decision": {
+                "action": "example_based",
+                "reason": "Candidate response is vague"
+            }
+        },
+        {
+            "question_id": "Q003",
+            "question": "How do you handle teamwork?",
+            "response": "I communicate with team members, divide tasks, track progress and help solve problems when required.",
+            "response_quality": "complete",
+            "confidence": "high",
+            "follow_up": {
+                "trigger": "scenario_based",
+                "follow_up_question": "Can you describe a challenging situation related to this and explain how you handled it?",
+                "reason": "complete"
+            },
+            "difficulty_level": "advanced",
+            "adaptive_question": "Imagine you face a challenging situation involving How do you handle teamwork?. How would you analyze the problem and solve it?",
+            "decision": {
+                "action": "scenario_based",
+                "reason": "Candidate gave a confident response"
+            }
+        },
+        {
+            "question_id": "Q004",
+            "question": "What are your career goals?",
+            "response": "I want to grow in my career.",
+            "response_quality": "complete",
+            "confidence": "normal",
+            "follow_up": {
+                "trigger": "deepening",
+                "follow_up_question": "Could you explain this further and describe your approach?",
+                "reason": "complete"
+            },
+            "difficulty_level": "simple",
+            "adaptive_question": "Can you explain your experience with What are your career goals??",
+            "decision": {
+                "action": "deepening",
+                "reason": "Additional detail can be explored"
+            }
+        }
+    ]
+}
