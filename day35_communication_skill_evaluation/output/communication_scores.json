@@ -1,0 +1,66 @@
+{
+    "total_candidates": 3,
+    "evaluations": [
+        {
+            "candidate_id": "C001",
+            "answer": "I worked on several data analysis projects. I used Python and SQL to clean data and generate useful insights for the team.",
+            "communication_evaluation": {
+                "parameter_scores": {
+                    "fluency": 20,
+                    "grammar": 20,
+                    "vocabulary": 15,
+                    "clarity": 20,
+                    "structure": 15,
+                    "filler_control": 10
+                },
+                "communication_score": 100,
+                "score_range": "0-100",
+                "filler_words": [],
+                "word_count": 22,
+                "sentence_count": 2
+            }
+        },
+        {
+            "candidate_id": "C002",
+            "answer": "Um, I basically worked on Python projects and like, I learned SQL.",
+            "communication_evaluation": {
+                "parameter_scores": {
+                    "fluency": 16,
+                    "grammar": 20,
+                    "vocabulary": 15,
+                    "clarity": 16,
+                    "structure": 12,
+                    "filler_control": 4
+                },
+                "communication_score": 83,
+                "score_range": "0-100",
+                "filler_words": [
+                    "like",
+                    "um",
+                    "basically"
+                ],
+                "word_count": 12,
+                "sentence_count": 1
+            }
+        },
+        {
+            "candidate_id": "C003",
+            "answer": "I know Python.",
+            "communication_evaluation": {
+                "parameter_scores": {
+                    "fluency": 8,
+                    "grammar": 20,
+                    "vocabulary": 15,
+                    "clarity": 7,
+                    "structure": 5,
+                    "filler_control": 10
+                },
+                "communication_score": 65,
+                "score_range": "0-100",
+                "filler_words": [],
+                "word_count": 3,
+                "sentence_count": 1
+            }
+        }
+    ]
+}
