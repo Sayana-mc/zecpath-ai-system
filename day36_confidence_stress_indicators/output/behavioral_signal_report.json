@@ -1,0 +1,113 @@
+{
+    "total_answers": 3,
+    "results": [
+        {
+            "answer_id": "ANS001",
+            "question": "Tell me about your strengths.",
+            "answer": "I am confident in Python and SQL. I successfully completed several projects.",
+            "confidence_analysis": {
+                "confidence_score": 100,
+                "hesitation": {
+                    "hesitation_count": 0,
+                    "pause_count": 0,
+                    "detected": false
+                },
+                "repeated_words": {
+                    "repeated_words": [],
+                    "count": 0
+                },
+                "uncertainty": {
+                    "phrases": [],
+                    "count": 0,
+                    "detected": false
+                }
+            },
+            "sentiment_analysis": {
+                "sentiment": "positive",
+                "score": 70,
+                "positive_count": 2,
+                "negative_count": 0
+            },
+            "behavioral_signals": {
+                "stress_score": 0,
+                "contradiction": {
+                    "contradiction": false,
+                    "reason": null
+                }
+            }
+        },
+        {
+            "answer_id": "ANS002",
+            "question": "Tell me about a difficult situation.",
+            "answer": "Um... I think maybe it was difficult and I was worried about the problem.",
+            "confidence_analysis": {
+                "confidence_score": 65,
+                "hesitation": {
+                    "hesitation_count": 1,
+                    "pause_count": 1,
+                    "detected": true
+                },
+                "repeated_words": {
+                    "repeated_words": [],
+                    "count": 0
+                },
+                "uncertainty": {
+                    "phrases": [
+                        "i think",
+                        "maybe"
+                    ],
+                    "count": 2,
+                    "detected": true
+                }
+            },
+            "sentiment_analysis": {
+                "sentiment": "negative",
+                "score": 20,
+                "positive_count": 0,
+                "negative_count": 3
+            },
+            "behavioral_signals": {
+                "stress_score": 65,
+                "contradiction": {
+                    "contradiction": false,
+                    "reason": null
+                }
+            }
+        },
+        {
+            "answer_id": "ANS003",
+            "question": "Tell me about your experience.",
+            "answer": "I have 2 years of experience working in data analysis.",
+            "confidence_analysis": {
+                "confidence_score": 100,
+                "hesitation": {
+                    "hesitation_count": 0,
+                    "pause_count": 0,
+                    "detected": false
+                },
+                "repeated_words": {
+                    "repeated_words": [],
+                    "count": 0
+                },
+                "uncertainty": {
+                    "phrases": [],
+                    "count": 0,
+                    "detected": false
+                }
+            },
+            "sentiment_analysis": {
+                "sentiment": "neutral",
+                "score": 50,
+                "positive_count": 0,
+                "negative_count": 0
+            },
+            "behavioral_signals": {
+                "stress_score": 0,
+                "contradiction": {
+                    "contradiction": true,
+                    "reason": "Experience duration differs from previous information."
+                }
+            }
+        }
+    ]
+}
