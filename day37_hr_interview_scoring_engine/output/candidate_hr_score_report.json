@@ -1,0 +1,44 @@
+{
+    "candidate_id": "C001",
+    "interview_type": "HR Interview",
+    "questions_evaluated": 4,
+    "average_parameter_scores": {
+        "answer_relevance": 4.75,
+        "communication": 4.25,
+        "confidence": 4.25,
+        "consistency": 4.5
+    },
+    "score": {
+        "questions_evaluated": 4,
+        "parameter_scores": {
+            "answer_relevance": 4.75,
+            "communication": 4.25,
+            "confidence": 4.25,
+            "consistency": 4.5
+        },
+        "weighted_score": 4.45,
+        "normalized_score": 89.0,
+        "explainable_breakdown": {
+            "answer_relevance": {
+                "raw_score": 4.75,
+                "weight": 0.3,
+                "weighted_contribution": 1.43
+            },
+            "communication": {
+                "raw_score": 4.25,
+                "weight": 0.25,
+                "weighted_contribution": 1.06
+            },
+            "confidence": {
+                "raw_score": 4.25,
+                "weight": 0.25,
+                "weighted_contribution": 1.06
+            },
+            "consistency": {
+                "raw_score": 4.5,
+                "weight": 0.2,
+                "weighted_contribution": 0.9
+            }
+        }
+    }
+}
