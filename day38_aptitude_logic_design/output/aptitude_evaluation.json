@@ -1,0 +1,45 @@
+{
+    "module": "Day 38 Aptitude Logic Design",
+    "total_questions": 3,
+    "results": [
+        {
+            "question_id": "APT001",
+            "category": "logical_reasoning",
+            "answer": "There are 10 tasks. 6 are completed, so 4 tasks remain.",
+            "logical_reasoning_score": {
+                "parameter_scores": {
+                    "logic": 4,
+                    "clarity": 5,
+                    "problem_solving": 2
+                },
+                "weighted_score": 370,
+                "normalized_score": 74.0
+            }
+        },
+        {
+            "question_id": "APT002",
+            "category": "logical_reasoning",
+            "answer": "First calculate the total tasks and divide by the number of days. Therefore the average is 4.",
+            "logical_reasoning_score": {
+                "parameter_scores": {
+                    "logic": 5,
+                    "clarity": 5,
+                    "problem_solving": 2
+                },
+                "weighted_score": 410,
+                "normalized_score": 82.0
+            }
+        },
+        {
+            "question_id": "APT003",
+            "category": "situational_judgment",
+            "answer": "I would identify the error, communicate it to the manager, analyze the impact, and fix or escalate it.",
+            "scenario_score": {
+                "decision_making": 3,
+                "communication": 5,
+                "problem_solving": 5,
+                "overall_score": 86.67
+            }
+        }
+    ]
+}
