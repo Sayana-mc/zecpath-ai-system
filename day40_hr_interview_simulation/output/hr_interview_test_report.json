@@ -1,0 +1,242 @@
+{
+    "day": 40,
+    "title": "HR Interview Simulation",
+    "total_sessions": 4,
+    "candidate_types_tested": [
+        "confident",
+        "hesitant",
+        "inexperienced",
+        "overqualified"
+    ],
+    "sessions": [
+        {
+            "candidate_id": "C001",
+            "candidate_type": "confident",
+            "question_scores": [
+                {
+                    "question_id": "Q001",
+                    "relevance": 5,
+                    "communication": 5,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 100.0
+                },
+                {
+                    "question_id": "Q002",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q003",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q004",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q005",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q006",
+                    "relevance": 3,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 80.0
+                }
+            ],
+            "overall_ai_score": 90.0,
+            "manual_score": 92,
+            "score_difference": 2.0
+        },
+        {
+            "candidate_id": "C002",
+            "candidate_type": "hesitant",
+            "question_scores": [
+                {
+                    "question_id": "Q001",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q002",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 3,
+                    "score": 80.0
+                },
+                {
+                    "question_id": "Q003",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 3,
+                    "consistency": 5,
+                    "score": 80.0
+                },
+                {
+                    "question_id": "Q004",
+                    "relevance": 4,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 85.0
+                },
+                {
+                    "question_id": "Q005",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q006",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                }
+            ],
+            "overall_ai_score": 85.83,
+            "manual_score": 68,
+            "score_difference": 17.83
+        },
+        {
+            "candidate_id": "C003",
+            "candidate_type": "inexperienced",
+            "question_scores": [
+                {
+                    "question_id": "Q001",
+                    "relevance": 3,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 80.0
+                },
+                {
+                    "question_id": "Q002",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q003",
+                    "relevance": 3,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 80.0
+                },
+                {
+                    "question_id": "Q004",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q005",
+                    "relevance": 4,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 85.0
+                },
+                {
+                    "question_id": "Q006",
+                    "relevance": 3,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 80.0
+                }
+            ],
+            "overall_ai_score": 84.17,
+            "manual_score": 62,
+            "score_difference": 22.17
+        },
+        {
+            "candidate_id": "C004",
+            "candidate_type": "overqualified",
+            "question_scores": [
+                {
+                    "question_id": "Q001",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q002",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q003",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q004",
+                    "relevance": 4,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 85.0
+                },
+                {
+                    "question_id": "Q005",
+                    "relevance": 4,
+                    "communication": 4,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 90.0
+                },
+                {
+                    "question_id": "Q006",
+                    "relevance": 4,
+                    "communication": 3,
+                    "confidence": 5,
+                    "consistency": 5,
+                    "score": 85.0
+                }
+            ],
+            "overall_ai_score": 88.33,
+            "manual_score": 88,
+            "score_difference": 0.33
+        }
+    ],
+    "average_ai_manual_accuracy": 89.42
+}

@@ -1,0 +1,5 @@
+{
+    "metric": "AI vs Manual Evaluation",
+    "accuracy": 89.42,
+    "interpretation": "Higher value indicates closer agreement between AI and manual scores."
+}
