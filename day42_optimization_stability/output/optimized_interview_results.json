@@ -1,0 +1,47 @@
+{
+    "day": 42,
+    "title": "Optimization & Stability",
+    "total_samples": 4,
+    "results": [
+        {
+            "candidate_id": "C001",
+            "question_id": "Q001",
+            "original_response": "I have experience in Python, SQL, Excel and Power BI.",
+            "cleaned_response": "I have experience in Python, SQL, Excel and Power BI.",
+            "previous_score": 82.0,
+            "followup_question": "Could you give an example?",
+            "followup_count": 1,
+            "processing_time_ms": 0.7559
+        },
+        {
+            "candidate_id": "C002",
+            "question_id": "Q002",
+            "original_response": "Actually um I worked worked with my team and we completed the project.",
+            "cleaned_response": "I worked with my team and we completed the project.",
+            "previous_score": 70.0,
+            "followup_question": "Could you give an example?",
+            "followup_count": 1,
+            "processing_time_ms": 0.1426
+        },
+        {
+            "candidate_id": "C003",
+            "question_id": "Q003",
+            "original_response": "I am hardworking and I have good technical skills.",
+            "cleaned_response": "I am hardworking and I have good technical skills.",
+            "previous_score": 45.0,
+            "followup_question": "Could you give an example?",
+            "followup_count": 1,
+            "processing_time_ms": 0.1311
+        },
+        {
+            "candidate_id": "C004",
+            "question_id": "Q004",
+            "original_response": "I handled a difficult data project and solved several technical problems.",
+            "cleaned_response": "I handled a difficult data project and solved several technical problems.",
+            "previous_score": 95.0,
+            "followup_question": "Could you give an example?",
+            "followup_count": 1,
+            "processing_time_ms": 0.1311
+        }
+    ]
+}

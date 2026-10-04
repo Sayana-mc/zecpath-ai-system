@@ -1,0 +1,30 @@
+[
+    {
+        "candidate_id": "C001",
+        "question_id": "Q001",
+        "question": "Tell me about your technical skills.",
+        "response": "I have experience in Python, SQL, Excel and Power BI.",
+        "previous_score": 82
+    },
+    {
+        "candidate_id": "C002",
+        "question_id": "Q002",
+        "question": "Tell me about your teamwork experience.",
+        "response": "Actually um I worked worked with my team and we completed the project.",
+        "previous_score": 70
+    },
+    {
+        "candidate_id": "C003",
+        "question_id": "Q003",
+        "question": "Why should we hire you?",
+        "response": "I am hardworking and I have good technical skills.",
+        "previous_score": 45
+    },
+    {
+        "candidate_id": "C004",
+        "question_id": "Q004",
+        "question": "Describe a challenging project.",
+        "response": "I handled a difficult data project and solved several technical problems.",
+        "previous_score": 95
+    }
+]

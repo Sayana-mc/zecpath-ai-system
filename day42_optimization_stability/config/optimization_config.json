@@ -1,0 +1,22 @@
+{
+    "followup": {
+        "max_followups_per_question": 2,
+        "duplicate_similarity_threshold": 0.80,
+        "minimum_response_length": 3
+    },
+    "scoring": {
+        "min_score": 0,
+        "max_score": 100,
+        "anomaly_difference_threshold": 40,
+        "default_score": 50
+    },
+    "transcript": {
+        "remove_fillers": true,
+        "normalize_whitespace": true,
+        "remove_repeated_words": true,
+        "remove_excessive_punctuation": true
+    },
+    "performance": {
+        "enable_caching": true
+    }
+}
