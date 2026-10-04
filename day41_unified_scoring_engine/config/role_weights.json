@@ -1,0 +1,22 @@
+{
+    "default": {
+        "ats": 0.40,
+        "screening": 0.30,
+        "hr_interview": 0.30
+    },
+    "data analyst": {
+        "ats": 0.40,
+        "screening": 0.35,
+        "hr_interview": 0.25
+    },
+    "ai/ml engineer": {
+        "ats": 0.45,
+        "screening": 0.30,
+        "hr_interview": 0.25
+    },
+    "hr executive": {
+        "ats": 0.30,
+        "screening": 0.30,
+        "hr_interview": 0.40
+    }
+}

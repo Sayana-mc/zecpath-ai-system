@@ -1,0 +1,73 @@
+{
+    "day": 41,
+    "title": "Unified Scoring Engine",
+    "total_candidates": 3,
+    "results": [
+        {
+            "candidate_id": "C001",
+            "candidate_name": "Candidate 1",
+            "role": "data analyst",
+            "round_scores": {
+                "ats_score": 88.0,
+                "screening_score": 84.17,
+                "hr_interview_score": 90.0
+            },
+            "weights": {
+                "ats": 0.4,
+                "screening": 0.35,
+                "hr_interview": 0.25
+            },
+            "weighted_contribution": {
+                "ats": 35.2,
+                "screening": 29.46,
+                "hr_interview": 22.5
+            },
+            "hiring_fit_percentage": 87.16,
+            "recommendation": "HIGH_FIT"
+        },
+        {
+            "candidate_id": "C002",
+            "candidate_name": "Candidate 2",
+            "role": "ai/ml engineer",
+            "round_scores": {
+                "ats_score": 82.0,
+                "screening_score": 78.0,
+                "hr_interview_score": 85.0
+            },
+            "weights": {
+                "ats": 0.45,
+                "screening": 0.3,
+                "hr_interview": 0.25
+            },
+            "weighted_contribution": {
+                "ats": 36.9,
+                "screening": 23.4,
+                "hr_interview": 21.25
+            },
+            "hiring_fit_percentage": 81.55,
+            "recommendation": "HIGH_FIT"
+        },
+        {
+            "candidate_id": "C003",
+            "candidate_name": "Candidate 3",
+            "role": "hr executive",
+            "round_scores": {
+                "ats_score": 75.0,
+                "screening_score": 80.0,
+                "hr_interview_score": 88.0
+            },
+            "weights": {
+                "ats": 0.3,
+                "screening": 0.3,
+                "hr_interview": 0.4
+            },
+            "weighted_contribution": {
+                "ats": 22.5,
+                "screening": 24.0,
+                "hr_interview": 35.2
+            },
+            "hiring_fit_percentage": 81.7,
+            "recommendation": "HIGH_FIT"
+        }
+    ]
+}

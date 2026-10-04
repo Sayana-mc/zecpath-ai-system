@@ -1,0 +1,26 @@
+[
+    {
+        "candidate_id": "C001",
+        "candidate_name": "Candidate 1",
+        "role": "data analyst",
+        "ats_score": 88,
+        "screening_score": 84.17,
+        "hr_interview_score": 90
+    },
+    {
+        "candidate_id": "C002",
+        "candidate_name": "Candidate 2",
+        "role": "ai/ml engineer",
+        "ats_score": 82,
+        "screening_score": 78,
+        "hr_interview_score": 85
+    },
+    {
+        "candidate_id": "C003",
+        "candidate_name": "Candidate 3",
+        "role": "hr executive",
+        "ats_score": 75,
+        "screening_score": 80,
+        "hr_interview_score": 88
+    }
+]
