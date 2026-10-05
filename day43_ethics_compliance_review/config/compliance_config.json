@@ -1,0 +1,39 @@
+{
+    "consent": {
+        "required": true,
+        "purpose": "AI-assisted HR screening and interview evaluation",
+        "candidate_notice_required": true,
+        "human_review_available": true
+    },
+    "fairness": {
+        "review_required": true,
+        "demographic_signals_excluded": true,
+        "score_difference_threshold": 15
+    },
+    "demographic_signals": [
+        "gender",
+        "sex",
+        "age",
+        "date of birth",
+        "religion",
+        "race",
+        "ethnicity",
+        "caste",
+        "marital status",
+        "disability",
+        "nationality",
+        "political affiliation"
+    ],
+    "explainability": {
+        "enabled": true,
+        "show_score_components": true,
+        "show_decision_reason": true,
+        "human_review_required_for_low_confidence": true
+    },
+    "retention": {
+        "enabled": true,
+        "default_retention_days": 90,
+        "delete_after_expiry": true,
+        "candidate_deletion_request_supported": true
+    }
+}

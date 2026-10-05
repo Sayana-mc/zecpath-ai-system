@@ -1,0 +1,41 @@
+[
+    {
+        "candidate_id": "C001",
+        "role": "Data Analyst",
+        "score_components": {
+            "skills": 88,
+            "experience": 82,
+            "communication": 85,
+            "consistency": 90
+        },
+        "final_score": 86.25,
+        "decision": "SHORTLISTED",
+        "response_text": "I have experience with Python, SQL, Excel and Power BI."
+    },
+    {
+        "candidate_id": "C002",
+        "role": "Data Analyst",
+        "score_components": {
+            "skills": 72,
+            "experience": 70,
+            "communication": 78,
+            "consistency": 75
+        },
+        "final_score": 73.75,
+        "decision": "REVIEW",
+        "response_text": "I worked on data analysis projects using Python and SQL."
+    },
+    {
+        "candidate_id": "C003",
+        "role": "Data Analyst",
+        "score_components": {
+            "skills": 90,
+            "experience": 88,
+            "communication": 92,
+            "consistency": 89
+        },
+        "final_score": 89.75,
+        "decision": "SHORTLISTED",
+        "response_text": "I built dashboards and performed data analysis using SQL and Power BI."
+    }
+]

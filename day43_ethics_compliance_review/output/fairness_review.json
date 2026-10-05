@@ -1,0 +1,16 @@
+{
+    "review_type": "Fairness Review",
+    "results": {
+        "status": "REVIEW_REQUIRED",
+        "candidate_count": 3,
+        "minimum_score": 73.75,
+        "maximum_score": 89.75,
+        "score_difference": 16.0,
+        "notes": [
+            "Review scoring consistency across candidates.",
+            "Do not use demographic attributes as scoring features.",
+            "Human review should remain available for uncertain decisions.",
+            "Large score variation detected; inspect scoring inputs and evidence."
+        ]
+    }
+}
