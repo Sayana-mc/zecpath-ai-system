@@ -11,7 +11,7 @@
             "previous_score": 82.0,
             "followup_question": "Could you give an example?",
             "followup_count": 1,
-            "processing_time_ms": 0.7559
+            "processing_time_ms": 0.5505
         },
         {
             "candidate_id": "C002",
@@ -21,7 +21,7 @@
             "previous_score": 70.0,
             "followup_question": "Could you give an example?",
             "followup_count": 1,
-            "processing_time_ms": 0.1426
+            "processing_time_ms": 0.0962
         },
         {
             "candidate_id": "C003",
@@ -31,7 +31,7 @@
             "previous_score": 45.0,
             "followup_question": "Could you give an example?",
             "followup_count": 1,
-            "processing_time_ms": 0.1311
+            "processing_time_ms": 0.1016
         },
         {
             "candidate_id": "C004",
@@ -41,7 +41,7 @@
             "previous_score": 95.0,
             "followup_question": "Could you give an example?",
             "followup_count": 1,
-            "processing_time_ms": 0.1311
+            "processing_time_ms": 0.2061
         }
     ]
 }
