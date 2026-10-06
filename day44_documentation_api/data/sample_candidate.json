@@ -1,0 +1,22 @@
+{
+    "candidate_id": "C001",
+    "role": "Data Analyst",
+    "responses": [
+        {
+            "question_id": "Q001",
+            "response": "I have experience with Python, SQL, Excel and Power BI."
+        },
+        {
+            "question_id": "Q002",
+            "response": "I completed internships related to data analysis and machine learning."
+        },
+        {
+            "question_id": "Q003",
+            "response": "I am available to join immediately."
+        },
+        {
+            "question_id": "Q004",
+            "response": "My expected salary is around 4 LPA."
+        }
+    ]
+}

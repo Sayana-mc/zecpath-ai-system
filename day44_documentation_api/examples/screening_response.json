@@ -1,0 +1,14 @@
+{
+    "candidate_id": "C001",
+    "status": "completed",
+    "screening_score": 84.17,
+    "recommendation": "REVIEW",
+    "explainability": {
+        "score_components": {
+            "clarity": 90,
+            "relevance": 85,
+            "completeness": 80,
+            "consistency": 82
+        }
+    }
+}

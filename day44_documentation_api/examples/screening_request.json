@@ -1,0 +1,14 @@
+{
+    "candidate_id": "C001",
+    "role": "Data Analyst",
+    "responses": [
+        {
+            "question_id": "Q001",
+            "response": "I have experience with Python and SQL."
+        },
+        {
+            "question_id": "Q002",
+            "response": "I completed a data science internship."
+        }
+    ]
+}

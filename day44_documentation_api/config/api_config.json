@@ -1,0 +1,21 @@
+{
+    "api_version": "v1",
+    "service_name": "hr-interview-ai",
+    "base_path": "/api/v1",
+    "content_type": "application/json",
+    "score_range": {
+        "minimum": 0,
+        "maximum": 100
+    },
+    "human_review": {
+        "enabled": true
+    },
+    "explainability": {
+        "enabled": true
+    },
+    "validation": {
+        "candidate_id_required": true,
+        "role_required": true,
+        "response_required": true
+    }
+}
