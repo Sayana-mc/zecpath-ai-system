@@ -1,0 +1,280 @@
+{
+    "system": "HR Interview AI",
+    "day": 45,
+    "demo_status": "completed",
+    "candidate_count": 4,
+    "results": [
+        {
+            "candidate_id": "C001",
+            "candidate_name": "Candidate 001",
+            "role": "Data Analyst",
+            "interview": {
+                "status": "completed",
+                "question_count": 4,
+                "question_results": [
+                    {
+                        "question_id": "Q001",
+                        "question": "Tell me about your technical skills.",
+                        "response": "I have experience with Python, SQL, Excel and Power BI.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q002",
+                        "question": "Tell me about your experience.",
+                        "response": "I completed data analysis projects and internships involving data cleaning, analysis and visualization.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q003",
+                        "question": "When can you join?",
+                        "response": "I am available to join immediately.",
+                        "score_breakdown": {
+                            "relevance": 65.0,
+                            "communication": 65.0,
+                            "confidence": 60.0,
+                            "consistency": 65.0,
+                            "overall_score": 63.75
+                        }
+                    },
+                    {
+                        "question_id": "Q004",
+                        "question": "What are your salary expectations?",
+                        "response": "My expected salary is around 4 LPA.",
+                        "score_breakdown": {
+                            "relevance": 65.0,
+                            "communication": 65.0,
+                            "confidence": 60.0,
+                            "consistency": 65.0,
+                            "overall_score": 63.75
+                        }
+                    }
+                ],
+                "hr_interview_score": 71.62
+            },
+            "previous_scores": {
+                "ats_score": 88.0,
+                "screening_score": 84.17
+            },
+            "final_unified_score": 81.94,
+            "final_recommendation": "HIGH_FIT",
+            "recommendation_reason": "Strong overall candidate score.",
+            "human_review": true
+        },
+        {
+            "candidate_id": "C002",
+            "candidate_name": "Candidate 002",
+            "role": "AI/ML Engineer",
+            "interview": {
+                "status": "completed",
+                "question_count": 4,
+                "question_results": [
+                    {
+                        "question_id": "Q001",
+                        "question": "Tell me about your technical skills.",
+                        "response": "I have worked with Python, machine learning, TensorFlow and NLP.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q002",
+                        "question": "Tell me about your experience.",
+                        "response": "I have completed machine learning projects involving classification and model evaluation.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q003",
+                        "question": "Describe a technical problem you solved.",
+                        "response": "I improved a machine learning pipeline by preprocessing the data and tuning the model.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q004",
+                        "question": "When can you join?",
+                        "response": "I can join within a short notice period.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    }
+                ],
+                "hr_interview_score": 79.5
+            },
+            "previous_scores": {
+                "ats_score": 82.0,
+                "screening_score": 78.0
+            },
+            "final_unified_score": 80.05,
+            "final_recommendation": "HIGH_FIT",
+            "recommendation_reason": "Strong overall candidate score.",
+            "human_review": true
+        },
+        {
+            "candidate_id": "C003",
+            "candidate_name": "Candidate 003",
+            "role": "HR Executive",
+            "interview": {
+                "status": "completed",
+                "question_count": 4,
+                "question_results": [
+                    {
+                        "question_id": "Q001",
+                        "question": "Tell me about yourself.",
+                        "response": "I am interested in HR operations and working with people.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q002",
+                        "question": "How do you handle teamwork?",
+                        "response": "I communicate with team members and try to solve problems together.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q003",
+                        "question": "What are your strengths?",
+                        "response": "My strengths are communication, patience and teamwork.",
+                        "score_breakdown": {
+                            "relevance": 65.0,
+                            "communication": 65.0,
+                            "confidence": 60.0,
+                            "consistency": 65.0,
+                            "overall_score": 63.75
+                        }
+                    },
+                    {
+                        "question_id": "Q004",
+                        "question": "When can you join?",
+                        "response": "I can join after completing my current commitment.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    }
+                ],
+                "hr_interview_score": 75.56
+            },
+            "previous_scores": {
+                "ats_score": 75.0,
+                "screening_score": 80.0
+            },
+            "final_unified_score": 76.67,
+            "final_recommendation": "MODERATE_FIT",
+            "recommendation_reason": "Candidate meets a reasonable level but requires review.",
+            "human_review": true
+        },
+        {
+            "candidate_id": "C004",
+            "candidate_name": "Candidate 004",
+            "role": "Data Analyst",
+            "interview": {
+                "status": "completed",
+                "question_count": 4,
+                "question_results": [
+                    {
+                        "question_id": "Q001",
+                        "question": "Tell me about your technical skills.",
+                        "response": "I know basic computer applications.",
+                        "score_breakdown": {
+                            "relevance": 65.0,
+                            "communication": 65.0,
+                            "confidence": 60.0,
+                            "consistency": 65.0,
+                            "overall_score": 63.75
+                        }
+                    },
+                    {
+                        "question_id": "Q002",
+                        "question": "Tell me about your experience.",
+                        "response": "I have limited practical experience.",
+                        "score_breakdown": {
+                            "relevance": 65.0,
+                            "communication": 65.0,
+                            "confidence": 60.0,
+                            "consistency": 65.0,
+                            "overall_score": 63.75
+                        }
+                    },
+                    {
+                        "question_id": "Q003",
+                        "question": "How do you solve a data problem?",
+                        "response": "I would first understand the problem and then analyse the data.",
+                        "score_breakdown": {
+                            "relevance": 80.0,
+                            "communication": 80.0,
+                            "confidence": 78.0,
+                            "consistency": 80.0,
+                            "overall_score": 79.5
+                        }
+                    },
+                    {
+                        "question_id": "Q004",
+                        "question": "When can you join?",
+                        "response": "I need some time before joining.",
+                        "score_breakdown": {
+                            "relevance": 65.0,
+                            "communication": 65.0,
+                            "confidence": 60.0,
+                            "consistency": 65.0,
+                            "overall_score": 63.75
+                        }
+                    }
+                ],
+                "hr_interview_score": 67.69
+            },
+            "previous_scores": {
+                "ats_score": 55.0,
+                "screening_score": 58.0
+            },
+            "final_unified_score": 59.71,
+            "final_recommendation": "LOW_FIT",
+            "recommendation_reason": "Candidate shows limited overall suitability.",
+            "human_review": true
+        }
+    ]
+}

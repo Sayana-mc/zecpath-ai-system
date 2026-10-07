@@ -1,0 +1,118 @@
+[
+    {
+        "candidate_id": "C001",
+        "name": "Candidate 001",
+        "role": "Data Analyst",
+        "responses": [
+            {
+                "question_id": "Q001",
+                "question": "Tell me about your technical skills.",
+                "response": "I have experience with Python, SQL, Excel and Power BI."
+            },
+            {
+                "question_id": "Q002",
+                "question": "Tell me about your experience.",
+                "response": "I completed data analysis projects and internships involving data cleaning, analysis and visualization."
+            },
+            {
+                "question_id": "Q003",
+                "question": "When can you join?",
+                "response": "I am available to join immediately."
+            },
+            {
+                "question_id": "Q004",
+                "question": "What are your salary expectations?",
+                "response": "My expected salary is around 4 LPA."
+            }
+        ],
+        "ats_score": 88.0,
+        "screening_score": 84.17
+    },
+    {
+        "candidate_id": "C002",
+        "name": "Candidate 002",
+        "role": "AI/ML Engineer",
+        "responses": [
+            {
+                "question_id": "Q001",
+                "question": "Tell me about your technical skills.",
+                "response": "I have worked with Python, machine learning, TensorFlow and NLP."
+            },
+            {
+                "question_id": "Q002",
+                "question": "Tell me about your experience.",
+                "response": "I have completed machine learning projects involving classification and model evaluation."
+            },
+            {
+                "question_id": "Q003",
+                "question": "Describe a technical problem you solved.",
+                "response": "I improved a machine learning pipeline by preprocessing the data and tuning the model."
+            },
+            {
+                "question_id": "Q004",
+                "question": "When can you join?",
+                "response": "I can join within a short notice period."
+            }
+        ],
+        "ats_score": 82.0,
+        "screening_score": 78.0
+    },
+    {
+        "candidate_id": "C003",
+        "name": "Candidate 003",
+        "role": "HR Executive",
+        "responses": [
+            {
+                "question_id": "Q001",
+                "question": "Tell me about yourself.",
+                "response": "I am interested in HR operations and working with people."
+            },
+            {
+                "question_id": "Q002",
+                "question": "How do you handle teamwork?",
+                "response": "I communicate with team members and try to solve problems together."
+            },
+            {
+                "question_id": "Q003",
+                "question": "What are your strengths?",
+                "response": "My strengths are communication, patience and teamwork."
+            },
+            {
+                "question_id": "Q004",
+                "question": "When can you join?",
+                "response": "I can join after completing my current commitment."
+            }
+        ],
+        "ats_score": 75.0,
+        "screening_score": 80.0
+    },
+    {
+        "candidate_id": "C004",
+        "name": "Candidate 004",
+        "role": "Data Analyst",
+        "responses": [
+            {
+                "question_id": "Q001",
+                "question": "Tell me about your technical skills.",
+                "response": "I know basic computer applications."
+            },
+            {
+                "question_id": "Q002",
+                "question": "Tell me about your experience.",
+                "response": "I have limited practical experience."
+            },
+            {
+                "question_id": "Q003",
+                "question": "How do you solve a data problem?",
+                "response": "I would first understand the problem and then analyse the data."
+            },
+            {
+                "question_id": "Q004",
+                "question": "When can you join?",
+                "response": "I need some time before joining."
+            }
+        ],
+        "ats_score": 55.0,
+        "screening_score": 58.0
+    }
+]
