@@ -1,0 +1,29 @@
+{
+  "technical_interview_hierarchy": {
+    "level_1": {
+      "name": "Introduction",
+      "purpose": "Understand candidate background and technical profile.",
+      "difficulty": "basic"
+    },
+    "level_2": {
+      "name": "Experience-Based Questions",
+      "purpose": "Evaluate real technical experience and project involvement.",
+      "difficulty": "basic_to_intermediate"
+    },
+    "level_3": {
+      "name": "Conceptual Questions",
+      "purpose": "Evaluate understanding of technical concepts.",
+      "difficulty": "basic_to_advanced"
+    },
+    "level_4": {
+      "name": "Scenario-Based Problems",
+      "purpose": "Evaluate practical problem solving and debugging ability.",
+      "difficulty": "intermediate_to_advanced"
+    },
+    "level_5": {
+      "name": "System Design",
+      "purpose": "Evaluate architecture, scalability and technical decision making.",
+      "difficulty": "advanced"
+    }
+  }
+}

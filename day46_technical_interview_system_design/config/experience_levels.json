@@ -1,0 +1,31 @@
+{
+  "0-2": {
+    "level": "basic",
+    "description": "Focus on fundamentals, definitions, basic implementation and simple practical questions.",
+    "question_types": [
+      "introduction",
+      "conceptual",
+      "basic_problem"
+    ]
+  },
+  "3-5": {
+    "level": "intermediate",
+    "description": "Focus on practical experience, debugging, implementation decisions and moderate scenarios.",
+    "question_types": [
+      "experience_based",
+      "conceptual",
+      "scenario_based",
+      "debugging"
+    ]
+  },
+  "5+": {
+    "level": "advanced",
+    "description": "Focus on architecture, system design, trade-offs, scalability and complex scenarios.",
+    "question_types": [
+      "experience_based",
+      "advanced_conceptual",
+      "scenario_based",
+      "system_design"
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "question_id": "TQ001",
+    "role": "MERN Developer",
+    "domain": "React",
+    "type": "conceptual",
+    "difficulty": "basic",
+    "experience_level": "0-2",
+    "question": "What is the difference between state and props in React?"
+  },
+  {
+    "question_id": "TQ002",
+    "role": "MERN Developer",
+    "domain": "Node.js",
+    "type": "experience_based",
+    "difficulty": "intermediate",
+    "experience_level": "3-5",
+    "question": "Explain a backend API you developed using Node.js and the challenges you faced."
+  },
+  {
+    "question_id": "TQ003",
+    "role": "MERN Developer",
+    "domain": "System Design",
+    "type": "system_design",
+    "difficulty": "advanced",
+    "experience_level": "5+",
+    "question": "How would you design a scalable REST API for a high-traffic application?"
+  },
+  {
+    "question_id": "TQ004",
+    "role": "Java Developer",
+    "domain": "Java",
+    "type": "conceptual",
+    "difficulty": "basic",
+    "experience_level": "0-2",
+    "question": "What are the main principles of object-oriented programming?"
+  },
+  {
+    "question_id": "TQ005",
+    "role": "DevOps Engineer",
+    "domain": "Docker",
+    "type": "scenario_based",
+    "difficulty": "intermediate",
+    "experience_level": "3-5",
+    "question": "A Docker container works locally but fails in production. How would you investigate the issue?"
+  },
+  {
+    "question_id": "TQ006",
+    "role": "Data Analyst",
+    "domain": "SQL",
+    "type": "conceptual",
+    "difficulty": "basic",
+    "experience_level": "0-2",
+    "question": "What is the difference between INNER JOIN and LEFT JOIN?"
+  },
+  {
+    "question_id": "TQ007",
+    "role": "AI/ML Engineer",
+    "domain": "Machine Learning",
+    "type": "scenario_based",
+    "difficulty": "intermediate",
+    "experience_level": "3-5",
+    "question": "Your machine learning model performs well on training data but poorly on test data. How would you investigate it?"
+  },
+  {
+    "question_id": "TQ008",
+    "role": "AI/ML Engineer",
+    "domain": "System Design",
+    "type": "system_design",
+    "difficulty": "advanced",
+    "experience_level": "5+",
+    "question": "How would you design a scalable machine learning inference system?"
+  }
+]

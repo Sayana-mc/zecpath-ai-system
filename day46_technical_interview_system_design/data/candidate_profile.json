@@ -1,0 +1,13 @@
+{
+  "candidate_id": "C001",
+  "candidate_name": "Demo Candidate",
+  "role": "AI/ML Engineer",
+  "experience_years": 2,
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "SQL",
+    "Pandas",
+    "Scikit-learn"
+  ]
+}

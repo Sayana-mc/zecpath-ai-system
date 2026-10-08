@@ -1,0 +1,60 @@
+{
+  "MERN Developer": {
+    "skill_domains": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "REST API"
+    ]
+  },
+  "Java Developer": {
+    "skill_domains": [
+      "Java",
+      "OOP",
+      "Collections",
+      "Spring Boot",
+      "REST API",
+      "SQL",
+      "Exception Handling"
+    ]
+  },
+  "DevOps Engineer": {
+    "skill_domains": [
+      "Linux",
+      "Git",
+      "Docker",
+      "CI/CD",
+      "Cloud",
+      "Kubernetes",
+      "Networking",
+      "Monitoring"
+    ]
+  },
+  "Data Analyst": {
+    "skill_domains": [
+      "SQL",
+      "Python",
+      "Excel",
+      "Statistics",
+      "Data Visualization",
+      "Power BI",
+      "Data Cleaning"
+    ]
+  },
+  "AI/ML Engineer": {
+    "skill_domains": [
+      "Python",
+      "Machine Learning",
+      "Deep Learning",
+      "Statistics",
+      "NLP",
+      "Computer Vision",
+      "Model Evaluation",
+      "MLOps"
+    ]
+  }
+}

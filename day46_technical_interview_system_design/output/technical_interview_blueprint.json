@@ -1,0 +1,83 @@
+{
+    "candidate_id": "C001",
+    "role": "AI/ML Engineer",
+    "experience_years": 2,
+    "experience_level": "0-2",
+    "difficulty": "basic",
+    "skill_domains": [
+        "Python",
+        "Machine Learning",
+        "Deep Learning",
+        "Statistics",
+        "NLP",
+        "Computer Vision",
+        "Model Evaluation",
+        "MLOps"
+    ],
+    "question_types": [
+        "introduction",
+        "conceptual",
+        "basic_problem"
+    ],
+    "question_hierarchy": {
+        "technical_interview_hierarchy": {
+            "level_1": {
+                "name": "Introduction",
+                "purpose": "Understand candidate background and technical profile.",
+                "difficulty": "basic"
+            },
+            "level_2": {
+                "name": "Experience-Based Questions",
+                "purpose": "Evaluate real technical experience and project involvement.",
+                "difficulty": "basic_to_intermediate"
+            },
+            "level_3": {
+                "name": "Conceptual Questions",
+                "purpose": "Evaluate understanding of technical concepts.",
+                "difficulty": "basic_to_advanced"
+            },
+            "level_4": {
+                "name": "Scenario-Based Problems",
+                "purpose": "Evaluate practical problem solving and debugging ability.",
+                "difficulty": "intermediate_to_advanced"
+            },
+            "level_5": {
+                "name": "System Design",
+                "purpose": "Evaluate architecture, scalability and technical decision making.",
+                "difficulty": "advanced"
+            }
+        }
+    },
+    "interview_flow": {
+        "interview_flow": [
+            {
+                "state": "START",
+                "next": "INTRODUCTION"
+            },
+            {
+                "state": "INTRODUCTION",
+                "next": "EXPERIENCE"
+            },
+            {
+                "state": "EXPERIENCE",
+                "next": "CONCEPTUAL"
+            },
+            {
+                "state": "CONCEPTUAL",
+                "next": "SCENARIO"
+            },
+            {
+                "state": "SCENARIO",
+                "next": "SYSTEM_DESIGN"
+            },
+            {
+                "state": "SYSTEM_DESIGN",
+                "next": "EVALUATION"
+            },
+            {
+                "state": "EVALUATION",
+                "next": "COMPLETED"
+            }
+        ]
+    }
+}

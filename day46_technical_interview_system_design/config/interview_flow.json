@@ -1,0 +1,32 @@
+{
+  "interview_flow": [
+    {
+      "state": "START",
+      "next": "INTRODUCTION"
+    },
+    {
+      "state": "INTRODUCTION",
+      "next": "EXPERIENCE"
+    },
+    {
+      "state": "EXPERIENCE",
+      "next": "CONCEPTUAL"
+    },
+    {
+      "state": "CONCEPTUAL",
+      "next": "SCENARIO"
+    },
+    {
+      "state": "SCENARIO",
+      "next": "SYSTEM_DESIGN"
+    },
+    {
+      "state": "SYSTEM_DESIGN",
+      "next": "EVALUATION"
+    },
+    {
+      "state": "EVALUATION",
+      "next": "COMPLETED"
+    }
+  ]
+}
