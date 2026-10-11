@@ -1,0 +1,18 @@
+
+{
+  "session_id": "DAY49-DEMO-001",
+  "candidate_id": "DEMO-C001",
+  "data_source": "synthetic_demo",
+  "consent_recorded": true,
+  "events": {
+    "tab_switch_count": 4,
+    "focus_loss_count": 3,
+    "external_voice_events": 1,
+    "repeated_looking_away_events": 5
+  },
+  "behavioral_context": {
+    "source": "day48_optional_context",
+    "signal_consistency_index": 75.75,
+    "note": "Descriptive context only; excluded from integrity risk score"
+  }
+}

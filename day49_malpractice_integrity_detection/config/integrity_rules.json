@@ -1,0 +1,40 @@
+
+{
+  "version": "1.0",
+  "purpose": "Interview integrity event review prototype",
+  "thresholds": {
+    "tab_switch_count": {
+      "warning_at": 3,
+      "risk_points": 15,
+      "tag": "TAB_SWITCH_ACTIVITY"
+    },
+    "focus_loss_count": {
+      "warning_at": 3,
+      "risk_points": 15,
+      "tag": "REPEATED_FOCUS_LOSS"
+    },
+    "external_voice_events": {
+      "warning_at": 2,
+      "risk_points": 20,
+      "tag": "POSSIBLE_EXTERNAL_AUDIO"
+    },
+    "repeated_looking_away_events": {
+      "warning_at": 5,
+      "risk_points": 10,
+      "tag": "REPEATED_LOOK_AWAY"
+    }
+  },
+  "risk_levels": {
+    "low_max": 24,
+    "moderate_max": 49
+  },
+  "combined_pattern_bonus": {
+    "minimum_flagged_categories": 3,
+    "risk_points": 10
+  },
+  "safeguards": {
+    "automatic_rejection": false,
+    "human_review_required": true,
+    "single_event_proves_cheating": false
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "session_id": "DAY49-DEMO-001",
+  "candidate_id": "DEMO-C001",
+  "data_source": "synthetic_demo",
+  "risk_score": 50,
+  "risk_level": "HIGH",
+  "status": "REVIEW_REQUIRED",
+  "warning_message": "Integrity review warning: please verify the recorded events and allow the candidate to explain them.",
+  "flags": [
+    {
+      "event": "tab_switch_count",
+      "observed_count": 4,
+      "threshold": 3,
+      "risk_tag": "TAB_SWITCH_ACTIVITY",
+      "severity": "WARNING",
+      "message": "tab_switch_count reached the configured review threshold."
+    },
+    {
+      "event": "focus_loss_count",
+      "observed_count": 3,
+      "threshold": 3,
+      "risk_tag": "REPEATED_FOCUS_LOSS",
+      "severity": "WARNING",
+      "message": "focus_loss_count reached the configured review threshold."
+    },
+    {
+      "event": "repeated_looking_away_events",
+      "observed_count": 5,
+      "threshold": 5,
+      "risk_tag": "REPEATED_LOOK_AWAY",
+      "severity": "WARNING",
+      "message": "repeated_looking_away_events reached the configured review threshold."
+    },
+    {
+      "event": "combined_pattern",
+      "observed_count": 3,
+      "threshold": 3,
+      "risk_tag": "MULTIPLE_SIGNAL_PATTERN",
+      "severity": "REVIEW",
+      "message": "Multiple event categories crossed configured thresholds."
+    }
+  ],
+  "event_counts": {
+    "tab_switch_count": 4,
+    "focus_loss_count": 3,
+    "external_voice_events": 1,
+    "repeated_looking_away_events": 5
+  },
+  "behavioral_context": {
+    "source": "day48_optional_context",
+    "signal_consistency_index": 75.75,
+    "used_in_risk_score": false
+  },
+  "decision": "HUMAN_REVIEW_ONLY",
+  "automatic_rejection": false,
+  "limitations": [
+    "Flags indicate events for review, not confirmed cheating.",
+    "External audio events require a separate validated detector.",
+    "Tab and focus events require a suitable event collector.",
+    "Looking away can have innocent or accessibility-related causes.",
+    "Synthetic or unverified event counts must not support real decisions."
+  ]
+}
