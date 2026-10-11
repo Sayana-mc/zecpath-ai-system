@@ -1,0 +1,53 @@
+[
+  {
+    "candidate_id": "C001",
+    "candidate_name": "Demo Candidate 1",
+    "role": "Data Analyst",
+    "skill": "SQL",
+    "question_id": "Q001",
+    "question_type": "conceptual",
+    "difficulty": "basic",
+    "question": "Explain the difference between INNER JOIN and LEFT JOIN.",
+    "answer": "INNER JOIN returns matching rows from both tables. LEFT JOIN returns all rows from the left table and matching rows from the right table. If there is no match, right-side columns contain NULL. For example, LEFT JOIN can show all customers, including customers who have not placed orders.",
+    "scores": {
+      "accuracy": 5,
+      "depth": 4,
+      "logical_reasoning": 4,
+      "real_world_applicability": 5
+    }
+  },
+  {
+    "candidate_id": "C001",
+    "candidate_name": "Demo Candidate 1",
+    "role": "Data Analyst",
+    "skill": "Python",
+    "question_id": "Q002",
+    "question_type": "conceptual",
+    "difficulty": "basic",
+    "question": "What is a Python list?",
+    "answer": "A list stores multiple items.",
+    "scores": {
+      "accuracy": 3,
+      "depth": 1,
+      "logical_reasoning": 1,
+      "real_world_applicability": 1
+    }
+  },
+  {
+    "candidate_id": "C001",
+    "candidate_name": "Demo Candidate 1",
+    "role": "Data Analyst",
+    "skill": "Data Analysis",
+    "question_id": "Q003",
+    "question_type": "scenario_based",
+    "difficulty": "intermediate",
+    "question": "How would you handle missing values in a dataset?",
+    "answer": "I would first inspect the amount and pattern of missing data. I would check whether values are missing randomly and assess the effect on the analysis. Depending on the column and business context, I might remove affected rows, impute suitable values, or preserve missingness as a separate category. I would document the decision and validate the result.",
+    "scores": {
+      "accuracy": 4,
+      "depth": 5,
+      "logical_reasoning": 5,
+      "real_world_applicability": 5
+    }
+  }
+]

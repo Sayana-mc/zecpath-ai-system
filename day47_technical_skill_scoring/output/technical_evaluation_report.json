@@ -1,0 +1,97 @@
+{
+    "report_title": "Technical Skill Evaluation Report",
+    "scoring_method": "Question-type weighted rubric",
+    "score_range": "0-100",
+    "evaluation_mode": "Rule-based demo using manually supplied parameter scores",
+    "candidate_id": "C001",
+    "overall_score": 73.67,
+    "question_count": 3,
+    "skill_wise_breakdown": {
+        "SQL": {
+            "question_count": 1,
+            "average_score": 90.0
+        },
+        "Python": {
+            "question_count": 1,
+            "average_score": 36.0
+        },
+        "Data Analysis": {
+            "question_count": 1,
+            "average_score": 95.0
+        }
+    },
+    "question_results": [
+        {
+            "candidate_id": "C001",
+            "candidate_name": "Demo Candidate 1",
+            "role": "Data Analyst",
+            "skill": "SQL",
+            "question_id": "Q001",
+            "question": "Explain the difference between INNER JOIN and LEFT JOIN.",
+            "question_type": "conceptual",
+            "difficulty": "basic",
+            "answer": "INNER JOIN returns matching rows from both tables. LEFT JOIN returns all rows from the left table and matching rows from the right table. If there is no match, right-side columns contain NULL. For example, LEFT JOIN can show all customers, including customers who have not placed orders.",
+            "parameter_scores": {
+                "accuracy": 5,
+                "depth": 4,
+                "logical_reasoning": 4,
+                "real_world_applicability": 5
+            },
+            "technical_score": 90.0,
+            "answer_depth": "deep",
+            "explanation": "Weighted score: 90.0/100. Answer depth classified as deep using demo rules.",
+            "improvement_suggestions": [
+                "Maintain the current standard and explain trade-offs."
+            ]
+        },
+        {
+            "candidate_id": "C001",
+            "candidate_name": "Demo Candidate 1",
+            "role": "Data Analyst",
+            "skill": "Python",
+            "question_id": "Q002",
+            "question": "What is a Python list?",
+            "question_type": "conceptual",
+            "difficulty": "basic",
+            "answer": "A list stores multiple items.",
+            "parameter_scores": {
+                "accuracy": 3,
+                "depth": 1,
+                "logical_reasoning": 1,
+                "real_world_applicability": 1
+            },
+            "technical_score": 36.0,
+            "answer_depth": "shallow",
+            "explanation": "Weighted score: 36.0/100. Answer depth classified as shallow using demo rules.",
+            "improvement_suggestions": [
+                "Add more technical detail.",
+                "Explain the reasoning step by step.",
+                "Include a relevant practical example."
+            ]
+        },
+        {
+            "candidate_id": "C001",
+            "candidate_name": "Demo Candidate 1",
+            "role": "Data Analyst",
+            "skill": "Data Analysis",
+            "question_id": "Q003",
+            "question": "How would you handle missing values in a dataset?",
+            "question_type": "scenario_based",
+            "difficulty": "intermediate",
+            "answer": "I would first inspect the amount and pattern of missing data. I would check whether values are missing randomly and assess the effect on the analysis. Depending on the column and business context, I might remove affected rows, impute suitable values, or preserve missingness as a separate category. I would document the decision and validate the result.",
+            "parameter_scores": {
+                "accuracy": 4,
+                "depth": 5,
+                "logical_reasoning": 5,
+                "real_world_applicability": 5
+            },
+            "technical_score": 95.0,
+            "answer_depth": "deep",
+            "explanation": "Weighted score: 95.0/100. Answer depth classified as deep using demo rules.",
+            "improvement_suggestions": [
+                "Maintain the current standard and explain trade-offs."
+            ]
+        }
+    ],
+    "review_note": "Scores are decision-support signals. Verify technical correctness and review results before making hiring decisions."
+}

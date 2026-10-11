@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "accuracy": 35,
+    "depth": 25,
+    "logical_reasoning": 20,
+    "real_world_applicability": 20
+  },
+  "score_range": {
+    "minimum": 0,
+    "maximum": 5
+  },
+  "question_type_weights": {
+    "conceptual": {
+      "accuracy": 0.40,
+      "depth": 0.30,
+      "logical_reasoning": 0.20,
+      "real_world_applicability": 0.10
+    },
+    "experience_based": {
+      "accuracy": 0.25,
+      "depth": 0.25,
+      "logical_reasoning": 0.20,
+      "real_world_applicability": 0.30
+    },
+    "scenario_based": {
+      "accuracy": 0.25,
+      "depth": 0.20,
+      "logical_reasoning": 0.30,
+      "real_world_applicability": 0.25
+    },
+    "system_design": {
+      "accuracy": 0.25,
+      "depth": 0.25,
+      "logical_reasoning": 0.30,
+      "real_world_applicability": 0.20
+    }
+  },
+  "difficulty_factors": {
+    "basic": 1.0,
+    "intermediate": 1.0,
+    "advanced": 1.0
+  }
+}
