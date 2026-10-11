@@ -1,0 +1,20 @@
+
+{
+  "session_id": "DEMO-001",
+  "candidate_id": "DEMO-C001",
+  "data_source": "synthetic_demo",
+  "consent_recorded": true,
+  "metrics": {
+    "gaze_stability": 0.80,
+    "head_movement_stability": 0.75,
+    "facial_engagement": 0.70,
+    "attention_consistency": 0.85,
+    "gesture_stability": 0.65
+  },
+  "event_counts": {
+    "off_screen_attention_events": 3,
+    "head_movement_events": 5,
+    "gesture_events": 4
+  },
+  "notes": "Synthetic sample values for software testing only"
+}

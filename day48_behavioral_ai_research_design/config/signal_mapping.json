@@ -1,0 +1,28 @@
+
+{
+  "version": "1.0",
+  "purpose": "Descriptive behavioral signal analysis prototype",
+  "score_name": "observable_signal_consistency_index",
+  "score_range": {
+    "minimum": 0,
+    "maximum": 100
+  },
+  "weights": {
+    "gaze_stability": 0.25,
+    "head_movement_stability": 0.20,
+    "facial_engagement": 0.20,
+    "attention_consistency": 0.20,
+    "gesture_stability": 0.15
+  },
+  "interpretation": {
+    "high": "Signals were relatively consistent in this sample",
+    "moderate": "Signals varied during this sample",
+    "low": "Signals varied substantially during this sample"
+  },
+  "safeguards": [
+    "Not a measure of honesty, personality, nervousness, or job suitability",
+    "Do not use for automatic hiring decisions",
+    "Provide accommodations and non-camera alternatives",
+    "Use consent-based, minimized, short-retention data"
+  ]
+}

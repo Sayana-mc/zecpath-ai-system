@@ -1,0 +1,47 @@
+{
+  "session_id": "DEMO-001",
+  "candidate_id": "DEMO-C001",
+  "data_source": "synthetic_demo",
+  "score_name": "observable_signal_consistency_index",
+  "signal_consistency_index": 75.75,
+  "signal_description": "Relatively consistent signals in this sample",
+  "signal_breakdown": {
+    "gaze_stability": {
+      "observed_value": 0.8,
+      "weight": 0.25,
+      "weighted_points": 20.0
+    },
+    "head_movement_stability": {
+      "observed_value": 0.75,
+      "weight": 0.2,
+      "weighted_points": 15.0
+    },
+    "facial_engagement": {
+      "observed_value": 0.7,
+      "weight": 0.2,
+      "weighted_points": 14.0
+    },
+    "attention_consistency": {
+      "observed_value": 0.85,
+      "weight": 0.2,
+      "weighted_points": 17.0
+    },
+    "gesture_stability": {
+      "observed_value": 0.65,
+      "weight": 0.15,
+      "weighted_points": 9.75
+    }
+  },
+  "event_counts": {
+    "off_screen_attention_events": 3,
+    "head_movement_events": 5,
+    "gesture_events": 4
+  },
+  "limitations": [
+    "Descriptive index only; not a hiring or suitability score.",
+    "Signals cannot reliably establish honesty, emotion, or intent.",
+    "Input values are only as reliable as their measurement method.",
+    "Human review and accessible alternatives are required."
+  ],
+  "human_review_required": true
+}
