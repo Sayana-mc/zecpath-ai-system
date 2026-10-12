@@ -1,0 +1,73 @@
+{
+  "session_id": "DAY50-DEMO-001",
+  "candidate_id": "DEMO-C001",
+  "task": {
+    "task_id": "CODE-001",
+    "task_type": "coding",
+    "title": "Find the largest number",
+    "description": "Return the largest number from a non-empty list.",
+    "max_score": 100
+  },
+  "evaluation_status": "EVALUATED",
+  "task_type": "coding",
+  "test_results": {
+    "passed": 3,
+    "total": 4,
+    "correctness_score": 75.0
+  },
+  "time_analysis": {
+    "elapsed_seconds": 1200,
+    "allotted_seconds": 1800,
+    "time_ratio": 0.667,
+    "time_management_score": 100.0,
+    "submitted_within_deadline": true
+  },
+  "score_breakdown": {
+    "correctness": {
+      "raw_score": 75.0,
+      "weight": 50,
+      "weighted_points": 37.5
+    },
+    "efficiency": {
+      "raw_score": 80,
+      "weight": 15,
+      "weighted_points": 12.0
+    },
+    "code_quality": {
+      "raw_score": 85,
+      "weight": 15,
+      "weighted_points": 12.75
+    },
+    "problem_solving": {
+      "raw_score": 80,
+      "weight": 10,
+      "weighted_points": 8.0
+    },
+    "time_management": {
+      "raw_score": 100.0,
+      "weight": 10,
+      "weighted_points": 10.0
+    }
+  },
+  "final_score": 80.25,
+  "maximum_score": 100,
+  "performance_band": "STRONG",
+  "review_flags": [],
+  "capture_summary": {
+    "code_snapshot_captured": true,
+    "snapshot_count": 2,
+    "execution_results_captured": true,
+    "answer_text_captured": true
+  },
+  "decision": {
+    "automatic_rejection": false,
+    "human_review_required": true,
+    "recommendation": "REVIEW_BY_HUMAN_EVALUATOR"
+  },
+  "limitations": [
+    "Execution results are supplied input and are not independently verified.",
+    "Efficiency, code quality, and problem-solving scores are supplied rubric scores.",
+    "The submitted code is captured but never executed by this prototype.",
+    "Scores are decision support and must not be the sole basis for hiring."
+  ]
+}
