@@ -1,0 +1,33 @@
+
+{
+  "candidate_id": "DEMO-C001",
+  "session_id": "DAY51-DEMO-001",
+  "role": "data_scientist",
+  "evaluations": {
+    "ats": {
+      "score": 85,
+      "maximum_score": 100,
+      "status": "completed"
+    },
+    "screening": {
+      "score": 80,
+      "maximum_score": 100,
+      "status": "completed"
+    },
+    "hr_interview": {
+      "score": 75,
+      "maximum_score": 100,
+      "status": "completed"
+    },
+    "technical_interview": {
+      "score": 90,
+      "maximum_score": 100,
+      "status": "completed"
+    },
+    "machine_test": {
+      "score": 80,
+      "maximum_score": 100,
+      "status": "completed"
+    }
+  }
+}

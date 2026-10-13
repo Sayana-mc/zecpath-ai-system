@@ -1,0 +1,40 @@
+
+{
+  "default_role": "data_scientist",
+  "roles": {
+    "data_scientist": {
+      "ats": 10,
+      "screening": 15,
+      "hr_interview": 15,
+      "technical_interview": 25,
+      "machine_test": 35
+    },
+    "data_analyst": {
+      "ats": 15,
+      "screening": 20,
+      "hr_interview": 15,
+      "technical_interview": 25,
+      "machine_test": 25
+    },
+    "software_engineer": {
+      "ats": 10,
+      "screening": 10,
+      "hr_interview": 10,
+      "technical_interview": 30,
+      "machine_test": 40
+    }
+  },
+  "normalization": {
+    "minimum_score": 0,
+    "maximum_score": 100
+  },
+  "decision_thresholds": {
+    "strong_fit": 80,
+    "potential_fit": 60
+  },
+  "safeguards": {
+    "automatic_rejection": false,
+    "human_review_required": true,
+    "missing_round_policy": "exclude_and_renormalize"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "candidate_id": "DEMO-C001",
+  "session_id": "DAY51-DEMO-001",
+  "target_role": "data_scientist",
+  "scoring_version": "day51-v1",
+  "score_status": "COMPLETE",
+  "hiring_fit_score_percent": 82.25,
+  "maximum_score": 100,
+  "fit_band": "STRONG_FIT",
+  "configured_role_weights_percent": {
+    "ats": 10,
+    "screening": 15,
+    "hr_interview": 15,
+    "technical_interview": 25,
+    "machine_test": 35
+  },
+  "effective_weights_percent": {
+    "ats": 10.0,
+    "hr_interview": 15.0,
+    "machine_test": 35.0,
+    "screening": 15.0,
+    "technical_interview": 25.0
+  },
+  "round_scores": {
+    "ats": {
+      "status": "completed",
+      "raw_score": 85,
+      "raw_maximum_score": 100,
+      "normalized_score": 85.0,
+      "configured_weight_percent": 10,
+      "effective_weight_percent": 10.0,
+      "weighted_contribution": 8.5,
+      "explanation": "85.00/100 normalized score multiplied by 10% configured weight."
+    },
+    "hr_interview": {
+      "status": "completed",
+      "raw_score": 75,
+      "raw_maximum_score": 100,
+      "normalized_score": 75.0,
+      "configured_weight_percent": 15,
+      "effective_weight_percent": 15.0,
+      "weighted_contribution": 11.25,
+      "explanation": "75.00/100 normalized score multiplied by 15% configured weight."
+    },
+    "machine_test": {
+      "status": "completed",
+      "raw_score": 80,
+      "raw_maximum_score": 100,
+      "normalized_score": 80.0,
+      "configured_weight_percent": 35,
+      "effective_weight_percent": 35.0,
+      "weighted_contribution": 28.0,
+      "explanation": "80.00/100 normalized score multiplied by 35% configured weight."
+    },
+    "screening": {
+      "status": "completed",
+      "raw_score": 80,
+      "raw_maximum_score": 100,
+      "normalized_score": 80.0,
+      "configured_weight_percent": 15,
+      "effective_weight_percent": 15.0,
+      "weighted_contribution": 12.0,
+      "explanation": "80.00/100 normalized score multiplied by 15% configured weight."
+    },
+    "technical_interview": {
+      "status": "completed",
+      "raw_score": 90,
+      "raw_maximum_score": 100,
+      "normalized_score": 90.0,
+      "configured_weight_percent": 25,
+      "effective_weight_percent": 25.0,
+      "weighted_contribution": 22.5,
+      "explanation": "90.00/100 normalized score multiplied by 25% configured weight."
+    }
+  },
+  "missing_rounds": [],
+  "not_applicable_rounds": [],
+  "available_weight_percent": 100.0,
+  "transparency": {
+    "formula": "Sum(normalized round score * configured round weight) / sum(weights for completed rounds)",
+    "missing_round_policy": "exclude_and_renormalize",
+    "normalization_scale": "0-100",
+    "scores_are_probabilities": false,
+    "human_review_required": true,
+    "automatic_rejection": false
+  },
+  "recommendation": "HUMAN_REVIEW_REQUIRED"
+}
