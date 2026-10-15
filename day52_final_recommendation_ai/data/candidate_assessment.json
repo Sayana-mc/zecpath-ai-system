@@ -1,0 +1,31 @@
+
+{
+  "candidate_id": "DEMO-C001",
+  "session_id": "DAY52-DEMO-001",
+  "target_role": "data_scientist",
+  "assessment_status": "COMPLETE",
+  "unified_score": 82.25,
+  "completed_rounds": 5,
+  "expected_rounds": 5,
+  "evidence_quality": 90,
+  "data_consistency": 100,
+  "risk_factors": {
+    "integrity": {
+      "flag": false,
+      "evidence": [],
+      "source": "Reviewed assessment records"
+    },
+    "behavior": {
+      "flag": false,
+      "evidence": [],
+      "source": "Structured, job-related assessment observations"
+    }
+  },
+  "rounds": {
+    "ats": 85,
+    "screening": 80,
+    "hr_interview": 75,
+    "technical_interview": 90,
+    "machine_test": 80
+  }
+}

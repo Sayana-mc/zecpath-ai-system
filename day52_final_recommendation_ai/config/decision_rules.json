@@ -1,0 +1,25 @@
+
+{
+  "decision_version": "day52-v1",
+  "score_thresholds": {
+    "selected_min": 80,
+    "review_min": 60
+  },
+  "confidence_thresholds": {
+    "selected_min": 75,
+    "review_min": 50
+  },
+  "minimum_completed_rounds": 3,
+  "require_complete_assessment_for_selection": true,
+  "risk_policy": {
+    "integrity_flag_requires_review": true,
+    "behavior_flag_requires_review": true,
+    "missing_rounds_require_review": true,
+    "low_confidence_requires_review": true,
+    "automatic_rejection_from_risk_flags": false
+  },
+  "risk_weights": {
+    "integrity": 0.6,
+    "behavior": 0.4
+  }
+}

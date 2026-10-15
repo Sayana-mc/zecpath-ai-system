@@ -1,0 +1,57 @@
+{
+    "candidate_id": "DEMO-C001",
+    "session_id": "DAY52-DEMO-001",
+    "target_role": "data_scientist",
+    "decision_version": "day52-v1",
+    "assessment_status": "COMPLETE",
+    "decision": "SELECTED",
+    "score": 82.25,
+    "confidence": 97.0,
+    "confidence_interpretation": "Evidence completeness indicator; not a probability of job success.",
+    "round_coverage": {
+        "completed": 5,
+        "expected": 5,
+        "coverage_percent": 100.0
+    },
+    "round_scores": {
+        "ats": 85.0,
+        "screening": 80.0,
+        "hr_interview": 75.0,
+        "technical_interview": 90.0,
+        "machine_test": 80.0
+    },
+    "risk_factors": {
+        "integrity": {
+            "flag": false,
+            "evidence": [],
+            "source": "Reviewed assessment records"
+        },
+        "behavior": {
+            "flag": false,
+            "evidence": [],
+            "source": "Structured, job-related assessment observations"
+        },
+        "flagged_risks": [],
+        "automatic_rejection_from_risk_flags": false
+    },
+    "explanation": {
+        "reasons": [
+            "Score 82.25 meets the selection threshold of 80.00.",
+            "Required assessment rounds are complete and no configured review flag is unresolved."
+        ],
+        "review_reasons": [],
+        "score_thresholds": {
+            "selected_min": 80.0,
+            "review_min": 60.0
+        },
+        "confidence_thresholds": {
+            "selected_min": 75.0,
+            "review_min": 50.0
+        },
+        "human_review_required": true
+    },
+    "audit": {
+        "recommendation_only": true,
+        "automatic_employment_action": false
+    }
+}
