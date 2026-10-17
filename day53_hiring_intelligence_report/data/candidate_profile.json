@@ -1,0 +1,115 @@
+
+{
+  "candidate": {
+    "candidate_id": "DEMO-C001",
+    "session_id": "DAY53-DEMO-001",
+    "name": "Demo Candidate",
+    "target_role": "Data Scientist",
+    "report_date": "2026-10-17"
+  },
+  "assessment_status": "COMPLETE",
+  "evaluation_rounds": {
+    "ats": {
+      "status": "COMPLETE",
+      "score": 85,
+      "summary": "The sample resume assessment indicates strong alignment with the configured role requirements.",
+      "strengths": [
+        "Relevant data science skills identified",
+        "Python and data analysis experience listed"
+      ],
+      "weaknesses": [
+        "Project impact requires further verification"
+      ],
+      "evidence": [
+        "ATS assessment score: 85/100",
+        "Skills and project sections reviewed"
+      ]
+    },
+    "screening": {
+      "status": "COMPLETE",
+      "score": 80,
+      "summary": "The candidate meets the sample screening criteria.",
+      "strengths": [
+        "Required screening criteria met"
+      ],
+      "weaknesses": [
+        "Practical depth should be confirmed in technical assessment"
+      ],
+      "evidence": [
+        "Screening assessment score: 80/100"
+      ]
+    },
+    "hr_interview": {
+      "status": "COMPLETE",
+      "score": 75,
+      "summary": "The sample HR assessment is positive overall, with some areas requiring follow-up.",
+      "strengths": [
+        "Relevant motivation was recorded in the sample assessment"
+      ],
+      "weaknesses": [
+        "Communication examples require interviewer verification"
+      ],
+      "evidence": [
+        "HR assessment score: 75/100"
+      ]
+    },
+    "technical_interview": {
+      "status": "COMPLETE",
+      "score": 90,
+      "summary": "The sample technical interview indicates strong performance.",
+      "strengths": [
+        "Strong technical assessment score",
+        "Good demonstrated problem-solving in the sample evaluation"
+      ],
+      "weaknesses": [
+        "Production-level experience should be verified where relevant"
+      ],
+      "evidence": [
+        "Technical interview score: 90/100"
+      ]
+    },
+    "machine_test": {
+      "status": "COMPLETE",
+      "score": 80,
+      "summary": "The candidate meets the sample machine-test threshold.",
+      "strengths": [
+        "Required practical assessment completed"
+      ],
+      "weaknesses": [
+        "Code quality and edge-case handling should be reviewed"
+      ],
+      "evidence": [
+        "Machine test score: 80/100"
+      ]
+    }
+  },
+  "behavioral_assessment": {
+    "status": "COMPLETE",
+    "summary": "No unresolved job-related behavior flag is recorded in this sample.",
+    "flags": [],
+    "evidence": [
+      "No behavior flag supplied in the demonstration data"
+    ]
+  },
+  "integrity_assessment": {
+    "status": "COMPLETE",
+    "summary": "No unresolved integrity flag is recorded in this sample.",
+    "flags": [],
+    "evidence": [
+      "No integrity flag supplied in the demonstration data"
+    ]
+  },
+  "day52_recommendation": {
+    "decision": "SELECTED",
+    "score": 82.25,
+    "confidence": 97.0,
+    "confidence_interpretation": "Evidence completeness indicator; not a probability of job success.",
+    "reasons": [
+      "Sample unified score meets the configured selection threshold.",
+      "All required evaluation rounds are complete in the sample."
+    ],
+    "review_reasons": [],
+    "human_review_required": true,
+    "recommendation_only": true
+  }
+}

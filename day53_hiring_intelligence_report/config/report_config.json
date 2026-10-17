@@ -1,0 +1,15 @@
+
+{
+  "report_version": "day53-v1",
+  "project_name": "Zecpath AI Hiring System",
+  "report_title": "Hiring Intelligence Report",
+  "strength_threshold": 80,
+  "development_threshold": 60,
+  "include_round_scores": true,
+  "include_risk_details": true,
+  "include_recommendation_explanation": true,
+  "export_formats": [
+    "json",
+    "markdown"
+  ]
+}
