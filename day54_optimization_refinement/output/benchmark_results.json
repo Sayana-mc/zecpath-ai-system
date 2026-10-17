@@ -1,0 +1,12 @@
+{
+  "iterations_per_operation": 1000,
+  "scoring": {
+    "total_seconds": 0.010618,
+    "average_milliseconds": 0.010618
+  },
+  "intent_detection": {
+    "total_seconds": 0.015165,
+    "average_milliseconds": 0.015165
+  },
+  "measurement_note": "Local microbenchmark of in-process Python functions. It excludes database, network, model inference, file I/O and end-to-end application latency."
+}

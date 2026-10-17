@@ -1,0 +1,28 @@
+
+{
+  "version": "day54-v1",
+  "project_name": "Zecpath AI Hiring System",
+  "thresholds": {
+    "strong_fit": 80,
+    "potential_fit": 60
+  },
+  "tuning": {
+    "minimum_threshold": 50,
+    "maximum_threshold": 90,
+    "step": 5
+  },
+  "consistency": {
+    "maximum_round_score_gap": 35,
+    "minimum_completed_rounds": 3
+  },
+  "review": {
+    "require_human_review": true,
+    "allow_automatic_rejection": false,
+    "review_on_unknown_intent": true,
+    "review_on_incomplete_rounds": true,
+    "review_on_large_score_gap": true
+  },
+  "benchmark": {
+    "iterations": 1000
+  }
+}
