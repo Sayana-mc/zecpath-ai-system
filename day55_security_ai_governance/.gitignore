@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+data/audit/*.jsonl
+data/audit/*.json
+data/consent/*.jsonl
+data/secure_storage/*.enc
+data/secure_storage/*.meta.json
+output/
+screenshots/

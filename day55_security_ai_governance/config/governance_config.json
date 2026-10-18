@@ -1,0 +1,34 @@
+{
+  "project_name": "Zecpath AI Hiring System",
+  "version": "day55-v1",
+  "audit": {
+    "log_file": "data/audit/audit.jsonl",
+    "integrity_file": "data/audit/audit_head.json",
+    "require_hash_chain": true
+  },
+  "retention_days": {
+    "transcripts": 90,
+    "reports": 365,
+    "audit_logs": 730,
+    "consent_records": 730
+  },
+  "storage": {
+    "directory": "data/secure_storage",
+    "key_environment_variable": "ZECpath_STORAGE_KEY"
+  },
+  "access": {
+    "roles": {
+      "admin": ["*"],
+      "hiring_manager": ["candidate:read", "report:read", "score:read", "decision:read"],
+      "reviewer": ["candidate:read", "transcript:read", "report:read", "score:read", "decision:read", "decision:record"],
+      "auditor": ["audit:read", "governance:read"],
+      "candidate": ["consent:read", "consent:update"]
+    }
+  },
+  "governance": {
+    "human_review_required": true,
+    "automatic_rejection_enabled": false,
+    "consent_required_for_processing": true,
+    "store_raw_transcripts_by_default": false
+  }
+}
