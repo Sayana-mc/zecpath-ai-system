@@ -1,0 +1,11 @@
+{
+  "project_name": "Zecpath AI Hiring System",
+  "version": "day57-v1",
+  "required_skills": ["python", "sql", "statistics", "machine learning", "pandas"],
+  "stage_weights": {"ats": 0.20, "screening": 0.15, "hr_interview": 0.20, "technical_interview": 0.30, "machine_test": 0.15},
+  "thresholds": {"strong_fit": 80, "potential_fit": 60},
+  "inconsistency": {"score_gap_threshold": 15},
+  "governance": {"human_review_required": true, "automatic_rejection_enabled": false},
+  "max_resume_characters": 200000,
+  "continue_on_candidate_error": true
+}

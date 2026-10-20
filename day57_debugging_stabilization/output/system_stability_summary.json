@@ -1,0 +1,28 @@
+{
+  "candidate_count": 4,
+  "successful_candidates": 4,
+  "failed_candidates": 0,
+  "stage_executions_recorded": 28,
+  "completed_stage_executions": 28,
+  "failed_stage_executions": 0,
+  "stage_completion_rate_percent": 100.0,
+  "average_pipeline_ms_successful_candidates": 16.227,
+  "inconsistency_count": 2,
+  "inconsistencies": [
+    {
+      "candidate_id": "SIM-C002",
+      "type": "ATS_INTERVIEW_CONTRADICTION",
+      "severity": "REVIEW",
+      "details": "Strong ATS keyword coverage conflicts with at least one later-stage score below 60."
+    },
+    {
+      "candidate_id": "SIM-C004",
+      "type": "ATS_INTERVIEW_CONTRADICTION",
+      "severity": "REVIEW",
+      "details": "Strong ATS keyword coverage conflicts with at least one later-stage score below 60."
+    }
+  ],
+  "human_review_required": true,
+  "automatic_rejection_enabled": false,
+  "performance_scope": "Local synthetic-data simulation only; excludes external model inference, network, database, and production ATS integrations."
+}

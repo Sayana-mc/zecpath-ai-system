@@ -1,0 +1,357 @@
+{
+  "report_schema_version": "1.0",
+  "project_name": "Zecpath AI Hiring System",
+  "module_version": "day57-v1",
+  "generated_at_utc": "2026-10-20T05:23:01.434569+00:00",
+  "test_mode": "SYNTHETIC_LOCAL_STABILIZATION",
+  "candidate_results": [
+    {
+      "candidate_id": "SIM-C001",
+      "candidate_name": "Candidate Alpha",
+      "status": "COMPLETED",
+      "stages": {
+        "resume_upload": {
+          "status": "COMPLETED",
+          "file_name": "alpha_resume.txt",
+          "character_count": 89
+        },
+        "ats_scoring": {
+          "status": "COMPLETED",
+          "score": 100.0,
+          "matched_skills": [
+            "python",
+            "sql",
+            "statistics",
+            "machine learning",
+            "pandas"
+          ],
+          "missing_skills": []
+        },
+        "screening": {
+          "status": "COMPLETED",
+          "score": 84.0
+        },
+        "hr_interview": {
+          "status": "COMPLETED",
+          "score": 78.0
+        },
+        "technical_interview": {
+          "status": "COMPLETED",
+          "score": 88.0
+        },
+        "machine_test": {
+          "status": "COMPLETED",
+          "score": 82.0
+        },
+        "final_decision": {
+          "status": "COMPLETED",
+          "round_scores": {
+            "ats": 100.0,
+            "screening": 84.0,
+            "hr_interview": 78.0,
+            "technical_interview": 88.0,
+            "machine_test": 82.0
+          },
+          "final_score": 86.9,
+          "ai_advisory": "STRONG_FIT_REVIEW_REQUIRED",
+          "human_review_required": true,
+          "automatic_rejection_enabled": false,
+          "decision_note": "Advisory only; no automated selection or rejection is performed."
+        }
+      },
+      "human_comparison": {
+        "human_judgment": "SELECTED",
+        "human_score": 84.0,
+        "score_gap": 2.9,
+        "label_match_rate_not_applicable": true,
+        "human_notes": "Synthetic test record."
+      },
+      "inconsistencies": [],
+      "performance_ms": {
+        "resume_upload": 13.425,
+        "ats_scoring": 0.324,
+        "screening": 0.004,
+        "hr_interview": 0.001,
+        "technical_interview": 0.005,
+        "machine_test": 0.002,
+        "final_decision": 0.0
+      },
+      "total_pipeline_ms": 13.761
+    },
+    {
+      "candidate_id": "SIM-C002",
+      "candidate_name": "Candidate Beta",
+      "status": "COMPLETED",
+      "stages": {
+        "resume_upload": {
+          "status": "COMPLETED",
+          "file_name": "beta_resume.txt",
+          "character_count": 70
+        },
+        "ats_scoring": {
+          "status": "COMPLETED",
+          "score": 100.0,
+          "matched_skills": [
+            "python",
+            "sql",
+            "statistics",
+            "machine learning",
+            "pandas"
+          ],
+          "missing_skills": []
+        },
+        "screening": {
+          "status": "COMPLETED",
+          "score": 68.0
+        },
+        "hr_interview": {
+          "status": "COMPLETED",
+          "score": 72.0
+        },
+        "technical_interview": {
+          "status": "COMPLETED",
+          "score": 58.0
+        },
+        "machine_test": {
+          "status": "COMPLETED",
+          "score": 62.0
+        },
+        "final_decision": {
+          "status": "COMPLETED",
+          "round_scores": {
+            "ats": 100.0,
+            "screening": 68.0,
+            "hr_interview": 72.0,
+            "technical_interview": 58.0,
+            "machine_test": 62.0
+          },
+          "final_score": 71.3,
+          "ai_advisory": "POTENTIAL_FIT_REVIEW_REQUIRED",
+          "human_review_required": true,
+          "automatic_rejection_enabled": false,
+          "decision_note": "Advisory only; no automated selection or rejection is performed."
+        }
+      },
+      "human_comparison": {
+        "human_judgment": "HOLD_REVIEW",
+        "human_score": 65.0,
+        "score_gap": 6.3,
+        "label_match_rate_not_applicable": true,
+        "human_notes": "Synthetic test record."
+      },
+      "inconsistencies": [
+        {
+          "type": "ATS_INTERVIEW_CONTRADICTION",
+          "severity": "REVIEW",
+          "details": "Strong ATS keyword coverage conflicts with at least one later-stage score below 60."
+        }
+      ],
+      "performance_ms": {
+        "resume_upload": 18.266,
+        "ats_scoring": 0.044,
+        "screening": 0.007,
+        "hr_interview": 0.002,
+        "technical_interview": 0.001,
+        "machine_test": 0.002,
+        "final_decision": 0.0
+      },
+      "total_pipeline_ms": 18.322
+    },
+    {
+      "candidate_id": "SIM-C003",
+      "candidate_name": "Candidate Gamma",
+      "status": "COMPLETED",
+      "stages": {
+        "resume_upload": {
+          "status": "COMPLETED",
+          "file_name": "gamma_resume.txt",
+          "character_count": 41
+        },
+        "ats_scoring": {
+          "status": "COMPLETED",
+          "score": 40.0,
+          "matched_skills": [
+            "python",
+            "statistics"
+          ],
+          "missing_skills": [
+            "sql",
+            "machine learning",
+            "pandas"
+          ]
+        },
+        "screening": {
+          "status": "COMPLETED",
+          "score": 52.0
+        },
+        "hr_interview": {
+          "status": "COMPLETED",
+          "score": 55.0
+        },
+        "technical_interview": {
+          "status": "COMPLETED",
+          "score": 48.0
+        },
+        "machine_test": {
+          "status": "COMPLETED",
+          "score": 50.0
+        },
+        "final_decision": {
+          "status": "COMPLETED",
+          "round_scores": {
+            "ats": 40.0,
+            "screening": 52.0,
+            "hr_interview": 55.0,
+            "technical_interview": 48.0,
+            "machine_test": 50.0
+          },
+          "final_score": 48.7,
+          "ai_advisory": "ADDITIONAL_REVIEW_REQUIRED",
+          "human_review_required": true,
+          "automatic_rejection_enabled": false,
+          "decision_note": "Advisory only; no automated selection or rejection is performed."
+        }
+      },
+      "human_comparison": {
+        "human_judgment": "REJECTED",
+        "human_score": 51.0,
+        "score_gap": 2.3,
+        "label_match_rate_not_applicable": true,
+        "human_notes": "Synthetic test label only."
+      },
+      "inconsistencies": [],
+      "performance_ms": {
+        "resume_upload": 14.636,
+        "ats_scoring": 0.035,
+        "screening": 0.006,
+        "hr_interview": 0.001,
+        "technical_interview": 0.001,
+        "machine_test": 0.001,
+        "final_decision": 0.0
+      },
+      "total_pipeline_ms": 14.68
+    },
+    {
+      "candidate_id": "SIM-C004",
+      "candidate_name": "Candidate Delta",
+      "status": "COMPLETED",
+      "stages": {
+        "resume_upload": {
+          "status": "COMPLETED",
+          "file_name": "delta_resume.txt",
+          "character_count": 81
+        },
+        "ats_scoring": {
+          "status": "COMPLETED",
+          "score": 100.0,
+          "matched_skills": [
+            "python",
+            "sql",
+            "statistics",
+            "machine learning",
+            "pandas"
+          ],
+          "missing_skills": []
+        },
+        "screening": {
+          "status": "COMPLETED",
+          "score": 90.0
+        },
+        "hr_interview": {
+          "status": "COMPLETED",
+          "score": 62.0
+        },
+        "technical_interview": {
+          "status": "COMPLETED",
+          "score": 55.0
+        },
+        "machine_test": {
+          "status": "COMPLETED",
+          "score": 58.0
+        },
+        "final_decision": {
+          "status": "COMPLETED",
+          "round_scores": {
+            "ats": 100.0,
+            "screening": 90.0,
+            "hr_interview": 62.0,
+            "technical_interview": 55.0,
+            "machine_test": 58.0
+          },
+          "final_score": 71.1,
+          "ai_advisory": "POTENTIAL_FIT_REVIEW_REQUIRED",
+          "human_review_required": true,
+          "automatic_rejection_enabled": false,
+          "decision_note": "Advisory only; no automated selection or rejection is performed."
+        }
+      },
+      "human_comparison": {
+        "human_judgment": "HOLD_REVIEW",
+        "human_score": 66.0,
+        "score_gap": 5.1,
+        "label_match_rate_not_applicable": true,
+        "human_notes": "Synthetic test record."
+      },
+      "inconsistencies": [
+        {
+          "type": "ATS_INTERVIEW_CONTRADICTION",
+          "severity": "REVIEW",
+          "details": "Strong ATS keyword coverage conflicts with at least one later-stage score below 60."
+        }
+      ],
+      "performance_ms": {
+        "resume_upload": 18.076,
+        "ats_scoring": 0.052,
+        "screening": 0.008,
+        "hr_interview": 0.002,
+        "technical_interview": 0.002,
+        "machine_test": 0.006,
+        "final_decision": 0.0
+      },
+      "total_pipeline_ms": 18.146
+    }
+  ],
+  "performance_analysis": {
+    "candidate_count": 4,
+    "successful_candidates": 4,
+    "failed_candidates": 0,
+    "stage_executions_recorded": 28,
+    "completed_stage_executions": 28,
+    "failed_stage_executions": 0,
+    "stage_completion_rate_percent": 100.0,
+    "average_pipeline_ms_successful_candidates": 16.227,
+    "inconsistency_count": 2,
+    "inconsistencies": [
+      {
+        "candidate_id": "SIM-C002",
+        "type": "ATS_INTERVIEW_CONTRADICTION",
+        "severity": "REVIEW",
+        "details": "Strong ATS keyword coverage conflicts with at least one later-stage score below 60."
+      },
+      {
+        "candidate_id": "SIM-C004",
+        "type": "ATS_INTERVIEW_CONTRADICTION",
+        "severity": "REVIEW",
+        "details": "Strong ATS keyword coverage conflicts with at least one later-stage score below 60."
+      }
+    ],
+    "human_review_required": true,
+    "automatic_rejection_enabled": false,
+    "performance_scope": "Local synthetic-data simulation only; excludes external model inference, network, database, and production ATS integrations."
+  },
+  "recommendations": [
+    "Keep human review mandatory and automatic rejection disabled.",
+    "Investigate score gaps and ATS-versus-interview contradictions before changing weights.",
+    "Add broader edge-case and integration tests before connecting live services.",
+    "Benchmark production latency only after model, database, storage and network integrations exist.",
+    "Use authorized representative data and documented human evaluation before assessing hiring validity.",
+    "The Day 56 simulation has no conversation-state module; validate the actual conversation component separately if it exists in the wider system."
+  ],
+  "limitations": [
+    "All records are synthetic.",
+    "ATS scoring is keyword coverage, not a trained model.",
+    "Human judgments are supplied test labels, not independently verified ground truth.",
+    "No external API, database, or production infrastructure is exercised.",
+    "Conversation logic is outside this module because no conversation engine is included in the Day 56 simulation package."
+  ]
+}
