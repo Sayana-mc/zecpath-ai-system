@@ -1,0 +1,3 @@
+Candidate Delta
+Skills: Python, SQL, statistics, machine learning, pandas.
+Projects: Predictive analytics and model development. Interview scores in this simulation are mixed.

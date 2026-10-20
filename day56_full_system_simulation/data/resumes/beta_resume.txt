@@ -1,0 +1,3 @@
+Candidate Beta
+Skills: Python, SQL, pandas, data visualization.
+Projects: Exploratory analysis and dashboard development.

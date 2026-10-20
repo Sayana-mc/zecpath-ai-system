@@ -1,0 +1,3 @@
+Candidate Alpha
+Skills: Python, SQL, statistics, machine learning, pandas, data visualization.
+Projects: Classification, model evaluation, SQL analytics, exploratory data analysis.

@@ -1,0 +1,3 @@
+Candidate Gamma
+Skills: Excel, basic reporting.
+Projects: Spreadsheet reporting. Limited evidence of Python, SQL, statistics, or machine learning.
