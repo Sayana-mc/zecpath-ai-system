@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InterviewScoreRequest",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "interview_id",
+    "question_id",
+    "transcript_text",
+    "rubric_version"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string"
+    },
+    "interview_id": {
+      "type": "string"
+    },
+    "question_id": {
+      "type": "string"
+    },
+    "transcript_text": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "rubric_version": {
+      "type": "string"
+    }
+  }
+}

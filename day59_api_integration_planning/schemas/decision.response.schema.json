@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DecisionResponse",
+  "type": "object",
+  "required": [
+    "request_id",
+    "candidate_id",
+    "job_id",
+    "recommendation",
+    "human_review_required",
+    "automatic_rejection"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "recommendation": {
+      "enum": [
+        "recommend_review",
+        "hold_for_review",
+        "insufficient_data"
+      ]
+    },
+    "human_review_required": {
+      "const": true
+    },
+    "automatic_rejection": {
+      "const": false
+    },
+    "reason_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScreeningRequest",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "job_id",
+    "resume_profile",
+    "screening_rubric_version"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "resume_profile": {
+      "type": "object"
+    },
+    "screening_rubric_version": {
+      "type": "string"
+    }
+  }
+}

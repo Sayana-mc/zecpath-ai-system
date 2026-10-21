@@ -1,0 +1,55 @@
+{
+  "project": "Zecpath AI Hiring System",
+  "version": "1.0.0",
+  "services": [
+    {
+      "name": "Resume Parsing API",
+      "method": "POST",
+      "path": "/v1/resume-jobs",
+      "mode": "async",
+      "success_status": 202
+    },
+    {
+      "name": "ATS Scoring API",
+      "method": "POST",
+      "path": "/v1/ats/score",
+      "mode": "sync",
+      "success_status": 200
+    },
+    {
+      "name": "Screening AI API",
+      "method": "POST",
+      "path": "/v1/screening/evaluate",
+      "mode": "sync",
+      "success_status": 200
+    },
+    {
+      "name": "Interview AI API",
+      "method": "POST",
+      "path": "/v1/interviews/score",
+      "mode": "sync",
+      "success_status": 200,
+      "timeout_seconds": 8
+    },
+    {
+      "name": "Decision AI API",
+      "method": "POST",
+      "path": "/v1/decisions/recommend",
+      "mode": "sync",
+      "success_status": 200
+    }
+  ],
+  "retry_policy": {
+    "max_attempts": 3,
+    "initial_backoff_seconds": 1,
+    "max_backoff_seconds": 8,
+    "jitter": true
+  },
+  "security": {
+    "tls_required": true,
+    "secrets_in_source": false,
+    "least_privilege": true
+  },
+  "human_review_required": true,
+  "automatic_rejection_enabled": false
+}

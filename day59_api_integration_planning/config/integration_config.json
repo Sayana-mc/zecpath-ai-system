@@ -1,0 +1,26 @@
+{
+  "project": "Zecpath AI Hiring System",
+  "version": "1.0.0",
+  "human_review_required": true,
+  "automatic_rejection_enabled": false,
+  "resume_processing": {
+    "mode": "async",
+    "accepted_status": 202,
+    "max_file_mb": 10
+  },
+  "interview_scoring": {
+    "mode": "sync",
+    "timeout_seconds": 8
+  },
+  "retry_policy": {
+    "max_attempts": 3,
+    "initial_backoff_seconds": 1,
+    "max_backoff_seconds": 8,
+    "jitter": true
+  },
+  "security": {
+    "tls_required": true,
+    "secrets_in_source": false,
+    "least_privilege": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ATSScoreRequest",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "job_id",
+    "resume_profile",
+    "required_skills"
+  ],
+  "properties": {
+    "candidate_id": {
+      "type": "string"
+    },
+    "job_id": {
+      "type": "string"
+    },
+    "resume_profile": {
+      "type": "object"
+    },
+    "required_skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

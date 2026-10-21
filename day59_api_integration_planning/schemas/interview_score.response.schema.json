@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "InterviewScoreResponse",
+  "type": "object",
+  "required": [
+    "request_id",
+    "candidate_id",
+    "interview_id",
+    "question_id",
+    "score",
+    "evidence",
+    "review_required"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string"
+    },
+    "candidate_id": {
+      "type": "string"
+    },
+    "interview_id": {
+      "type": "string"
+    },
+    "question_id": {
+      "type": "string"
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "evidence": {
+      "type": "array"
+    },
+    "review_required": {
+      "const": true
+    }
+  }
+}
