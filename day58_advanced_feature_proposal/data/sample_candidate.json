@@ -1,0 +1,11 @@
+{
+  "candidate_id": "DEMO-C058-001",
+  "target_role": "Junior Data Analyst",
+  "skills_demonstrated": ["python", "excel"],
+  "required_skills": ["python", "sql", "excel", "data visualization"],
+  "candidate_goal": "Prepare for a structured data analyst interview",
+  "consent": {
+    "video_analysis": false,
+    "recording_storage": false
+  }
+}

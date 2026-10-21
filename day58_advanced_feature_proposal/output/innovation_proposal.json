@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-10-21T04:49:22.767251+00:00",
+  "project": "Zecpath AI Hiring System",
+  "day": 58,
+  "status": "PROPOSAL_AND_LOCAL_PROTOTYPE",
+  "feature_count": 6,
+  "roadmap_phase_count": 5,
+  "principles": {
+    "human_review_required": true,
+    "automatic_rejection_enabled": false,
+    "emotion_inference_for_hiring_enabled": false,
+    "video_analysis_requires_explicit_consent": true,
+    "candidate_data_minimization": true
+  },
+  "features": [
+    {
+      "id": "F01",
+      "name": "Consent-based video interview review",
+      "category": "video_analysis",
+      "priority": "MEDIUM",
+      "status": "PROPOSED",
+      "description": "Optional recording review, timestamps, and transcript alignment for interviewers.",
+      "guardrails": [
+        "explicit consent",
+        "withdrawal option",
+        "limited retention",
+        "human review",
+        "no emotion/personality inference"
+      ],
+      "acceptance_criteria": [
+        "recording is off by default",
+        "access is role-restricted",
+        "candidate can request deletion"
+      ]
+    },
+    {
+      "id": "F02",
+      "name": "Emotion detection",
+      "category": "emotion_detection",
+      "priority": "NOT_RECOMMENDED",
+      "status": "EXCLUDED_FROM_HIRING_DECISIONS",
+      "description": "Do not infer emotions, honesty, confidence, or personality from facial expressions or voice for hiring decisions.",
+      "guardrails": [
+        "not used for ranking",
+        "not used for rejection",
+        "no proxy personality scoring"
+      ],
+      "acceptance_criteria": [
+        "no emotion score is generated or stored"
+      ]
+    },
+    {
+      "id": "F03",
+      "name": "Real-time interview feedback",
+      "category": "real_time_feedback",
+      "priority": "HIGH",
+      "status": "PROPOSED",
+      "description": "Optional practice-mode feedback on answer structure, relevance to a rubric, and technical concepts.",
+      "guardrails": [
+        "practice mode only by default",
+        "transparent rubric",
+        "candidate can opt out",
+        "no hidden scoring"
+      ],
+      "acceptance_criteria": [
+        "feedback references observable answer content",
+        "candidate sees why feedback was provided"
+      ]
+    },
+    {
+      "id": "F04",
+      "name": "AI coaching system",
+      "category": "candidate_coaching",
+      "priority": "HIGH",
+      "status": "PROPOSED",
+      "description": "Creates practice plans, sample questions, and learning activities from job-related skill gaps.",
+      "guardrails": [
+        "recommendations are advisory",
+        "candidate controls participation",
+        "coaching usage is not a hiring score"
+      ],
+      "acceptance_criteria": [
+        "every suggestion maps to a role skill",
+        "no unsupported claims about candidate ability"
+      ]
+    },
+    {
+      "id": "F05",
+      "name": "Candidate improvement suggestions",
+      "category": "candidate_improvement",
+      "priority": "HIGH",
+      "status": "PROTOTYPE_AVAILABLE",
+      "description": "Identifies missing target skills and suggests practical learning actions.",
+      "guardrails": [
+        "based only on supplied skills and role requirements",
+        "candidate can correct inputs"
+      ],
+      "acceptance_criteria": [
+        "each missing skill has a concrete next step"
+      ]
+    },
+    {
+      "id": "F06",
+      "name": "Interview analytics dashboard",
+      "category": "interview_analytics",
+      "priority": "MEDIUM",
+      "status": "PROPOSED",
+      "description": "Shows stage completion, rubric coverage, review latency, and reviewer disagreement at aggregate level.",
+      "guardrails": [
+        "role-based access",
+        "small-group privacy protections",
+        "no emotion/personality metrics"
+      ],
+      "acceptance_criteria": [
+        "metric definitions are documented",
+        "dashboard data can be audited"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "id": "P1",
+      "name": "Reliable foundations",
+      "timeline": "0-2 months",
+      "priority": "HIGH",
+      "features": [
+        "Feature registry",
+        "Input validation",
+        "Versioned outputs",
+        "Audit events",
+        "Candidate consent controls"
+      ],
+      "exit_criteria": [
+        "Unit and integration tests pass",
+        "Output schemas documented",
+        "Human review enforced"
+      ]
+    },
+    {
+      "id": "P2",
+      "name": "Candidate coaching MVP",
+      "timeline": "2-4 months",
+      "priority": "HIGH",
+      "features": [
+        "Skill-gap suggestions",
+        "Answer-structure coaching",
+        "Practice questions",
+        "Candidate-controlled progress view"
+      ],
+      "exit_criteria": [
+        "Suggestions trace to job-related evidence",
+        "Candidate can view and correct profile data",
+        "No hiring decisions based on coaching usage"
+      ]
+    },
+    {
+      "id": "P3",
+      "name": "Interview analytics dashboard",
+      "timeline": "4-6 months",
+      "priority": "MEDIUM",
+      "features": [
+        "Stage completion metrics",
+        "Question coverage",
+        "Structured rubric summaries",
+        "Reviewer disagreement analysis"
+      ],
+      "exit_criteria": [
+        "Metrics definitions documented",
+        "Access controls tested",
+        "No emotion/personality scores"
+      ]
+    },
+    {
+      "id": "P4",
+      "name": "Consent-based video workflow pilot",
+      "timeline": "6-9 months",
+      "priority": "MEDIUM",
+      "features": [
+        "Optional recording upload",
+        "Speech transcription with review",
+        "Timestamped event markers",
+        "Retention and deletion workflow"
+      ],
+      "exit_criteria": [
+        "Explicit consent and withdrawal supported",
+        "Recording access restricted",
+        "Transcripts can be corrected",
+        "No facial emotion or personality inference"
+      ]
+    },
+    {
+      "id": "P5",
+      "name": "Scale and operational readiness",
+      "timeline": "9-12 months",
+      "priority": "HIGH",
+      "features": [
+        "Queue-based processing",
+        "API versioning",
+        "Observability",
+        "Load and recovery testing",
+        "Model and prompt evaluation"
+      ],
+      "exit_criteria": [
+        "Load targets met",
+        "Monitoring and rollback tested",
+        "Privacy/security review complete"
+      ]
+    }
+  ],
+  "coaching_prototype": {
+    "schema_version": "1.0",
+    "candidate_id": "DEMO-C058-001",
+    "target_role": "Junior Data Analyst",
+    "purpose": "candidate_coaching_only",
+    "demonstrated_skills": [
+      "python",
+      "excel"
+    ],
+    "skills_to_practice": [
+      {
+        "skill": "sql",
+        "suggestion": "Practice SELECT, JOIN, GROUP BY, filtering, and window-function questions."
+      },
+      {
+        "skill": "data visualization",
+        "suggestion": "Build a small dashboard and explain why each chart fits the question."
+      }
+    ],
+    "summary": "2 target skill(s) identified for optional practice.",
+    "hiring_decision": null,
+    "human_review_required_for_hiring": true,
+    "note": "This plan is advisory and must not be used to rank or reject a candidate. Verify the input profile with the candidate."
+  },
+  "limitations": [
+    "The coaching prototype uses transparent rules and supplied skill lists; it is not a trained AI model.",
+    "Video analysis is proposed as an optional consent-based workflow, not implemented here.",
+    "Emotion or personality inference is excluded from hiring decisions.",
+    "The roadmap is a proposal and requires privacy, security, legal, accessibility, and stakeholder review."
+  ]
+}

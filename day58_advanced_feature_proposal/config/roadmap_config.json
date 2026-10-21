@@ -1,0 +1,54 @@
+{
+  "project": "Zecpath AI Hiring System",
+  "day": 58,
+  "version": "1.0",
+  "principles": {
+    "human_review_required": true,
+    "automatic_rejection_enabled": false,
+    "emotion_inference_for_hiring_enabled": false,
+    "video_analysis_requires_explicit_consent": true,
+    "candidate_data_minimization": true
+  },
+  "phases": [
+    {
+      "id": "P1",
+      "name": "Reliable foundations",
+      "timeline": "0-2 months",
+      "priority": "HIGH",
+      "features": ["Feature registry", "Input validation", "Versioned outputs", "Audit events", "Candidate consent controls"],
+      "exit_criteria": ["Unit and integration tests pass", "Output schemas documented", "Human review enforced"]
+    },
+    {
+      "id": "P2",
+      "name": "Candidate coaching MVP",
+      "timeline": "2-4 months",
+      "priority": "HIGH",
+      "features": ["Skill-gap suggestions", "Answer-structure coaching", "Practice questions", "Candidate-controlled progress view"],
+      "exit_criteria": ["Suggestions trace to job-related evidence", "Candidate can view and correct profile data", "No hiring decisions based on coaching usage"]
+    },
+    {
+      "id": "P3",
+      "name": "Interview analytics dashboard",
+      "timeline": "4-6 months",
+      "priority": "MEDIUM",
+      "features": ["Stage completion metrics", "Question coverage", "Structured rubric summaries", "Reviewer disagreement analysis"],
+      "exit_criteria": ["Metrics definitions documented", "Access controls tested", "No emotion/personality scores"]
+    },
+    {
+      "id": "P4",
+      "name": "Consent-based video workflow pilot",
+      "timeline": "6-9 months",
+      "priority": "MEDIUM",
+      "features": ["Optional recording upload", "Speech transcription with review", "Timestamped event markers", "Retention and deletion workflow"],
+      "exit_criteria": ["Explicit consent and withdrawal supported", "Recording access restricted", "Transcripts can be corrected", "No facial emotion or personality inference"]
+    },
+    {
+      "id": "P5",
+      "name": "Scale and operational readiness",
+      "timeline": "9-12 months",
+      "priority": "HIGH",
+      "features": ["Queue-based processing", "API versioning", "Observability", "Load and recovery testing", "Model and prompt evaluation"],
+      "exit_criteria": ["Load targets met", "Monitoring and rollback tested", "Privacy/security review complete"]
+    }
+  ]
+}
