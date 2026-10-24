@@ -1,0 +1,15 @@
+{
+  "batch_size": 8,
+  "max_concurrency": 4,
+  "cache_max_entries": 128,
+  "cache_ttl_seconds": 60,
+  "simulated_resume_count": 100,
+  "simulated_inference_delay_ms": 2,
+  "load_test_concurrency_levels": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "note": "Synthetic local simulation only. Tune with representative staging data."
+}

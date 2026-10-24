@@ -1,0 +1,83 @@
+{
+  "title": "Day 60 Performance Benchmark Report",
+  "project": "Zecpath AI Hiring System",
+  "environment": "Synthetic local simulation",
+  "configuration": {
+    "batch_size": 8,
+    "max_concurrency": 4,
+    "cache_max_entries": 128,
+    "cache_ttl_seconds": 60,
+    "simulated_resume_count": 100,
+    "simulated_inference_delay_ms": 2,
+    "load_test_concurrency_levels": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "note": "Synthetic local simulation only. Tune with representative staging data."
+  },
+  "cases": [
+    {
+      "items": 100,
+      "batch_size": 8,
+      "max_concurrency": 1,
+      "elapsed_seconds": 0.793689,
+      "throughput_items_per_second": 125.99,
+      "cache_hits": 50,
+      "cache_hit_rate": 0.5,
+      "current_traced_bytes": 56878,
+      "peak_traced_bytes": 65536,
+      "success_count": 100,
+      "failure_count": 0,
+      "note": "Synthetic local workload; simulated delay, not real model latency."
+    },
+    {
+      "items": 100,
+      "batch_size": 8,
+      "max_concurrency": 2,
+      "elapsed_seconds": 0.403663,
+      "throughput_items_per_second": 247.73,
+      "cache_hits": 50,
+      "cache_hit_rate": 0.5,
+      "current_traced_bytes": 30045,
+      "peak_traced_bytes": 38719,
+      "success_count": 100,
+      "failure_count": 0,
+      "note": "Synthetic local workload; simulated delay, not real model latency."
+    },
+    {
+      "items": 100,
+      "batch_size": 8,
+      "max_concurrency": 4,
+      "elapsed_seconds": 0.191453,
+      "throughput_items_per_second": 522.32,
+      "cache_hits": 50,
+      "cache_hit_rate": 0.5,
+      "current_traced_bytes": 30157,
+      "peak_traced_bytes": 38631,
+      "success_count": 100,
+      "failure_count": 0,
+      "note": "Synthetic local workload; simulated delay, not real model latency."
+    },
+    {
+      "items": 100,
+      "batch_size": 8,
+      "max_concurrency": 8,
+      "elapsed_seconds": 0.102989,
+      "throughput_items_per_second": 970.98,
+      "cache_hits": 50,
+      "cache_hit_rate": 0.5,
+      "current_traced_bytes": 30157,
+      "peak_traced_bytes": 37863,
+      "success_count": 100,
+      "failure_count": 0,
+      "note": "Synthetic local workload; simulated delay, not real model latency."
+    }
+  ],
+  "limitations": [
+    "Mock inference only; no live AI provider or production database.",
+    "tracemalloc measures Python-traced allocations, not total process or GPU memory.",
+    "Results are not a production SLA or real model-inference benchmark."
+  ]
+}
