@@ -1,0 +1,12 @@
+{
+  "service_name": "zecpath-ai-hiring",
+  "environment": "local-demo",
+  "latency_warning_ms": 1000,
+  "latency_critical_ms": 3000,
+  "failure_rate_warning_percent": 5,
+  "failure_rate_critical_percent": 10,
+  "minimum_events_for_failure_alert": 10,
+  "accuracy_warning_percent": 85,
+  "log_candidate_content": false,
+  "retention_days": 30
+}

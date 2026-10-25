@@ -1,0 +1,12 @@
+[
+  {
+    "rule": "api_failure_rate",
+    "severity": "CRITICAL",
+    "value": 25.0
+  },
+  {
+    "rule": "api_p95_latency",
+    "severity": "CRITICAL",
+    "value": 3200.0
+  }
+]

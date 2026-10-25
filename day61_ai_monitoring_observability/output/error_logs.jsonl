@@ -1,0 +1,1 @@
+{"component": "interview-analyzer", "correlation_id": "demo-003", "error_type": "TimeoutError", "event_id": "20f35d70-4e37-431f-8189-ccf605fd2505", "event_type": "error", "message": "Model request exceeded timeout", "service": "zecpath-ai-hiring", "timestamp": "2026-10-25T05:59:22.896347+00:00"}

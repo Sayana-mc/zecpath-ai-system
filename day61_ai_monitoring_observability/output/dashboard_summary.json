@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-10-25T05:59:22.977983+00:00",
+  "candidate_processing": {
+    "api_requests": 12,
+    "api_failures": 3,
+    "failure_rate_percent": 25.0,
+    "p50_response_ms": 190.0,
+    "p95_response_ms": 3200.0,
+    "model_runs": 3,
+    "model_failures": 1
+  },
+  "interview_metrics": {
+    "analysis_runs": 2,
+    "analysis_success_rate_percent": 50.0
+  },
+  "decision_audit": {
+    "events": 2,
+    "human_reviewed_events": 1,
+    "decision_counts": {
+      "REVIEW_REQUIRED": 1,
+      "SHORTLIST": 1
+    }
+  },
+  "accuracy_note": "Calculate accuracy only against reviewed ground-truth labels."
+}
