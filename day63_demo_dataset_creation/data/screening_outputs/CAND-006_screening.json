@@ -1,0 +1,12 @@
+{
+  "candidate_id": "CAND-006",
+  "job_id": "JOB-DA-001",
+  "status": "NEEDS_MORE_INFORMATION",
+  "review_flags": [
+    "Portfolio or supporting evidence not supplied",
+    "Conflicting experience statements",
+    "Some required skills are not evidenced"
+  ],
+  "human_review_required": true,
+  "note": "Simulation only; not a hiring decision."
+}

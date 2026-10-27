@@ -1,0 +1,5 @@
+Dev Patel | dev.patel@example.test
+Education: B.Tech IT, 2025
+Skills: Python, pandas
+Project: tried a machine-learning tutorial. Model score was 99%.
+No dataset, evaluation method, code link, or project details included.

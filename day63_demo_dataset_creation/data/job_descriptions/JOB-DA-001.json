@@ -1,0 +1,22 @@
+{
+  "job_id": "JOB-DA-001",
+  "title": "Junior Data Analyst",
+  "required_skills": [
+    "SQL",
+    "Python",
+    "Excel",
+    "data cleaning",
+    "visualization"
+  ],
+  "preferred_skills": [
+    "Power BI",
+    "statistics",
+    "Git"
+  ],
+  "responsibilities": [
+    "Clean datasets",
+    "Write SQL reports",
+    "Build dashboards",
+    "Communicate findings"
+  ]
+}

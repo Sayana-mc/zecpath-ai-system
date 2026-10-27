@@ -1,0 +1,6 @@
+Fatima Rahman | fatima.rahman@example.test | Bengaluru
+Education: M.Sc. Computer Science, fictional Northbridge Institute, expected 2027
+Skills: Python, pandas, NumPy, scikit-learn, model evaluation, NLP, Git
+Project: Spam classification with TF-IDF and logistic regression; compared precision, recall and F1; documented imbalance and leakage risks.
+Project: Bike demand regression; compared linear regression and random forest using MAE.
+Experience: Campus research assistant, fictional lab, 2026.

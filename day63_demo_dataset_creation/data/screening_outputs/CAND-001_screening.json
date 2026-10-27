@@ -1,0 +1,8 @@
+{
+  "candidate_id": "CAND-001",
+  "job_id": "JOB-DA-001",
+  "status": "READY_FOR_HUMAN_REVIEW",
+  "review_flags": [],
+  "human_review_required": true,
+  "note": "Simulation only; not a hiring decision."
+}

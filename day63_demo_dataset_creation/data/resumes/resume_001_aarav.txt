@@ -1,0 +1,6 @@
+Aarav Nair
+aarav.nair@example.test | Kochi, India
+Skills: SQL, Python, pandas, Excel, data cleaning, visualization, Power BI, statistics, Git
+Education: B.Sc. Statistics, Coastal State University (fictional), 2025
+Project: Retail dashboard; cleaned 12,000 synthetic rows, wrote SQL aggregations and validated totals.
+Experience: Reporting Intern, fictional Example Analytics Lab, 3 months.

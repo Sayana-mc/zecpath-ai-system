@@ -1,0 +1,174 @@
+{
+  "dataset_name": "zecpath_demo_dataset",
+  "schema_version": 1,
+  "candidate_count": 6,
+  "candidates": [
+    {
+      "candidate_id": "CAND-001",
+      "resume_file": "resume_001_aarav.txt",
+      "resume_text": "Aarav Nair\naarav.nair@example.test | Kochi, India\nSkills: SQL, Python, pandas, Excel, data cleaning, visualization, Power BI, statistics, Git\nEducation: B.Sc. Statistics, Coastal State University (fictional), 2025\nProject: Retail dashboard; cleaned 12,000 synthetic rows, wrote SQL aggregations and validated totals.\nExperience: Reporting Intern, fictional Example Analytics Lab, 3 months.",
+      "job_id": "JOB-DA-001",
+      "job_description": {
+        "job_id": "JOB-DA-001",
+        "title": "Junior Data Analyst",
+        "required_skills": [
+          "SQL",
+          "Python",
+          "Excel",
+          "data cleaning",
+          "visualization"
+        ],
+        "preferred_skills": [
+          "Power BI",
+          "statistics",
+          "Git"
+        ],
+        "responsibilities": [
+          "Clean datasets",
+          "Write SQL reports",
+          "Build dashboards",
+          "Communicate findings"
+        ]
+      },
+      "screening_output": {
+        "candidate_id": "CAND-001",
+        "job_id": "JOB-DA-001",
+        "status": "READY_FOR_HUMAN_REVIEW",
+        "review_flags": [],
+        "human_review_required": true,
+        "note": "Simulation only; not a hiring decision."
+      }
+    },
+    {
+      "candidate_id": "CAND-002",
+      "resume_file": "resume_002_meera.txt",
+      "resume_text": "Meera Thomas | meera.thomas@example.test\nEducation: B.Com, Riverbend College (fictional), 2026\nSkills: Excel, basic SQL, charts, communication\nProject: Monthly expense tracker using PivotTables. No Python or dashboard experience listed.",
+      "job_id": null,
+      "job_description": null,
+      "screening_output": null
+    },
+    {
+      "candidate_id": "CAND-003",
+      "resume_file": "resume_003_rohan_noisy.txt",
+      "resume_text": "ROHAN DAS / rohan.das@example.test\nObjective: looking for any job ASAP!!!\nSkills: excel, python?? sql (course only) data stuff\nEducation: BCA expected 2027 (date may be old)\nProject: dashboard (details not available)\nExperience: 2 years? freelance? not sure. Phone number omitted.",
+      "job_id": null,
+      "job_description": null,
+      "screening_output": null
+    },
+    {
+      "candidate_id": "CAND-004",
+      "resume_file": "resume_004_fatima_ml.txt",
+      "resume_text": "Fatima Rahman | fatima.rahman@example.test | Bengaluru\nEducation: M.Sc. Computer Science, fictional Northbridge Institute, expected 2027\nSkills: Python, pandas, NumPy, scikit-learn, model evaluation, NLP, Git\nProject: Spam classification with TF-IDF and logistic regression; compared precision, recall and F1; documented imbalance and leakage risks.\nProject: Bike demand regression; compared linear regression and random forest using MAE.\nExperience: Campus research assistant, fictional lab, 2026.",
+      "job_id": "JOB-ML-002",
+      "job_description": {
+        "job_id": "JOB-ML-002",
+        "title": "Machine Learning Intern",
+        "required_skills": [
+          "Python",
+          "pandas",
+          "scikit-learn",
+          "model evaluation"
+        ],
+        "preferred_skills": [
+          "NLP",
+          "PyTorch",
+          "Git",
+          "API development"
+        ],
+        "responsibilities": [
+          "Prepare data",
+          "Build baselines",
+          "Evaluate metrics",
+          "Document experiments"
+        ]
+      },
+      "screening_output": {
+        "candidate_id": "CAND-004",
+        "job_id": "JOB-ML-002",
+        "status": "READY_FOR_HUMAN_REVIEW",
+        "review_flags": [],
+        "human_review_required": true,
+        "note": "Simulation only; not a hiring decision."
+      }
+    },
+    {
+      "candidate_id": "CAND-005",
+      "resume_file": "resume_005_dev_sparse.txt",
+      "resume_text": "Dev Patel | dev.patel@example.test\nEducation: B.Tech IT, 2025\nSkills: Python, pandas\nProject: tried a machine-learning tutorial. Model score was 99%.\nNo dataset, evaluation method, code link, or project details included.",
+      "job_id": "JOB-ML-002",
+      "job_description": {
+        "job_id": "JOB-ML-002",
+        "title": "Machine Learning Intern",
+        "required_skills": [
+          "Python",
+          "pandas",
+          "scikit-learn",
+          "model evaluation"
+        ],
+        "preferred_skills": [
+          "NLP",
+          "PyTorch",
+          "Git",
+          "API development"
+        ],
+        "responsibilities": [
+          "Prepare data",
+          "Build baselines",
+          "Evaluate metrics",
+          "Document experiments"
+        ]
+      },
+      "screening_output": {
+        "candidate_id": "CAND-005",
+        "job_id": "JOB-ML-002",
+        "status": "NEEDS_MORE_INFORMATION",
+        "review_flags": [
+          "Portfolio or supporting evidence not supplied",
+          "Some required skills are not evidenced"
+        ],
+        "human_review_required": true,
+        "note": "Simulation only; not a hiring decision."
+      }
+    },
+    {
+      "candidate_id": "CAND-006",
+      "resume_file": "resume_006_isha_conflict.txt",
+      "resume_text": "Isha Menon | isha.menon@example.test\nSkills: SQL, Excel, Python, Power BI\nEducation: B.Sc. Mathematics, 2024\nProject: Sales dashboard with SQL and Power BI.\nExperience section: Data Analyst at fictional Example Corp, Jan 2023-Dec 2025.\nSummary section: Fresher with no employment experience. Statements conflict and need clarification.",
+      "job_id": "JOB-DA-001",
+      "job_description": {
+        "job_id": "JOB-DA-001",
+        "title": "Junior Data Analyst",
+        "required_skills": [
+          "SQL",
+          "Python",
+          "Excel",
+          "data cleaning",
+          "visualization"
+        ],
+        "preferred_skills": [
+          "Power BI",
+          "statistics",
+          "Git"
+        ],
+        "responsibilities": [
+          "Clean datasets",
+          "Write SQL reports",
+          "Build dashboards",
+          "Communicate findings"
+        ]
+      },
+      "screening_output": {
+        "candidate_id": "CAND-006",
+        "job_id": "JOB-DA-001",
+        "status": "NEEDS_MORE_INFORMATION",
+        "review_flags": [
+          "Portfolio or supporting evidence not supplied",
+          "Conflicting experience statements",
+          "Some required skills are not evidenced"
+        ],
+        "human_review_required": true,
+        "note": "Simulation only; not a hiring decision."
+      }
+    }
+  ]
+}

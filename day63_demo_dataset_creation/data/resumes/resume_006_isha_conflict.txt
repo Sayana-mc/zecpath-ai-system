@@ -1,0 +1,6 @@
+Isha Menon | isha.menon@example.test
+Skills: SQL, Excel, Python, Power BI
+Education: B.Sc. Mathematics, 2024
+Project: Sales dashboard with SQL and Power BI.
+Experience section: Data Analyst at fictional Example Corp, Jan 2023-Dec 2025.
+Summary section: Fresher with no employment experience. Statements conflict and need clarification.

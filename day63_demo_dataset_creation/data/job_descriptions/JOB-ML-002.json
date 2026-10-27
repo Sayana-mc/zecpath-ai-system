@@ -1,0 +1,22 @@
+{
+  "job_id": "JOB-ML-002",
+  "title": "Machine Learning Intern",
+  "required_skills": [
+    "Python",
+    "pandas",
+    "scikit-learn",
+    "model evaluation"
+  ],
+  "preferred_skills": [
+    "NLP",
+    "PyTorch",
+    "Git",
+    "API development"
+  ],
+  "responsibilities": [
+    "Prepare data",
+    "Build baselines",
+    "Evaluate metrics",
+    "Document experiments"
+  ]
+}

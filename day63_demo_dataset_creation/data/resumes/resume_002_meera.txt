@@ -1,0 +1,4 @@
+Meera Thomas | meera.thomas@example.test
+Education: B.Com, Riverbend College (fictional), 2026
+Skills: Excel, basic SQL, charts, communication
+Project: Monthly expense tracker using PivotTables. No Python or dashboard experience listed.
