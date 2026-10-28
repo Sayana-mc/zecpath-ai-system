@@ -1,6 +1,6 @@
 {
   "report_name": "Day 64 Synthetic End-to-End Walkthrough",
-  "generated_at": "2026-10-28T14:15:17.525924+00:00",
+  "generated_at": "2026-10-28T14:26:14.835153+00:00",
   "test_mode": "SYNTHETIC_LOCAL_INTEGRATION",
   "candidate_id": "CAND-001",
   "session_id": "DAY64-DEMO-001",
@@ -373,15 +373,15 @@
   },
   "performance": {
     "stage_latency_ms": {
-      "ats": 2.198,
-      "screening": 42.132,
-      "hr_interview": 0.046,
-      "technical_interview": 35.004,
-      "machine_test": 16.504,
-      "aggregation": 0.127,
-      "decision": 0.067
+      "ats": 5.175,
+      "screening": 4.053,
+      "hr_interview": 0.087,
+      "technical_interview": 2.002,
+      "machine_test": 1.153,
+      "aggregation": 0.157,
+      "decision": 0.116
     },
-    "total_pipeline_ms": 142.081,
+    "total_pipeline_ms": 16.804,
     "scope": "Single local synthetic run; not a load test and excludes network, storage, external models, and production services."
   },
   "limitations": [

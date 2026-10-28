@@ -2,20 +2,20 @@
 
 - Candidate: `CAND-001` (synthetic demo)
 - Session: `DAY64-DEMO-001`
-- Generated: 2026-10-28T14:15:17.525924+00:00
+- Generated: 2026-10-28T14:26:14.835153+00:00
 - Mode: `SYNTHETIC_LOCAL_INTEGRATION`
 
 ## Stage results
 
 | Stage | Score / status | Latency (ms) |
 |---|---:|---:|
-| ATS | 44.86 | 2.198 |
-| Screening | 91.75 | 42.132 |
-| HR interview | 85.0 | 0.046 |
-| Technical interview | 73.67 | 35.004 |
-| Machine test | 80.25 | 16.504 |
-| Aggregation | 76.31 (COMPLETE) | 0.127 |
-| Decision | HOLD_REVIEW (advisory) | 0.067 |
+| ATS | 44.86 | 5.175 |
+| Screening | 91.75 | 4.053 |
+| HR interview | 85.0 | 0.087 |
+| Technical interview | 73.67 | 2.002 |
+| Machine test | 80.25 | 1.153 |
+| Aggregation | 76.31 (COMPLETE) | 0.157 |
+| Decision | HOLD_REVIEW (advisory) | 0.116 |
 
 ## Review safeguards
 
@@ -35,5 +35,5 @@
 
 ## Performance scope
 
-- Total local runtime: 142.081 ms
+- Total local runtime: 16.804 ms
 - Single local synthetic run; not a load test and excludes network, storage, external models, and production services.
