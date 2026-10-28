@@ -1,0 +1,396 @@
+{
+  "report_name": "Day 64 Synthetic End-to-End Walkthrough",
+  "generated_at": "2026-10-28T14:15:17.525924+00:00",
+  "test_mode": "SYNTHETIC_LOCAL_INTEGRATION",
+  "candidate_id": "CAND-001",
+  "session_id": "DAY64-DEMO-001",
+  "stage_order": [
+    "ats",
+    "screening",
+    "hr_interview",
+    "technical_interview",
+    "machine_test",
+    "aggregation",
+    "decision"
+  ],
+  "stages": {
+    "ats": {
+      "score": 44.86,
+      "classification": "LOW",
+      "components": {
+        "skill_match": 100.0,
+        "experience_relevance": 0.0,
+        "education_alignment": 30.0,
+        "semantic_similarity": 17.86
+      },
+      "matched_required_skills": [
+        "SQL",
+        "Python",
+        "Excel",
+        "data cleaning",
+        "visualization"
+      ],
+      "missing_required_skills": [],
+      "experience_evidence": {
+        "target_role": "data analyst",
+        "relevance_score": 0.0,
+        "relevant_roles": []
+      },
+      "education_evidence": {
+        "score": 0.3,
+        "matched_fields": [],
+        "relevance": "LOW"
+      },
+      "similarity_mode": "lexical_overlap_proxy_not_semantic_embedding",
+      "scoring_weights": {
+        "skill_match": 0.35,
+        "experience_relevance": 0.2,
+        "education_alignment": 0.15,
+        "semantic_similarity": 0.3
+      }
+    },
+    "screening": {
+      "status": "completed",
+      "screening_id": "SCR-CAND-001",
+      "questions_processed": 4,
+      "score": 91.75,
+      "question_scores": [
+        {
+          "answer_id": "DAY64-ANS-001",
+          "candidate_id": "CAND-001",
+          "question_id": "Q001",
+          "question": "What technical skills do you have?",
+          "answer": "I have used SQL, Python, Excel, data cleaning, and visualization for a retail dashboard project.",
+          "intent": "skills",
+          "parameter_scores": {
+            "clarity": 4,
+            "relevance": 5,
+            "completeness": 5,
+            "consistency": 5
+          },
+          "weighted_score": 4.75,
+          "normalized_score": 95.0,
+          "explanation": [
+            "The answer is clearly expressed.",
+            "The answer is relevant to the expected topic.",
+            "The answer contains sufficient information.",
+            "The answer is consistent with the available candidate information."
+          ]
+        },
+        {
+          "answer_id": "DAY64-ANS-002",
+          "candidate_id": "CAND-001",
+          "question_id": "Q002",
+          "question": "Tell me about your experience.",
+          "answer": "I completed a three-month reporting internship where I cleaned data and wrote SQL reports.",
+          "intent": "experience",
+          "parameter_scores": {
+            "clarity": 4,
+            "relevance": 5,
+            "completeness": 4,
+            "consistency": 3
+          },
+          "weighted_score": 4.1,
+          "normalized_score": 82.0,
+          "explanation": [
+            "The answer is clearly expressed.",
+            "The answer is relevant to the expected topic.",
+            "The answer contains sufficient information."
+          ]
+        },
+        {
+          "answer_id": "DAY64-ANS-003",
+          "candidate_id": "CAND-001",
+          "question_id": "Q003",
+          "question": "When can you join?",
+          "answer": "I am available to join immediately.",
+          "intent": "availability",
+          "parameter_scores": {
+            "clarity": 4,
+            "relevance": 5,
+            "completeness": 5,
+            "consistency": 5
+          },
+          "weighted_score": 4.75,
+          "normalized_score": 95.0,
+          "explanation": [
+            "The answer is clearly expressed.",
+            "The answer is relevant to the expected topic.",
+            "The answer contains sufficient information.",
+            "The answer is consistent with the available candidate information."
+          ]
+        },
+        {
+          "answer_id": "DAY64-ANS-004",
+          "candidate_id": "CAND-001",
+          "question_id": "Q004",
+          "question": "What is your salary expectation?",
+          "answer": "My salary expectation is 4 LPA.",
+          "intent": "salary_expectation",
+          "parameter_scores": {
+            "clarity": 4,
+            "relevance": 5,
+            "completeness": 5,
+            "consistency": 5
+          },
+          "weighted_score": 4.75,
+          "normalized_score": 95.0,
+          "explanation": [
+            "The answer is clearly expressed.",
+            "The answer is relevant to the expected topic.",
+            "The answer contains sufficient information.",
+            "The answer is consistent with the available candidate information."
+          ]
+        }
+      ],
+      "scoring_mode": "rule_based_demo_heuristics"
+    },
+    "hr_interview": {
+      "candidate_id": "CAND-001",
+      "completed_phases": [
+        "introduction",
+        "core_hr_questions",
+        "role_based_evaluation",
+        "closing"
+      ],
+      "score": 85.0,
+      "rubric_input": {
+        "answer_relevance": 4.5,
+        "communication": 4.0,
+        "confidence": 4.0,
+        "consistency": 4.5
+      },
+      "score_provenance": "synthetic_demo_ratings_not_reviewer_feedback",
+      "explainable_breakdown": {
+        "answer_relevance": {
+          "raw_score": 4.5,
+          "weight": 0.3,
+          "weighted_contribution": 1.35
+        },
+        "communication": {
+          "raw_score": 4.0,
+          "weight": 0.25,
+          "weighted_contribution": 1.0
+        },
+        "confidence": {
+          "raw_score": 4.0,
+          "weight": 0.25,
+          "weighted_contribution": 1.0
+        },
+        "consistency": {
+          "raw_score": 4.5,
+          "weight": 0.2,
+          "weighted_contribution": 0.9
+        }
+      }
+    },
+    "technical_interview": {
+      "score": 73.67,
+      "question_count": 3,
+      "skill_wise_breakdown": {
+        "SQL": {
+          "question_count": 1,
+          "average_score": 90.0
+        },
+        "Python": {
+          "question_count": 1,
+          "average_score": 36.0
+        },
+        "Data Analysis": {
+          "question_count": 1,
+          "average_score": 95.0
+        }
+      },
+      "evaluation_mode": "Rule-based demo using manually supplied parameter scores",
+      "score_provenance": "synthetic_manual_rubric_inputs"
+    },
+    "machine_test": {
+      "score": 80.25,
+      "test_results": {
+        "passed": 3,
+        "total": 4,
+        "correctness_score": 75.0
+      },
+      "review_flags": [],
+      "evaluation_limitations": [
+        "Execution results are supplied input and are not independently verified.",
+        "Efficiency, code quality, and problem-solving scores are supplied rubric scores.",
+        "The submitted code is captured but never executed by this prototype.",
+        "Scores are decision support and must not be the sole basis for hiring."
+      ],
+      "score_provenance": "supplied_synthetic_execution_and_rubric_results"
+    },
+    "aggregation": {
+      "candidate_id": "CAND-001",
+      "session_id": "DAY64-DEMO-001",
+      "target_role": "data_analyst",
+      "scoring_version": "day51-v1",
+      "score_status": "COMPLETE",
+      "hiring_fit_score_percent": 76.31,
+      "maximum_score": 100,
+      "fit_band": "POTENTIAL_FIT",
+      "configured_role_weights_percent": {
+        "ats": 15,
+        "screening": 20,
+        "hr_interview": 15,
+        "technical_interview": 25,
+        "machine_test": 25
+      },
+      "effective_weights_percent": {
+        "ats": 15.0,
+        "hr_interview": 15.0,
+        "machine_test": 25.0,
+        "screening": 20.0,
+        "technical_interview": 25.0
+      },
+      "round_scores": {
+        "ats": {
+          "status": "completed",
+          "raw_score": 44.86,
+          "raw_maximum_score": 100,
+          "normalized_score": 44.86,
+          "configured_weight_percent": 15,
+          "effective_weight_percent": 15.0,
+          "weighted_contribution": 6.73,
+          "explanation": "44.86/100 normalized score multiplied by 15% configured weight."
+        },
+        "hr_interview": {
+          "status": "completed",
+          "raw_score": 85.0,
+          "raw_maximum_score": 100,
+          "normalized_score": 85.0,
+          "configured_weight_percent": 15,
+          "effective_weight_percent": 15.0,
+          "weighted_contribution": 12.75,
+          "explanation": "85.00/100 normalized score multiplied by 15% configured weight."
+        },
+        "machine_test": {
+          "status": "completed",
+          "raw_score": 80.25,
+          "raw_maximum_score": 100,
+          "normalized_score": 80.25,
+          "configured_weight_percent": 25,
+          "effective_weight_percent": 25.0,
+          "weighted_contribution": 20.06,
+          "explanation": "80.25/100 normalized score multiplied by 25% configured weight."
+        },
+        "screening": {
+          "status": "completed",
+          "raw_score": 91.75,
+          "raw_maximum_score": 100,
+          "normalized_score": 91.75,
+          "configured_weight_percent": 20,
+          "effective_weight_percent": 20.0,
+          "weighted_contribution": 18.35,
+          "explanation": "91.75/100 normalized score multiplied by 20% configured weight."
+        },
+        "technical_interview": {
+          "status": "completed",
+          "raw_score": 73.67,
+          "raw_maximum_score": 100,
+          "normalized_score": 73.67,
+          "configured_weight_percent": 25,
+          "effective_weight_percent": 25.0,
+          "weighted_contribution": 18.42,
+          "explanation": "73.67/100 normalized score multiplied by 25% configured weight."
+        }
+      },
+      "missing_rounds": [],
+      "not_applicable_rounds": [],
+      "available_weight_percent": 100.0,
+      "transparency": {
+        "formula": "Sum(normalized round score * configured round weight) / sum(weights for completed rounds)",
+        "missing_round_policy": "exclude_and_renormalize",
+        "normalization_scale": "0-100",
+        "scores_are_probabilities": false,
+        "human_review_required": true,
+        "automatic_rejection": false
+      },
+      "recommendation": "HUMAN_REVIEW_REQUIRED"
+    },
+    "decision": {
+      "candidate_id": "CAND-001",
+      "session_id": "DAY64-DEMO-001",
+      "target_role": "data_analyst",
+      "decision_version": "day52-v1",
+      "assessment_status": "COMPLETE",
+      "decision": "HOLD_REVIEW",
+      "score": 76.31,
+      "confidence": 92.5,
+      "confidence_interpretation": "Evidence completeness indicator; not a probability of job success.",
+      "round_coverage": {
+        "completed": 5,
+        "expected": 5,
+        "coverage_percent": 100.0
+      },
+      "round_scores": {
+        "ats": 44.86,
+        "screening": 91.75,
+        "hr_interview": 85.0,
+        "technical_interview": 73.67,
+        "machine_test": 80.25
+      },
+      "risk_factors": {
+        "integrity": {
+          "flag": false,
+          "evidence": [],
+          "source": "No finding asserted in synthetic walkthrough"
+        },
+        "behavior": {
+          "flag": false,
+          "evidence": [],
+          "source": "No finding asserted in synthetic walkthrough"
+        },
+        "flagged_risks": [],
+        "automatic_rejection_from_risk_flags": false
+      },
+      "explanation": {
+        "reasons": [
+          "Score 76.31 falls in the review range (60.00 to below 80.00).",
+          "A human reviewer should assess the candidate's evidence."
+        ],
+        "review_reasons": [],
+        "score_thresholds": {
+          "selected_min": 80.0,
+          "review_min": 60.0
+        },
+        "confidence_thresholds": {
+          "selected_min": 75.0,
+          "review_min": 50.0
+        },
+        "human_review_required": true
+      },
+      "audit": {
+        "recommendation_only": true,
+        "automatic_employment_action": false
+      }
+    }
+  },
+  "human_review": {
+    "required": true,
+    "disposition": "PENDING",
+    "automatic_employment_action": false
+  },
+  "performance": {
+    "stage_latency_ms": {
+      "ats": 2.198,
+      "screening": 42.132,
+      "hr_interview": 0.046,
+      "technical_interview": 35.004,
+      "machine_test": 16.504,
+      "aggregation": 0.127,
+      "decision": 0.067
+    },
+    "total_pipeline_ms": 142.081,
+    "scope": "Single local synthetic run; not a load test and excludes network, storage, external models, and production services."
+  },
+  "limitations": [
+    "All inputs in this walkthrough are synthetic demonstration data.",
+    "ATS semantic_similarity is a lexical-overlap proxy, not an embedding model.",
+    "Screening scores use heuristic rules and are not validated measures.",
+    "HR parameter scores and technical rubric scores are supplied demo ratings, not reviewer feedback.",
+    "Machine-test execution results and rubric metrics are supplied; submitted code is not executed by the prototype.",
+    "No external ATS, voice, database, authentication, or deployed service is integrated.",
+    "The recommendation is advisory only; no human disposition or employment action is made."
+  ]
+}

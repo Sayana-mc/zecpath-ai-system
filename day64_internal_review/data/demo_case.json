@@ -1,0 +1,152 @@
+{
+  "candidate_id": "CAND-001",
+  "session_id": "DAY64-DEMO-001",
+  "role": "data_analyst",
+  "synthetic_demo_only": true,
+  "evidence_quality": 75,
+  "data_consistency": 100,
+  "screening_answers": [
+    {
+      "answer_id": "DAY64-ANS-001",
+      "question_id": "Q001",
+      "question": "What technical skills do you have?",
+      "answer": "I have used SQL, Python, Excel, data cleaning, and visualization for a retail dashboard project.",
+      "expected_intent": "skills",
+      "previous_information": {
+        "skills": [
+          "SQL",
+          "Python",
+          "Excel",
+          "data cleaning",
+          "visualization"
+        ]
+      }
+    },
+    {
+      "answer_id": "DAY64-ANS-002",
+      "question_id": "Q002",
+      "question": "Tell me about your experience.",
+      "answer": "I completed a three-month reporting internship where I cleaned data and wrote SQL reports.",
+      "expected_intent": "experience",
+      "previous_information": {
+        "experience_years": 0.25
+      }
+    },
+    {
+      "answer_id": "DAY64-ANS-003",
+      "question_id": "Q003",
+      "question": "When can you join?",
+      "answer": "I am available to join immediately.",
+      "expected_intent": "availability",
+      "previous_information": {
+        "availability": "immediate"
+      }
+    },
+    {
+      "answer_id": "DAY64-ANS-004",
+      "question_id": "Q004",
+      "question": "What is your salary expectation?",
+      "answer": "My salary expectation is 4 LPA.",
+      "expected_intent": "salary_expectation",
+      "previous_information": {
+        "salary_lpa": 4
+      }
+    }
+  ],
+  "hr_parameter_scores": {
+    "answer_relevance": 4.5,
+    "communication": 4.0,
+    "confidence": 4.0,
+    "consistency": 4.5
+  },
+  "technical_answers": [
+    {
+      "question_id": "DAY64-T001",
+      "skill": "SQL",
+      "question_type": "conceptual",
+      "difficulty": "basic",
+      "question": "Explain the difference between INNER JOIN and LEFT JOIN.",
+      "answer": "INNER JOIN returns matching rows from both tables. LEFT JOIN returns all rows from the left table and matching rows from the right table, using NULL where there is no match.",
+      "scores": {
+        "accuracy": 5,
+        "depth": 4,
+        "logical_reasoning": 4,
+        "real_world_applicability": 5
+      }
+    },
+    {
+      "question_id": "DAY64-T002",
+      "skill": "Python",
+      "question_type": "conceptual",
+      "difficulty": "basic",
+      "question": "What is a Python list?",
+      "answer": "A list stores multiple items.",
+      "scores": {
+        "accuracy": 3,
+        "depth": 1,
+        "logical_reasoning": 1,
+        "real_world_applicability": 1
+      }
+    },
+    {
+      "question_id": "DAY64-T003",
+      "skill": "Data Analysis",
+      "question_type": "scenario_based",
+      "difficulty": "intermediate",
+      "question": "How would you handle missing values in a dataset?",
+      "answer": "I would inspect the amount and pattern of missing data, assess the effect on analysis, choose removal or imputation based on the context, document the choice, and validate the result.",
+      "scores": {
+        "accuracy": 4,
+        "depth": 5,
+        "logical_reasoning": 5,
+        "real_world_applicability": 5
+      }
+    }
+  ],
+  "machine_test": {
+    "task": {
+      "task_id": "DAY64-CODE-001",
+      "task_type": "coding",
+      "title": "Find the largest number",
+      "description": "Return the largest number from a non-empty list.",
+      "max_score": 100
+    },
+    "time": {
+      "allotted_seconds": 1800,
+      "elapsed_seconds": 1200,
+      "submitted_before_deadline": true
+    },
+    "submission": {
+      "code_snapshot": "def find_largest(numbers):\n    if not numbers:\n        raise ValueError('numbers must not be empty')\n    return max(numbers)",
+      "answer_text": "Validate that the input is non-empty, then return its maximum.",
+      "execution_results": [
+        {
+          "test_id": "T1",
+          "passed": true,
+          "message": "Positive numbers"
+        },
+        {
+          "test_id": "T2",
+          "passed": true,
+          "message": "Negative numbers"
+        },
+        {
+          "test_id": "T3",
+          "passed": true,
+          "message": "Single element"
+        },
+        {
+          "test_id": "T4",
+          "passed": false,
+          "message": "Empty list validation expectation not met by evaluator"
+        }
+      ],
+      "metrics": {
+        "efficiency": 80,
+        "code_quality": 85,
+        "problem_solving": 80
+      },
+      "snapshot_history": []
+    }
+  }
+}

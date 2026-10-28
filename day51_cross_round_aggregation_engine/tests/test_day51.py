@@ -45,9 +45,7 @@ class Day51AggregationTests(unittest.TestCase):
 
         self.assertEqual(report["score_status"], "PARTIAL")
         self.assertEqual(report["missing_rounds"], ["machine_test"])
-        self.assertAlmostEqual(
-            report["hiring_fit_score_percent"], 83.461538, places=4
-        )
+        self.assertEqual(report["hiring_fit_score_percent"], 83.46)
         self.assertAlmostEqual(
             sum(report["effective_weights_percent"].values()), 100.0
         )
