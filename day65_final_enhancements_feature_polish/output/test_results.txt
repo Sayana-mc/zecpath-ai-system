@@ -1,0 +1,11 @@
+test_human_review_is_always_required (test_day65.Day65Tests.test_human_review_is_always_required) ... ok
+test_input_data_counts (test_day65.Day65Tests.test_input_data_counts) ... ok
+test_reports_exist_and_are_readable (test_day65.Day65Tests.test_reports_exist_and_are_readable) ... ok
+test_skill_matching_uses_word_boundaries (test_day65.Day65Tests.test_skill_matching_uses_word_boundaries) ... ok
+test_unknown_job_is_rejected (test_day65.Day65Tests.test_unknown_job_is_rejected) ... ok
+test_weights_are_consistent (test_day65.Day65Tests.test_weights_are_consistent) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+OK

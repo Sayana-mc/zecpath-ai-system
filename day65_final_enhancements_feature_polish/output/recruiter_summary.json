@@ -1,0 +1,157 @@
+{
+  "report_title": "Day 65 Recruiter Review Summary",
+  "generated_at_utc": "2026-10-29T13:28:01.495171+00:00",
+  "scoring_version": "1.0.0-demo",
+  "simulation_only": true,
+  "candidate_count": 6,
+  "job_count": 2,
+  "human_review_required_count": 6,
+  "automated_rejection_enabled": false,
+  "records": [
+    {
+      "candidate_id": "CAND-001",
+      "candidate_name": "Aarav Menon",
+      "job_id": "JOB-DA-001",
+      "job_title": "Junior Data Analyst",
+      "score_percent": 100,
+      "required_skills_found": [
+        "Python",
+        "SQL",
+        "Excel"
+      ],
+      "required_skills_total": 3,
+      "preferred_skills_found": [
+        "Power BI",
+        "Statistics"
+      ],
+      "preferred_skills_total": 2,
+      "application_complete": true,
+      "interview_response_present": true,
+      "review_flags": [],
+      "status": "INTERVIEW_REVIEW",
+      "human_review_required": true,
+      "automated_rejection": false,
+      "scoring_version": "1.0.0-demo"
+    },
+    {
+      "candidate_id": "CAND-002",
+      "candidate_name": "Meera Nair",
+      "job_id": "JOB-DA-001",
+      "job_title": "Junior Data Analyst",
+      "score_percent": 80.0,
+      "required_skills_found": [
+        "Python",
+        "SQL",
+        "Excel"
+      ],
+      "required_skills_total": 3,
+      "preferred_skills_found": [],
+      "preferred_skills_total": 2,
+      "application_complete": true,
+      "interview_response_present": false,
+      "review_flags": [],
+      "status": "SCREENING_REVIEW",
+      "human_review_required": true,
+      "automated_rejection": false,
+      "scoring_version": "1.0.0-demo"
+    },
+    {
+      "candidate_id": "CAND-003",
+      "candidate_name": "Rohan Das",
+      "job_id": "JOB-DA-001",
+      "job_title": "Junior Data Analyst",
+      "score_percent": 53.3,
+      "required_skills_found": [
+        "SQL",
+        "Excel"
+      ],
+      "required_skills_total": 3,
+      "preferred_skills_found": [],
+      "preferred_skills_total": 2,
+      "application_complete": false,
+      "interview_response_present": false,
+      "review_flags": [
+        "Application information incomplete",
+        "Some required skills are not evidenced in resume",
+        "Resume details need clarification"
+      ],
+      "status": "HUMAN_REVIEW_REQUIRED",
+      "human_review_required": true,
+      "automated_rejection": false,
+      "scoring_version": "1.0.0-demo"
+    },
+    {
+      "candidate_id": "CAND-004",
+      "candidate_name": "Fatima Rahman",
+      "job_id": "JOB-ML-002",
+      "job_title": "Machine Learning Intern",
+      "score_percent": 90.0,
+      "required_skills_found": [
+        "Python",
+        "Machine Learning",
+        "Pandas"
+      ],
+      "required_skills_total": 3,
+      "preferred_skills_found": [
+        "Scikit-learn"
+      ],
+      "preferred_skills_total": 2,
+      "application_complete": true,
+      "interview_response_present": true,
+      "review_flags": [],
+      "status": "INTERVIEW_REVIEW",
+      "human_review_required": true,
+      "automated_rejection": false,
+      "scoring_version": "1.0.0-demo"
+    },
+    {
+      "candidate_id": "CAND-005",
+      "candidate_name": "Dev Shah",
+      "job_id": "JOB-ML-002",
+      "job_title": "Machine Learning Intern",
+      "score_percent": 53.3,
+      "required_skills_found": [
+        "Python",
+        "Machine Learning"
+      ],
+      "required_skills_total": 3,
+      "preferred_skills_found": [],
+      "preferred_skills_total": 2,
+      "application_complete": false,
+      "interview_response_present": false,
+      "review_flags": [
+        "Application information incomplete",
+        "Some required skills are not evidenced in resume",
+        "Resume details need clarification"
+      ],
+      "status": "HUMAN_REVIEW_REQUIRED",
+      "human_review_required": true,
+      "automated_rejection": false,
+      "scoring_version": "1.0.0-demo"
+    },
+    {
+      "candidate_id": "CAND-006",
+      "candidate_name": "Isha Thomas",
+      "job_id": "JOB-ML-002",
+      "job_title": "Machine Learning Intern",
+      "score_percent": 80.0,
+      "required_skills_found": [
+        "Python",
+        "Machine Learning",
+        "Pandas"
+      ],
+      "required_skills_total": 3,
+      "preferred_skills_found": [],
+      "preferred_skills_total": 2,
+      "application_complete": true,
+      "interview_response_present": true,
+      "review_flags": [
+        "Resume details need clarification"
+      ],
+      "status": "HUMAN_REVIEW_REQUIRED",
+      "human_review_required": true,
+      "automated_rejection": false,
+      "scoring_version": "1.0.0-demo"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0-demo",
+  "required_skill_weight": 0.8,
+  "preferred_skill_weight": 0.2,
+  "score_min": 0,
+  "score_max": 100,
+  "display_precision": 1,
+  "human_review_required": true,
+  "automated_rejection_enabled": false,
+  "notes": "Transparent deterministic demo heuristic. Not validated for employment decisions."
+}

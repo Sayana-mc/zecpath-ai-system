@@ -1,0 +1,28 @@
+[
+  {
+    "job_id": "JOB-DA-001",
+    "title": "Junior Data Analyst",
+    "required_skills": [
+      "Python",
+      "SQL",
+      "Excel"
+    ],
+    "preferred_skills": [
+      "Power BI",
+      "Statistics"
+    ]
+  },
+  {
+    "job_id": "JOB-ML-002",
+    "title": "Machine Learning Intern",
+    "required_skills": [
+      "Python",
+      "Machine Learning",
+      "Pandas"
+    ],
+    "preferred_skills": [
+      "Scikit-learn",
+      "SQL"
+    ]
+  }
+]

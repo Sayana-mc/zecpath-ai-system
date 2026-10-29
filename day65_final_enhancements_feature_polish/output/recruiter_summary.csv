@@ -1,0 +1,7 @@
+candidate_id,candidate_name,job_id,job_title,score_percent,status,application_complete,interview_response_present,review_flags,human_review_required,automated_rejection,scoring_version
+CAND-001,Aarav Menon,JOB-DA-001,Junior Data Analyst,100,INTERVIEW_REVIEW,True,True,,True,False,1.0.0-demo
+CAND-002,Meera Nair,JOB-DA-001,Junior Data Analyst,80.0,SCREENING_REVIEW,True,False,,True,False,1.0.0-demo
+CAND-003,Rohan Das,JOB-DA-001,Junior Data Analyst,53.3,HUMAN_REVIEW_REQUIRED,False,False,Application information incomplete; Some required skills are not evidenced in resume; Resume details need clarification,True,False,1.0.0-demo
+CAND-004,Fatima Rahman,JOB-ML-002,Machine Learning Intern,90.0,INTERVIEW_REVIEW,True,True,,True,False,1.0.0-demo
+CAND-005,Dev Shah,JOB-ML-002,Machine Learning Intern,53.3,HUMAN_REVIEW_REQUIRED,False,False,Application information incomplete; Some required skills are not evidenced in resume; Resume details need clarification,True,False,1.0.0-demo
+CAND-006,Isha Thomas,JOB-ML-002,Machine Learning Intern,80.0,HUMAN_REVIEW_REQUIRED,True,True,Resume details need clarification,True,False,1.0.0-demo

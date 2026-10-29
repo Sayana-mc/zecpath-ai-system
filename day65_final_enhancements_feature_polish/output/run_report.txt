@@ -1,0 +1,11 @@
+Day 65 final enhancements demo completed.
+Candidates processed: 6
+Job descriptions: 2
+Human review required: 6
+Scoring version: 1.0.0-demo
+Automated rejection: disabled
+External ATS/API: not called
+Simulation only: yes
+Status counts: {"HUMAN_REVIEW_REQUIRED": 3, "INTERVIEW_REVIEW": 2, "SCREENING_REVIEW": 1}
+JSON report: C:\Users\sayan\Documents\zecpath-ai-system\day65_final_enhancements_feature_polish\output\recruiter_summary.json
+CSV report: C:\Users\sayan\Documents\zecpath-ai-system\day65_final_enhancements_feature_polish\output\recruiter_summary.csv

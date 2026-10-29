@@ -1,0 +1,50 @@
+[
+  {
+    "candidate_id": "CAND-001",
+    "name": "Aarav Menon",
+    "job_id": "JOB-DA-001",
+    "resume_text": "Python SQL Excel Power BI Statistics projects in data cleaning and dashboards.",
+    "application_complete": true,
+    "interview_response_present": true
+  },
+  {
+    "candidate_id": "CAND-002",
+    "name": "Meera Nair",
+    "job_id": "JOB-DA-001",
+    "resume_text": "Python SQL Excel coursework and a small reporting project.",
+    "application_complete": true,
+    "interview_response_present": false
+  },
+  {
+    "candidate_id": "CAND-003",
+    "name": "Rohan Das",
+    "job_id": "JOB-DA-001",
+    "resume_text": "Excel basic spreadsheets. SQL details not available. Fresher.",
+    "application_complete": false,
+    "interview_response_present": false
+  },
+  {
+    "candidate_id": "CAND-004",
+    "name": "Fatima Rahman",
+    "job_id": "JOB-ML-002",
+    "resume_text": "Python Machine Learning Pandas Scikit-learn model evaluation project.",
+    "application_complete": true,
+    "interview_response_present": true
+  },
+  {
+    "candidate_id": "CAND-005",
+    "name": "Dev Shah",
+    "job_id": "JOB-ML-002",
+    "resume_text": "Python beginner. Interested in machine learning. Details not available.",
+    "application_complete": false,
+    "interview_response_present": false
+  },
+  {
+    "candidate_id": "CAND-006",
+    "name": "Isha Thomas",
+    "job_id": "JOB-ML-002",
+    "resume_text": "Python Pandas machine learning. Experience section conflicts with fresher statement.",
+    "application_complete": true,
+    "interview_response_present": true
+  }
+]
