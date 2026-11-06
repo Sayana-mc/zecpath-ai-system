@@ -1,50 +1,42 @@
 import uuid
-from datetime import datetime, timezone
-from typing import Any, Dict
+from typing import Any
 
+from .database import (
+    create_processing_job,
+    get_processing_job,
+    update_processing_job,
+)
 from .errors import JobNotFoundError
 
 
-JOBS: Dict[str, Dict[str, Any]] = {}
-
-
-def create_job(filename: str) -> str:
+def create_job(
+    filename: str,
+    candidate_id: str | None = None,
+    job_id: str | None = None,
+) -> str:
     """Create a new asynchronous processing job."""
 
-    job_id = str(uuid.uuid4())
-
-    JOBS[job_id] = {
-        "job_id": job_id,
-        "filename": filename,
-        "status": "QUEUED",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "result": None,
-        "error": None,
-    }
-
+    job_id = job_id or str(uuid.uuid4())
+    create_processing_job(job_id, filename, candidate_id)
     return job_id
 
 
 def update_job(
     job_id: str,
     status: str,
-    result: Dict[str, Any] | None = None,
+    result: dict[str, Any] | None = None,
     error: str | None = None,
 ) -> None:
     """Update asynchronous job state."""
 
-    if job_id not in JOBS:
+    if not update_processing_job(job_id, status, result, error):
         raise JobNotFoundError(job_id)
 
-    JOBS[job_id]["status"] = status
-    JOBS[job_id]["result"] = result
-    JOBS[job_id]["error"] = error
 
-
-def get_job(job_id: str) -> Dict[str, Any]:
+def get_job(job_id: str) -> dict[str, Any]:
     """Return job status."""
 
-    if job_id not in JOBS:
+    job = get_processing_job(job_id)
+    if job is None:
         raise JobNotFoundError(job_id)
-
-    return JOBS[job_id]
+    return job

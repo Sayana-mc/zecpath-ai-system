@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from conversation_flow import ConversationFlow
-from decision_tree import ConversationDecisionTree
+from .decision_tree import ConversationDecisionTree
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = PROJECT_ROOT / "output"
 OUTPUT_DIR.mkdir(exist_ok=True)

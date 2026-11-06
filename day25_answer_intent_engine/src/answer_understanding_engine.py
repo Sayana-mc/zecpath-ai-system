@@ -1,6 +1,6 @@
-from intent_classifier import IntentClassifier
-from information_extractor import extract_information
-from answer_validator import validate_answer
+from .intent_classifier import IntentClassifier
+from .information_extractor import extract_information
+from .answer_validator import validate_answer
 
 
 class AnswerUnderstandingEngine:

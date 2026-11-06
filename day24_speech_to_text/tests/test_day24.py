@@ -1,12 +1,4 @@
-import sys
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-SRC_DIR = PROJECT_ROOT / "day24_speech_to_text" / "src"
-
-sys.path.insert(0, str(SRC_DIR))
-
-from transcript_cleaner import (
+from day24_speech_to_text.src.transcript_cleaner import (
     normalize_whitespace,
     remove_filler_words,
     remove_repeated_words,

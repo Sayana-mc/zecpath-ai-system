@@ -1,9 +1,9 @@
-from src.skill_normalizer import (
+from day9_skill_extraction.src.skill_normalizer import (
     normalize_skill_name,
     get_skill_category
 )
 
-from src.skill_extractor import (
+from day9_skill_extraction.src.skill_extractor import (
     extract_skills_from_text,
     deduplicate_skills
 )

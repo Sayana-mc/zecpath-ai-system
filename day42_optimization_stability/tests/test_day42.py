@@ -1,24 +1,7 @@
-import sys
-from pathlib import Path
-
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-SRC_DIR = (
-    PROJECT_ROOT
-    / "day42_optimization_stability"
-    / "src"
-)
-
-sys.path.insert(
-    0,
-    str(SRC_DIR)
-)
-
-from transcript_cleaner import TranscriptCleaner
-from followup_stabilizer import FollowUpStabilizer
-from refined_scoring_engine import RefinedScoringEngine
-from anomaly_detector import ScoreAnomalyDetector
+from day42_optimization_stability.src.transcript_cleaner import TranscriptCleaner
+from day42_optimization_stability.src.followup_stabilizer import FollowUpStabilizer
+from day42_optimization_stability.src.refined_scoring_engine import RefinedScoringEngine
+from day42_optimization_stability.src.anomaly_detector import ScoreAnomalyDetector
 
 
 def test_transcript_cleanup():

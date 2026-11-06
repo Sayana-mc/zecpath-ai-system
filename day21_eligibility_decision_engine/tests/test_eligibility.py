@@ -1,12 +1,17 @@
 import json
+from pathlib import Path
 
-from src.eligibility_engine import EligibilityDecisionEngine
+from day21_eligibility_decision_engine.src.eligibility_engine import EligibilityDecisionEngine
 
 
 def load_rules():
-
+    config_path = (
+        Path(__file__).resolve().parents[1]
+        / "config"
+        / "eligibility_rules.json"
+    )
     with open(
-        "config/eligibility_rules.json",
+        config_path,
         "r",
         encoding="utf-8"
     ) as file:

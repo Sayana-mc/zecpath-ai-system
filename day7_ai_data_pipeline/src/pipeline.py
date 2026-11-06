@@ -1,4 +1,4 @@
-from src.metadata import create_metadata
+from .metadata import create_metadata
 
 
 def create_pipeline_record(

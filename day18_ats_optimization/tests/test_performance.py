@@ -1,7 +1,7 @@
 import time
 
-from src.noisy_resume_handler import normalize_noisy_text
-from src.entity_optimizer import detect_skills
+from day18_ats_optimization.src.noisy_resume_handler import normalize_noisy_text
+from day18_ats_optimization.src.entity_optimizer import detect_skills
 
 
 def test_text_normalization_speed():

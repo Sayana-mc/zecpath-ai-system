@@ -1,18 +1,18 @@
 import pytest
 
-from src.normalization import (
+from day15_fairness_bias_reduction.src.normalization import (
     normalize_text,
     normalize_score,
     normalize_candidate,
 )
 
-from src.bias_reduction import (
+from day15_fairness_bias_reduction.src.bias_reduction import (
     mask_personal_attributes,
     calculate_keyword_dependence,
     reduce_keyword_dependence,
 )
 
-from src.fairness_engine import (
+from day15_fairness_bias_reduction.src.fairness_engine import (
     normalize_score_range,
     calculate_bias_indicators,
     process_candidates,

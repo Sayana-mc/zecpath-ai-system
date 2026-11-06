@@ -1,4 +1,4 @@
-from src.similarity_engine import (
+from day12_semantic_matching.src.similarity_engine import (
     cosine_similarity,
     similarity_label,
 )

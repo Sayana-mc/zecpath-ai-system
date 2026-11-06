@@ -3,7 +3,7 @@ from pathlib import Path
 
 from followup_engine import FollowUpEngine
 from adaptive_questioning import AdaptiveQuestioning
-from decision_tree import FollowUpDecisionTree
+from .decision_tree import FollowUpDecisionTree
 
 
 def main():

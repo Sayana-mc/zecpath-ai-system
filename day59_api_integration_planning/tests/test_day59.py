@@ -1,9 +1,6 @@
 import unittest
-from pathlib import Path
-import sys
-sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from src.contracts import ContractError, validate_resume_request, validate_interview_request, validate_score_response
-from src.integration_plan import load_config, validate_config, build_plan
+from day59_api_integration_planning.src.contracts import ContractError, validate_resume_request, validate_interview_request, validate_score_response
+from day59_api_integration_planning.src.integration_plan import load_config, validate_config, build_plan
 
 class TestDay59(unittest.TestCase):
  def test_config_valid(self): validate_config(load_config())

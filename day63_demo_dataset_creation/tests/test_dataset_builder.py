@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from src.dataset_builder import BASE_DIR, build_demo_dataset
+from day63_demo_dataset_creation.src.dataset_builder import BASE_DIR, build_demo_dataset
 
 
 class BuildDemoDatasetTests(unittest.TestCase):

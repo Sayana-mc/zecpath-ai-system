@@ -1,0 +1,12 @@
+FICTIONAL DEMO RESUME
+
+Profile
+Synthetic applicant with project experience in data cleanup and reporting.
+
+Skills
+Python, SQL, Git, and Power BI.
+
+Project
+Built a small Python and SQL reporting workflow and used Git for version control.
+
+This file contains no real applicant information. It is for local API demos only.

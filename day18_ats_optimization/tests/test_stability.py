@@ -1,9 +1,9 @@
-from src.noisy_resume_handler import (
+from day18_ats_optimization.src.noisy_resume_handler import (
     normalize_noisy_text,
     normalize_skill_text,
 )
 
-from src.entity_optimizer import (
+from day18_ats_optimization.src.entity_optimizer import (
     detect_skills,
     detect_years_of_experience,
 )

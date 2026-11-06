@@ -21,6 +21,26 @@ class JobNotFoundError(ATSAPIError):
         )
 
 
+class CandidateNotFoundError(ATSAPIError):
+    """Raised when a candidate does not exist."""
+
+    def __init__(self, candidate_id: str):
+        super().__init__(
+            message=f"Candidate '{candidate_id}' was not found.",
+            error_code="CANDIDATE_NOT_FOUND",
+        )
+
+
+class OpeningNotFoundError(ATSAPIError):
+    """Raised when a job opening does not exist."""
+
+    def __init__(self, opening_id: str):
+        super().__init__(
+            message=f"Job opening '{opening_id}' was not found.",
+            error_code="OPENING_NOT_FOUND",
+        )
+
+
 class InvalidResumeError(ATSAPIError):
     """Raised when an uploaded resume is invalid."""
 

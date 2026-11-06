@@ -17,6 +17,8 @@ htmlcov/
 
 # Logs
 logs/*.log
+data/*.sqlite3
+uploads/
 
 # IDE
 .vscode/

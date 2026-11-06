@@ -14,7 +14,7 @@ sys.path.insert(0, str(SRC_DIR))
 
 
 from conversation_flow import ConversationFlow
-from decision_tree import ConversationDecisionTree
+from day29_ai_conversation_flow.src.decision_tree import ConversationDecisionTree
 
 
 def test_start_conversation():

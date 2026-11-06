@@ -1,19 +1,6 @@
-import sys
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-SRC_DIR = (
-    PROJECT_ROOT /
-    "day36_confidence_stress_indicators" /
-    "src"
-)
-
-sys.path.insert(0, str(SRC_DIR))
-
-from confidence_analyzer import ConfidenceAnalyzer
-from sentiment_engine import SentimentEngine
-from behavioral_signals import BehavioralSignalAnalyzer
+from day36_confidence_stress_indicators.src.confidence_analyzer import ConfidenceAnalyzer
+from day36_confidence_stress_indicators.src.sentiment_engine import SentimentEngine
+from day36_confidence_stress_indicators.src.behavioral_signals import BehavioralSignalAnalyzer
 
 
 def test_hesitation_detection():

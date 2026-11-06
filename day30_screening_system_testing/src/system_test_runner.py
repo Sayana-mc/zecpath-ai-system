@@ -26,7 +26,7 @@ sys.path.insert(0, str(DAY25_SRC))
 sys.path.insert(0, str(DAY26_SRC))
 sys.path.insert(0, str(DAY30_SRC))
 
-from test_dataset import TEST_CASES
+from screening_test_data import TEST_CASES
 
 from intent_classifier import IntentClassifier
 from answer_validator import validate_answer

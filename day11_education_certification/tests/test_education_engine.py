@@ -1,17 +1,17 @@
-from src.education_parser import (
+from day11_education_certification.src.education_parser import (
     detect_degree_type,
     extract_year,
     normalize_field,
     parse_education_section,
 )
 
-from src.certification_parser import (
+from day11_education_certification.src.certification_parser import (
     normalize_certification_name,
     classify_certification,
     extract_certifications,
 )
 
-from src.education_relevance import (
+from day11_education_certification.src.education_relevance import (
     calculate_education_relevance,
 )
 

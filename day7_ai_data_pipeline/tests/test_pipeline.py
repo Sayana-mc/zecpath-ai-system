@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from src.metadata import create_metadata
-from src.storage import (
+from day7_ai_data_pipeline.src.metadata import create_metadata
+from day7_ai_data_pipeline.src.storage import (
     save_resume,
     save_parsed_profile,
     save_ats_score,

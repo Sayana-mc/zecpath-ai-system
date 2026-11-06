@@ -16,7 +16,7 @@ sys.path.insert(
     str(SRC_DIR)
 )
 
-from transcript_cleaner import TranscriptCleaner
+from .transcript_cleaner import TranscriptCleaner
 from followup_stabilizer import FollowUpStabilizer
 from refined_scoring_engine import RefinedScoringEngine
 from optimization_engine import OptimizationEngine

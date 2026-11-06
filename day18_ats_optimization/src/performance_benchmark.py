@@ -3,8 +3,8 @@ from __future__ import annotations
 import time
 import tracemalloc
 
-from src.noisy_resume_handler import normalize_noisy_text
-from src.entity_optimizer import detect_skills
+from .noisy_resume_handler import normalize_noisy_text
+from .entity_optimizer import detect_skills
 
 
 def benchmark_text_normalization(text: str) -> float:

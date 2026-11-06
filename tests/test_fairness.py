@@ -1,3 +1,6 @@
+from day15_fairness_bias_reduction.src.fairness_engine import process_candidates
+
+
 def test_pipeline_applies_score_normalization():
     candidates = [
         {

@@ -1,6 +1,6 @@
 from datetime import date
 
-from src.experience_parser import (
+from day10_experience_relevance.src.experience_parser import (
     parse_month_year,
     calculate_months,
     calculate_total_experience,
@@ -8,7 +8,7 @@ from src.experience_parser import (
     detect_overlaps,
 )
 
-from src.relevance_scorer import (
+from day10_experience_relevance.src.relevance_scorer import (
     calculate_role_similarity,
     calculate_relevance_score,
 )

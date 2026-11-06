@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Local Zecpath recruiter demo">
+  <link rel="icon" href="data:,">
+  <title>Zecpath AI Hiring System</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      color: #172433;
+      background: #f3f6f9;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 320px; }
+    header {
+      background: #102a43;
+      color: #fff;
+      padding: 22px max(24px, calc((100% - 1180px) / 2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+    header h1 { margin: 0; font-size: 1.35rem; }
+    header p { margin: 5px 0 0; color: #d9e2ec; font-size: .9rem; }
+    header a { color: #fff; }
+    main { max-width: 1180px; margin: 24px auto; padding: 0 20px 48px; }
+    .banner {
+      border-left: 4px solid #d99000;
+      background: #fff7df;
+      padding: 13px 16px;
+      margin-bottom: 20px;
+      line-height: 1.45;
+    }
+    .notice { min-height: 24px; margin: 10px 0; font-weight: 600; }
+    .notice.error { color: #a4262c; }
+    .notice.success { color: #176b3a; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .panel {
+      background: white;
+      border: 1px solid #d9e2ec;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px #102a430d;
+      margin-bottom: 18px;
+      min-width: 0;
+    }
+    .panel h2 { margin: 0 0 14px; font-size: 1.12rem; }
+    .panel p { line-height: 1.5; }
+    label { display: block; font-weight: 600; margin: 12px 0 5px; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid #9fb3c8;
+      border-radius: 5px;
+      background: #fff;
+      color: inherit;
+      padding: 9px 10px;
+      font: inherit;
+    }
+    textarea { min-height: 72px; resize: vertical; }
+    input[type="file"] { padding: 7px; }
+    button {
+      border: 0;
+      border-radius: 5px;
+      background: #176b87;
+      color: #fff;
+      padding: 9px 13px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: #0e536b; }
+    button:disabled { opacity: .6; cursor: wait; }
+    button.secondary { background: #52677b; }
+    button.danger { background: #a4262c; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .toolbar { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; }
+    .toolbar > * { flex: 1 1 180px; }
+    .toolbar button { flex: 0 0 auto; }
+    .muted { color: #52677b; font-size: .92rem; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; min-width: 760px; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid #d9e2ec; text-align: left; vertical-align: top; }
+    th { color: #334e68; font-size: .88rem; }
+    td select { min-width: 135px; }
+    .score { font-weight: 700; white-space: nowrap; }
+    .evidence { max-width: 240px; overflow-wrap: anywhere; }
+    .empty { color: #627d98; padding: 20px 0; }
+    .status-line { white-space: nowrap; font-size: .9rem; }
+    .status-line[data-state="connected"] { color: #b7efc5; }
+    .status-line[data-state="unavailable"] { color: #ffd2d2; }
+    @media (max-width: 760px) {
+      header { align-items: flex-start; flex-direction: column; }
+      .grid { grid-template-columns: 1fr; }
+      main { margin-top: 14px; padding: 0 12px 32px; }
+      .panel { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Zecpath AI Hiring System</h1>
+      <p>Recruiter workspace</p>
+    </div>
+    <div>
+      <span id="apiStatus" class="status-line" role="status" aria-live="polite">Checking API...</span>
+      &nbsp;|&nbsp;
+      <a href="/docs" target="_blank" rel="noopener noreferrer">API documentation</a>
+      &nbsp;|&nbsp;
+      <button id="signOutButton" type="button" class="secondary" hidden>Sign out</button>
+    </div>
+  </header>
+  <main>
+    <section id="loginPanel" class="panel" aria-labelledby="loginHeading">
+      <h2 id="loginHeading">Recruiter sign-in</h2>
+      <p class="muted">Your sign-in uses an HTTP-only session cookie that expires after 8 hours. Sign out when finished.</p>
+      <form id="loginForm">
+        <label for="authUsername">Username</label>
+        <input id="authUsername" autocomplete="username" required>
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" autocomplete="current-password" required>
+        <div class="actions"><button type="submit">Sign in</button></div>
+      </form>
+    </section>
+    <div id="notice" class="notice" role="status" aria-live="polite"></div>
+    <div id="workspace" hidden>
+    <div class="banner">
+      <strong>Local demo only.</strong> Match scores use exact required-skill overlap, not AI or a validated hiring model.
+      Review the evidence yourself. No score makes an employment decision.
+    </div>
+    <div class="grid">
+      <section class="panel" aria-labelledby="createOpeningHeading">
+        <h2 id="createOpeningHeading">Create a job opening</h2>
+        <form id="openingForm">
+          <label for="jobTitle">Job title</label>
+          <input id="jobTitle" name="title" required minlength="2" maxlength="160">
+          <label for="jobDescription">Description</label>
+          <textarea id="jobDescription" name="description" maxlength="20000"></textarea>
+          <label for="requiredSkills">Required skills (comma separated)</label>
+          <input id="requiredSkills" name="required_skills" required placeholder="Python, SQL, Git">
+          <label for="preferredSkills">Preferred skills (comma separated)</label>
+          <input id="preferredSkills" name="preferred_skills" placeholder="Power BI">
+          <div class="actions"><button type="submit">Create opening</button></div>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="manageOpeningHeading">
+        <h2 id="manageOpeningHeading">Manage opening</h2>
+        <label for="openingSelect">Selected job</label>
+        <select id="openingSelect" aria-label="Select job opening"></select>
+        <form id="editOpeningForm">
+          <label for="editTitle">Title</label>
+          <input id="editTitle" required minlength="2" maxlength="160">
+          <label for="editDescription">Description</label>
+          <textarea id="editDescription" maxlength="20000"></textarea>
+          <label for="editRequired">Required skills</label>
+          <input id="editRequired" required>
+          <label for="editPreferred">Preferred skills</label>
+          <input id="editPreferred">
+          <label for="editStatus">Status</label>
+          <select id="editStatus">
+            <option value="OPEN">Open</option>
+            <option value="CLOSED">Closed</option>
+          </select>
+          <div class="actions">
+            <button type="submit">Save job changes</button>
+            <button id="deleteOpening" type="button" class="danger">Delete job and applications</button>
+          </div>
+        </form>
+        <p id="noOpening" class="empty" hidden>Create a job opening to begin.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="applyHeading">
+        <h2 id="applyHeading">Register candidate</h2>
+        <form id="candidateForm">
+          <label for="candidateName">Candidate name</label>
+          <input id="candidateName" required maxlength="160" autocomplete="off">
+          <label for="candidateEmail">Email (optional)</label>
+          <input id="candidateEmail" type="email" maxlength="320" autocomplete="off">
+          <label for="candidateSkills">Candidate-reported skills (comma separated)</label>
+          <input id="candidateSkills" placeholder="Python, SQL">
+          <label for="resumeFile">Resume file (TXT, DOCX, or text-based PDF; max 5 MiB)</label>
+          <input id="resumeFile" type="file" accept=".txt,.docx,.pdf">
+          <p class="muted">Provide at least one reported skill or a resume file. Uploaded files are removed after extraction; extracted text is saved with the application.</p>
+          <div class="actions"><button id="candidateSubmit" type="submit">Register candidate</button></div>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="shortlistHeading">
+        <h2 id="shortlistHeading">Shortlist review suggestions</h2>
+        <p class="muted">Uses saved scores for the selected opening. It does not update candidate statuses.</p>
+        <label for="minimumScore">Minimum score (%)</label>
+        <input id="minimumScore" type="number" min="0" max="100" step="1" value="60">
+        <div class="actions">
+          <button id="shortlistButton" type="button">Rank scored candidates</button>
+          <button id="refreshButton" type="button" class="secondary">Refresh data</button>
+        </div>
+        <div id="shortlistResults" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <section class="panel" aria-labelledby="candidateListHeading">
+      <h2 id="candidateListHeading">Applications</h2>
+      <div class="toolbar">
+        <div>
+          <label for="candidateSearch">Search candidates</label>
+          <input id="candidateSearch" type="search" placeholder="Name or email">
+        </div>
+        <div>
+          <label for="statusFilter">Filter by status</label>
+          <select id="statusFilter">
+            <option value="">All statuses</option>
+            <option>APPLIED</option><option>IN_REVIEW</option><option>SHORTLISTED</option>
+            <option>INTERVIEW</option><option>OFFER</option><option>HIRED</option>
+            <option>REJECTED</option><option>WITHDRAWN</option>
+          </select>
+        </div>
+        <button id="reloadButton" type="button" class="secondary">Reload applications</button>
+      </div>
+      <p id="candidateEmpty" class="empty">Select a job opening to view its applications.</p>
+      <div class="table-wrap">
+        <table id="candidateTable" hidden>
+          <thead>
+            <tr><th>Candidate</th><th>Skills / resume evidence</th><th>Score</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="candidateRows"></tbody>
+        </table>
+      </div>
+    </section>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const api = "/api/v1";
+      const state = { openings: [], candidates: [] };
+      const byId = (id) => document.getElementById(id);
+      const notice = byId("notice");
+      const statusNames = ["APPLIED", "IN_REVIEW", "SHORTLISTED", "INTERVIEW", "OFFER", "HIRED", "REJECTED", "WITHDRAWN"];
+      let recruiterAuthenticated = false;
+      let apiAvailable = null;
+      let recovering = false;
+
+      function showNotice(message, isError = false) {
+        notice.textContent = message;
+        notice.className = `notice ${isError ? "error" : "success"}`;
+      }
+
+      function setApiStatus(message, connected = false) {
+        const status = byId("apiStatus");
+        status.textContent = message;
+        status.dataset.state = connected ? "connected" : "unavailable";
+      }
+
+      async function checkApiHealth() {
+        try {
+          const response = await fetch(`${api}/health`, {
+            headers: { Accept: "application/json" },
+            cache: "no-store"
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            apiAvailable = false;
+            setApiStatus(`API reachable — health check failed (${response.status})`, false);
+            return null;
+          }
+          const wasUnavailable = apiAvailable === false;
+          apiAvailable = true;
+          if (!data.authentication_configured) {
+            setApiStatus("API connected — recruiter authentication is not configured", true);
+          } else if (recruiterAuthenticated) {
+            setApiStatus("API connected — recruiter authenticated", true);
+          } else {
+            setApiStatus("API connected — sign-in required", true);
+          }
+          if (wasUnavailable && recruiterAuthenticated && !byId("workspace").hidden && !recovering) {
+            recovering = true;
+            try {
+              await refresh();
+              showNotice("API connection restored. Saved data reloaded.");
+            } catch (error) {
+              showNotice(error.message, true);
+            } finally {
+              recovering = false;
+            }
+          }
+          return data;
+        } catch (error) {
+          apiAvailable = false;
+          setApiStatus("API unavailable — retrying automatically", false);
+          return null;
+        }
+      }
+
+      async function request(path, options = {}) {
+        const headers = new Headers(options.headers || {});
+        let response;
+        try {
+          response = await fetch(`${api}${path}`, {
+            ...options,
+            headers,
+            credentials: "same-origin"
+          });
+        } catch (error) {
+          apiAvailable = false;
+          setApiStatus("API unavailable — retrying automatically", false);
+          throw new Error("Cannot reach the API. Check the backend; the page will retry automatically.");
+        }
+        apiAvailable = true;
+        if (response.status === 204) return null;
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const detail = data.detail;
+          const message = typeof detail === "string" ? detail : (detail && detail.message) || `Request failed (${response.status}).`;
+          if (response.status === 401) {
+            recruiterAuthenticated = false;
+            state.openings = [];
+            state.candidates = [];
+            byId("loginPanel").hidden = false;
+            byId("workspace").hidden = true;
+            byId("signOutButton").hidden = true;
+            renderOpening();
+            renderCandidates();
+            setApiStatus("API connected — recruiter sign-in required", true);
+          } else if (response.status >= 500) {
+            setApiStatus("API connected — server reported an error", true);
+          }
+          throw new Error(message);
+        }
+        return data;
+      }
+
+      function jsonOptions(method, body) {
+        return { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) };
+      }
+
+      function splitSkills(value) {
+        return value.split(",").map((item) => item.trim()).filter(Boolean);
+      }
+
+      function selectedOpening() {
+        return state.openings.find((opening) => opening.opening_id === byId("openingSelect").value);
+      }
+
+      function renderOpening() {
+        const select = byId("openingSelect");
+        const previous = select.value;
+        select.replaceChildren();
+        const emptyOption = document.createElement("option");
+        emptyOption.value = "";
+        emptyOption.textContent = state.openings.length ? "Select an opening" : "No openings yet";
+        select.append(emptyOption);
+        for (const opening of state.openings) {
+          const option = document.createElement("option");
+          option.value = opening.opening_id;
+          option.textContent = `${opening.title} (${opening.status.toLowerCase()})`;
+          select.append(option);
+        }
+        if (state.openings.some((item) => item.opening_id === previous)) select.value = previous;
+        else if (state.openings.length) select.value = state.openings[0].opening_id;
+
+        const opening = selectedOpening();
+        byId("editOpeningForm").hidden = !opening;
+        byId("noOpening").hidden = Boolean(opening);
+        byId("deleteOpening").disabled = !opening;
+        if (opening) {
+          byId("editTitle").value = opening.title;
+          byId("editDescription").value = opening.description;
+          byId("editRequired").value = opening.required_skills.join(", ");
+          byId("editPreferred").value = opening.preferred_skills.join(", ");
+          byId("editStatus").value = opening.status;
+        }
+      }
+
+      function makeCell(text, className = "") {
+        const cell = document.createElement("td");
+        cell.textContent = text;
+        if (className) cell.className = className;
+        return cell;
+      }
+
+      function renderCandidates() {
+        const opening = selectedOpening();
+        const term = byId("candidateSearch").value.trim().toLocaleLowerCase();
+        const status = byId("statusFilter").value;
+        const candidates = state.candidates.filter((candidate) =>
+          (!status || candidate.application_status === status) &&
+          (!term || `${candidate.name} ${candidate.email || ""}`.toLocaleLowerCase().includes(term))
+        );
+        const body = byId("candidateRows");
+        body.replaceChildren();
+        byId("candidateTable").hidden = !candidates.length;
+        byId("candidateEmpty").hidden = candidates.length > 0;
+        byId("candidateEmpty").textContent = !opening
+          ? "Select a job opening to view its applications."
+          : state.candidates.length === 0
+            ? "No applications for this job yet. Register a candidate above."
+            : "No candidates match the current search or status filter.";
+
+        for (const candidate of candidates) {
+          const row = document.createElement("tr");
+          const nameCell = makeCell(candidate.name);
+          if (candidate.email) {
+            const email = document.createElement("div");
+            email.className = "muted";
+            email.textContent = candidate.email;
+            nameCell.append(email);
+          }
+          row.append(nameCell);
+
+          const evidence = candidate.score_evidence;
+          const evidenceCell = makeCell(
+            evidence
+              ? `Matched: ${evidence.matched_required_skills.join(", ") || "none"}; Missing: ${evidence.missing_required_skills.join(", ") || "none"}`
+              : candidate.skills.length
+                ? `Reported: ${candidate.skills.join(", ")}`
+                : candidate.resume_text
+                  ? `Resume text saved (${candidate.resume_text.length} characters)`
+                  : "No skills or resume yet",
+            "evidence"
+          );
+          if (evidence) {
+            const evidenceDetails = document.createElement("details");
+            const evidenceSummary = document.createElement("summary");
+            evidenceSummary.textContent = "Review score evidence";
+            evidenceDetails.append(evidenceSummary);
+            const evidenceList = document.createElement("ul");
+            for (const skill of evidence.matched_required_skills) {
+              const item = document.createElement("li");
+              const profileMatch = evidence.profile_skills.some((value) => value.toLocaleLowerCase() === skill.toLocaleLowerCase());
+              const resumeMatch = evidence.resume_evidence.find((value) => value.skill.toLocaleLowerCase() === skill.toLocaleLowerCase());
+              item.textContent = `${skill}: ${profileMatch ? "candidate-reported" : ""}${profileMatch && resumeMatch ? "; " : ""}${resumeMatch ? `resume mention: “${resumeMatch.excerpt}”` : ""}`;
+              evidenceList.append(item);
+            }
+            evidenceDetails.append(evidenceList);
+            evidenceCell.append(evidenceDetails);
+          }
+          if (candidate.resume_text) {
+            const resumeDetails = document.createElement("details");
+            const resumeSummary = document.createElement("summary");
+            resumeSummary.textContent = "View extracted resume text";
+            const resumeText = document.createElement("pre");
+            resumeText.textContent = candidate.resume_text;
+            resumeDetails.append(resumeSummary, resumeText);
+            evidenceCell.append(resumeDetails);
+          }
+          row.append(evidenceCell);
+          row.append(makeCell(candidate.score === null ? "Not scored" : `${candidate.score.toFixed(1)}%`, "score"));
+
+          const statusCell = document.createElement("td");
+          const statusSelect = document.createElement("select");
+          statusSelect.setAttribute("aria-label", `Application status for ${candidate.name}`);
+          for (const value of statusNames) {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = value.replaceAll("_", " ");
+            statusSelect.append(option);
+          }
+          statusSelect.value = candidate.application_status;
+          statusSelect.addEventListener("change", async () => {
+            statusSelect.disabled = true;
+            try {
+              await request(`/candidates/${encodeURIComponent(candidate.candidate_id)}`, jsonOptions("PATCH", { application_status: statusSelect.value }));
+              showNotice(`Saved ${candidate.name}'s status as ${statusSelect.value}.`);
+              await loadCandidates();
+            } catch (error) {
+              showNotice(error.message, true);
+              statusSelect.value = candidate.application_status;
+            } finally {
+              statusSelect.disabled = false;
+            }
+          });
+          statusCell.append(statusSelect);
+          row.append(statusCell);
+
+          const actions = document.createElement("td");
+          const scoreButton = document.createElement("button");
+          scoreButton.type = "button";
+          scoreButton.textContent = "Score";
+          scoreButton.addEventListener("click", () => scoreCandidate(candidate, scoreButton));
+          actions.append(scoreButton);
+          const editDetails = document.createElement("details");
+          const editSummary = document.createElement("summary");
+          editSummary.textContent = "Edit profile";
+          const editForm = document.createElement("form");
+          const editName = document.createElement("input");
+          editName.value = candidate.name;
+          editName.maxLength = 160;
+          editName.required = true;
+          editName.setAttribute("aria-label", "Candidate name");
+          const editEmail = document.createElement("input");
+          editEmail.type = "email";
+          editEmail.value = candidate.email || "";
+          editEmail.maxLength = 320;
+          editEmail.setAttribute("aria-label", "Candidate email");
+          const editSkills = document.createElement("input");
+          editSkills.value = candidate.skills.join(", ");
+          editSkills.setAttribute("aria-label", "Candidate-reported skills");
+          const saveProfile = document.createElement("button");
+          saveProfile.type = "submit";
+          saveProfile.textContent = "Save profile";
+          editForm.append(editName, editEmail, editSkills, saveProfile);
+          editForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            saveProfile.disabled = true;
+            try {
+              await request(`/candidates/${encodeURIComponent(candidate.candidate_id)}`, jsonOptions("PATCH", {
+                name: editName.value.trim(),
+                email: editEmail.value.trim() || null,
+                skills: splitSkills(editSkills.value)
+              }));
+              await loadCandidates();
+              showNotice(`Saved ${candidate.name}'s profile.`);
+            } catch (error) {
+              showNotice(error.message, true);
+            } finally {
+              saveProfile.disabled = false;
+            }
+          });
+          editDetails.append(editSummary, editForm);
+          actions.append(editDetails);
+
+          const screeningDetails = document.createElement("details");
+          const screeningSummary = document.createElement("summary");
+          screeningSummary.textContent = "Screening report";
+          screeningDetails.append(screeningSummary);
+          const screeningForm = document.createElement("form");
+          const screeningIntent = document.createElement("select");
+          screeningIntent.setAttribute("aria-label", "Screening question topic");
+          for (const [value, label] of [
+            ["skills", "Skills"],
+            ["experience", "Experience"],
+            ["availability", "Availability"],
+            ["salary_expectation", "Salary expectation"]
+          ]) {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent = label;
+            screeningIntent.append(option);
+          }
+          const screeningQuestion = document.createElement("input");
+          screeningQuestion.placeholder = "Question";
+          screeningQuestion.required = true;
+          screeningQuestion.setAttribute("aria-label", "Screening question");
+          const screeningAnswer = document.createElement("textarea");
+          screeningAnswer.placeholder = "Candidate response";
+          screeningAnswer.maxLength = 10000;
+          screeningAnswer.setAttribute("aria-label", "Candidate response");
+          const screeningSubmit = document.createElement("button");
+          screeningSubmit.type = "submit";
+          screeningSubmit.textContent = "Generate report";
+          screeningForm.append(screeningIntent, screeningQuestion, screeningAnswer, screeningSubmit);
+          const reports = document.createElement("div");
+          screeningForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            screeningSubmit.disabled = true;
+            try {
+              await request(`/candidates/${encodeURIComponent(candidate.candidate_id)}/screening-reports`, jsonOptions("POST", {
+                answers: [{
+                  question_id: "Q1",
+                  question: screeningQuestion.value.trim(),
+                  answer: screeningAnswer.value,
+                  expected_intent: screeningIntent.value
+                }]
+              }));
+              await loadScreeningReports(candidate, reports);
+              showNotice("Screening notes saved. They are rule-based and require human review.");
+            } catch (error) {
+              showNotice(error.message, true);
+            } finally {
+              screeningSubmit.disabled = false;
+            }
+          });
+          screeningDetails.addEventListener("toggle", () => {
+            if (screeningDetails.open) {
+              loadScreeningReports(candidate, reports).catch((error) => showNotice(error.message, true));
+            }
+          });
+          screeningDetails.append(screeningForm, reports);
+          actions.append(screeningDetails);
+
+          const resumeButton = document.createElement("button");
+          resumeButton.type = "button";
+          resumeButton.className = "secondary";
+          resumeButton.textContent = "Upload resume";
+          resumeButton.style.marginLeft = "6px";
+          const resumeInput = document.createElement("input");
+          resumeInput.type = "file";
+          resumeInput.accept = ".txt,.docx,.pdf";
+          resumeInput.hidden = true;
+          resumeInput.addEventListener("change", () => {
+            if (resumeInput.files[0]) uploadResumeForCandidate(candidate, resumeInput.files[0], resumeButton);
+          });
+          resumeButton.addEventListener("click", () => resumeInput.click());
+          actions.append(resumeButton, resumeInput);
+          const deleteButton = document.createElement("button");
+          deleteButton.type = "button";
+          deleteButton.className = "danger";
+          deleteButton.textContent = "Delete";
+          deleteButton.style.marginLeft = "6px";
+          deleteButton.addEventListener("click", () => deleteCandidate(candidate, deleteButton));
+          actions.append(deleteButton);
+          row.append(actions);
+          body.append(row);
+        }
+      }
+
+      async function loadCandidates() {
+        const opening = selectedOpening();
+        state.candidates = opening
+          ? await request(`/candidates?opening_id=${encodeURIComponent(opening.opening_id)}`)
+          : [];
+        renderCandidates();
+      }
+
+      async function loadScreeningReports(candidate, container) {
+        const reports = await request(`/candidates/${encodeURIComponent(candidate.candidate_id)}/screening-reports`);
+        container.replaceChildren();
+        for (const report of reports) {
+          const details = document.createElement("details");
+          const summary = document.createElement("summary");
+          summary.textContent = `Report ${new Date(report.created_at).toLocaleString()}`;
+          const reportText = document.createElement("pre");
+          reportText.textContent = JSON.stringify(report, null, 2);
+          details.append(summary, reportText);
+          container.append(details);
+        }
+        if (!reports.length) container.textContent = "No screening reports saved.";
+      }
+
+      async function refresh() {
+        const current = byId("openingSelect").value;
+        state.openings = await request("/openings");
+        renderOpening();
+        if (current && state.openings.some((item) => item.opening_id === current)) {
+          byId("openingSelect").value = current;
+          renderOpening();
+        }
+        await loadCandidates();
+      }
+
+      async function waitForResume(jobId) {
+        for (let attempt = 0; attempt < 60; attempt += 1) {
+          const job = await request(`/jobs/${encodeURIComponent(jobId)}`);
+          if (job.status === "COMPLETED") return job;
+          if (job.status === "FAILED") throw new Error(job.error || "Resume extraction failed.");
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+        throw new Error("Resume processing timed out. Check its job status and try again.");
+      }
+
+      async function uploadResumeForCandidate(candidate, file, button) {
+        button.disabled = true;
+        try {
+          const form = new FormData();
+          form.append("candidate_id", candidate.candidate_id);
+          form.append("file", file);
+          const queued = await request("/resumes/upload", { method: "POST", body: form });
+          await waitForResume(queued.job_id);
+          await loadCandidates();
+          showNotice(`Extracted and saved the resume for ${candidate.name}.`);
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      async function scoreCandidate(candidate, button) {
+        button.disabled = true;
+        try {
+          const result = await request("/candidates/score", jsonOptions("POST", {
+            job_id: candidate.opening_id,
+            candidate_id: candidate.candidate_id
+          }));
+          showNotice(`Score ${result.score.toFixed(1)}%. Matched: ${result.evidence.matched_required_skills.join(", ") || "none"}. Human review is required.`);
+          await loadCandidates();
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      }
+
+      async function deleteCandidate(candidate, button) {
+        if (!confirm(`Delete ${candidate.name}'s application and saved resume text?`)) return;
+        button.disabled = true;
+        try {
+          await request(`/candidates/${encodeURIComponent(candidate.candidate_id)}`, { method: "DELETE" });
+          showNotice(`Deleted ${candidate.name}'s application.`);
+          await loadCandidates();
+        } catch (error) {
+          showNotice(error.message, true);
+          button.disabled = false;
+        }
+      }
+
+      byId("openingForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const button = event.submitter;
+        button.disabled = true;
+        try {
+          const required = splitSkills(byId("requiredSkills").value);
+          if (!required.length) throw new Error("Enter at least one required skill.");
+          const opening = await request("/openings", jsonOptions("POST", {
+            title: byId("jobTitle").value.trim(),
+            description: byId("jobDescription").value.trim(),
+            required_skills: required,
+            preferred_skills: splitSkills(byId("preferredSkills").value)
+          }));
+          await refresh();
+          byId("openingSelect").value = opening.opening_id;
+          renderOpening();
+          await loadCandidates();
+          event.target.reset();
+          showNotice(`Created job opening "${opening.title}".`);
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      byId("editOpeningForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const opening = selectedOpening();
+        if (!opening) return;
+        const button = event.submitter;
+        button.disabled = true;
+        try {
+          const required = splitSkills(byId("editRequired").value);
+          if (!required.length) throw new Error("A job must have at least one required skill.");
+          await request(`/openings/${encodeURIComponent(opening.opening_id)}`, jsonOptions("PATCH", {
+            title: byId("editTitle").value.trim(),
+            description: byId("editDescription").value.trim(),
+            required_skills: required,
+            preferred_skills: splitSkills(byId("editPreferred").value),
+            status: byId("editStatus").value
+          }));
+          await refresh();
+          showNotice("Saved job opening changes.");
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      byId("deleteOpening").addEventListener("click", async () => {
+        const opening = selectedOpening();
+        if (!opening || !confirm(`Delete "${opening.title}" and all of its candidate applications?`)) return;
+        byId("deleteOpening").disabled = true;
+        try {
+          await request(`/openings/${encodeURIComponent(opening.opening_id)}`, { method: "DELETE" });
+          state.candidates = [];
+          byId("shortlistResults").replaceChildren();
+          await refresh();
+          showNotice(`Deleted "${opening.title}" and its applications.`);
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          byId("deleteOpening").disabled = false;
+        }
+      });
+
+      byId("openingSelect").addEventListener("change", async () => {
+        renderOpening();
+        byId("shortlistResults").replaceChildren();
+        try {
+          await loadCandidates();
+        } catch (error) {
+          showNotice(error.message, true);
+        }
+      });
+
+      byId("candidateForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const opening = selectedOpening();
+        const file = byId("resumeFile").files[0];
+        const skills = splitSkills(byId("candidateSkills").value);
+        if (!opening) return showNotice("Create or select an opening first.", true);
+        if (opening.status !== "OPEN") return showNotice("This opening is closed to new applications.", true);
+        if (!file && !skills.length) return showNotice("Provide candidate-reported skills or upload a resume.", true);
+        const button = byId("candidateSubmit");
+        button.disabled = true;
+        let savedCandidate = null;
+        try {
+          const payload = {
+            name: byId("candidateName").value.trim(),
+            opening_id: opening.opening_id,
+            skills
+          };
+          if (byId("candidateEmail").value.trim()) payload.email = byId("candidateEmail").value.trim();
+          savedCandidate = await request("/candidates", jsonOptions("POST", payload));
+          if (file) {
+            const form = new FormData();
+            form.append("candidate_id", savedCandidate.candidate_id);
+            form.append("file", file);
+            const queued = await request("/resumes/upload", { method: "POST", body: form });
+            await waitForResume(queued.job_id);
+          }
+          event.target.reset();
+          await loadCandidates();
+          showNotice(`Registered ${savedCandidate.name}${file ? " and extracted the uploaded resume" : ""}.`);
+        } catch (error) {
+          let message = error.message;
+          if (savedCandidate) {
+            message = `Candidate ${savedCandidate.name} was saved. ${message} Use Upload resume on the saved application to retry extraction.`;
+            try {
+              await loadCandidates();
+            } catch (refreshError) {
+              message += ` Refresh also failed: ${refreshError.message}`;
+            }
+          }
+          showNotice(message, true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      byId("shortlistButton").addEventListener("click", async (event) => {
+        const opening = selectedOpening();
+        if (!opening) return showNotice("Select a job opening first.", true);
+        const minimumScore = Number(byId("minimumScore").value);
+        if (!Number.isFinite(minimumScore) || minimumScore < 0 || minimumScore > 100) {
+          return showNotice("Minimum score must be between 0 and 100.", true);
+        }
+        const button = event.currentTarget;
+        button.disabled = true;
+        try {
+          const result = await request(`/openings/${encodeURIComponent(opening.opening_id)}/shortlist`, jsonOptions("POST", { minimum_score: minimumScore }));
+          const names = new Map(state.candidates.map((candidate) => [candidate.candidate_id, candidate.name]));
+          const list = document.createElement("ol");
+          for (const candidate of result.candidates) {
+            const item = document.createElement("li");
+            item.textContent = `${candidate.rank}. ${names.get(candidate.candidate_id) || candidate.candidate_id} - ${candidate.score.toFixed(1)}%`;
+            list.append(item);
+          }
+          const target = byId("shortlistResults");
+          target.replaceChildren();
+          if (result.candidates.length) target.append(list);
+          else {
+            const empty = document.createElement("p");
+            empty.className = "empty";
+            empty.textContent = "No scored candidates meet this threshold.";
+            target.append(empty);
+          }
+          showNotice(`Found ${result.shortlisted_count} review suggestion(s). Human review is required.`);
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      for (const id of ["refreshButton", "reloadButton"]) {
+        byId(id).addEventListener("click", async () => {
+          try {
+            await refresh();
+            showNotice("Loaded the latest saved data.");
+          } catch (error) {
+            showNotice(error.message, true);
+          }
+        });
+      }
+      for (const id of ["candidateSearch", "statusFilter"]) {
+        byId(id).addEventListener("input", renderCandidates);
+        byId(id).addEventListener("change", renderCandidates);
+      }
+
+      byId("loginForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const username = byId("authUsername").value;
+        const password = byId("authPassword").value;
+        const health = await checkApiHealth();
+        if (!health) {
+          showNotice("The API is unavailable. Check that the backend is running and retry.", true);
+          return;
+        }
+        if (!health.authentication_configured) {
+          showNotice("The API is running, but recruiter authentication is not configured. Restart it with ZECPATH_AUTH_USERNAME and a password of at least 16 characters.", true);
+          return;
+        }
+        try {
+          await request("/auth/session", jsonOptions("POST", { username, password }));
+          recruiterAuthenticated = true;
+          byId("loginPanel").hidden = true;
+          byId("workspace").hidden = false;
+          byId("signOutButton").hidden = false;
+          setApiStatus("API connected — recruiter authenticated", true);
+          byId("authPassword").value = "";
+          await refresh();
+          showNotice("Loaded saved recruiter data.");
+        } catch (error) {
+          recruiterAuthenticated = false;
+          setApiStatus(apiAvailable ? "API connected — sign-in failed" : "API unavailable — retrying automatically", apiAvailable);
+          showNotice(error.message, true);
+        }
+      });
+
+      byId("signOutButton").addEventListener("click", async () => {
+        let signOutError = null;
+        try {
+          await request("/auth/session", { method: "DELETE" });
+        } catch (error) {
+          signOutError = error;
+        }
+        recruiterAuthenticated = false;
+        state.openings = [];
+        state.candidates = [];
+        byId("workspace").hidden = true;
+        byId("loginPanel").hidden = false;
+        byId("signOutButton").hidden = true;
+        setApiStatus(apiAvailable ? "API connected — sign-in required" : "API unavailable — retrying automatically", apiAvailable);
+        renderOpening();
+        renderCandidates();
+        showNotice(
+          signOutError
+            ? `Local workspace cleared, but sign-out failed: ${signOutError.message}`
+            : "Signed out.",
+          Boolean(signOutError)
+        );
+      });
+
+      checkApiHealth();
+      window.setInterval(checkApiHealth, 5000);
+      (async () => {
+        const health = await checkApiHealth();
+        if (!health || !health.authentication_configured) return;
+        try {
+          const session = await request("/auth/session");
+          if (!session.authenticated) return;
+          recruiterAuthenticated = true;
+          byId("loginPanel").hidden = true;
+          byId("workspace").hidden = false;
+          byId("signOutButton").hidden = false;
+          setApiStatus("API connected — recruiter authenticated", true);
+          await refresh();
+        } catch (error) {
+          if (apiAvailable && error.message !== "Valid recruiter credentials are required.") {
+            showNotice(error.message, true);
+          }
+        }
+      })();
+    })();
+  </script>
+</body>
+</html>

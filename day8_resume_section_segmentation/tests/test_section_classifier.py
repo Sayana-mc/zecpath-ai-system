@@ -1,10 +1,10 @@
-from src.section_classifier import (
+from day8_resume_section_segmentation.src.section_classifier import (
     classify_heading,
     detect_section_heading,
     normalize_heading,
 )
 
-from src.segmentation_engine import (
+from day8_resume_section_segmentation.src.segmentation_engine import (
     segment_resume,
 )
 

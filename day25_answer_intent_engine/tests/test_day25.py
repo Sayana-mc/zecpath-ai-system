@@ -1,38 +1,19 @@
-import sys
-from pathlib import Path
-
-
-# ============================================================
-# PROJECT PATH SETUP
-# ============================================================
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-SRC_DIR = (
-    PROJECT_ROOT
-    / "day25_answer_intent_engine"
-    / "src"
-)
-
-sys.path.insert(0, str(SRC_DIR))
-
-
 # ============================================================
 # IMPORTS
 # ============================================================
 
-from intent_classifier import IntentClassifier
+from day25_answer_intent_engine.src.intent_classifier import IntentClassifier
 
-from information_extractor import (
+from day25_answer_intent_engine.src.information_extractor import (
     extract_skills,
     extract_experience,
     extract_availability,
     extract_salary
 )
 
-from answer_validator import validate_answer
+from day25_answer_intent_engine.src.answer_validator import validate_answer
 
-from answer_understanding_engine import (
+from day25_answer_intent_engine.src.answer_understanding_engine import (
     AnswerUnderstandingEngine
 )
 

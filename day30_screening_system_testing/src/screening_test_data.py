@@ -1,3 +1,5 @@
+"""Synthetic cases used by the Day 30 screening system test runner."""
+
 TEST_CASES = [
     {
         "id": "TC001",

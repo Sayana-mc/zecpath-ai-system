@@ -2,7 +2,7 @@ import json
 import unittest
 from pathlib import Path
 
-from src.main import (
+from day65_final_enhancements_feature_polish.src.main import (
     DATA, CONFIG, OUTPUT, DataValidationError, find_skills,
     load_json, run, score_candidate, validate_inputs
 )

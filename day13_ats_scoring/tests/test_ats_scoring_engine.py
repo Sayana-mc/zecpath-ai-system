@@ -1,4 +1,4 @@
-from src.ats_scoring_engine import (
+from day13_ats_scoring.src.ats_scoring_engine import (
     calculate_component_scores,
     calculate_ats_score,
     classify_score,

@@ -1,4 +1,4 @@
-from transcript_cleaner import (
+from .transcript_cleaner import (
     clean_transcript,
     detect_partial_answer
 )

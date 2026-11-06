@@ -1,8 +1,8 @@
-from src.ranking_engine import (
+from day14_candidate_ranking.src.ranking_engine import (
     normalize_score,
     rank_candidates,
 )
-from src.shortlisting_engine import (
+from day14_candidate_ranking.src.shortlisting_engine import (
     get_decision,
 )
 

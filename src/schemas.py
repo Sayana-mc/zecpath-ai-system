@@ -1,11 +1,151 @@
-from typing import Any, Dict, List, Optional
+import re
+from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import (
+    BaseModel,
+    Field,
+    StringConstraints,
+    field_validator,
+    model_validator,
+)
+
+
+Skill = Annotated[
+    str,
+    StringConstraints(strip_whitespace=True, min_length=1, max_length=80),
+]
+NonBlankText = Annotated[
+    str,
+    StringConstraints(strip_whitespace=True, min_length=1),
+]
+
+
+ApplicationStatus = Literal[
+    "APPLIED",
+    "IN_REVIEW",
+    "SHORTLISTED",
+    "INTERVIEW",
+    "OFFER",
+    "HIRED",
+    "REJECTED",
+    "WITHDRAWN",
+]
+
+
+class OpeningCreate(BaseModel):
+    title: Annotated[NonBlankText, Field(min_length=2, max_length=160)]
+    description: str = Field(default="", max_length=20_000)
+    required_skills: list[Skill] = Field(min_length=1, max_length=100)
+    preferred_skills: list[Skill] = Field(default_factory=list, max_length=100)
+
+
+class OpeningUpdate(BaseModel):
+    title: Annotated[NonBlankText, Field(min_length=2, max_length=160)] | None = None
+    description: str | None = Field(default=None, max_length=20_000)
+    required_skills: list[Skill] | None = Field(default=None, min_length=1, max_length=100)
+    preferred_skills: list[Skill] | None = Field(default=None, max_length=100)
+    status: Literal["OPEN", "CLOSED"] | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_null_values(cls, value: Any) -> Any:
+        if isinstance(value, dict):
+            null_fields = [
+                field
+                for field in (
+                    "title",
+                    "description",
+                    "required_skills",
+                    "preferred_skills",
+                    "status",
+                )
+                if field in value and value[field] is None
+            ]
+            if null_fields:
+                raise ValueError(
+                    f"Fields cannot be null: {', '.join(null_fields)}."
+                )
+        return value
+
+
+class OpeningResponse(BaseModel):
+    opening_id: str
+    title: str
+    description: str
+    required_skills: list[str]
+    preferred_skills: list[str]
+    status: str
+    created_at: str
+    updated_at: str
+
+
+class CandidateCreate(BaseModel):
+    name: Annotated[NonBlankText, Field(max_length=160)]
+    email: str | None = Field(default=None, max_length=320)
+    opening_id: str = Field(min_length=1, max_length=80)
+    skills: list[Skill] = Field(default_factory=list, max_length=100)
+    resume_text: str = Field(default="", max_length=200_000)
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, value: str | None) -> str | None:
+        if value is not None and not re.fullmatch(
+            r"[^@\s]+@[^@\s]+\.[^@\s]+", value
+        ):
+            raise ValueError("Enter a valid email address.")
+        return value
+
+
+class CandidateUpdate(BaseModel):
+    name: Annotated[NonBlankText, Field(max_length=160)] | None = None
+    email: str | None = Field(default=None, max_length=320)
+    skills: list[Skill] | None = Field(default=None, max_length=100)
+    application_status: ApplicationStatus | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def reject_null_values(cls, value: Any) -> Any:
+        if isinstance(value, dict):
+            null_fields = [
+                field
+                for field in ("name", "skills", "application_status")
+                if field in value and value[field] is None
+            ]
+            if null_fields:
+                raise ValueError(
+                    f"Fields cannot be null: {', '.join(null_fields)}."
+                )
+        return value
+
+    @field_validator("email")
+    @classmethod
+    def validate_email(cls, value: str | None) -> str | None:
+        if value is not None and not re.fullmatch(
+            r"[^@\s]+@[^@\s]+\.[^@\s]+", value
+        ):
+            raise ValueError("Enter a valid email address.")
+        return value
+
+
+class CandidateResponse(BaseModel):
+    candidate_id: str
+    name: str
+    email: str | None
+    opening_id: str
+    skills: list[str]
+    resume_text: str
+    resume_filename: str | None
+    application_status: str
+    score: float | None
+    score_evidence: dict[str, Any] | None
+    created_at: str
+    updated_at: str
 
 
 class ResumeUploadResponse(BaseModel):
     job_id: str
     filename: str
+    candidate_id: str | None = None
     status: str
     message: str
 
@@ -22,22 +162,22 @@ class ParseResponse(BaseModel):
 
 
 class ScoreRequest(BaseModel):
-    job_id: str
+    job_id: str = Field(min_length=1, max_length=80)
     candidate_id: str
-    job_id_reference: Optional[str] = None
 
 
 class ScoreResponse(BaseModel):
     job_id: str
     candidate_id: str
     score: float
+    evidence: dict[str, Any]
+    human_review_required: bool = True
     status: str
     message: str
 
 
 class ShortlistRequest(BaseModel):
-    job_id: str
-    candidates: List[Dict[str, Any]]
+    candidates: list[dict[str, Any]]
     minimum_score: float = Field(default=60.0, ge=0.0, le=100.0)
 
 
@@ -51,18 +191,71 @@ class ShortlistResponse(BaseModel):
     job_id: str
     status: str
     shortlisted_count: int
-    candidates: List[ShortlistedCandidate]
+    candidates: list[ShortlistedCandidate]
+    human_review_required: bool = True
+    simulation_only: bool = False
     message: str
+
+
+class PersistedShortlistRequest(BaseModel):
+    minimum_score: float = Field(default=60.0, ge=0.0, le=100.0)
+
+
+ScreeningIntent = Literal[
+    "skills",
+    "experience",
+    "availability",
+    "salary_expectation",
+]
+
+
+class ScreeningAnswerRequest(BaseModel):
+    question_id: Annotated[
+        str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)
+    ]
+    question: Annotated[
+        str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)
+    ]
+    answer: str = Field(max_length=10_000)
+    expected_intent: ScreeningIntent
+
+
+class ScreeningReportRequest(BaseModel):
+    answers: list[ScreeningAnswerRequest] = Field(min_length=1, max_length=20)
+
+
+class ScreeningReportResponse(BaseModel):
+    report_id: str
+    candidate_id: str
+    opening_id: str
+    created_at: str
+    method: Literal["day25_keyword_and_regex_rules"]
+    answers: list[dict[str, Any]]
+    review_flags: list[str]
+    human_review_required: Literal[True] = True
 
 
 class JobStatusResponse(BaseModel):
     job_id: str
     status: str
-    result: Optional[Dict[str, Any]] = None
-    error: Optional[str] = None
+    result: dict[str, Any] | None = None
+    error: str | None = None
 
 
 class ErrorResponse(BaseModel):
     error: str
     message: str
-    details: Optional[Dict[str, Any]] = None
+    details: dict[str, Any] | None = None
+
+
+class RecruiterLoginRequest(BaseModel):
+    username: Annotated[
+        str, StringConstraints(strip_whitespace=True, min_length=1, max_length=160)
+    ]
+    password: Annotated[str, StringConstraints(min_length=1, max_length=1024)]
+
+
+class RecruiterSessionResponse(BaseModel):
+    authenticated: bool
+    username: str | None = None
+    expires_at: float | None = None

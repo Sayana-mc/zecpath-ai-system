@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.segmentation_engine import process_all_resumes
+from .segmentation_engine import process_all_resumes
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent

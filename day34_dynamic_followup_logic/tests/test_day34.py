@@ -1,19 +1,6 @@
-import sys
-from pathlib import Path
-
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-SRC_DIR = (
-    PROJECT_ROOT
-    / "day34_dynamic_followup_logic"
-    / "src"
-)
-
-sys.path.insert(0, str(SRC_DIR))
-
-from followup_engine import FollowUpEngine
-from adaptive_questioning import AdaptiveQuestioning
-from decision_tree import FollowUpDecisionTree
+from day34_dynamic_followup_logic.src.followup_engine import FollowUpEngine
+from day34_dynamic_followup_logic.src.adaptive_questioning import AdaptiveQuestioning
+from day34_dynamic_followup_logic.src.decision_tree import FollowUpDecisionTree
 
 
 def test_incomplete_response():
