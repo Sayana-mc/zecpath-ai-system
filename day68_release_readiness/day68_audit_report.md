@@ -73,8 +73,10 @@ security or code review of every historical exercise.
   restore process, or tested production database configuration.
 - SQLite applicant data and extracted text are unencrypted. No tenant isolation,
   multiple recruiter accounts, or RBAC exists.
-- The legacy environment-credential mode does not store a password hash. Basic
-  auth must be confined to localhost or protected by TLS.
+- Recruiter passwords are stored as salted PBKDF2 hashes in SQLite; no
+  environment-based password mode is supported. Direct HTTP Basic
+  authentication remains available for API clients and must be confined to
+  localhost or protected by TLS.
 - Candidate lists are unpaginated and return full extracted resume text.
 - Resume processing runs as an in-process FastAPI background task; it is not a
   durable external worker queue, and duplicate-content detection is absent.

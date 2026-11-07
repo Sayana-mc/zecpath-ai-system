@@ -9,27 +9,33 @@ and are not all wired into that API.
 
 - Create, list, edit, close, and delete job openings.
 - Register, list, edit, track, and delete candidate applications.
-- Protect API operations with a single environment-configured recruiter
-  username and password. The dashboard receives an HTTP-only session cookie
-  that survives page reloads and expires after 8 hours; direct API clients may
-  continue to use HTTP Basic authentication.
+- Protect API operations with a single SQLite-backed recruiter account. The
+  dashboard receives an HTTP-only session cookie that survives page reloads
+  and expires after 8 hours; direct API clients may continue to use HTTP Basic
+  authentication.
 - Upload TXT, DOCX, and text-based PDF resumes (up to 5 MiB) and extract text.
 - Review the saved extracted resume text and the exact snippets used by matching.
 - Persist application, processing, score, and review data in SQLite.
-- Calculate a transparent exact required-skill overlap score from explicitly
-  supplied candidate skills and/or exact skill mentions in extracted resume
-  text. The response includes the matching evidence.
-- Clear saved scores and evidence when a candidate's skills/resume or a job's
-  required skills change; affected applications must be rescored before they
-  appear in shortlist suggestions.
+- Extract skills, education, and dated work history with the existing Day 9-11
+  parsers; persist the structured extraction with the candidate record.
+- Calculate a transparent weighted score using Day 9-11 extracted evidence,
+  Day 12 local sentence embeddings when a resume is present, and the active Day
+  13 scoring formula. The response includes component evidence, weights,
+  contributions, missing-input reasons, classification, and rank.
+- Clear saved scores and evidence when score inputs change, including candidate
+  name/skills/resume and job title, description, requirements, or preferred
+  skills; affected applications must be rescored before shortlist suggestions.
 - Rank previously scored applications for a job as a recruiter review aid.
 - Save rule-based screening-answer notes and review flags. The Day 25 keyword
   classifier and regex extractors do not score or rank candidates.
 - Use interactive API documentation at `/docs`.
 
-The matching method is a simple lexical heuristic, not semantic AI, a validated
-employment model, or a recommendation to reject a candidate. Every score and
-shortlist requires human review. No external AI or ATS service is called.
+The scoring method is an experimental heuristic, not a validated employment
+model or a recommendation to reject a candidate. Day 12 inference runs locally
+from the `all-MiniLM-L6-v2` model cache; no resume text or scoring request is
+sent to an external AI service. Missing evidence is reported and contributes
+zero under the existing Day 13 normalization. Every score and shortlist
+requires human review.
 Screening notes use separate keyword/regex rules; their heuristic output is not
 validated and is not included in match scores. Scanned-image OCR, multiple
 recruiter roles, identity-provider integration, notifications, and production
@@ -45,6 +51,8 @@ deployment are not implemented in the root API.
 - `python-docx` and `pypdf` for DOCX/PDF text extraction; TXT is decoded as
   UTF-8.
 - `python-multipart` for file-upload form parsing.
+- `sentence-transformers` for local Day 12 embedding inference; the model must
+  already be cached before scoring candidates with resumes.
 - A same-origin HTML/CSS/JavaScript dashboard in `static/index.html`.
 - Pytest and HTTPX for root and repository testing.
 
@@ -67,6 +75,18 @@ The initializer prompts for a username and password without echoing the
 password, requires at least 16 characters, and stores a salted PBKDF2-HMAC
 hash. It only creates the first account and will not overwrite an existing
 account. The database is created at its configured path before the prompt.
+There is no shipped/default recruiter username or password.
+
+To replace a forgotten username or password, stop the server and run:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.reset_recruiter
+```
+
+The reset prompts for a new username and password without echoing the
+password, stores a new salted hash, and revokes existing sessions. Passwords
+cannot be recovered or displayed. If `ZECPATH_DB_PATH` is set, set it to the
+same database path before account creation, reset, and server startup.
 
 Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) for the recruiter
 workspace and sign in with those credentials. `/docs` documents the protected
@@ -79,17 +99,48 @@ and reloads saved data after a backend connection is restored. The small
 browser UI and backend share one FastAPI process; there is no separate frontend
 build or start command.
 
+### Use the recruiter dashboard
+
+1. Open `http://127.0.0.1:8000/` and sign in with the username and password
+   chosen during first-account setup. The dashboard and API share this
+   same-origin FastAPI server and its `ZECPATH_DB_PATH` database.
+2. Use **Create a job opening** to add a title and required skills. The
+   **Manage opening** form lets you update or close the selected opening.
+3. Use **Register candidate** to enter a candidate and either reported skills
+   or a resume file. TXT, DOCX, and text-based PDF resumes are extracted and
+   saved with the candidate record, including structured skills, education,
+   and detectable work history. Job openings can optionally include minimum
+   education and years of experience.
+4. In **Applications**, choose **Score** to combine Day 9-11 parsed evidence,
+   local Day 12 resume/job similarity when available, and Day 13's weighted
+   formula. Expand **Review score evidence**, **Review component scores**, and
+   **Review extracted resume details** to inspect inputs, missing components,
+   weights, and contributions. Use **Rank scored candidates** for review-only
+   shortlist suggestions.
+5. Expand **Screening report** on a candidate row, submit a question and
+   answer, then review the saved rule-based report. Screening notes and scores
+   are not automated hiring decisions; retain human review.
+6. Use **Refresh data** or reload the browser to retrieve persisted openings,
+   candidates, scores, and screening reports. **Sign out** revokes the session;
+   protected API data is unavailable until you sign in again.
+
+The Day 21 eligibility decision engine remains a separate stage prototype and
+is not currently exposed through the root recruiter dashboard or API. The
+standalone Day 16 API is also a demo, not the root app's runtime. There is no
+executable Day 20 ATS scorer; the root integration uses the existing Day 13
+weighted scorer rather than claiming an unavailable Day 20 feature. See the
+[Day 16/20 integration and verification report](docs/day16_day20_integration.md).
+
 ### Environment configuration
 
 | Variable | Required | Purpose |
 |---|---:|---|
 | `ZECPATH_DB_PATH` | No | SQLite file path. Defaults to `data/zecpath.sqlite3`. Set it before both account initialization and server startup. |
-| `ZECPATH_AUTH_USERNAME` | No | Legacy local-only authentication username. Prefer the database account initialized by `src.create_recruiter`. |
-| `ZECPATH_AUTH_PASSWORD` | No | Legacy local-only password (minimum 16 characters); it is read from the process environment and is not stored as a password hash. Do not use this mode for network exposure. |
 
-No `.env` file is loaded by the application. In PowerShell, environment
-variables apply to child processes started in that same terminal. Use a
-unique temporary database for a clean synthetic demo.
+Authentication uses only salted password hashes stored in SQLite; plaintext
+environment-variable credentials are not supported. No `.env` file is loaded
+by the application. Use a unique temporary database for a clean synthetic
+demo.
 
 ### API quick reference
 
@@ -108,7 +159,7 @@ cookie is present.
 | Candidates | `/api/v1/candidates` and `/api/v1/candidates/{candidate_id}` | Protected; GET/POST/PATCH/DELETE. |
 | Resume upload | `POST /api/v1/resumes/upload` | Protected multipart upload; TXT, DOCX, or text-based PDF up to 5 MiB. |
 | Processing status | `GET /api/v1/jobs/{job_id}` | Protected. |
-| Match score | `POST /api/v1/candidates/score` | Protected; deterministic exact-skill evidence. |
+| Match score | `POST /api/v1/candidates/score` | Protected; Day 9-13 evidence, local Day 12 semantics when a resume is present, and Day 13 weighted score. |
 | Shortlist suggestions | `POST /api/v1/openings/{opening_id}/shortlist` | Protected; uses saved scores and does not change candidate status. |
 | Screening notes | `POST/GET /api/v1/candidates/{candidate_id}/screening-reports` | Protected; rule-based notes, not an assessment score. |
 
@@ -116,14 +167,11 @@ Browser session-authenticated POST/PATCH/DELETE requests must have a matching
 same-origin `Origin` header. Direct API clients can use HTTP Basic; use it only
 over TLS outside localhost.
 
-If port 8000 is already in use, choose a free local port, for example:
-
-```powershell
-.\.venv\Scripts\python.exe -m uvicorn src.main:app --host 127.0.0.1 --port 8765
-```
-
-Then open `http://127.0.0.1:8765/`. The page uses same-origin relative API
-routes, so the UI and API always use the selected port together.
+Use the browser URL matching the port in the Uvicorn command. The documented
+command above uses port 8000; opening a page on port 8765 will not connect to
+that server. If you intentionally change the port, change the Uvicorn
+`--port` value and browser URL together. The page uses same-origin relative
+API routes, so the UI and API always use the selected port together.
 
 The API creates `data/zecpath.sqlite3` on first start. To use a different local
 database, set the path before launching:
@@ -134,19 +182,16 @@ $env:ZECPATH_DB_PATH = "$PWD\data\live-demo.sqlite3"
 ```
 
 Set `ZECPATH_DB_PATH` before running the first-recruiter initializer as well,
-so the account and application use the same database. Unset the variable to
-return to the default path. No external service keys are required. The
-application does not ship with a recruiter username or password.
-For legacy local setups, `ZECPATH_AUTH_USERNAME` and a unique
-`ZECPATH_AUTH_PASSWORD` of at least 16 characters can still configure
-environment-based authentication; those credentials are not persisted by the
-application. Login sessions are stored as SHA-256 token hashes in the selected
-SQLite database, use an HTTP-only, SameSite=Strict cookie, expire after 8
-hours, and are revoked on sign-out. Five failed logins for a username and
-client address are throttled for 15 minutes. Session-authenticated writes
-require a same-origin `Origin` header. The API also retains HTTP Basic for
-direct clients; Basic authentication must only be used over TLS if reachable
-through a network-facing proxy.
+so the account and application use the same database. Set it before the reset
+command as well. Unset the variable to return to the default path. No external
+service keys are required. The application does not ship with a recruiter
+username or password. Login sessions are stored as SHA-256 token hashes in the
+selected SQLite database, use an HTTP-only, SameSite=Strict cookie, expire
+after 8 hours, and are revoked on sign-out or credential reset. Five failed
+logins for a username and client address are throttled for 15 minutes.
+Session-authenticated writes require a same-origin `Origin` header. The API
+also retains HTTP Basic for direct clients; Basic authentication must only be
+used over TLS if reachable through a network-facing proxy.
 
 Keep the service bound to localhost. The single shared recruiter credential is
 not a substitute for an identity provider, multiple recruiter accounts, or
@@ -159,8 +204,9 @@ hardening.
 
 ## Local database backup and restore
 
-The application currently has no automated backup or migration command. For a
-local demo, stop Uvicorn before copying the configured SQLite database:
+The application currently has no automated backup or versioned migration
+command. Startup applies additive schema changes for newer root API fields.
+For a local demo, stop Uvicorn before copying the configured SQLite database:
 
 ```powershell
 Copy-Item .\data\zecpath.sqlite3 .\data\zecpath.sqlite3.backup
@@ -171,8 +217,8 @@ before replacing a database. To restore, stop Uvicorn, preserve the current
 database under a different name, then copy the verified backup to the exact
 configured database path. These file-copy instructions are only appropriate
 for a stopped local SQLite application; they are not a production backup or
-recovery plan. The database schema is created with `CREATE TABLE IF NOT EXISTS`
-and does not have versioned migrations.
+recovery plan. Schema creation and additive column upgrades are automatic but
+are not versioned migrations.
 
 ## Repeatable synthetic demo
 
@@ -180,8 +226,9 @@ The repository includes [data/demo_resume.txt](data/demo_resume.txt), a
 fictional text resume. Use only synthetic data:
 
 1. In `/docs`, call `POST /api/v1/openings` with a title, description, required
-   skills `["Python", "SQL", "Git"]`, and optional preferred skills. Save the
-   returned `opening_id`.
+   skills `["Python", "SQL", "Git"]`, optional preferred skills, and optional
+   `minimum_education` / `minimum_years_experience`. Save the returned
+   `opening_id`.
 2. Call `POST /api/v1/candidates` with a synthetic name/email, that
    `opening_id`, and an empty `skills` list. Save the returned `candidate_id`.
 3. Call `POST /api/v1/resumes/upload`, set `candidate_id`, and select
@@ -189,7 +236,11 @@ fictional text resume. Use only synthetic data:
 4. Call `GET /api/v1/jobs/{job_id}` to verify `COMPLETED`, then
    `GET /api/v1/candidates/{candidate_id}` to inspect the saved extracted text.
 5. Call `POST /api/v1/candidates/score` with the opening and candidate IDs.
-   Review the score evidence and `human_review_required` flag.
+   Review component scores, unavailable-input reasons, weights, contributions,
+   extracted evidence, rank, and the `human_review_required` flag. Resume
+   semantic scoring uses a locally cached Day 12 model. To cache it explicitly,
+   run `.\.venv\Scripts\python.exe -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"`
+   once while online, before running scoring.
 6. In the application row, expand **Screening report**, choose a question
    topic, enter a question and answer, and generate the rule-based report.
    Review its extracted fields and flags; it is not an assessment score.
@@ -245,6 +296,13 @@ evidence. The root API tests exercise its persistence and HTTP workflows.
   final validation, and release notes.
 - [Final ATS report](docs/reports/Final_ATS_Report.md) summarizes current
   status and acceptance blockers.
+- [Day 16/20 integration and verification report](docs/day16_day20_integration.md)
+  documents the actual root endpoints, Day 9-13 scoring flow, and integration
+  limits.
+- Import the [Postman collection](postman/ZecPath%20Recruiter%20API.postman_collection.json)
+  and [local environment](postman/ZecPath%20Local.postman_environment.json)
+  for synthetic HTTP API checks. Set the recruiter credentials locally and do
+  not export or share an environment containing real credentials.
 
 ## Troubleshooting
 
@@ -254,13 +312,13 @@ evidence. The root API tests exercise its persistence and HTTP workflows.
   `static/index.html` as a local file or use a different host/port). Confirm
   the dashboard sign-in succeeds. The frontend calls relative `/api/v1`
   routes, so no separate API URL or CORS configuration is needed.
-- **Dashboard sign-in fails:** Set `ZECPATH_AUTH_USERNAME` and a unique
-  `ZECPATH_AUTH_PASSWORD` of at least 16 characters in the same PowerShell
-  session that starts Uvicorn, or initialize the first recruiter account with
-  `.\.venv\Scripts\python.exe -m src.create_recruiter`. Missing credentials or
-  an uninitialized account cause protected API requests to fail with a server
-  configuration error. Five failed sign-ins from the same client address for
-  that username trigger a 15-minute cooldown.
+- **Dashboard sign-in fails:** Create the first account with
+  `.\.venv\Scripts\python.exe -m src.create_recruiter`. If you have forgotten
+  the username or password, stop Uvicorn and run
+  `.\.venv\Scripts\python.exe -m src.reset_recruiter` to replace both. Confirm
+  that the browser URL uses the same port as the active Uvicorn command and
+  that both commands use the same `ZECPATH_DB_PATH`, if configured. Five failed
+  sign-ins for a username/client address trigger a 15-minute cooldown.
 - **Sign-in expires:** Dashboard sessions last 8 hours. Sign in again after
   expiry or restart using the configured recruiter credentials.
 - **Port 8000 is already in use:** Stop the server you started in its own

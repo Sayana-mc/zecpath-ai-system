@@ -37,6 +37,8 @@ class OpeningCreate(BaseModel):
     description: str = Field(default="", max_length=20_000)
     required_skills: list[Skill] = Field(min_length=1, max_length=100)
     preferred_skills: list[Skill] = Field(default_factory=list, max_length=100)
+    minimum_education: str | None = Field(default=None, max_length=160)
+    minimum_years_experience: float | None = Field(default=None, ge=0, le=80)
 
 
 class OpeningUpdate(BaseModel):
@@ -44,6 +46,8 @@ class OpeningUpdate(BaseModel):
     description: str | None = Field(default=None, max_length=20_000)
     required_skills: list[Skill] | None = Field(default=None, min_length=1, max_length=100)
     preferred_skills: list[Skill] | None = Field(default=None, max_length=100)
+    minimum_education: str | None = Field(default=None, max_length=160)
+    minimum_years_experience: float | None = Field(default=None, ge=0, le=80)
     status: Literal["OPEN", "CLOSED"] | None = None
 
     @model_validator(mode="before")
@@ -74,6 +78,8 @@ class OpeningResponse(BaseModel):
     description: str
     required_skills: list[str]
     preferred_skills: list[str]
+    minimum_education: str | None = None
+    minimum_years_experience: float | None = None
     status: str
     created_at: str
     updated_at: str
@@ -134,6 +140,7 @@ class CandidateResponse(BaseModel):
     opening_id: str
     skills: list[str]
     resume_text: str
+    resume_data: dict[str, Any]
     resume_filename: str | None
     application_status: str
     score: float | None
@@ -158,6 +165,7 @@ class ParseResponse(BaseModel):
     job_id: str
     status: str
     parsed_text: str
+    extracted_data: dict[str, Any] = Field(default_factory=dict)
     message: str
 
 
@@ -171,6 +179,15 @@ class ScoreResponse(BaseModel):
     candidate_id: str
     score: float
     evidence: dict[str, Any]
+    job_title: str
+    candidate_name: str
+    extracted_skills: list[str]
+    matching_required_skills: list[str]
+    missing_required_skills: list[str]
+    education_details: list[dict[str, Any]]
+    experience_details: dict[str, Any]
+    components: dict[str, Any]
+    ranking: int
     human_review_required: bool = True
     status: str
     message: str

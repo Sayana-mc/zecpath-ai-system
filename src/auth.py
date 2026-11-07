@@ -1,6 +1,5 @@
 import hashlib
 import hmac
-import os
 import secrets
 
 from fastapi import Depends, HTTPException, Request, status
@@ -17,11 +16,7 @@ PASSWORD_SALT_BYTES = 16
 
 
 def authentication_is_configured() -> bool:
-    username = os.environ.get("ZECPATH_AUTH_USERNAME")
-    password = os.environ.get("ZECPATH_AUTH_PASSWORD")
-    return database.has_recruiter_accounts() or bool(
-        username and password and len(password) >= 16
-    )
+    return database.has_recruiter_accounts()
 
 
 def hash_recruiter_password(password: str) -> tuple[str, str]:
@@ -33,44 +28,26 @@ def hash_recruiter_password(password: str) -> tuple[str, str]:
 
 
 def is_configured_recruiter(username: str) -> bool:
-    if database.has_recruiter_accounts():
-        return database.get_recruiter_account(username) is not None
-    configured_username = os.environ.get("ZECPATH_AUTH_USERNAME")
-    configured_password = os.environ.get("ZECPATH_AUTH_PASSWORD")
-    return bool(
-        configured_username
-        and configured_password
-        and len(configured_password) >= 16
-        and secrets.compare_digest(username, configured_username)
-    )
+    return database.get_recruiter_account(username) is not None
 
 
 def verify_recruiter_credentials(username: str, password: str) -> str | None:
-    if database.has_recruiter_accounts():
-        account = database.get_recruiter_account(username)
-        salt = bytes.fromhex(account["password_salt"]) if account else bytes(PASSWORD_SALT_BYTES)
-        expected = (
-            bytes.fromhex(account["password_hash"])
-            if account
-            else bytes(32)
-        )
-        supplied = hashlib.pbkdf2_hmac(
-            "sha256",
-            password.encode("utf-8"),
-            salt,
-            PASSWORD_HASH_ITERATIONS,
-        )
-        if account and hmac.compare_digest(supplied, expected):
-            return account["username"]
-        return None
-
-    configured_username = os.environ.get("ZECPATH_AUTH_USERNAME")
-    configured_password = os.environ.get("ZECPATH_AUTH_PASSWORD")
-    if not configured_username or not configured_password or len(configured_password) < 16:
-        return None
-    username_matches = secrets.compare_digest(username, configured_username)
-    password_matches = secrets.compare_digest(password, configured_password)
-    return configured_username if username_matches and password_matches else None
+    account = database.get_recruiter_account(username)
+    salt = (
+        bytes.fromhex(account["password_salt"])
+        if account
+        else bytes(PASSWORD_SALT_BYTES)
+    )
+    expected = bytes.fromhex(account["password_hash"]) if account else bytes(32)
+    supplied = hashlib.pbkdf2_hmac(
+        "sha256",
+        password.encode("utf-8"),
+        salt,
+        PASSWORD_HASH_ITERATIONS,
+    )
+    if account and hmac.compare_digest(supplied, expected):
+        return account["username"]
+    return None
 
 
 def require_recruiter(

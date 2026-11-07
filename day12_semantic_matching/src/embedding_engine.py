@@ -10,9 +10,10 @@ class EmbeddingEngine:
     Sentence Transformers.
     """
 
-    def __init__(self):
+    def __init__(self, local_files_only=False):
         self.model = SentenceTransformer(
-            MODEL_NAME
+            MODEL_NAME,
+            local_files_only=local_files_only,
         )
 
     def encode(self, text):

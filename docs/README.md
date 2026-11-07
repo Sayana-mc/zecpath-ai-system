@@ -12,12 +12,37 @@ recruiter application.
   variables, API reference, tests, limitations, and local demo workflow.
 - [Verified root architecture](architecture/ATS_Architecture.md) — actual app
   entrypoint and data flow.
+- [System architecture](system_architecture.md) — current root-app components,
+  trust boundaries, and integrated versus prototype stages.
+- [Database schema](database_schema.md) — SQLite tables, relationships, and
+  persistence behavior.
+- [API documentation](api_documentation.md) — root route contracts and auth
+  requirements.
+- [Setup and run guide](setup_and_run.md) — Windows commands, first account,
+  reset, URL, Postman, and tests.
+- [ATS scoring methodology](ats_scoring_methodology.md) — active Day 9–13
+  inputs, weights, formula, and cautions.
+- [Resume processing](resume_processing.md) — upload validation, extraction,
+  retention, and failure behavior.
+- [Known limitations](known_limitations.md) — integration boundary and
+  operational gaps.
+- [Testing report](testing_report.md) — measured tests and synthetic browser
+  verification.
+- [Day 1–68 audit](day01_day68_audit.md) and
+  [integration report](day01_day68_integration_report.md) — inventory,
+  evidence, verification gates, and explicit limits.
 - [Developer guide](developer_guide/Developer_Guide.md) — Windows setup,
   testing, and troubleshooting.
 - [Daily report catalog](daily_reports.md) — historical module themes and
   selected evidence.
 - [AI roadmap](ai_roadmap.md) — implemented deterministic capabilities versus
   proposed AI work.
+- [Day 16/20 integration and verification](day16_day20_integration.md) —
+  distinguishes the standalone Day 16 demo from the root API and documents the
+  Day 9-13 scoring integration and evidence.
+- [Postman collection](../postman/ZecPath%20Recruiter%20API.postman_collection.json)
+  and [local environment](../postman/ZecPath%20Local.postman_environment.json)
+  — synthetic recruiter API workflow; no credentials are included.
 - [Internship portfolio](internship_portfolio.md) — evidence-based portfolio
   summary.
 
@@ -53,6 +78,6 @@ recruiter application.
 
 The root app is a small local FastAPI service and dashboard. Many numbered
 folders are independent exercises, simulations, or plans. Consult the current
-root API, schemas, tests, and [integration report](../day68_release_readiness/day68_integration_report.md)
+root API, schemas, tests, and [Day 1–68 integration report](day01_day68_integration_report.md)
 before describing a historical module as a live feature. No document here
 certifies production readiness.

@@ -33,6 +33,8 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
             description TEXT NOT NULL DEFAULT '',
             required_skills TEXT NOT NULL,
             preferred_skills TEXT NOT NULL,
+            minimum_education TEXT,
+            minimum_years_experience REAL,
             status TEXT NOT NULL CHECK (status IN ('OPEN', 'CLOSED')),
             created_at TEXT NOT NULL,
             updated_at TEXT NOT NULL
@@ -44,6 +46,7 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
             opening_id TEXT NOT NULL REFERENCES openings(opening_id) ON DELETE CASCADE,
             skills TEXT NOT NULL,
             resume_text TEXT NOT NULL DEFAULT '',
+            resume_data TEXT NOT NULL DEFAULT '{}',
             resume_filename TEXT,
             application_status TEXT NOT NULL CHECK (
                 application_status IN (
@@ -101,6 +104,22 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
         );
         """
     )
+    opening_columns = {
+        row["name"] for row in connection.execute("PRAGMA table_info(openings)")
+    }
+    if "minimum_education" not in opening_columns:
+        connection.execute("ALTER TABLE openings ADD COLUMN minimum_education TEXT")
+    if "minimum_years_experience" not in opening_columns:
+        connection.execute(
+            "ALTER TABLE openings ADD COLUMN minimum_years_experience REAL"
+        )
+    candidate_columns = {
+        row["name"] for row in connection.execute("PRAGMA table_info(candidates)")
+    }
+    if "resume_data" not in candidate_columns:
+        connection.execute(
+            "ALTER TABLE candidates ADD COLUMN resume_data TEXT NOT NULL DEFAULT '{}'"
+        )
     try:
         yield connection
         connection.commit()
@@ -234,6 +253,34 @@ def create_first_recruiter_account(
         )
 
 
+def reset_recruiter_account(
+    username: str, password_salt: str, password_hash: str
+) -> None:
+    with _connection() as connection:
+        connection.execute("BEGIN IMMEDIATE")
+        accounts = connection.execute(
+            "SELECT username FROM recruiter_accounts"
+        ).fetchall()
+        if not accounts:
+            raise ValueError(
+                "No recruiter account exists. Create the first account instead."
+            )
+        if len(accounts) != 1:
+            raise ValueError(
+                "Expected exactly one recruiter account; credentials were not changed."
+            )
+        connection.execute(
+            """
+            UPDATE recruiter_accounts
+            SET username = ?, password_salt = ?, password_hash = ?
+            WHERE username = ?
+            """,
+            (username, password_salt, password_hash, accounts[0]["username"]),
+        )
+        connection.execute("DELETE FROM recruiter_sessions")
+        connection.execute("DELETE FROM recruiter_login_attempts")
+
+
 def revoke_recruiter_session(token: str) -> None:
     with _connection() as connection:
         connection.execute(
@@ -327,6 +374,7 @@ def _candidate(row: sqlite3.Row | None) -> dict[str, Any] | None:
         return None
     record = dict(row)
     record["skills"] = json.loads(record["skills"])
+    record["resume_data"] = json.loads(record["resume_data"])
     record["score_evidence"] = (
         json.loads(record["score_evidence"])
         if record["score_evidence"] is not None
@@ -343,8 +391,9 @@ def create_opening(data: dict[str, Any]) -> dict[str, Any]:
             """
             INSERT INTO openings (
                 opening_id, title, description, required_skills,
-                preferred_skills, status, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, 'OPEN', ?, ?)
+                preferred_skills, minimum_education,
+                minimum_years_experience, status, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, 'OPEN', ?, ?)
             """,
             (
                 opening_id,
@@ -352,6 +401,8 @@ def create_opening(data: dict[str, Any]) -> dict[str, Any]:
                 data.get("description", ""),
                 json.dumps(data["required_skills"]),
                 json.dumps(data.get("preferred_skills", [])),
+                data.get("minimum_education"),
+                data.get("minimum_years_experience"),
                 now,
                 now,
             ),
@@ -392,6 +443,8 @@ def update_opening(opening_id: str, data: dict[str, Any]) -> dict[str, Any] | No
         "description",
         "required_skills",
         "preferred_skills",
+        "minimum_education",
+        "minimum_years_experience",
         "status",
     }
     updates = {key: value for key, value in data.items() if key in allowed_fields}
@@ -400,7 +453,11 @@ def update_opening(opening_id: str, data: dict[str, Any]) -> dict[str, Any] | No
     updates["updated_at"] = _now()
     with _connection() as connection:
         current = connection.execute(
-            "SELECT required_skills FROM openings WHERE opening_id = ?",
+            """
+            SELECT title, description, required_skills, preferred_skills,
+                   minimum_education, minimum_years_experience
+            FROM openings WHERE opening_id = ?
+            """,
             (opening_id,),
         ).fetchone()
         if current is None:
@@ -410,6 +467,22 @@ def update_opening(opening_id: str, data: dict[str, Any]) -> dict[str, Any] | No
             and json.loads(current["required_skills"])
             != updates["required_skills"]
         )
+        scoring_inputs_changed = required_skills_changed or any(
+            key in updates
+            and (
+                json.loads(current[key])
+                if key == "preferred_skills"
+                else current[key]
+            )
+            != updates[key]
+            for key in (
+                "title",
+                "description",
+                "preferred_skills",
+                "minimum_education",
+                "minimum_years_experience",
+            )
+        )
         for key in ("required_skills", "preferred_skills"):
             if key in updates:
                 updates[key] = json.dumps(updates[key])
@@ -418,7 +491,7 @@ def update_opening(opening_id: str, data: dict[str, Any]) -> dict[str, Any] | No
             f"UPDATE openings SET {assignments} WHERE opening_id = ?",
             (*updates.values(), opening_id),
         )
-        if required_skills_changed:
+        if scoring_inputs_changed:
             connection.execute(
                 """
                 UPDATE candidates
@@ -458,8 +531,8 @@ def create_candidate(data: dict[str, Any]) -> dict[str, Any]:
             """
             INSERT INTO candidates (
                 candidate_id, name, email, opening_id, skills, resume_text,
-                application_status, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, 'APPLIED', ?, ?)
+                resume_data, application_status, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, '{}', 'APPLIED', ?, ?)
             """,
             (
                 candidate_id,
@@ -532,6 +605,16 @@ def update_candidate(
             if skills_changed:
                 updates["score"] = None
                 updates["score_evidence"] = None
+        if "name" in updates:
+            current_name = connection.execute(
+                "SELECT name FROM candidates WHERE candidate_id = ?",
+                (candidate_id,),
+            ).fetchone()
+            if current_name is None:
+                return None
+            if current_name["name"] != updates["name"]:
+                updates["score"] = None
+                updates["score_evidence"] = None
         assignments = ", ".join(f"{key} = ?" for key in updates)
         connection.execute(
             f"UPDATE candidates SET {assignments} WHERE candidate_id = ?",
@@ -546,17 +629,26 @@ def update_candidate(
 
 
 def save_candidate_resume(
-    candidate_id: str, filename: str, parsed_text: str
+    candidate_id: str,
+    filename: str,
+    parsed_text: str,
+    resume_data: dict[str, Any],
 ) -> bool:
     with _connection() as connection:
         cursor = connection.execute(
             """
             UPDATE candidates
-            SET resume_filename = ?, resume_text = ?, score = NULL,
-                score_evidence = NULL, updated_at = ?
+            SET resume_filename = ?, resume_text = ?, resume_data = ?,
+                score = NULL, score_evidence = NULL, updated_at = ?
             WHERE candidate_id = ?
             """,
-            (filename, parsed_text, _now(), candidate_id),
+            (
+                filename,
+                parsed_text,
+                json.dumps(resume_data),
+                _now(),
+                candidate_id,
+            ),
         )
         return cursor.rowcount > 0
 

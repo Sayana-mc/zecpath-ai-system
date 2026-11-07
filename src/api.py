@@ -55,6 +55,11 @@ from .services import (
     parse_resume,
     shortlist_candidates,
 )
+from .integrated_scoring import (
+    ScoringModelUnavailableError,
+    calculate_integrated_score,
+)
+from .resume_analysis import extract_resume_data
 
 
 logger = logging.getLogger(__name__)
@@ -72,6 +77,13 @@ router = APIRouter(
 
 UPLOAD_DIR = Path(__file__).resolve().parents[1] / "uploads"
 MAX_RESUME_BYTES = 5 * 1024 * 1024
+RESUME_MIME_TYPES = {
+    ".pdf": {"application/pdf"},
+    ".docx": {
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    ".txt": {"text/plain"},
+}
 
 
 def _opening_or_404(opening_id: str) -> dict:
@@ -202,8 +214,9 @@ def process_resume_job(
     try:
         update_job(job_id, "PROCESSING")
         parsed_text = parse_resume(file_path)
+        resume_data = extract_resume_data(parsed_text)
         if candidate_id and not database.save_candidate_resume(
-            candidate_id, filename, parsed_text
+            candidate_id, filename, parsed_text, resume_data
         ):
             raise InvalidResumeError(
                 "The candidate record was removed before resume processing completed."
@@ -214,6 +227,7 @@ def process_resume_job(
             result={
                 "candidate_id": candidate_id,
                 "parsed_text": parsed_text,
+                "resume_data": resume_data,
             },
         )
         job = database.get_processing_job(job_id)
@@ -451,6 +465,14 @@ async def upload_resume(
             status_code=400,
             detail="Unsupported resume format. Use PDF, DOCX, or TXT.",
         )
+    content_type = (file.content_type or "").casefold()
+    if content_type and content_type != "application/octet-stream" and (
+        content_type not in RESUME_MIME_TYPES[extension]
+    ):
+        raise HTTPException(
+            status_code=400,
+            detail="Resume file type does not match its filename extension.",
+        )
     if candidate_id is not None:
         _candidate_or_404(candidate_id)
 
@@ -528,6 +550,7 @@ def parse_resume_endpoint(request: ParseRequest) -> ParseResponse:
             },
         )
     parsed_text = (job.get("result") or {}).get("parsed_text", "")
+    resume_data = (job.get("result") or {}).get("resume_data", {})
     if not parsed_text:
         raise HTTPException(
             status_code=410,
@@ -537,6 +560,7 @@ def parse_resume_endpoint(request: ParseRequest) -> ParseResponse:
         job_id=request.job_id,
         status=job["status"],
         parsed_text=parsed_text,
+        extracted_data=resume_data,
         message="Resume text extracted successfully.",
     )
 
@@ -551,19 +575,52 @@ def score_candidate(request: ScoreRequest) -> ScoreResponse:
             detail="Candidate application does not belong to this job opening.",
         )
     try:
-        score, evidence = calculate_candidate_match(candidate, opening)
+        calculate_candidate_match(candidate, opening)
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from None
+    try:
+        score, evidence = calculate_integrated_score(candidate, opening)
+    except ScoringModelUnavailableError as exc:
+        logger.exception("Day 12 semantic model unavailable")
+        raise HTTPException(status_code=503, detail=str(exc)) from None
     if not database.save_candidate_score(request.candidate_id, score, evidence):
+        raise HTTPException(status_code=404, detail="Candidate not found.")
+    scored_candidates = [
+        item
+        for item in database.list_candidates(request.job_id)
+        if item["score"] is not None
+    ]
+    scored_candidates.sort(key=lambda item: (-item["score"], item["name"]))
+    ranking = next(
+        (
+            index
+            for index, item in enumerate(scored_candidates, start=1)
+            if item["candidate_id"] == request.candidate_id
+        ),
+        None,
+    )
+    if ranking is None:
         raise HTTPException(status_code=404, detail="Candidate not found.")
     return ScoreResponse(
         job_id=request.job_id,
         candidate_id=request.candidate_id,
         score=score,
         evidence=evidence,
+        job_title=opening["title"],
+        candidate_name=candidate["name"],
+        extracted_skills=evidence["extracted_skills"],
+        matching_required_skills=evidence["matching_required_skills"],
+        missing_required_skills=evidence["missing_required_skills"],
+        education_details=evidence["education_details"],
+        experience_details=evidence["experience_details"],
+        components=evidence["components"],
+        ranking=ranking,
         human_review_required=True,
         status="SCORED",
-        message="Exact required-skill overlap calculated; human review is required.",
+        message=(
+            "Day 9-13 ATS score calculated from available evidence; human review "
+            "is required."
+        ),
     )
 
 

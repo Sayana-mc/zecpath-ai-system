@@ -10,7 +10,8 @@ def main() -> None:
     database.initialize_database()
     if database.has_recruiter_accounts():
         raise SystemExit(
-            "A recruiter account is already initialized. No changes were made."
+            "A recruiter account is already initialized. No changes were made. "
+            "Use `python -m src.reset_recruiter` to replace its credentials."
         )
 
     username = input("Recruiter username: ").strip()

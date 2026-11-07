@@ -1,0 +1,321 @@
+{
+  "info": {
+    "_postman_id": "66a4deec-a9d8-4e16-b9f0-804cf2b9cbb2",
+    "name": "ZecPath Recruiter API",
+    "description": "Root FastAPI recruiter workflow. Uses the Postman cookie jar for the HTTP-only session; credentials and applicant data must be synthetic.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "noauth"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000" },
+    { "key": "recruiterUsername", "value": "" },
+    { "key": "recruiterPassword", "value": "" },
+    { "key": "openingId", "value": "" },
+    { "key": "candidateId", "value": "" },
+    { "key": "jobId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/health"
+      }
+    },
+    {
+      "name": "Recruiter login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Login succeeds', function () { pm.response.to.have.status(200); });",
+              "pm.test('Session cookie is HTTP-only', function () { pm.expect(pm.response.headers.get('Set-Cookie') || '').to.include('HttpOnly'); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"{{recruiterUsername}}\",\n  \"password\": \"{{recruiterPassword}}\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/auth/session"
+      }
+    },
+    {
+      "name": "Check session",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/auth/session"
+      }
+    },
+    {
+      "name": "Create opening",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Opening created', function () { pm.response.to.have.status(201); });",
+              "pm.environment.set('openingId', pm.response.json().opening_id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Data Analyst\",\n  \"description\": \"Analyze business data using Python and SQL.\",\n  \"required_skills\": [\"Python\", \"SQL\"],\n  \"preferred_skills\": [\"Power BI\"],\n  \"minimum_education\": \"Bachelor\",\n  \"minimum_years_experience\": 2\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/openings"
+      }
+    },
+    {
+      "name": "List openings",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/openings"
+      }
+    },
+    {
+      "name": "Get opening",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/openings/{{openingId}}"
+      }
+    },
+    {
+      "name": "Update opening requirements",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"description\": \"Analyze business data using Python and SQL. Synthetic demo requirement update.\",\n  \"minimum_years_experience\": 2\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/openings/{{openingId}}"
+      }
+    },
+    {
+      "name": "Create candidate",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Candidate created', function () { pm.response.to.have.status(201); });",
+              "pm.environment.set('candidateId', pm.response.json().candidate_id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Synthetic Applicant\",\n  \"email\": \"synthetic.applicant@example.test\",\n  \"opening_id\": \"{{openingId}}\",\n  \"skills\": [\"Python\"]\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/candidates"
+      }
+    },
+    {
+      "name": "Upload synthetic resume",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Resume accepted', function () { pm.response.to.have.status(202); });",
+              "pm.environment.set('jobId', pm.response.json().job_id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Origin", "value": "{{baseUrl}}" }],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "candidate_id", "value": "{{candidateId}}", "type": "text" },
+            { "key": "file", "type": "file", "src": "" }
+          ]
+        },
+        "url": "{{baseUrl}}/api/v1/resumes/upload"
+      }
+    },
+    {
+      "name": "Check resume job",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/jobs/{{jobId}}"
+      }
+    },
+    {
+      "name": "Get candidate",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/candidates/{{candidateId}}"
+      }
+    },
+    {
+      "name": "List candidates for opening",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/candidates?opening_id={{openingId}}"
+      }
+    },
+    {
+      "name": "Update candidate status",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"application_status\": \"IN_REVIEW\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/candidates/{{candidateId}}"
+      }
+    },
+    {
+      "name": "Parse completed resume",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"job_id\": \"{{jobId}}\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/resumes/parse"
+      }
+    },
+    {
+      "name": "Score candidate",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Score calculated with human review flag', function () { pm.response.to.have.status(200); pm.expect(pm.response.json().human_review_required).to.eql(true); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"job_id\": \"{{openingId}}\",\n  \"candidate_id\": \"{{candidateId}}\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/candidates/score"
+      }
+    },
+    {
+      "name": "Shortlist review suggestions",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"minimum_score\": 0\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/openings/{{openingId}}/shortlist"
+      }
+    },
+    {
+      "name": "Create screening report",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Origin", "value": "{{baseUrl}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"answers\": [\n    {\n      \"question_id\": \"Q1\",\n      \"question\": \"Which Python data tools have you used?\",\n      \"answer\": \"I used Python and pandas in a synthetic project.\",\n      \"expected_intent\": \"skills\"\n    }\n  ]\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": "{{baseUrl}}/api/v1/candidates/{{candidateId}}/screening-reports"
+      }
+    },
+    {
+      "name": "List candidate screening reports",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/candidates/{{candidateId}}/screening-reports"
+      }
+    },
+    {
+      "name": "Sign out",
+      "request": {
+        "method": "DELETE",
+        "header": [{ "key": "Origin", "value": "{{baseUrl}}" }],
+        "url": "{{baseUrl}}/api/v1/auth/session"
+      }
+    },
+    {
+      "name": "Protected route after sign out (expect 401)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Protected route denies signed-out session', function () { pm.response.to.have.status(401); });"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/v1/openings"
+      }
+    }
+  ]
+}

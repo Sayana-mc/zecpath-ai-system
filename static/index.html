@@ -130,8 +130,9 @@
     <div id="notice" class="notice" role="status" aria-live="polite"></div>
     <div id="workspace" hidden>
     <div class="banner">
-      <strong>Local demo only.</strong> Match scores use exact required-skill overlap, not AI or a validated hiring model.
-      Review the evidence yourself. No score makes an employment decision.
+      <strong>Decision support only.</strong> Scores combine extracted or reported skills,
+      available experience and education evidence, and local semantic similarity when a resume is present.
+      Missing components contribute zero and are identified in the evidence. Review every result; no score makes an employment decision.
     </div>
     <div class="grid">
       <section class="panel" aria-labelledby="createOpeningHeading">
@@ -145,6 +146,10 @@
           <input id="requiredSkills" name="required_skills" required placeholder="Python, SQL, Git">
           <label for="preferredSkills">Preferred skills (comma separated)</label>
           <input id="preferredSkills" name="preferred_skills" placeholder="Power BI">
+          <label for="minimumEducation">Minimum education (optional)</label>
+          <input id="minimumEducation" name="minimum_education" maxlength="160" placeholder="Bachelor's degree">
+          <label for="minimumExperience">Minimum years of experience (optional)</label>
+          <input id="minimumExperience" name="minimum_years_experience" type="number" min="0" max="80" step="0.5">
           <div class="actions"><button type="submit">Create opening</button></div>
         </form>
       </section>
@@ -162,6 +167,10 @@
           <input id="editRequired" required>
           <label for="editPreferred">Preferred skills</label>
           <input id="editPreferred">
+          <label for="editMinimumEducation">Minimum education</label>
+          <input id="editMinimumEducation" maxlength="160">
+          <label for="editMinimumExperience">Minimum years of experience</label>
+          <input id="editMinimumExperience" type="number" min="0" max="80" step="0.5">
           <label for="editStatus">Status</label>
           <select id="editStatus">
             <option value="OPEN">Open</option>
@@ -373,6 +382,8 @@
           byId("editDescription").value = opening.description;
           byId("editRequired").value = opening.required_skills.join(", ");
           byId("editPreferred").value = opening.preferred_skills.join(", ");
+          byId("editMinimumEducation").value = opening.minimum_education || "";
+          byId("editMinimumExperience").value = opening.minimum_years_experience ?? "";
           byId("editStatus").value = opening.status;
         }
       }
@@ -438,7 +449,29 @@
               evidenceList.append(item);
             }
             evidenceDetails.append(evidenceList);
+            const scoreDetails = document.createElement("details");
+            const scoreSummary = document.createElement("summary");
+            scoreSummary.textContent = "Review component scores";
+            scoreDetails.append(scoreSummary);
+            const scoreList = document.createElement("ul");
+            for (const [key, component] of Object.entries(evidence.components || {})) {
+              const item = document.createElement("li");
+              const weighted = evidence.breakdown?.[key];
+              item.textContent = `${key.replaceAll("_", " ")}: ${weighted ? `${weighted.score.toFixed(1)}% (${(weighted.weight * 100).toFixed(0)}% weight; ${weighted.weighted_contribution.toFixed(1)} points)` : "not scored"}${component.score === null ? ` — unavailable: ${component.reason}` : ""}`;
+              scoreList.append(item);
+            }
+            scoreDetails.append(scoreList);
+            evidenceDetails.append(scoreDetails);
             evidenceCell.append(evidenceDetails);
+          }
+          if (candidate.resume_data && Object.keys(candidate.resume_data).length) {
+            const extractionDetails = document.createElement("details");
+            const extractionSummary = document.createElement("summary");
+            extractionSummary.textContent = "Review extracted resume details";
+            const extractionText = document.createElement("pre");
+            extractionText.textContent = JSON.stringify(candidate.resume_data, null, 2);
+            extractionDetails.append(extractionSummary, extractionText);
+            evidenceCell.append(extractionDetails);
           }
           if (candidate.resume_text) {
             const resumeDetails = document.createElement("details");
@@ -678,7 +711,7 @@
             job_id: candidate.opening_id,
             candidate_id: candidate.candidate_id
           }));
-          showNotice(`Score ${result.score.toFixed(1)}%. Matched: ${result.evidence.matched_required_skills.join(", ") || "none"}. Human review is required.`);
+          showNotice(`ATS score ${result.score.toFixed(1)}% (rank ${result.ranking}). Matched: ${result.matching_required_skills.join(", ") || "none"}. Human review is required.`);
           await loadCandidates();
         } catch (error) {
           showNotice(error.message, true);
@@ -711,7 +744,9 @@
             title: byId("jobTitle").value.trim(),
             description: byId("jobDescription").value.trim(),
             required_skills: required,
-            preferred_skills: splitSkills(byId("preferredSkills").value)
+            preferred_skills: splitSkills(byId("preferredSkills").value),
+            minimum_education: byId("minimumEducation").value.trim() || null,
+            minimum_years_experience: byId("minimumExperience").value === "" ? null : Number(byId("minimumExperience").value)
           }));
           await refresh();
           byId("openingSelect").value = opening.opening_id;
@@ -740,6 +775,8 @@
             description: byId("editDescription").value.trim(),
             required_skills: required,
             preferred_skills: splitSkills(byId("editPreferred").value),
+            minimum_education: byId("editMinimumEducation").value.trim() || null,
+            minimum_years_experience: byId("editMinimumExperience").value === "" ? null : Number(byId("editMinimumExperience").value),
             status: byId("editStatus").value
           }));
           await refresh();
@@ -883,7 +920,7 @@
           return;
         }
         if (!health.authentication_configured) {
-          showNotice("The API is running, but recruiter authentication is not configured. Restart it with ZECPATH_AUTH_USERNAME and a password of at least 16 characters.", true);
+          showNotice("Recruiter authentication is not configured. In the project terminal, run `python -m src.create_recruiter` to create the first account.", true);
           return;
         }
         try {

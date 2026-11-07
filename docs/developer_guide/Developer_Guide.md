@@ -22,8 +22,11 @@ py -3.12 -m venv .venv
 
 The initializer creates the first recruiter account in the configured SQLite
 database, asks for a username and 16+ character password, and saves a salted
-PBKDF2 hash. It refuses to overwrite an existing account. If using a custom
-database, set `ZECPATH_DB_PATH` before running both the initializer and server.
+PBKDF2 hash. It refuses to overwrite an existing account. To set a new username
+and password later, stop Uvicorn and run
+`.\.venv\Scripts\python.exe -m src.reset_recruiter`; the reset revokes active
+sessions. If using a custom database, set `ZECPATH_DB_PATH` before running the
+initializer, reset command, and server.
 
 ## Run and inspect the API
 
@@ -34,16 +37,16 @@ database, set `ZECPATH_DB_PATH` before running both the initializer and server.
 Open `http://127.0.0.1:8000/` for the dashboard,
 `http://127.0.0.1:8000/docs` for Swagger, and
 `http://127.0.0.1:8000/api/v1/health` for the public database-backed health
-check. If port 8000 is occupied, start on 8765 and open
-`http://127.0.0.1:8765/`. Do not open `static/index.html` directly from disk:
-the dashboard uses same-origin API URLs.
+check. The browser URL must use the same port shown by Uvicorn. Do not open
+`static/index.html` directly from disk: the dashboard uses same-origin API
+URLs.
 
 ## Tests and checks
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest tests -q
 .\.venv\Scripts\python.exe -m pytest -q
-.\.venv\Scripts\python.exe -m py_compile src\api.py src\auth.py src\database.py src\schemas.py src\create_recruiter.py
+.\.venv\Scripts\python.exe -m py_compile src\api.py src\auth.py src\database.py src\schemas.py src\create_recruiter.py src\reset_recruiter.py
 .\.venv\Scripts\python.exe -m pip check
 git --no-pager diff --check
 ```
@@ -54,9 +57,11 @@ corresponding stage is connected to the root app.
 
 ## Troubleshooting and data protection
 
-- `authentication_configured: false`: initialize the first recruiter or use
-  the legacy `ZECPATH_AUTH_USERNAME` / `ZECPATH_AUTH_PASSWORD` variables for a
-  local-only setup.
+- `authentication_configured: false`: run
+  `.\.venv\Scripts\python.exe -m src.create_recruiter` from the repository
+  root. If you have forgotten the credentials, stop Uvicorn and run
+  `.\.venv\Scripts\python.exe -m src.reset_recruiter`; passwords cannot be
+  retrieved.
 - Sign-in is throttled after five failures for a username/client address for
   15 minutes.
 - Dashboard session duration is eight hours; sign in again after expiry.
