@@ -1,0 +1,17 @@
+flowchart TB
+    Browser[Same-origin recruiter dashboard] -->|HTTPS in deployment / REST| API[FastAPI modular monolith]
+    API --> Auth[Recruiter authentication]
+    API --> Resume[Resume extraction and parsing modules]
+    API --> Score[Integrated ATS scoring]
+    API --> Ranking[Job-specific ranking]
+    API --> Screening[Day 25 rule-based report]
+    Resume --> Rules[Day 8-11 deterministic parsers]
+    Score --> Embedding[Local Day 12 sentence-transformer]
+    Score --> Formula[Day 13 weighted formula]
+    API --> DB[(SQLite)]
+    Resume --> DB
+    Score --> DB
+    Ranking --> DB
+    Screening --> DB
+    FutureQueue -. optional future boundary .-> FutureWorker[Durable worker]
+    API -. future extraction .-> FutureQueue

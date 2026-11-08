@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.example/schemas/experience.schema.json",
+  "title": "Parsed employment experience",
+  "type": "object",
+  "required": ["job_title", "company", "start_date", "end_date", "duration_months"],
+  "properties": {
+    "job_title": {"type": "string"},
+    "company": {"type": ["string", "null"]},
+    "start_date": {"type": "string", "format": "date"},
+    "end_date": {"type": "string", "format": "date"},
+    "duration_months": {"type": "integer", "minimum": 0}
+  },
+  "additionalProperties": true
+}

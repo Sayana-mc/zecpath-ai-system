@@ -1,0 +1,20 @@
+flowchart LR
+    Recruiter[Recruiter] --> Job[Create job and structured requirements]
+    Candidate[Candidate] --> Apply[Submit application and resume]
+    Job --> Store[(SQLite)]
+    Apply --> Upload[Validate and queue resume]
+    Upload --> Extract[Extract text]
+    Extract --> Parse[Sections, skills, experience, education, certifications]
+    Parse --> Store
+    Store --> Match[Local semantic matching]
+    Job --> Match
+    Match --> Score[Explainable weighted ATS heuristic]
+    Score --> Rank[Job-specific ranking suggestions]
+    Rank --> Review[Human recruiter review]
+    Review --> Decision[Recruiter decision]
+    Review -. planned, not root-integrated .-> Voice[Voice screening]
+    Voice -. planned .-> HR[HR interview]
+    HR -. planned .-> Technical[Technical interview]
+    Technical -. planned .-> MachineTest[Machine test]
+    MachineTest -. planned .-> FinalDecision[Final decision support]
+    FinalDecision -. planned .-> Offer[Offer automation]

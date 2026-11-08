@@ -56,6 +56,10 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
             ),
             score REAL,
             score_evidence TEXT,
+            location TEXT,
+            relocation_willingness INTEGER,
+            work_mode_preference TEXT,
+            availability_date TEXT,
             created_at TEXT NOT NULL,
             updated_at TEXT NOT NULL,
             UNIQUE (opening_id, email)
@@ -96,6 +100,80 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
         );
         CREATE INDEX IF NOT EXISTS recruiter_sessions_expiry_idx
             ON recruiter_sessions(expires_at);
+        CREATE TABLE IF NOT EXISTS eligibility_configurations (
+            opening_id TEXT PRIMARY KEY REFERENCES openings(opening_id) ON DELETE CASCADE,
+            version INTEGER NOT NULL,
+            configuration_json TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS eligibility_evaluations (
+            evaluation_id TEXT PRIMARY KEY,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            opening_id TEXT NOT NULL REFERENCES openings(opening_id) ON DELETE CASCADE,
+            configuration_version INTEGER NOT NULL,
+            input_fingerprint TEXT NOT NULL,
+            result_json TEXT NOT NULL,
+            evaluated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS eligibility_latest_idx
+            ON eligibility_evaluations(candidate_id, opening_id, evaluated_at);
+        CREATE TABLE IF NOT EXISTS screening_sessions (
+            session_id TEXT PRIMARY KEY,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            opening_id TEXT NOT NULL REFERENCES openings(opening_id) ON DELETE CASCADE,
+            status TEXT NOT NULL CHECK (
+                status IN ('CREATED', 'IN_PROGRESS', 'INTERRUPTED', 'COMPLETED', 'CANCELLED')
+            ),
+            language TEXT NOT NULL,
+            started_at TEXT NOT NULL,
+            completed_at TEXT,
+            source TEXT NOT NULL,
+            version INTEGER NOT NULL DEFAULT 1,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_sessions_candidate_idx
+            ON screening_sessions(candidate_id, opening_id, created_at);
+        CREATE TABLE IF NOT EXISTS transcript_segments (
+            segment_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            question_id TEXT,
+            speaker TEXT NOT NULL CHECK (
+                speaker IN ('CANDIDATE', 'RECRUITER', 'AI', 'SYSTEM', 'FOLLOW_UP')
+            ),
+            raw_text TEXT NOT NULL,
+            normalized_text TEXT NOT NULL,
+            start_time TEXT,
+            end_time TEXT,
+            confidence REAL CHECK (confidence IS NULL OR (confidence >= 0 AND confidence <= 1)),
+            language TEXT,
+            source TEXT NOT NULL,
+            processing_version TEXT NOT NULL,
+            sequence_number INTEGER NOT NULL CHECK (sequence_number > 0),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            UNIQUE(session_id, sequence_number)
+        );
+        CREATE INDEX IF NOT EXISTS transcript_segments_session_idx
+            ON transcript_segments(session_id, sequence_number);
+        CREATE TABLE IF NOT EXISTS screening_interactions (
+            interaction_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            question_id TEXT NOT NULL,
+            candidate_answer TEXT,
+            answer_type TEXT,
+            validation_status TEXT NOT NULL CHECK (
+                validation_status IN ('PENDING', 'VALID', 'INVALID', 'SKIPPED', 'UNANSWERED')
+            ),
+            display_order INTEGER NOT NULL CHECK (display_order > 0),
+            follow_up_to TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            UNIQUE(session_id, display_order)
+        );
+        CREATE INDEX IF NOT EXISTS screening_interactions_session_idx
+            ON screening_interactions(session_id, display_order);
         CREATE TABLE IF NOT EXISTS recruiter_login_attempts (
             key_hash TEXT PRIMARY KEY,
             attempts INTEGER NOT NULL,
@@ -120,6 +198,16 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
         connection.execute(
             "ALTER TABLE candidates ADD COLUMN resume_data TEXT NOT NULL DEFAULT '{}'"
         )
+    for column, definition in (
+        ("location", "TEXT"),
+        ("relocation_willingness", "INTEGER"),
+        ("work_mode_preference", "TEXT"),
+        ("availability_date", "TEXT"),
+    ):
+        if column not in candidate_columns:
+            connection.execute(
+                f"ALTER TABLE candidates ADD COLUMN {column} {definition}"
+            )
     try:
         yield connection
         connection.commit()
@@ -380,6 +468,12 @@ def _candidate(row: sqlite3.Row | None) -> dict[str, Any] | None:
         if record["score_evidence"] is not None
         else None
     )
+    if "relocation_willingness" in record:
+        record["relocation_willingness"] = (
+            bool(record["relocation_willingness"])
+            if record["relocation_willingness"] is not None
+            else None
+        )
     return record
 
 
@@ -531,8 +625,10 @@ def create_candidate(data: dict[str, Any]) -> dict[str, Any]:
             """
             INSERT INTO candidates (
                 candidate_id, name, email, opening_id, skills, resume_text,
-                resume_data, application_status, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, '{}', 'APPLIED', ?, ?)
+                resume_data, location, relocation_willingness,
+                work_mode_preference, availability_date, application_status,
+                created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, '{}', ?, ?, ?, ?, 'APPLIED', ?, ?)
             """,
             (
                 candidate_id,
@@ -541,6 +637,14 @@ def create_candidate(data: dict[str, Any]) -> dict[str, Any]:
                 data["opening_id"],
                 json.dumps(data.get("skills", [])),
                 data.get("resume_text", ""),
+                data.get("location"),
+                (
+                    int(data["relocation_willingness"])
+                    if data.get("relocation_willingness") is not None
+                    else None
+                ),
+                data.get("work_mode_preference"),
+                data.get("availability_date"),
                 now,
                 now,
             ),
@@ -587,7 +691,16 @@ def get_candidate(candidate_id: str) -> dict[str, Any] | None:
 def update_candidate(
     candidate_id: str, data: dict[str, Any]
 ) -> dict[str, Any] | None:
-    allowed_fields = {"name", "email", "skills", "application_status"}
+    allowed_fields = {
+        "name",
+        "email",
+        "skills",
+        "application_status",
+        "location",
+        "relocation_willingness",
+        "work_mode_preference",
+        "availability_date",
+    }
     updates = {key: value for key, value in data.items() if key in allowed_fields}
     if not updates:
         return get_candidate(candidate_id)
@@ -615,6 +728,8 @@ def update_candidate(
             if current_name["name"] != updates["name"]:
                 updates["score"] = None
                 updates["score_evidence"] = None
+        if "relocation_willingness" in updates and updates["relocation_willingness"] is not None:
+            updates["relocation_willingness"] = int(updates["relocation_willingness"])
         assignments = ", ".join(f"{key} = ?" for key in updates)
         connection.execute(
             f"UPDATE candidates SET {assignments} WHERE candidate_id = ?",
@@ -766,3 +881,252 @@ def get_processing_job(job_id: str) -> dict[str, Any] | None:
             json.loads(record["result"]) if record["result"] is not None else None
         )
         return record
+
+
+def save_eligibility_configuration(
+    opening_id: str, configuration: dict[str, Any]
+) -> dict[str, Any] | None:
+    now = _now()
+    with _connection() as connection:
+        current = connection.execute(
+            "SELECT version, created_at FROM eligibility_configurations WHERE opening_id = ?",
+            (opening_id,),
+        ).fetchone()
+        version = current["version"] + 1 if current else 1
+        created_at = current["created_at"] if current else now
+        connection.execute(
+            """
+            INSERT INTO eligibility_configurations (
+                opening_id, version, configuration_json, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT(opening_id) DO UPDATE SET
+                version = excluded.version,
+                configuration_json = excluded.configuration_json,
+                updated_at = excluded.updated_at
+            """,
+            (opening_id, version, json.dumps(configuration), created_at, now),
+        )
+        return {
+            "opening_id": opening_id,
+            "version": version,
+            "configuration": configuration,
+            "created_at": created_at,
+            "updated_at": now,
+        }
+
+
+def get_eligibility_configuration(opening_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM eligibility_configurations WHERE opening_id = ?",
+            (opening_id,),
+        ).fetchone()
+        if row is None:
+            return None
+        return {
+            "opening_id": row["opening_id"],
+            "version": row["version"],
+            "configuration": json.loads(row["configuration_json"]),
+            "created_at": row["created_at"],
+            "updated_at": row["updated_at"],
+        }
+
+
+def save_eligibility_evaluation(
+    evaluation: dict[str, Any], input_fingerprint: str
+) -> None:
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO eligibility_evaluations (
+                evaluation_id, candidate_id, opening_id, configuration_version,
+                input_fingerprint, result_json, evaluated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                evaluation["evaluation_id"],
+                evaluation["candidate_id"],
+                evaluation["opening_id"],
+                evaluation["configuration_version"],
+                input_fingerprint,
+                json.dumps(evaluation),
+                evaluation["evaluated_at"],
+            ),
+        )
+
+
+def get_latest_eligibility_evaluation(
+    candidate_id: str, opening_id: str
+) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            """
+            SELECT result_json, input_fingerprint
+            FROM eligibility_evaluations
+            WHERE candidate_id = ? AND opening_id = ?
+            ORDER BY evaluated_at DESC LIMIT 1
+            """,
+            (candidate_id, opening_id),
+        ).fetchone()
+        if row is None:
+            return None
+        result = json.loads(row["result_json"])
+        result["_input_fingerprint"] = row["input_fingerprint"]
+        return result
+
+
+def create_screening_session(session: dict[str, Any]) -> dict[str, Any]:
+    now = _now()
+    started_at = session.get("started_at") or now
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_sessions (
+                session_id, candidate_id, opening_id, status, language,
+                started_at, completed_at, source, version, created_at, updated_at
+            ) VALUES (?, ?, ?, 'CREATED', ?, ?, NULL, ?, 1, ?, ?)
+            """,
+            (
+                session["session_id"],
+                session["candidate_id"],
+                session["opening_id"],
+                session["language"],
+                started_at,
+                session["source"],
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_sessions WHERE session_id = ?",
+            (session["session_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def get_screening_session(session_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM screening_sessions WHERE session_id = ?",
+            (session_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def update_screening_session_status(session_id: str, status: str) -> dict[str, Any] | None:
+    now = _now()
+    completed_at = now if status in {"COMPLETED", "CANCELLED"} else None
+    with _connection() as connection:
+        connection.execute(
+            """
+            UPDATE screening_sessions
+            SET status = ?, completed_at = ?, version = version + 1, updated_at = ?
+            WHERE session_id = ?
+            """,
+            (status, completed_at, now, session_id),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_sessions WHERE session_id = ?",
+            (session_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def save_transcript_segments(
+    session_id: str, segments: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    now = _now()
+    with _connection() as connection:
+        for segment in segments:
+            raw_text = segment["text"]
+            normalized = " ".join(raw_text.split())
+            connection.execute(
+                """
+                INSERT INTO transcript_segments (
+                    segment_id, session_id, question_id, speaker, raw_text,
+                    normalized_text, start_time, end_time, confidence, language,
+                    source, processing_version, sequence_number, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'transcript-v1', ?, ?, ?)
+                """,
+                (
+                    segment["segment_id"],
+                    session_id,
+                    segment.get("question_id"),
+                    segment["speaker"],
+                    raw_text,
+                    normalized,
+                    segment.get("start_time"),
+                    segment.get("end_time"),
+                    segment.get("confidence"),
+                    segment.get("language"),
+                    segment["source"],
+                    segment["sequence_number"],
+                    now,
+                    now,
+                ),
+            )
+        rows = connection.execute(
+            """
+            SELECT * FROM transcript_segments
+            WHERE session_id = ? ORDER BY sequence_number
+            """,
+            (session_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+
+def list_transcript_segments(session_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM transcript_segments
+            WHERE session_id = ? ORDER BY sequence_number
+            """,
+            (session_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+
+def save_screening_interaction(
+    session_id: str, interaction: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_interactions (
+                interaction_id, session_id, question_id, candidate_answer,
+                answer_type, validation_status, display_order, follow_up_to,
+                created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                interaction["interaction_id"],
+                session_id,
+                interaction["question_id"],
+                interaction.get("candidate_answer"),
+                interaction.get("answer_type"),
+                interaction["validation_status"],
+                interaction["display_order"],
+                interaction.get("follow_up_to"),
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_interactions WHERE interaction_id = ?",
+            (interaction["interaction_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def list_screening_interactions(session_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM screening_interactions
+            WHERE session_id = ? ORDER BY display_order
+            """,
+            (session_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]

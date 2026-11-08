@@ -1,4 +1,16 @@
 SECTION_PATTERNS = {
+    "SUMMARY": [
+        "summary",
+        "professional summary",
+        "profile",
+        "professional profile",
+        "career summary",
+    ],
+    "OBJECTIVE": [
+        "objective",
+        "career objective",
+        "professional objective",
+    ],
     "SKILLS": [
         "skills",
         "technical skills",
@@ -50,5 +62,23 @@ SECTION_PATTERNS = {
         "professional projects",
         "key projects",
         "project experience",
+    ],
+    "ACHIEVEMENTS": [
+        "achievements",
+        "key achievements",
+        "accomplishments",
+        "awards and achievements",
+        "honors and awards",
+    ],
+    "PUBLICATIONS": [
+        "publications",
+        "selected publications",
+        "papers",
+        "research publications",
+    ],
+    "LANGUAGES": [
+        "languages",
+        "language skills",
+        "spoken languages",
     ],
 }

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.example/schemas/skill.schema.json",
+  "title": "Extracted skill evidence",
+  "type": "object",
+  "required": ["skill", "category", "source", "match_type", "confidence"],
+  "properties": {
+    "skill": {"type": "string", "minLength": 1},
+    "category": {"type": "string"},
+    "source": {"type": "string"},
+    "match_type": {"type": "string"},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+  },
+  "additionalProperties": true
+}

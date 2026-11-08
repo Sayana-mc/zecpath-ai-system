@@ -21,9 +21,10 @@ text and structured details after successful processing.
 
 The root extraction calls:
 
+- Day 8 section heading detection and segmentation.
 - Day 9 skill dictionary/alias extraction.
 - Day 10 work-history/date parsing and total detected experience.
-- Day 11 education parsing.
+- Day 11 education and certification parsing.
 
 Candidate rows keep the original filename, extracted text, structured
 `resume_data`, score and score evidence. Uploads are deleted after extraction;
@@ -32,10 +33,12 @@ operation. Processing status/result/error is stored in `processing_jobs`.
 Restart marks queued/in-progress jobs failed rather than claiming success.
 Candidate deletion redacts text from retained processing results.
 
-The current structured result does **not** extract all contact details,
-certifications, projects, achievements, skills provenance corrections, or
-candidate confirmation workflows. Data not parsed remains absent; the root
-does not invent it. No OCR is implemented: scanned-image PDFs commonly fail
+The current structured result does **not** reliably extract all contact
+details, responsibilities, project/achievement contents, certification
+issuer/dates, or candidate confirmation corrections. Data not parsed remains
+absent; the root does not invent it. Semantic scoring filters common labeled
+personal attributes and contact details, but this is not complete
+de-identification. No OCR is implemented: scanned-image PDFs commonly fail
 with no-readable-text. PDF/DOCX parsers do not execute uploaded scripts.
 
 ## Failure behavior and constraints

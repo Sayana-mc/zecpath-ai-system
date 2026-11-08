@@ -63,6 +63,23 @@ def test_total_experience():
     ) == 3.0
 
 
+def test_total_experience_does_not_double_count_overlapping_roles():
+    experiences = [
+        {
+            "start_date": "2020-01-01",
+            "end_date": "2021-06-01",
+            "duration_months": 18,
+        },
+        {
+            "start_date": "2021-01-01",
+            "end_date": "2021-12-01",
+            "duration_months": 12,
+        },
+    ]
+
+    assert calculate_total_experience(experiences) == 2.0
+
+
 def test_gap_detection():
 
     experiences = [

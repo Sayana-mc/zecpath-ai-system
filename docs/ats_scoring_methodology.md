@@ -3,7 +3,7 @@
 ## Status and source of truth
 
 The root API scoring pipeline is implemented in `src.integrated_scoring`.
-It combines the existing Day 9–11 rule-based extraction, Day 12 local
+It combines Day 8 section segmentation, Day 9–11 rule-based extraction, Day 12 local
 SentenceTransformer similarity, and Day 13's `generate_score_breakdown`.
 There is no executable Day 20 scorer. The active role weights are in
 `day13_ats_scoring/src/weight_manager.py`; the similarly named JSON
@@ -22,15 +22,16 @@ For a candidate already associated with the selected opening:
    The component is matched required skills divided by the number of unique
    normalized required skills. Preferred skills are displayed as evidence but
    are not part of this Day 13 component.
-2. **Experience:** Day 10 date parser's summed duration (when any work period
-   was parsed) divided by the opening's minimum years, capped at 1. If either
+2. **Experience:** Day 10 parsed total duration (dated overlapping ranges are
+   merged; undated duration estimates remain approximate) divided by the opening's minimum years, capped at 1. If either
    candidate years or job minimum is unavailable, the component result is
    unavailable. A configured minimum of zero yields a full component score.
 3. **Education:** the first Day 11 education record is compared with the
    configured minimum via Day 13's degree-level mapping. Missing/unrecognized
    levels are unavailable.
-4. **Semantic similarity:** the local `all-MiniLM-L6-v2` model encodes the
-   resume text and a job text containing title, description, required and
+4. **Semantic similarity:** the local `all-MiniLM-L6-v2` model encodes
+   sectioned resume text after basic contact/common labeled personal-data
+   filtering and job text containing title, description, required and
    preferred skills, and specified education/experience requirements.
    Cosine similarity is clamped to 0–1. It is not calculated without readable
    resume text.

@@ -3,10 +3,11 @@
 ## Integration boundary
 
 The only supported app runtime is `src.main:app`. The root integrates Days
-9–13 for resume-derived ATS scoring and Day 25 for rule-based screening
-annotations. Other stage folders are independent unless specifically called
-from the root code. The Day 16 standalone API is a demo; Day 20 contains a
-checklist, not a scorer.
+8–13 for resume-derived ATS scoring and Day 25 for rule-based screening
+annotations. Limited personal-data masking is applied to semantic matching;
+it is not a fairness evaluation. Other stage folders are independent unless
+specifically called from the root code. The Day 16 standalone API is a demo;
+Day 20 contains a checklist, not a scorer.
 
 Eligibility (Day 21), question dataset (Day 22), transcript/audio (Days 23–24),
 screening scoring (Day 26), sentiment/confidence (Day 27), comprehensive
@@ -16,16 +17,18 @@ connected as a unified recruiter workflow. Days 1, 2, 66, and 67 are absent.
 
 ## Applicant data and scoring
 
-- Resume extraction is rule-based and currently structures skills, some
-  education, and date-derived experience only. It does not structure
-  certifications, candidate contact fields, projects, achievements, or
-  recruiter-confirmed corrections.
+- Resume extraction is rule-based and structures detected sections, skills,
+  some education and certifications, and date-derived experience. Projects,
+  achievements, candidate contact fields, and recruiter-confirmed corrections
+  are not fully structured for scoring.
 - Original upload binaries are deleted after processing; only filename and
   extracted text/structured data remain. There is no OCR or reprocessing
   source file.
 - Day 12 uses a general-purpose local model; model availability/cache is
   required. Day 13 missing component inputs contribute zero to the final score
   despite being marked unavailable in evidence.
+- Personal-data filtering removes common labels/contact formats from semantic
+  input only; it does not ensure full de-identification or remove all proxies.
 - The model and weights have not been independently validated for job
   relevance, reliability, subgroup impacts or legal compliance. Scores and
   shortlists are not hiring decisions.

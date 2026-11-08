@@ -35,6 +35,15 @@ API clients; use only locally or over TLS.
 | POST | `/api/v1/openings/{opening_id}/shortlist` | `minimum_score`; saved per-opening score suggestions |
 | POST | `/api/v1/candidates/shortlist` | Legacy caller-supplied score simulation; response explicitly says simulation-only |
 | POST / GET | `/api/v1/candidates/{candidate_id}/screening-reports` | Create/read Day 25 rule-based answer reports |
+| POST | `/api/v1/openings/parse-description` | Conservative explicit-heading JD extraction; recruiter confirmation required |
+| GET / PUT | `/api/v1/openings/{opening_id}/eligibility-config` | Read or replace versioned eligibility configuration |
+| POST | `/api/v1/candidates/{candidate_id}/eligibility/evaluate` | Evaluate a candidate against their associated opening |
+| GET | `/api/v1/candidates/{candidate_id}/eligibility?opening_id=...` | Retrieve current evaluation; recomputes when inputs/configuration changed |
+| GET | `/api/v1/screening/questions` | Filter canonical questions by role, category, language, mandatory, and active |
+| POST | `/api/v1/screening/sessions` | Create a persisted session for a candidate's associated opening |
+| GET / PATCH | `/api/v1/screening/sessions/{session_id}` | Retrieve transcript bundle or update the session state |
+| POST / GET | `/api/v1/screening/sessions/{session_id}/segments` | Append validated transcript segments or retrieve session interactions |
+| POST / GET | `/api/v1/screening/sessions/{session_id}/interactions` | Persist/retrieve structured question interactions |
 
 ## Error behavior and contract notes
 
@@ -46,10 +55,14 @@ throttled login attempts, and 503 for missing auth configuration/database or
 unavailable local semantic model. See `/docs` for exact operation response
 schemas.
 
-The root API does not expose a distinct rank endpoint, Day 21 eligibility,
-Day 26 screening scores, Day 28 reports, audio/transcript, or interview
-operations. The standalone Day 16 API is separate, not mounted, and is not
-the source of recruiter records.
+The persisted shortlist route ranks candidates with saved scores; the legacy
+`/candidates/shortlist` route remains simulation-only. Eligibility and
+transcript endpoints are manual-review decision support and storage
+interfaces. The API does not expose audio recording, speech recognition,
+voice AI, or automated interview operations. The standalone Day 16 API is
+separate, not mounted, and is not the source of recruiter records. The
+question-bank API returns only available translations; it does not fabricate
+pending translations.
 
 All ATS endpoint definitions are in `src/api.py`; authentication/schema details
 are in `src/auth.py` and `src/schemas.py`.

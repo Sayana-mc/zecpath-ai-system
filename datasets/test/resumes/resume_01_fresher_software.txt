@@ -1,0 +1,14 @@
+SYNTHETIC TEST RESUME 01 - FRESHER SOFTWARE DEVELOPER
+
+OBJECTIVE
+Entry-level software developer seeking a role building reliable web applications.
+
+EDUCATION
+B.Tech Computer Science, Example Institute, 2025
+
+SKILLS
+Python, JavaScript, SQL, Git, FastAPI
+
+PROJECTS
+Built a student course planner with a FastAPI service and SQLite database.
+Created tests for REST endpoints and basic input validation.

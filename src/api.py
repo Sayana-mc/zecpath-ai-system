@@ -1,3 +1,5 @@
+import hashlib
+import json
 import logging
 import secrets
 import sqlite3
@@ -32,6 +34,12 @@ from .schemas import (
     CandidateCreate,
     CandidateResponse,
     CandidateUpdate,
+    EligibilityConfigurationRequest,
+    EligibilityConfigurationResponse,
+    EligibilityEvaluationRequest,
+    EligibilityEvaluationResponse,
+    JobDescriptionParseRequest,
+    JobDescriptionParseResponse,
     JobStatusResponse,
     OpeningCreate,
     OpeningResponse,
@@ -49,6 +57,15 @@ from .schemas import (
     ShortlistedCandidate,
     ScreeningReportRequest,
     ScreeningReportResponse,
+    ScreeningInteractionCreate,
+    ScreeningInteractionResponse,
+    ScreeningQuestionResponse,
+    ScreeningSessionCreate,
+    ScreeningSessionResponse,
+    ScreeningSessionStatusUpdate,
+    ScreeningTranscriptResponse,
+    TranscriptSegmentCreate,
+    TranscriptSegmentResponse,
 )
 from .services import (
     calculate_candidate_match,
@@ -60,6 +77,9 @@ from .integrated_scoring import (
     calculate_integrated_score,
 )
 from .resume_analysis import extract_resume_data
+from .eligibility import evaluate_eligibility
+from .screening_questions import get_questions, load_dataset
+from .job_description_parser import parse_job_description
 
 
 logger = logging.getLogger(__name__)
@@ -98,6 +118,48 @@ def _candidate_or_404(candidate_id: str) -> dict:
     if candidate is None:
         raise HTTPException(status_code=404, detail="Candidate not found.")
     return candidate
+
+
+def _session_or_404(session_id: str) -> dict:
+    session = database.get_screening_session(session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Screening session not found.")
+    return session
+
+
+def _eligibility_fingerprint(
+    candidate: dict, opening: dict, configuration_version: int
+) -> str:
+    inputs = {
+        "candidate_id": candidate["candidate_id"],
+        "candidate_updated_at": candidate["updated_at"],
+        "score": candidate.get("score"),
+        "score_evidence": candidate.get("score_evidence"),
+        "opening_id": opening["opening_id"],
+        "opening_updated_at": opening["updated_at"],
+        "configuration_version": configuration_version,
+    }
+    return hashlib.sha256(
+        json.dumps(inputs, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
+def _evaluate_and_persist_eligibility(
+    candidate: dict, opening: dict, configuration_record: dict
+) -> dict:
+    fingerprint = _eligibility_fingerprint(
+        candidate, opening, configuration_record["version"]
+    )
+    result = evaluate_eligibility(
+        candidate=candidate,
+        opening=opening,
+        configuration=configuration_record["configuration"],
+        configuration_version=configuration_record["version"],
+        evaluation_id=str(uuid.uuid4()),
+        evaluated_at=database.current_timestamp(),
+    )
+    database.save_eligibility_evaluation(result, fingerprint)
+    return result
 
 
 @system_router.post("/auth/session", response_model=RecruiterSessionResponse)
@@ -268,6 +330,16 @@ def health_check() -> dict[str, str | bool]:
         "version": "1.0.0",
         "authentication_configured": authentication_is_configured(),
     }
+
+
+@router.post(
+    "/openings/parse-description",
+    response_model=JobDescriptionParseResponse,
+)
+def parse_opening_description(
+    request: JobDescriptionParseRequest,
+) -> dict:
+    return parse_job_description(request.description)
 
 
 @router.post("/openings", response_model=OpeningResponse, status_code=201)
@@ -583,6 +655,8 @@ def score_candidate(request: ScoreRequest) -> ScoreResponse:
     except ScoringModelUnavailableError as exc:
         logger.exception("Day 12 semantic model unavailable")
         raise HTTPException(status_code=503, detail=str(exc)) from None
+    evidence["scored_at"] = database.current_timestamp()
+    evidence["scoring_version"] = "day9-12-13-v1"
     if not database.save_candidate_score(request.candidate_id, score, evidence):
         raise HTTPException(status_code=404, detail="Candidate not found.")
     scored_candidates = [
@@ -622,6 +696,292 @@ def score_candidate(request: ScoreRequest) -> ScoreResponse:
             "is required."
         ),
     )
+
+
+@router.put(
+    "/openings/{opening_id}/eligibility-config",
+    response_model=EligibilityConfigurationResponse,
+)
+def save_opening_eligibility_configuration(
+    opening_id: str, request: EligibilityConfigurationRequest
+) -> dict:
+    _opening_or_404(opening_id)
+    record = database.save_eligibility_configuration(
+        opening_id, request.model_dump(mode="json")
+    )
+    if record is None:
+        raise HTTPException(status_code=404, detail="Job opening not found.")
+    return record
+
+
+@router.get(
+    "/openings/{opening_id}/eligibility-config",
+    response_model=EligibilityConfigurationResponse,
+)
+def get_opening_eligibility_configuration(opening_id: str) -> dict:
+    _opening_or_404(opening_id)
+    record = database.get_eligibility_configuration(opening_id)
+    if record is None:
+        raise HTTPException(
+            status_code=404, detail="Eligibility configuration not found."
+        )
+    return record
+
+
+@router.post(
+    "/candidates/{candidate_id}/eligibility/evaluate",
+    response_model=EligibilityEvaluationResponse,
+    status_code=201,
+)
+def evaluate_candidate_eligibility(
+    candidate_id: str, request: EligibilityEvaluationRequest
+) -> dict:
+    candidate = _candidate_or_404(candidate_id)
+    opening = _opening_or_404(request.opening_id)
+    if candidate["opening_id"] != opening["opening_id"]:
+        raise HTTPException(
+            status_code=409,
+            detail="Candidate application does not belong to this job opening.",
+        )
+    configuration = database.get_eligibility_configuration(opening["opening_id"])
+    if configuration is None:
+        raise HTTPException(
+            status_code=409,
+            detail="Configure eligibility rules before evaluating a candidate.",
+        )
+    return _evaluate_and_persist_eligibility(candidate, opening, configuration)
+
+
+@router.get(
+    "/candidates/{candidate_id}/eligibility",
+    response_model=EligibilityEvaluationResponse,
+)
+def get_candidate_eligibility(candidate_id: str, opening_id: str) -> dict:
+    candidate = _candidate_or_404(candidate_id)
+    opening = _opening_or_404(opening_id)
+    if candidate["opening_id"] != opening["opening_id"]:
+        raise HTTPException(
+            status_code=409,
+            detail="Candidate application does not belong to this job opening.",
+        )
+    configuration = database.get_eligibility_configuration(opening_id)
+    if configuration is None:
+        raise HTTPException(
+            status_code=404, detail="Eligibility configuration not found."
+        )
+    fingerprint = _eligibility_fingerprint(
+        candidate, opening, configuration["version"]
+    )
+    latest = database.get_latest_eligibility_evaluation(candidate_id, opening_id)
+    if latest is None or latest.pop("_input_fingerprint", None) != fingerprint:
+        return _evaluate_and_persist_eligibility(candidate, opening, configuration)
+    return latest
+
+
+@router.get("/screening/questions", response_model=list[ScreeningQuestionResponse])
+def list_screening_questions(
+    role_id: str | None = None,
+    category: str | None = None,
+    language: str = "en",
+    mandatory: bool | None = None,
+    active_only: bool = True,
+) -> list[dict]:
+    dataset = load_dataset()
+    if role_id is not None and role_id not in dataset["roles"]:
+        raise HTTPException(status_code=422, detail="Unsupported screening role.")
+    normalized_category = category.upper().replace(" ", "_") if category else None
+    if (
+        normalized_category is not None
+        and normalized_category not in dataset["categories"]
+    ):
+        raise HTTPException(status_code=422, detail="Unsupported question category.")
+    try:
+        return get_questions(
+            role_id=role_id,
+            category=category,
+            language=language,
+            mandatory=mandatory,
+            active_only=active_only,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+
+
+@router.post(
+    "/screening/sessions",
+    response_model=ScreeningSessionResponse,
+    status_code=201,
+)
+def create_screening_session(request: ScreeningSessionCreate) -> dict:
+    candidate = _candidate_or_404(request.candidate_id)
+    _opening_or_404(request.opening_id)
+    if candidate["opening_id"] != request.opening_id:
+        raise HTTPException(
+            status_code=409,
+            detail="Candidate application does not belong to this job opening.",
+        )
+    return database.create_screening_session(
+        {**request.model_dump(), "session_id": str(uuid.uuid4())}
+    )
+
+
+@router.get(
+    "/screening/sessions/{session_id}",
+    response_model=ScreeningTranscriptResponse,
+)
+def get_screening_transcript(session_id: str) -> dict:
+    session = _session_or_404(session_id)
+    return {
+        "session": session,
+        "segments": database.list_transcript_segments(session_id),
+        "interactions": database.list_screening_interactions(session_id),
+    }
+
+
+@router.patch(
+    "/screening/sessions/{session_id}",
+    response_model=ScreeningSessionResponse,
+)
+def update_screening_session(
+    session_id: str, request: ScreeningSessionStatusUpdate
+) -> dict:
+    session = _session_or_404(session_id)
+    allowed_transitions = {
+        "CREATED": {"IN_PROGRESS", "CANCELLED"},
+        "IN_PROGRESS": {"INTERRUPTED", "COMPLETED", "CANCELLED"},
+        "INTERRUPTED": {"IN_PROGRESS", "COMPLETED", "CANCELLED"},
+    }
+    if request.status not in allowed_transitions.get(session["status"], set()):
+        raise HTTPException(
+            status_code=409,
+            detail=f"Cannot change a {session['status']} session to {request.status}.",
+        )
+    return database.update_screening_session_status(session_id, request.status) or {}
+
+
+@router.post(
+    "/screening/sessions/{session_id}/segments",
+    response_model=list[TranscriptSegmentResponse],
+    status_code=201,
+)
+def add_transcript_segments(
+    session_id: str, segments: list[TranscriptSegmentCreate]
+) -> list[dict]:
+    session = _session_or_404(session_id)
+    if session["status"] not in {"IN_PROGRESS", "INTERRUPTED"}:
+        raise HTTPException(
+            status_code=409,
+            detail="Start or resume the screening session before adding transcript segments.",
+        )
+    if not segments or len(segments) > 500:
+        raise HTTPException(
+            status_code=422, detail="Submit between 1 and 500 transcript segments."
+        )
+    existing_segments = database.list_transcript_segments(session_id)
+    if existing_segments:
+        expected_sequence = existing_segments[-1]["sequence_number"] + 1
+        if segments[0].sequence_number != expected_sequence:
+            raise HTTPException(
+                status_code=409,
+                detail=f"Transcript sequence must resume at {expected_sequence}.",
+            )
+    elif segments[0].sequence_number != 1:
+        raise HTTPException(
+            status_code=409,
+            detail="Transcript sequence must begin at 1.",
+        )
+    if any(
+        later.sequence_number <= earlier.sequence_number
+        for earlier, later in zip(segments, segments[1:])
+    ):
+        raise HTTPException(
+            status_code=422,
+            detail="Transcript segments must be submitted in increasing sequence order.",
+        )
+    valid_question_ids = {
+        item["question_id"] for item in load_dataset()["questions"]
+    }
+    submitted_ids: set[str] = set()
+    submitted_sequences: set[int] = set()
+    existing_sequences = {item["sequence_number"] for item in existing_segments}
+    records = []
+    for segment in segments:
+        if segment.question_id and segment.question_id not in valid_question_ids:
+            raise HTTPException(status_code=422, detail="Unknown screening question ID.")
+        if segment.segment_id and segment.segment_id in submitted_ids:
+            raise HTTPException(status_code=422, detail="Duplicate segment ID in request.")
+        if (
+            segment.sequence_number in submitted_sequences
+            or segment.sequence_number in existing_sequences
+        ):
+            raise HTTPException(
+                status_code=409, detail="Duplicate transcript sequence number."
+            )
+        segment_id = segment.segment_id or str(uuid.uuid4())
+        submitted_ids.add(segment_id)
+        submitted_sequences.add(segment.sequence_number)
+        records.append(
+            {
+                **segment.model_dump(exclude={"segment_id"}),
+                "segment_id": segment_id,
+                "start_time": (
+                    segment.start_time.isoformat() if segment.start_time else None
+                ),
+                "end_time": segment.end_time.isoformat() if segment.end_time else None,
+            }
+        )
+    try:
+        return database.save_transcript_segments(session_id, records)
+    except sqlite3.IntegrityError:
+        raise HTTPException(
+            status_code=409,
+            detail="Transcript segment ID or sequence number already exists.",
+        ) from None
+
+
+@router.post(
+    "/screening/sessions/{session_id}/interactions",
+    response_model=ScreeningInteractionResponse,
+    status_code=201,
+)
+def add_screening_interaction(
+    session_id: str, request: ScreeningInteractionCreate
+) -> dict:
+    session = _session_or_404(session_id)
+    if session["status"] not in {"IN_PROGRESS", "INTERRUPTED"}:
+        raise HTTPException(
+            status_code=409,
+            detail="Start or resume the screening session before adding interactions.",
+        )
+    question_ids = {item["question_id"] for item in load_dataset()["questions"]}
+    if request.question_id not in question_ids:
+        raise HTTPException(status_code=422, detail="Unknown screening question ID.")
+    if request.follow_up_to:
+        exists = any(
+            item["interaction_id"] == request.follow_up_to
+            for item in database.list_screening_interactions(session_id)
+        )
+        if not exists:
+            raise HTTPException(status_code=422, detail="Unknown follow-up interaction.")
+    try:
+        return database.save_screening_interaction(
+            session_id,
+            {**request.model_dump(), "interaction_id": str(uuid.uuid4())},
+        )
+    except sqlite3.IntegrityError:
+        raise HTTPException(
+            status_code=409,
+            detail="An interaction already exists at that display order.",
+        ) from None
+
+
+@router.get(
+    "/screening/sessions/{session_id}/interactions",
+    response_model=list[ScreeningInteractionResponse],
+)
+def get_screening_interactions(session_id: str) -> list[dict]:
+    _session_or_404(session_id)
+    return database.list_screening_interactions(session_id)
 
 
 @router.post(

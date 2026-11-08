@@ -58,6 +58,12 @@ def parse_month_year(value: str) -> Optional[date]:
         today = date.today()
         return date(today.year, today.month, 1)
 
+    try:
+        parsed_date = date.fromisoformat(value[:10])
+        return date(parsed_date.year, parsed_date.month, 1)
+    except ValueError:
+        pass
+
     match = re.search(
         r"(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|"
         r"may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|"
@@ -271,12 +277,30 @@ def parse_experience_section(text: str):
 
 
 def calculate_total_experience(experiences) -> float:
-    """Calculate total experience in years."""
+    """Calculate total experience without double-counting dated overlaps."""
+    intervals = []
+    undated_months = 0
+    for item in experiences:
+        start = parse_month_year(item.get("start_date", ""))
+        end = parse_month_year(item.get("end_date", ""))
+        if start and end and end >= start:
+            intervals.append((start, end))
+        else:
+            undated_months += max(0, int(item.get("duration_months", 0)))
 
-    total_months = sum(
-        item.get("duration_months", 0)
-        for item in experiences
-    )
+    intervals.sort(key=lambda interval: interval[0])
+    dated_months = 0
+    if intervals:
+        merged_start, merged_end = intervals[0]
+        for start, end in intervals[1:]:
+            if start <= merged_end:
+                merged_end = max(merged_end, end)
+                continue
+            dated_months += calculate_months(merged_start, merged_end)
+            merged_start, merged_end = start, end
+        dated_months += calculate_months(merged_start, merged_end)
+
+    total_months = dated_months + undated_months
 
     return round(total_months / 12, 2)
 

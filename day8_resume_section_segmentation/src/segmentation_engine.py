@@ -5,11 +5,16 @@ from .section_classifier import detect_section_heading
 
 
 SUPPORTED_SECTIONS = [
+    "SUMMARY",
+    "OBJECTIVE",
     "SKILLS",
     "WORK EXPERIENCE",
     "EDUCATION",
     "CERTIFICATIONS",
     "PROJECTS",
+    "ACHIEVEMENTS",
+    "PUBLICATIONS",
+    "LANGUAGES",
 ]
 
 

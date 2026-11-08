@@ -1,0 +1,23 @@
+sequenceDiagram
+    actor R as Recruiter
+    participant UI as Dashboard
+    participant API as FastAPI
+    participant DB as SQLite
+    participant PAR as Resume parsers
+    participant MOD as Local embedding model
+    R->>UI: Create job with structured requirements
+    UI->>API: POST /api/v1/openings
+    API->>DB: Store opening
+    R->>UI: Upload resume for application
+    UI->>API: POST /api/v1/resumes/upload
+    API->>DB: Store processing job
+    API-->>UI: 202 + job_id
+    API->>PAR: Extract and structure resume
+    PAR->>DB: Save text and parsed profile
+    R->>UI: Request candidate score
+    UI->>API: POST /api/v1/candidates/score
+    API->>DB: Load candidate and opening
+    API->>MOD: Encode sanitized resume and job text
+    MOD-->>API: Embeddings
+    API->>DB: Save score and evidence
+    API-->>UI: Score, components, warnings, rank

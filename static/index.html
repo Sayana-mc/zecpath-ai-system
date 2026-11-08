@@ -142,6 +142,9 @@
           <input id="jobTitle" name="title" required minlength="2" maxlength="160">
           <label for="jobDescription">Description</label>
           <textarea id="jobDescription" name="description" maxlength="20000"></textarea>
+          <div class="actions">
+            <button id="parseJobDescriptionButton" type="button" class="secondary">Parse labeled requirements</button>
+          </div>
           <label for="requiredSkills">Required skills (comma separated)</label>
           <input id="requiredSkills" name="required_skills" required placeholder="Python, SQL, Git">
           <label for="preferredSkills">Preferred skills (comma separated)</label>
@@ -193,6 +196,23 @@
           <input id="candidateEmail" type="email" maxlength="320" autocomplete="off">
           <label for="candidateSkills">Candidate-reported skills (comma separated)</label>
           <input id="candidateSkills" placeholder="Python, SQL">
+          <label for="candidateLocation">Candidate-reported location (optional)</label>
+          <input id="candidateLocation" maxlength="160" autocomplete="off">
+          <label for="candidateRelocation">Relocation willingness (optional)</label>
+          <select id="candidateRelocation">
+            <option value="">Not provided</option>
+            <option value="true">Willing</option>
+            <option value="false">Not willing</option>
+          </select>
+          <label for="candidateWorkMode">Work-mode preference (optional)</label>
+          <select id="candidateWorkMode">
+            <option value="">Not provided</option>
+            <option value="ONSITE">Onsite</option>
+            <option value="HYBRID">Hybrid</option>
+            <option value="REMOTE">Remote</option>
+          </select>
+          <label for="candidateAvailability">Available from (optional)</label>
+          <input id="candidateAvailability" type="date">
           <label for="resumeFile">Resume file (TXT, DOCX, or text-based PDF; max 5 MiB)</label>
           <input id="resumeFile" type="file" accept=".txt,.docx,.pdf">
           <p class="muted">Provide at least one reported skill or a resume file. Uploaded files are removed after extraction; extracted text is saved with the application.</p>
@@ -210,6 +230,33 @@
           <button id="refreshButton" type="button" class="secondary">Refresh data</button>
         </div>
         <div id="shortlistResults" aria-live="polite"></div>
+        <hr>
+        <h3>Eligibility review rules</h3>
+        <p class="muted">Missing or uncertain evidence routes to recruiter review. Configure job-related rules only.</p>
+        <form id="eligibilityForm">
+          <label for="eligibilityMinimumScore">Minimum current ATS score (optional)</label>
+          <input id="eligibilityMinimumScore" type="number" min="0" max="100" step="1">
+          <label for="eligibilitySkills">Mandatory skills (comma separated)</label>
+          <input id="eligibilitySkills" placeholder="Python, SQL">
+          <label for="eligibilityMinimumExperience">Minimum experience in years (optional)</label>
+          <input id="eligibilityMinimumExperience" type="number" min="0" max="80" step="0.5">
+          <label for="eligibilityMaximumExperience">Maximum experience in years (optional)</label>
+          <input id="eligibilityMaximumExperience" type="number" min="0" max="80" step="0.5">
+          <label for="eligibilityLocations">Allowed locations (comma separated, optional)</label>
+          <input id="eligibilityLocations" placeholder="Kochi, Bengaluru">
+          <label for="eligibilityWorkMode">Required work mode (optional)</label>
+          <select id="eligibilityWorkMode">
+            <option value="">No work-mode constraint</option>
+            <option value="ONSITE">Onsite</option>
+            <option value="HYBRID">Hybrid</option>
+            <option value="REMOTE">Remote</option>
+          </select>
+          <label><input id="eligibilityRemoteAllowed" type="checkbox" style="width:auto"> Remote work is allowed</label>
+          <label><input id="eligibilityRelocationRequired" type="checkbox" style="width:auto"> Relocation is required</label>
+          <label for="eligibilityLatestStart">Latest start date (optional)</label>
+          <input id="eligibilityLatestStart" type="date">
+          <div class="actions"><button id="saveEligibilityButton" type="submit">Save eligibility rules</button></div>
+        </form>
       </section>
     </div>
 
@@ -517,6 +564,13 @@
           scoreButton.textContent = "Score";
           scoreButton.addEventListener("click", () => scoreCandidate(candidate, scoreButton));
           actions.append(scoreButton);
+          const eligibilityButton = document.createElement("button");
+          eligibilityButton.type = "button";
+          eligibilityButton.className = "secondary";
+          eligibilityButton.textContent = "Evaluate eligibility";
+          eligibilityButton.style.marginLeft = "6px";
+          eligibilityButton.addEventListener("click", () => evaluateEligibility(candidate, eligibilityButton));
+          actions.append(eligibilityButton);
           const editDetails = document.createElement("details");
           const editSummary = document.createElement("summary");
           editSummary.textContent = "Edit profile";
@@ -674,7 +728,47 @@
           byId("openingSelect").value = current;
           renderOpening();
         }
+        await loadEligibilityConfiguration();
         await loadCandidates();
+      }
+
+      async function loadEligibilityConfiguration() {
+        const opening = selectedOpening();
+        const form = byId("eligibilityForm");
+        form.reset();
+        if (!opening) return;
+        try {
+          const saved = await request(`/openings/${encodeURIComponent(opening.opening_id)}/eligibility-config`);
+          const config = saved.configuration;
+          byId("eligibilityMinimumScore").value = config.minimum_ats_score ?? "";
+          byId("eligibilitySkills").value = config.mandatory_skills.join(", ");
+          byId("eligibilityMinimumExperience").value = config.minimum_experience_years ?? "";
+          byId("eligibilityMaximumExperience").value = config.maximum_experience_years ?? "";
+          byId("eligibilityLocations").value = config.location_rules.allowed_locations.join(", ");
+          byId("eligibilityWorkMode").value = config.location_rules.work_mode || "";
+          byId("eligibilityRemoteAllowed").checked = config.location_rules.remote_allowed;
+          byId("eligibilityRelocationRequired").checked = config.location_rules.relocation_required;
+          byId("eligibilityLatestStart").value = config.location_rules.latest_start_date || "";
+        } catch (error) {
+          if (!error.message.includes("Eligibility configuration not found")) throw error;
+        }
+      }
+
+      async function evaluateEligibility(candidate, button) {
+        button.disabled = true;
+        try {
+          const result = await request(`/candidates/${encodeURIComponent(candidate.candidate_id)}/eligibility/evaluate`, jsonOptions("POST", {
+            opening_id: candidate.opening_id
+          }));
+          const reasons = result.review_reasons.length
+            ? ` ${result.review_reasons.join(" ")}`
+            : "";
+          showNotice(`${candidate.name}: eligibility ${result.status}. ${result.decision_explanation}${reasons}`);
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
       }
 
       async function waitForResume(jobId) {
@@ -761,6 +855,25 @@
         }
       });
 
+      byId("parseJobDescriptionButton").addEventListener("click", async (event) => {
+        const description = byId("jobDescription").value;
+        if (!description.trim()) return showNotice("Enter a job description before parsing.", true);
+        const button = event.currentTarget;
+        button.disabled = true;
+        try {
+          const parsed = await request("/openings/parse-description", jsonOptions("POST", { description }));
+          if (parsed.required_skills.length) byId("requiredSkills").value = parsed.required_skills.join(", ");
+          byId("preferredSkills").value = parsed.preferred_skills.join(", ");
+          if (parsed.minimum_education) byId("minimumEducation").value = parsed.minimum_education;
+          if (parsed.minimum_years_experience !== null) byId("minimumExperience").value = parsed.minimum_years_experience;
+          showNotice(`Parsed only explicitly labeled requirements. ${parsed.warnings.join(" ") || "Review and confirm the populated fields before saving."}`);
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+
       byId("editOpeningForm").addEventListener("submit", async (event) => {
         event.preventDefault();
         const opening = selectedOpening();
@@ -809,6 +922,7 @@
         renderOpening();
         byId("shortlistResults").replaceChildren();
         try {
+          await loadEligibilityConfiguration();
           await loadCandidates();
         } catch (error) {
           showNotice(error.message, true);
@@ -833,6 +947,10 @@
             skills
           };
           if (byId("candidateEmail").value.trim()) payload.email = byId("candidateEmail").value.trim();
+          if (byId("candidateLocation").value.trim()) payload.location = byId("candidateLocation").value.trim();
+          if (byId("candidateRelocation").value) payload.relocation_willingness = byId("candidateRelocation").value === "true";
+          if (byId("candidateWorkMode").value) payload.work_mode_preference = byId("candidateWorkMode").value;
+          if (byId("candidateAvailability").value) payload.availability_date = byId("candidateAvailability").value;
           savedCandidate = await request("/candidates", jsonOptions("POST", payload));
           if (file) {
             const form = new FormData();
@@ -888,6 +1006,45 @@
             target.append(empty);
           }
           showNotice(`Found ${result.shortlisted_count} review suggestion(s). Human review is required.`);
+        } catch (error) {
+          showNotice(error.message, true);
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      byId("eligibilityForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const opening = selectedOpening();
+        if (!opening) return showNotice("Select a job opening first.", true);
+        const optionalNumber = (id) => {
+          const value = byId(id).value;
+          return value === "" ? null : Number(value);
+        };
+        const minimumScore = optionalNumber("eligibilityMinimumScore");
+        const minimumExperience = optionalNumber("eligibilityMinimumExperience");
+        const maximumExperience = optionalNumber("eligibilityMaximumExperience");
+        if (minimumScore !== null && (!Number.isFinite(minimumScore) || minimumScore < 0 || minimumScore > 100)) {
+          return showNotice("Minimum ATS score must be between 0 and 100.", true);
+        }
+        const button = byId("saveEligibilityButton");
+        button.disabled = true;
+        try {
+          const result = await request(`/openings/${encodeURIComponent(opening.opening_id)}/eligibility-config`, jsonOptions("PUT", {
+            minimum_ats_score: minimumScore,
+            mandatory_skills: splitSkills(byId("eligibilitySkills").value),
+            minimum_experience_years: minimumExperience,
+            maximum_experience_years: maximumExperience,
+            location_rules: {
+              allowed_locations: splitSkills(byId("eligibilityLocations").value),
+              work_mode: byId("eligibilityWorkMode").value || null,
+              remote_allowed: byId("eligibilityRemoteAllowed").checked,
+              relocation_required: byId("eligibilityRelocationRequired").checked,
+              latest_start_date: byId("eligibilityLatestStart").value || null
+            },
+            decision_policy: { manual_review_on_missing_data: true }
+          }));
+          showNotice(`Saved eligibility rules for ${opening.title} (version ${result.version}).`);
         } catch (error) {
           showNotice(error.message, true);
         } finally {

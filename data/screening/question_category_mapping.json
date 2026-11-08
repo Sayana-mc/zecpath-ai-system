@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "categories": {
+    "INTRODUCTION": {
+      "label": "Introduction",
+      "purpose": "Candidate background and motivation",
+      "permitted_answer_types": ["TEXT"]
+    },
+    "EDUCATION": {
+      "label": "Education",
+      "purpose": "Job-relevant academic background",
+      "permitted_answer_types": ["TEXT"]
+    },
+    "EXPERIENCE": {
+      "label": "Experience",
+      "purpose": "Relevant work, internship, and experience duration",
+      "permitted_answer_types": ["TEXT", "NUMBER", "DURATION"]
+    },
+    "SKILLS": {
+      "label": "Skills",
+      "purpose": "Role-related skills and tools",
+      "permitted_answer_types": ["TEXT", "SKILL_LIST"]
+    },
+    "LOCATION": {
+      "label": "Location",
+      "purpose": "Candidate-supplied location and work-mode preferences",
+      "permitted_answer_types": ["LOCATION", "YES_NO"]
+    },
+    "SALARY": {
+      "label": "Salary",
+      "purpose": "Optional candidate salary expectations; informational only by default",
+      "permitted_answer_types": ["CURRENCY"]
+    },
+    "NOTICE_PERIOD": {
+      "label": "Notice Period",
+      "purpose": "Candidate-supplied availability or notice period",
+      "permitted_answer_types": ["NOTICE_PERIOD", "DURATION"]
+    }
+  }
+}

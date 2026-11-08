@@ -1,0 +1,16 @@
+SYNTHETIC TEST RESUME 03 - DATA ANALYST
+
+PROFILE
+Analyst experienced in turning operational data into clear business reporting.
+
+TECHNICAL SKILLS
+SQL, Python, Excel, Power BI, Tableau
+
+WORK HISTORY
+Data Analyst
+Example Retail Group
+March 2022 - December 2024
+Prepared dashboards, validated source data, and explained trends to stakeholders.
+
+EDUCATION
+B.Com Finance, Example College, 2021

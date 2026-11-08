@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.example/schemas/resume.schema.json",
+  "title": "ZecPath extracted resume profile",
+  "type": "object",
+  "required": [
+    "extraction_method",
+    "skills",
+    "skill_details",
+    "education",
+    "certifications",
+    "experience",
+    "experience_years",
+    "sections"
+  ],
+  "properties": {
+    "extraction_method": {"type": "string", "minLength": 1},
+    "skills": {"type": "array", "items": {"type": "string"}},
+    "skill_details": {
+      "type": "array",
+      "items": {"$ref": "https://zecpath.example/schemas/skill.schema.json"}
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["degree_type", "degree_name", "graduation_year"],
+        "properties": {
+          "degree_type": {"type": "string"},
+          "degree_name": {"type": "string"},
+          "field_of_study": {"type": "string"},
+          "institution": {"type": "string"},
+          "graduation_year": {"type": ["integer", "null"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "category", "year"],
+        "properties": {
+          "name": {"type": "string"},
+          "category": {"type": "string"},
+          "year": {"type": ["integer", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "experience": {
+      "type": "array",
+      "items": {"$ref": "https://zecpath.example/schemas/experience.schema.json"}
+    },
+    "experience_years": {"type": ["number", "null"], "minimum": 0},
+    "sections": {
+      "type": "object",
+      "required": ["sections", "detected_headings"],
+      "properties": {
+        "sections": {
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        },
+        "detected_headings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["heading", "section"],
+            "properties": {
+              "heading": {"type": "string"},
+              "section": {"type": "string"}
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

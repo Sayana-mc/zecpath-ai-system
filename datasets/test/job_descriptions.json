@@ -1,0 +1,35 @@
+{
+  "provenance": "Synthetic test data; not production jobs.",
+  "job_descriptions": [
+    {
+      "job_id": "SYNTHETIC-TECH-01",
+      "job_title": "Backend Software Engineer",
+      "description": "Build and maintain reliable services and APIs.",
+      "required_skills": ["Python", "REST APIs", "PostgreSQL"],
+      "preferred_skills": ["Docker", "AWS"],
+      "experience_required_years": 2,
+      "education": ["Computer Science or equivalent experience"],
+      "responsibilities": ["Implement APIs", "Review database performance"]
+    },
+    {
+      "job_id": "SYNTHETIC-ANALYST-01",
+      "job_title": "Data Analyst",
+      "description": "Prepare reports and explain operational trends.",
+      "required_skills": ["SQL", "Excel", "Data visualization"],
+      "preferred_skills": ["Python", "Power BI"],
+      "experience_required_years": 1,
+      "education": ["Relevant degree or equivalent experience"],
+      "responsibilities": ["Validate data", "Present findings"]
+    },
+    {
+      "job_id": "SYNTHETIC-PEOPLE-01",
+      "job_title": "HR Coordinator",
+      "description": "Coordinate interviews and maintain hiring records.",
+      "required_skills": ["Scheduling", "Communication", "HR administration"],
+      "preferred_skills": ["Applicant tracking systems"],
+      "experience_required_years": 0,
+      "education": [],
+      "responsibilities": ["Coordinate interviews", "Maintain process records"]
+    }
+  ]
+}

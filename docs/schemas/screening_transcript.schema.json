@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.example/schemas/screening_transcript.schema.json",
+  "title": "ZecPath Screening Transcript",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["session", "segments", "interactions"],
+  "properties": {
+    "session": {
+      "type": "object",
+      "required": ["session_id", "candidate_id", "opening_id", "status", "language", "started_at", "completed_at", "source", "version", "created_at", "updated_at"],
+      "properties": {
+        "session_id": {"type": "string", "minLength": 1},
+        "candidate_id": {"type": "string", "minLength": 1},
+        "opening_id": {"type": "string", "minLength": 1},
+        "status": {"enum": ["CREATED", "IN_PROGRESS", "INTERRUPTED", "COMPLETED", "CANCELLED"]},
+        "language": {"type": "string", "minLength": 2},
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": ["string", "null"], "format": "date-time"},
+        "source": {"enum": ["MANUAL", "RECRUITER", "IMPORT"]},
+        "version": {"type": "integer", "minimum": 1},
+        "created_at": {"type": "string", "format": "date-time"},
+        "updated_at": {"type": "string", "format": "date-time"}
+      },
+      "additionalProperties": false
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["segment_id", "session_id", "question_id", "speaker", "raw_text", "normalized_text", "start_time", "end_time", "confidence", "language", "source", "processing_version", "sequence_number", "created_at", "updated_at"],
+        "properties": {
+          "segment_id": {"type": "string", "minLength": 1},
+          "session_id": {"type": "string", "minLength": 1},
+          "question_id": {"type": ["string", "null"]},
+          "speaker": {"enum": ["CANDIDATE", "RECRUITER", "AI", "SYSTEM", "FOLLOW_UP"]},
+          "raw_text": {"type": "string"},
+          "normalized_text": {"type": "string"},
+          "start_time": {"type": ["string", "null"], "format": "date-time"},
+          "end_time": {"type": ["string", "null"], "format": "date-time"},
+          "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "language": {"type": ["string", "null"]},
+          "source": {"enum": ["MANUAL", "RECRUITER", "IMPORT", "SPEECH_RECOGNITION"]},
+          "processing_version": {"type": "string"},
+          "sequence_number": {"type": "integer", "minimum": 1},
+          "created_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["interaction_id", "session_id", "question_id", "candidate_answer", "answer_type", "validation_status", "display_order", "follow_up_to", "created_at", "updated_at"],
+        "properties": {
+          "interaction_id": {"type": "string", "minLength": 1},
+          "session_id": {"type": "string", "minLength": 1},
+          "question_id": {"type": "string", "minLength": 1},
+          "candidate_answer": {"type": ["string", "null"]},
+          "answer_type": {"type": ["string", "null"]},
+          "validation_status": {"enum": ["PENDING", "VALID", "INVALID", "SKIPPED", "UNANSWERED"]},
+          "display_order": {"type": "integer", "minimum": 1},
+          "follow_up_to": {"type": ["string", "null"]},
+          "created_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time"}
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

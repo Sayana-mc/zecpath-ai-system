@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zecpath.example/schemas/screening_question.schema.json",
+  "title": "ZecPath Screening Question",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "question_id",
+    "role_id",
+    "role_label",
+    "category",
+    "question_text",
+    "expected_answer_type",
+    "mandatory",
+    "scoring_importance",
+    "display_order",
+    "language",
+    "is_active",
+    "version",
+    "created_at",
+    "updated_at",
+    "follow_up_eligible",
+    "translations"
+  ],
+  "properties": {
+    "question_id": {"type": "string", "minLength": 1},
+    "role_id": {"type": "string", "minLength": 1},
+    "role_label": {"type": "string", "minLength": 1},
+    "category": {
+      "enum": ["INTRODUCTION", "EDUCATION", "EXPERIENCE", "SKILLS", "LOCATION", "SALARY", "NOTICE_PERIOD"]
+    },
+    "question_text": {"type": "string", "minLength": 1},
+    "expected_answer_type": {
+      "enum": ["TEXT", "NUMBER", "YES_NO", "SINGLE_CHOICE", "MULTIPLE_CHOICE", "DATE", "DURATION", "LOCATION", "CURRENCY", "NOTICE_PERIOD", "SKILL_LIST"]
+    },
+    "mandatory": {"type": "boolean"},
+    "scoring_importance": {"enum": ["HIGH", "MEDIUM", "LOW", "INFORMATIONAL"]},
+    "display_order": {"type": "integer", "minimum": 1},
+    "language": {"enum": ["en", "ml", "hi"]},
+    "is_active": {"type": "boolean"},
+    "version": {"type": "integer", "minimum": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "follow_up_eligible": {"type": "boolean"},
+    "translations": {
+      "type": "object",
+      "required": ["en", "ml", "hi"],
+      "properties": {
+        "en": {"$ref": "#/$defs/translation"},
+        "ml": {"$ref": "#/$defs/translation"},
+        "hi": {"$ref": "#/$defs/translation"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "translation": {
+      "type": "object",
+      "required": ["question_text", "status"],
+      "properties": {
+        "question_text": {"type": ["string", "null"]},
+        "status": {"enum": ["AVAILABLE", "PENDING"]}
+      },
+      "additionalProperties": false
+    }
+  }
+}

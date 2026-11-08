@@ -16,9 +16,10 @@ and are not all wired into that API.
 - Upload TXT, DOCX, and text-based PDF resumes (up to 5 MiB) and extract text.
 - Review the saved extracted resume text and the exact snippets used by matching.
 - Persist application, processing, score, and review data in SQLite.
-- Extract skills, education, and dated work history with the existing Day 9-11
-  parsers; persist the structured extraction with the candidate record.
-- Calculate a transparent weighted score using Day 9-11 extracted evidence,
+- Extract sections, skills, education, certifications, and dated work history
+  with the existing Day 8-11 parsers; persist the structured profile with the
+  candidate record.
+- Calculate a transparent weighted score using Day 8-11 extracted evidence,
   Day 12 local sentence embeddings when a resume is present, and the active Day
   13 scoring formula. The response includes component evidence, weights,
   contributions, missing-input reasons, classification, and rank.
@@ -26,6 +27,13 @@ and are not all wired into that API.
   name/skills/resume and job title, description, requirements, or preferred
   skills; affected applications must be rescored before shortlist suggestions.
 - Rank previously scored applications for a job as a recruiter review aid.
+- Parse explicitly labeled job-description requirement sections for recruiter
+  confirmation; parsing does not update an opening automatically.
+- Configure and retrieve per-opening eligibility rules and candidate
+  evaluations. Missing information is surfaced for human review; evaluation
+  never changes application status.
+- Retrieve the available screening question bank and persist manual/imported
+  screening sessions, transcript segments, and question interactions.
 - Save rule-based screening-answer notes and review flags. The Day 25 keyword
   classifier and regex extractors do not score or rank candidates.
 - Use interactive API documentation at `/docs`.
@@ -33,9 +41,11 @@ and are not all wired into that API.
 The scoring method is an experimental heuristic, not a validated employment
 model or a recommendation to reject a candidate. Day 12 inference runs locally
 from the `all-MiniLM-L6-v2` model cache; no resume text or scoring request is
-sent to an external AI service. Missing evidence is reported and contributes
-zero under the existing Day 13 normalization. Every score and shortlist
-requires human review.
+sent to an external AI service. Contact details and common labeled personal
+attributes are excluded from semantic matching input, but this is not complete
+de-identification or a fairness guarantee. Missing evidence is reported and
+contributes zero under the existing Day 13 normalization. Every score and
+shortlist requires human review.
 Screening notes use separate keyword/regex rules; their heuristic output is not
 validated and is not included in match scores. Scanned-image OCR, multiple
 recruiter roles, identity-provider integration, notifications, and production
@@ -55,6 +65,7 @@ deployment are not implemented in the root API.
   already be cached before scoring candidates with resumes.
 - A same-origin HTML/CSS/JavaScript dashboard in `static/index.html`.
 - Pytest and HTTPX for root and repository testing.
+- `jsonschema` for validating the documented Day 4 JSON Schema contracts.
 
 The root application has no configured LLM provider. The separate numbered
 day folders include prototypes (for example Day 24 Faster-Whisper) that are
@@ -111,7 +122,7 @@ build or start command.
    saved with the candidate record, including structured skills, education,
    and detectable work history. Job openings can optionally include minimum
    education and years of experience.
-4. In **Applications**, choose **Score** to combine Day 9-11 parsed evidence,
+4. In **Applications**, choose **Score** to combine Day 8-11 parsed evidence,
    local Day 12 resume/job similarity when available, and Day 13's weighted
    formula. Expand **Review score evidence**, **Review component scores**, and
    **Review extracted resume details** to inspect inputs, missing components,
@@ -124,12 +135,12 @@ build or start command.
    candidates, scores, and screening reports. **Sign out** revokes the session;
    protected API data is unavailable until you sign in again.
 
-The Day 21 eligibility decision engine remains a separate stage prototype and
-is not currently exposed through the root recruiter dashboard or API. The
-standalone Day 16 API is also a demo, not the root app's runtime. There is no
-executable Day 20 ATS scorer; the root integration uses the existing Day 13
-weighted scorer rather than claiming an unavailable Day 20 feature. See the
-[Day 16/20 integration and verification report](docs/day16_day20_integration.md).
+The standalone Day 16 API remains a separate demo, not the root app's runtime.
+The root eligibility and transcript features are review/storage interfaces,
+not automated employment decisions or voice AI. There is no independent
+executable Day 20 scorer; the root uses the existing Day 9–13 weighted scorer.
+See the [Days 16–23 implementation report](docs/day16_day23_implementation_report.md)
+and [audit](docs/day16_day23_implementation_audit.md).
 
 ### Environment configuration
 
@@ -159,9 +170,13 @@ cookie is present.
 | Candidates | `/api/v1/candidates` and `/api/v1/candidates/{candidate_id}` | Protected; GET/POST/PATCH/DELETE. |
 | Resume upload | `POST /api/v1/resumes/upload` | Protected multipart upload; TXT, DOCX, or text-based PDF up to 5 MiB. |
 | Processing status | `GET /api/v1/jobs/{job_id}` | Protected. |
-| Match score | `POST /api/v1/candidates/score` | Protected; Day 9-13 evidence, local Day 12 semantics when a resume is present, and Day 13 weighted score. |
+| Match score | `POST /api/v1/candidates/score` | Protected; Day 8-13 evidence, local Day 12 semantics when a resume is present, and Day 13 weighted score. |
 | Shortlist suggestions | `POST /api/v1/openings/{opening_id}/shortlist` | Protected; uses saved scores and does not change candidate status. |
 | Screening notes | `POST/GET /api/v1/candidates/{candidate_id}/screening-reports` | Protected; rule-based notes, not an assessment score. |
+| JD parsing | `POST /api/v1/openings/parse-description` | Protected; explicit headings only; recruiter confirmation required. |
+| Eligibility | `/api/v1/openings/{opening_id}/eligibility-config` and `/api/v1/candidates/{candidate_id}/eligibility` | Protected; versioned rules, human review required. |
+| Screening questions | `GET /api/v1/screening/questions` | Protected; returns existing questions and available translations only. |
+| Transcript data | `/api/v1/screening/sessions` and nested `/segments` and `/interactions` routes | Protected; manual/import persistence; no audio or speech AI. |
 
 Browser session-authenticated POST/PATCH/DELETE requests must have a matching
 same-origin `Origin` header. Direct API clients can use HTTP Basic; use it only
@@ -284,6 +299,16 @@ evidence. The root API tests exercise its persistence and HTTP workflows.
 
 ## Documentation and submission reports
 
+- [Day 1–15 task-level audit](docs/day01_day15_implementation_audit.md),
+  [implementation report](docs/day01_day15_implementation_report.md),
+  [test report](docs/day01_day15_test_report.md), and
+  [known limitations](docs/day01_day15_known_limitations.md). These mark the
+  unavailable PRD and other blockers explicitly; they do not claim all
+  requirements are complete.
+- [Day 1–15 progress checkpoint](docs/day01_day15_implementation_progress.md)
+  records remaining work.
+- [Synthetic Day 4 resume/JD samples](datasets/test/) are isolated test data
+  and are never loaded into the application database.
 - [Documentation index](docs/README.md) maps current guides and historical
   stage reports.
 - [Daily module report catalog](docs/daily_reports.md) distinguishes stage
@@ -297,7 +322,11 @@ evidence. The root API tests exercise its persistence and HTTP workflows.
 - [Final ATS report](docs/reports/Final_ATS_Report.md) summarizes current
   status and acceptance blockers.
 - [Day 16/20 integration and verification report](docs/day16_day20_integration.md)
-  documents the actual root endpoints, Day 9-13 scoring flow, and integration
+- [Days 16–23 implementation audit](docs/day16_day23_implementation_audit.md)
+- [Days 16–23 implementation report](docs/day16_day23_implementation_report.md)
+- [Days 16–23 test report](docs/day16_day23_test_report.md)
+- [Days 16–23 known limitations](docs/day16_day23_known_limitations.md)
+  documents the actual root endpoints, Day 8-13 scoring flow, and integration
   limits.
 - Import the [Postman collection](postman/ZecPath%20Recruiter%20API.postman_collection.json)
   and [local environment](postman/ZecPath%20Local.postman_environment.json)

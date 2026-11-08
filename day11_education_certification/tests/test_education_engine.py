@@ -69,6 +69,9 @@ def test_certification_normalization():
         )
         == "AWS Certified"
     )
+    assert normalize_certification_name(
+        "AWS Certified Solutions Architect"
+    ) == "AWS Certified Solutions Architect"
 
 
 def test_certification_category():

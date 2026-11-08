@@ -13,7 +13,7 @@ from day13_ats_scoring.src.scoring_parameters import (
     skill_match_score,
 )
 
-from .resume_analysis import extract_resume_data
+from .resume_analysis import build_resume_matching_text, extract_resume_data
 from .services import calculate_candidate_match
 
 if TYPE_CHECKING:
@@ -35,6 +35,7 @@ def calculate_integrated_score(
     resume_data = candidate.get("resume_data") or (
         extract_resume_data(resume_text) if resume_text else {}
     )
+    matching_text = build_resume_matching_text(resume_text, resume_data)
     profile_skills = candidate.get("skills", [])
     extracted_skills = resume_data.get("skills", [])
     all_skills = list(
@@ -63,7 +64,11 @@ def calculate_integrated_score(
 
     semantic_similarity = None
     semantic_reason = "A readable resume is required for Day 12 semantic scoring."
-    if resume_text:
+    if resume_text and not matching_text:
+        semantic_reason = (
+            "No job-relevant resume text remained after personal-data filtering."
+        )
+    if matching_text:
         job_text_parts = [
             str(opening["title"]),
             str(opening.get("description", "")),
@@ -82,7 +87,7 @@ def calculate_integrated_score(
         try:
             resume_embedding, job_embedding = _embedding_engine().encode_many(
                 [
-                    resume_text,
+                    matching_text,
                     ". ".join(part for part in job_text_parts if part).strip(),
                 ]
             )
@@ -110,6 +115,7 @@ def calculate_integrated_score(
                 else None
             ),
             "reason": semantic_reason,
+            "personal_data_masking": "Contact details and labeled personal attributes are excluded from matching input.",
         },
     }
     breakdown = generate_score_breakdown(
@@ -119,7 +125,19 @@ def calculate_integrated_score(
         semantic_similarity,
         opening["title"],
     )
-    _, exact_evidence = calculate_candidate_match(candidate, opening)
+    if all_skills or matching_text:
+        matching_candidate = {
+            **candidate,
+            "skills": all_skills,
+            "resume_text": matching_text,
+        }
+        _, exact_evidence = calculate_candidate_match(matching_candidate, opening)
+    else:
+        exact_evidence = {
+            "profile_skills": [],
+            "resume_evidence_skills": [],
+            "resume_evidence": [],
+        }
     required_skills_by_key: dict[str, str] = {}
     for skill in opening["required_skills"]:
         cleaned = str(skill).strip()
@@ -173,14 +191,22 @@ def calculate_integrated_score(
         "formula": "sum(component_score_0_to_100 * configured_role_weight)",
         "scoring_explanation": (
             "Day 9-11 extract skills, dated work history, and education; "
-            "Day 12 compares the resume with the job title, description, "
+            "Day 8 section segmentation scopes extraction when recognized "
+            "sections exist. Day 12 compares a resume representation with the "
+            "job title, description, "
             "required/preferred skills, and specified education/experience "
             "requirements using sentence-embedding cosine similarity; Day 13 "
             "applies its configured, role-specific weighted formula. Missing "
             "experience or education inputs are represented as unavailable "
             "by their component helper and contribute zero under Day 13's "
-            "existing score normalization."
+            "existing score normalization. Contact details and labeled "
+            "personal attributes are excluded from semantic matching."
         ),
+        "fairness_safeguards": {
+            "personal_attributes_used_for_scoring": False,
+            "semantic_input_masking": True,
+            "human_review_required": True,
+        },
         "human_review_required": True,
         **{
             key: value

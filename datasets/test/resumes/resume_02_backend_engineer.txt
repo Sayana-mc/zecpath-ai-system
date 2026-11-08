@@ -1,0 +1,19 @@
+SYNTHETIC TEST RESUME 02 - EXPERIENCED BACKEND ENGINEER
+
+SUMMARY
+Backend engineer with experience designing APIs and operating data services.
+
+SKILLS
+Python, Java, PostgreSQL, Redis, Docker, AWS
+
+WORK EXPERIENCE
+Backend Engineer
+Example Systems
+January 2021 - Present
+Designed REST APIs, improved database queries, and maintained service monitoring.
+
+EDUCATION
+B.Sc Computer Science, Example University, 2020
+
+CERTIFICATIONS
+AWS Certified Solutions Architect 2023

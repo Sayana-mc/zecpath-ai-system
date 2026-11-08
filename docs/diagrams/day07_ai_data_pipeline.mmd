@@ -1,0 +1,18 @@
+flowchart LR
+    A[Resume upload] --> B[File and MIME validation]
+    B --> C[Processing job]
+    C --> D[PDF/DOCX/TXT extraction]
+    D --> E[Day 8 section segmentation]
+    E --> F[Day 9 skill extraction]
+    E --> G[Day 10 experience parsing]
+    E --> H[Day 11 education and certification parsing]
+    F --> I[(Candidate resume profile in SQLite)]
+    G --> I
+    H --> I
+    D --> I
+    I --> J[Sanitized matching text]
+    J --> K[Day 12 local embeddings]
+    K --> L[Day 13 weighted score]
+    L --> M[(Score and evidence)]
+    M --> N[Job-scoped ranking suggestions]
+    N --> O[Human review]

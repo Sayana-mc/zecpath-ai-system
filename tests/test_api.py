@@ -102,29 +102,78 @@ def test_existing_database_is_migrated_for_structured_resume_and_job_requirement
         );
         """
     )
+    connection.execute(
+        """
+        INSERT INTO openings (
+            opening_id, title, description, required_skills, preferred_skills,
+            status, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            "legacy-opening",
+            "Legacy Analyst",
+            "Existing opening",
+            '["Python"]',
+            "[]",
+            "OPEN",
+            "2024-01-01T00:00:00+00:00",
+            "2024-01-01T00:00:00+00:00",
+        ),
+    )
+    connection.execute(
+        """
+        INSERT INTO candidates (
+            candidate_id, name, email, opening_id, skills, resume_text,
+            resume_filename, application_status, score, score_evidence,
+            created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """,
+        (
+            "legacy-candidate",
+            "Legacy Applicant",
+            None,
+            "legacy-opening",
+            '["Python"]',
+            "Existing resume text",
+            None,
+            "APPLIED",
+            None,
+            None,
+            "2024-01-01T00:00:00+00:00",
+            "2024-01-01T00:00:00+00:00",
+        ),
+    )
+    connection.commit()
     connection.close()
     monkeypatch.setenv("ZECPATH_DB_PATH", str(database_path))
 
     database.initialize_database()
-    opening = database.create_opening(
+    opening = database.get_opening("legacy-opening")
+    candidate = database.get_candidate("legacy-candidate")
+    assert opening["title"] == "Legacy Analyst"
+    assert candidate["name"] == "Legacy Applicant"
+    assert candidate["resume_text"] == "Existing resume text"
+    assert candidate["skills"] == ["Python"]
+
+    created_opening = database.create_opening(
         {
-            "opening_id": "legacy-opening",
+            "opening_id": "new-opening",
             "title": "Analyst",
             "description": "",
             "required_skills": ["Python"],
             "preferred_skills": [],
         }
     )
-    candidate = database.create_candidate(
+    created_candidate = database.create_candidate(
         {
-            "candidate_id": "legacy-candidate",
-            "name": "Legacy Applicant",
-            "opening_id": "legacy-opening",
+            "candidate_id": "new-candidate",
+            "name": "New Applicant",
+            "opening_id": created_opening["opening_id"],
         }
     )
-    assert opening["minimum_education"] is None
-    assert opening["minimum_years_experience"] is None
-    assert candidate["resume_data"] == {}
+    assert created_opening["minimum_education"] is None
+    assert created_opening["minimum_years_experience"] is None
+    assert created_candidate["resume_data"] == {}
 
 
 def test_job_and_candidate_crud_and_persistence(client, tmp_path):
@@ -282,6 +331,74 @@ def test_semantic_embedding_uses_job_requirements_and_description(
         "3",
     ):
         assert requirement in job_text
+
+
+def test_scoring_extracts_sections_certifications_and_masks_personal_data(
+    client, monkeypatch
+):
+    opening = create_opening(client)
+    resume_text = (
+        "Ada Sharma\n"
+        "Email: ada@example.test\n"
+        "Gender: female\n"
+        "SKILLS\n"
+        "Python, SQL\n"
+        "WORK EXPERIENCE\n"
+        "Data Analyst at Example Co, 2020 - 2024\n"
+        "CERTIFICATIONS\n"
+        "AWS Certified Solutions Architect 2023\n"
+    )
+    candidate = create_candidate(client, opening["opening_id"])
+    upload = client.post(
+        "/api/v1/resumes/upload",
+        data={"candidate_id": candidate["candidate_id"]},
+        files={"file": ("resume.txt", resume_text.encode(), "text/plain")},
+    )
+    assert upload.status_code == 202
+    assert client.get(f"/api/v1/jobs/{upload.json()['job_id']}").json()["status"] == (
+        "COMPLETED"
+    )
+    captured_texts = []
+
+    class CapturingEmbeddingEngine:
+        def encode_many(self, texts):
+            captured_texts.extend(texts)
+            return [[1.0, 0.0] for _ in texts]
+
+    monkeypatch.setattr(
+        "src.integrated_scoring._embedding_engine",
+        lambda: CapturingEmbeddingEngine(),
+    )
+    response = client.post(
+        "/api/v1/candidates/score",
+        json={
+            "job_id": opening["opening_id"],
+            "candidate_id": candidate["candidate_id"],
+        },
+    )
+
+    assert response.status_code == 200
+    result = response.json()
+    matching_text = captured_texts[0]
+    assert "Ada Sharma" not in matching_text
+    assert "ada@example.test" not in matching_text
+    assert "Gender: female" not in matching_text
+    assert "Python, SQL" in matching_text
+    assert "Data Analyst at Example Co" in matching_text
+    assert "Python" in result["extracted_skills"]
+    assert result["evidence"]["fairness_safeguards"] == {
+        "personal_attributes_used_for_scoring": False,
+        "semantic_input_masking": True,
+        "human_review_required": True,
+    }
+
+    saved_candidate = client.get(
+        f"/api/v1/candidates/{candidate['candidate_id']}"
+    ).json()
+    assert saved_candidate["resume_data"]["sections"]["detected_headings"]
+    assert saved_candidate["resume_data"]["certifications"][0]["name"] == (
+        "AWS Certified Solutions Architect 2023"
+    )
 
 
 def test_score_rejects_missing_evidence_and_wrong_job(client):

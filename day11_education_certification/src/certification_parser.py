@@ -20,11 +20,8 @@ def normalize_certification_name(name: str) -> str:
         "figma": "Figma",
     }
 
-    lower_name = name.lower()
-
     for key, value in replacements.items():
-        if key in lower_name:
-            return value
+        name = re.sub(re.escape(key), value, name, flags=re.IGNORECASE)
 
     return name
 
