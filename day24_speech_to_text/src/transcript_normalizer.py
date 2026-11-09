@@ -5,9 +5,21 @@ from .transcript_cleaner import (
 
 
 def normalize_transcription(stt_result):
+    if not stt_result:
+        return {
+            "raw_text": "",
+            "clean_text": "",
+            "language": "unknown",
+            "language_probability": 0.0,
+            "segments": [],
+            "partial_answer": True,
+            "segment_count": 0
+        }
 
-    raw_text = stt_result["text"]
-    segments = stt_result["segments"]
+    raw_text = str(stt_result.get("text", "")).strip()
+    segments = stt_result.get("segments") or []
+    backup_language = stt_result.get("language", "unknown")
+    backup_probability = stt_result.get("language_probability", 0.0)
 
     cleaned = clean_transcript(raw_text)
 
@@ -19,9 +31,8 @@ def normalize_transcription(stt_result):
     return {
         "raw_text": raw_text,
         "clean_text": cleaned["clean_text"],
-        "language": stt_result["language"],
-        "language_probability":
-            stt_result["language_probability"],
+        "language": backup_language,
+        "language_probability": backup_probability,
         "segments": segments,
         "partial_answer": partial_answer,
         "segment_count": len(segments)
