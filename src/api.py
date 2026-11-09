@@ -66,6 +66,19 @@ from .schemas import (
     ScreeningTranscriptResponse,
     TranscriptSegmentCreate,
     TranscriptSegmentResponse,
+    ScreeningAudioUploadResponse,
+    ScreeningAudioStatusResponse,
+    ScreeningTranscriptCreate,
+    ScreeningTranscriptDetailResponse,
+    ScreeningAnswerCreate,
+    ScreeningAnswerResponse,
+    ScreeningQuestionScoreCreate,
+    ScreeningQuestionScoreResponse,
+    ScreeningAggregateScoreResponse,
+    BehavioralAnalysisCreate,
+    BehavioralAnalysisResponse,
+    ScreeningReportFullCreate,
+    ScreeningReportFullResponse,
 )
 from .services import (
     calculate_candidate_match,
@@ -80,6 +93,14 @@ from .resume_analysis import extract_resume_data
 from .eligibility import evaluate_eligibility
 from .screening_questions import get_questions, load_dataset
 from .job_description_parser import parse_job_description
+from .stt_integration import stt_integration
+from .answer_understanding_integration import answer_understanding_integration
+from .screening_scoring_integration import screening_scoring_integration
+from .behavioral_analysis_integration import behavioral_analysis_integration
+from .screening_report_integration import screening_report_integration
+from .conversation_flow_integration import conversation_flow_integration
+from .edge_case_integration import edge_case_integration
+from .screening_pipeline import screening_pipeline
 
 
 logger = logging.getLogger(__name__)
@@ -97,6 +118,7 @@ router = APIRouter(
 
 UPLOAD_DIR = Path(__file__).resolve().parents[1] / "uploads"
 MAX_RESUME_BYTES = 5 * 1024 * 1024
+MAX_AUDIO_BYTES = 50 * 1024 * 1024
 RESUME_MIME_TYPES = {
     ".pdf": {"application/pdf"},
     ".docx": {
@@ -1040,3 +1062,195 @@ def shortlist_demo(request: ShortlistRequest) -> ShortlistResponse:
         simulation_only=True,
         message="Uses caller-supplied scores only; no saved candidate records were read or changed.",
     )
+
+
+@router.post(
+    "/screening/sessions",
+    response_model=dict,
+    status_code=201,
+)
+def create_screening_session_full(request: ScreeningSessionCreate) -> dict:
+    """Create a new screening session with questions."""
+    session_data = screening_pipeline.create_screening_session(
+        candidate_id=request.candidate_id,
+        opening_id=request.opening_id,
+        language=request.language,
+    )
+    return session_data
+
+
+@router.get(
+    "/screening/sessions/{session_id}/status",
+    response_model=dict,
+)
+def get_screening_session_status(session_id: str) -> dict:
+    """Get comprehensive screening session status."""
+    return screening_pipeline.get_session_status(session_id)
+
+
+@router.post(
+    "/screening/sessions/{session_id}/start",
+    response_model=dict,
+)
+def start_screening_session(session_id: str) -> dict:
+    """Start the screening conversation flow."""
+    _session_or_404(session_id)
+    return conversation_flow_integration.start_session(session_id)
+
+
+@router.post(
+    "/screening/sessions/{session_id}/audio",
+    response_model=ScreeningAudioUploadResponse,
+    status_code=202,
+)
+async def upload_screening_audio(
+    session_id: str,
+    file: UploadFile = File(...),
+    question_id: str | None = Form(default=None),
+) -> ScreeningAudioUploadResponse:
+    """Upload audio file for transcription."""
+    _session_or_404(session_id)
+
+    filename = Path(file.filename or "").name
+    extension = Path(filename).suffix.lower()
+    if extension not in {".wav", ".mp3", ".m4a", ".ogg", ".flac"}:
+        raise HTTPException(
+            status_code=400,
+            detail="Unsupported audio format. Use WAV, MP3, M4A, OGG, or FLAC.",
+        )
+
+    content = await file.read(MAX_AUDIO_BYTES + 1)
+    if not content:
+        raise HTTPException(status_code=400, detail="Uploaded audio is empty.")
+    if len(content) > MAX_AUDIO_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail=f"Audio exceeds the {MAX_AUDIO_BYTES // (1024*1024)} MiB upload limit.",
+        )
+
+    mime_type = file.content_type or "audio/wav"
+    return await stt_integration.upload_audio(
+        session_id=session_id,
+        file_bytes=content,
+        filename=filename,
+        mime_type=mime_type,
+        question_id=question_id,
+    )
+
+
+@router.get(
+    "/screening/audio/{audio_id}",
+    response_model=ScreeningAudioStatusResponse,
+)
+def get_audio_status(audio_id: str) -> ScreeningAudioStatusResponse:
+    """Get audio processing status."""
+    try:
+        return stt_integration.get_audio_status(audio_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+
+
+@router.post(
+    "/screening/audio/{audio_id}/transcribe",
+    response_model=ScreeningTranscriptDetailResponse,
+)
+def transcribe_audio(audio_id: str) -> ScreeningTranscriptDetailResponse:
+    """Process audio through STT and save transcript."""
+    try:
+        return stt_integration.process_audio(audio_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+    except Exception as exc:
+        logger.exception("Transcription failed")
+        raise HTTPException(status_code=500, detail="Transcription failed") from None
+
+
+@router.get(
+    "/screening/transcripts/{transcript_id}",
+    response_model=ScreeningTranscriptDetailResponse,
+)
+def get_transcript(transcript_id: str) -> ScreeningTranscriptDetailResponse:
+    """Get transcript by ID."""
+    try:
+        return stt_integration.get_transcript(transcript_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+
+
+@router.post(
+    "/screening/sessions/{session_id}/answers/text",
+    response_model=dict,
+)
+def submit_text_answer(
+    session_id: str,
+    question_id: str,
+    answer_text: str = Form(...),
+) -> dict:
+    """Submit text answer for a question."""
+    _session_or_404(session_id)
+    return screening_pipeline.process_text_response(
+        session_id=session_id,
+        question_id=question_id,
+        text_answer=answer_text,
+    )
+
+
+@router.post(
+    "/screening/sessions/{session_id}/complete",
+    response_model=dict,
+)
+def complete_screening_session(session_id: str) -> dict:
+    """Complete screening session and generate report."""
+    _session_or_404(session_id)
+    return screening_pipeline.complete_session(session_id)
+
+
+@router.get(
+    "/screening/sessions/{session_id}/report",
+    response_model=ScreeningReportFullResponse,
+)
+def get_screening_report(session_id: str) -> ScreeningReportFullResponse:
+    """Get screening report for session."""
+    reports = database.list_screening_reports_full(session_id)
+    if not reports:
+        raise HTTPException(status_code=404, detail="No report found for this session.")
+    return ScreeningReportFullResponse(**reports[0])
+
+
+@router.get(
+    "/screening/candidates/{candidate_id}/reports",
+    response_model=list[ScreeningReportFullResponse],
+)
+def list_candidate_screening_reports(candidate_id: str) -> list[ScreeningReportFullResponse]:
+    """List all screening reports for a candidate."""
+    _candidate_or_404(candidate_id)
+    sessions = database.list_screening_sessions(candidate_id)
+    reports = []
+    for session in sessions:
+        session_reports = database.list_screening_reports_full(session["session_id"])
+        reports.extend(session_reports)
+    return [ScreeningReportFullResponse(**r) for r in reports]
+
+
+@router.get(
+    "/screening/questions/{role_id}",
+    response_model=list[ScreeningQuestionResponse],
+)
+def get_questions_for_role(role_id: str, language: str = "en") -> list[dict]:
+    """Get screening questions for a specific role."""
+    questions = get_questions(role_id=role_id, language=language, active_only=True)
+    return questions
+
+
+def _candidate_or_404(candidate_id: str) -> dict:
+    candidate = database.get_candidate(candidate_id)
+    if candidate is None:
+        raise HTTPException(status_code=404, detail="Candidate not found.")
+    return candidate
+
+
+def _session_or_404(session_id: str) -> dict:
+    session = database.get_screening_session(session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Screening session not found.")
+    return session

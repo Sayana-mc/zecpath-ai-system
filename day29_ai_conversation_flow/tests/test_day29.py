@@ -13,7 +13,7 @@ SRC_DIR = (
 sys.path.insert(0, str(SRC_DIR))
 
 
-from conversation_flow import ConversationFlow
+from day29_ai_conversation_flow.src.conversation_flow import ConversationFlow
 from day29_ai_conversation_flow.src.decision_tree import ConversationDecisionTree
 
 

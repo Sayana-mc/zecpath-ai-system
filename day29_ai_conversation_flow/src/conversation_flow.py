@@ -1,4 +1,4 @@
-from conversation_state import ConversationState
+from .conversation_state import ConversationState
 class ConversationFlow:
 
     def __init__(self):

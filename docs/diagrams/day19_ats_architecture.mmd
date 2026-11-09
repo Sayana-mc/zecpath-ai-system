@@ -1,0 +1,137 @@
+```mermaid
+flowchart TD
+    subgraph "External Clients"
+        RECRUITER[Recruiter Dashboard]
+        API_CLIENT[API Client / curl]
+    end
+
+    subgraph "ZecPath ATS Root Application"
+        subgraph "API Layer"
+            ROUTER[FastAPI Router\nsrc/api.py]
+            AUTH[Auth Middleware\nsrc/auth.py]
+            SCHEMAS[Pydantic Schemas\nsrc/schemas.py]
+        end
+
+        subgraph "Service Layer"
+            SERVICES[Core Services\nsrc/services.py]
+            RESUME_ANALYSIS[Resume Analysis\nsrc/resume_analysis.py]
+            INTEGRATED_SCORING[Integrated Scoring\nsrc/integrated_scoring.py]
+            ELIGIBILITY[Eligibility Engine\nsrc/eligibility.py]
+            SCREENING_Q[Screening Questions\nsrc/screening_questions.py]
+            JD_PARSER[JD Parser\nsrc/job_description_parser.py]
+            ATS_EVAL[ATS Evaluation\nsrc/ats_evaluation.py]
+        end
+
+        subgraph "Data Layer"
+            DB[(SQLite Database\nsrc/database.py)]
+            UPLOADS[(File Storage\nuploads/)]
+        end
+
+        subgraph "Background Processing"
+            BG_TASKS[FastAPI BackgroundTasks]
+        end
+    end
+
+    subgraph "AI/ML Engines (External Modules)"
+        DAY5[Day 5: Text Extraction]
+        DAY8[Day 8: Section Segmentation]
+        DAY9[Day 9: Skill Extraction]
+        DAY10[Day 10: Experience Parsing]
+        DAY11[Day 11: Education Parsing]
+        DAY12[Day 12: Semantic Matching\n- EmbeddingEngine\n- all-MiniLM-L6-v2]
+        DAY13[Day 13: ATS Scoring\n- Weighted Formula\n- Role Weights]
+        DAY14[Day 14: Ranking & Shortlisting]
+        DAY15[Day 15: Fairness & Bias]
+        DAY21[Day 21: Eligibility Rules]
+        DAY22[Day 22: Question Bank]
+        DAY23[Day 23: Transcript Storage]
+    end
+
+    subgraph "External Dependencies"
+        SENTENCE_TRANSFORMERS[sentence-transformers]
+        PYMUPDF[pymupdf / fitz]
+        PYTHON_DOCX[python-docx]
+        SQLITE3[sqlite3 stdlib]
+    end
+
+    %% Client connections
+    RECRUITER -->|HTTPS| ROUTER
+    API_CLIENT -->|HTTPS| ROUTER
+
+    %% API Layer
+    ROUTER --> AUTH
+    ROUTER --> SCHEMAS
+    AUTH --> DB
+
+    %% Service Layer connections
+    ROUTER --> SERVICES
+    ROUTER --> RESUME_ANALYSIS
+    ROUTER --> INTEGRATED_SCORING
+    ROUTER --> ELIGIBILITY
+    ROUTER --> SCREENING_Q
+    ROUTER --> JD_PARSER
+    ROUTER --> ATS_EVAL
+
+    %% Service to AI/ML
+    SERVICES --> DAY5
+    SERVICES --> BG_TASKS
+    RESUME_ANALYSIS --> DAY8
+    RESUME_ANALYSIS --> DAY9
+    RESUME_ANALYSIS --> DAY10
+    RESUME_ANALYSIS --> DAY11
+    INTEGRATED_SCORING --> DAY9
+    INTEGRATED_SCORING --> DAY10
+    INTEGRATED_SCORING --> DAY11
+    INTEGRATED_SCORING --> DAY12
+    INTEGRATED_SCORING --> DAY13
+    SERVICES --> DAY14
+    ELIGIBILITY --> DAY21
+    SCREENING_Q --> DAY22
+    ROUTER --> DAY23
+
+    %% Data Layer
+    SERVICES --> DB
+    RESUME_ANALYSIS --> DB
+    INTEGRATED_SCORING --> DB
+    ELIGIBILITY --> DB
+    SCREENING_Q --> DB
+    JD_PARSER --> DB
+    AUTH --> DB
+    BG_TASKS --> DB
+    BG_TASKS --> UPLOADS
+
+    %% AI/ML to External Dependencies
+    DAY5 --> PYMUPDF
+    DAY5 --> PYTHON_DOCX
+    DAY12 --> SENTENCE_TRANSFORMERS
+    DAY8 --> SQLITE3
+    DAY9 --> SQLITE3
+    DAY10 --> SQLITE3
+    DAY11 --> SQLITE3
+    DAY13 --> SQLITE3
+    DAY14 --> SQLITE3
+    DAY21 --> SQLITE3
+    DAY22 --> SQLITE3
+    DAY23 --> SQLITE3
+
+    %% Background Tasks
+    BG_TASKS --> DAY5
+    BG_TASKS --> RESUME_ANALYSIS
+
+    %% Styling
+    classDef client fill:#e1f5fe,stroke:#01579b
+    classDef api fill:#f3e5f5,stroke:#4a148c
+    classDef service fill:#e8f5e9,stroke:#1b5e20
+    classDef ai fill:#fff3e0,stroke:#e65100
+    classDef data fill:#fce4ec,stroke:#880e4f
+    classDef bg fill:#f1f8e9,stroke:#33691e
+    classDef ext fill:#eceff1,stroke:#37474f
+
+    class RECRUITER,API_CLIENT client
+    class ROUTER,AUTH,SCHEMAS api
+    class SERVICES,RESUME_ANALYSIS,INTEGRATED_SCORING,ELIGIBILITY,SCREENING_Q,JD_PARSER,ATS_EVAL service
+    class DAY5,DAY8,DAY9,DAY10,DAY11,DAY12,DAY13,DAY14,DAY15,DAY21,DAY22,DAY23 ai
+    class DB,UPLOADS data
+    class BG_TASKS bg
+    class SENTENCE_TRANSFORMERS,PYMUPDF,PYTHON_DOCX,SQLITE3 ext
+```

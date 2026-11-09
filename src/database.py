@@ -180,6 +180,128 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
             window_started REAL NOT NULL,
             blocked_until REAL NOT NULL DEFAULT 0
         );
+        CREATE TABLE IF NOT EXISTS screening_audio (
+            audio_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            question_id TEXT,
+            file_path TEXT NOT NULL,
+            file_size_bytes INTEGER NOT NULL,
+            duration_seconds REAL,
+            mime_type TEXT,
+            source TEXT NOT NULL CHECK (source IN ('UPLOAD', 'RECORDING')),
+            status TEXT NOT NULL CHECK (status IN ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED')),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_audio_session_idx
+            ON screening_audio(session_id, created_at);
+        CREATE TABLE IF NOT EXISTS screening_transcripts (
+            transcript_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            audio_id TEXT REFERENCES screening_audio(audio_id) ON DELETE SET NULL,
+            question_id TEXT,
+            raw_text TEXT NOT NULL,
+            cleaned_text TEXT NOT NULL,
+            language TEXT,
+            language_probability REAL,
+            partial_answer INTEGER NOT NULL CHECK (partial_answer IN (0, 1)),
+            processing_version TEXT NOT NULL,
+            segment_count INTEGER NOT NULL DEFAULT 0,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_transcripts_session_idx
+            ON screening_transcripts(session_id, question_id);
+        CREATE TABLE IF NOT EXISTS screening_answers (
+            answer_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            transcript_id TEXT REFERENCES screening_transcripts(transcript_id) ON DELETE SET NULL,
+            question_id TEXT NOT NULL,
+            question_text TEXT NOT NULL,
+            expected_intent TEXT NOT NULL,
+            detected_intent TEXT,
+            answer_status TEXT NOT NULL CHECK (answer_status IN ('VALID', 'INVALID', 'PARTIAL', 'VAGUE', 'OFF_TOPIC', 'UNCLEAR', 'MISSING')),
+            raw_answer TEXT NOT NULL,
+            cleaned_answer TEXT NOT NULL,
+            extracted_information TEXT NOT NULL DEFAULT '{}',
+            intent_confidence REAL,
+            needs_clarification INTEGER NOT NULL CHECK (needs_clarification IN (0, 1)),
+            is_off_topic INTEGER NOT NULL CHECK (is_off_topic IN (0, 1)),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_answers_session_idx
+            ON screening_answers(session_id, question_id);
+        CREATE TABLE IF NOT EXISTS screening_question_scores (
+            score_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            answer_id TEXT NOT NULL REFERENCES screening_answers(answer_id) ON DELETE CASCADE,
+            question_id TEXT NOT NULL,
+            clarity_score INTEGER NOT NULL CHECK (clarity_score BETWEEN 0 AND 5),
+            relevance_score INTEGER NOT NULL CHECK (relevance_score BETWEEN 0 AND 5),
+            completeness_score INTEGER NOT NULL CHECK (completeness_score BETWEEN 0 AND 5),
+            consistency_score INTEGER NOT NULL CHECK (consistency_score BETWEEN 0 AND 5),
+            weighted_score REAL NOT NULL,
+            normalized_score REAL NOT NULL,
+            explanation TEXT NOT NULL,
+            human_review_required INTEGER NOT NULL CHECK (human_review_required IN (0, 1)),
+            scoring_version TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_question_scores_session_idx
+            ON screening_question_scores(session_id, question_id);
+        CREATE TABLE IF NOT EXISTS screening_aggregate_scores (
+            aggregate_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            overall_score REAL NOT NULL,
+            score_status TEXT NOT NULL CHECK (score_status IN ('PROVISIONAL', 'FINAL', 'REVIEW_REQUIRED')),
+            questions_evaluated INTEGER NOT NULL,
+            questions_answered INTEGER NOT NULL,
+            questions_missing INTEGER NOT NULL,
+            human_review_required INTEGER NOT NULL CHECK (human_review_required IN (0, 1)),
+            scoring_version TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_aggregate_scores_session_idx
+            ON screening_aggregate_scores(session_id);
+        CREATE TABLE IF NOT EXISTS behavioral_analysis (
+            analysis_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            answer_id TEXT REFERENCES screening_answers(answer_id) ON DELETE SET NULL,
+            sentiment TEXT CHECK (sentiment IN ('POSITIVE', 'NEUTRAL', 'NEGATIVE', 'MIXED', 'UNCERTAIN')),
+            sentiment_score REAL,
+            confidence_score REAL,
+            hesitation_count INTEGER NOT NULL DEFAULT 0,
+            uncertainty_count INTEGER NOT NULL DEFAULT 0,
+            contradiction_detected INTEGER NOT NULL CHECK (contradiction_detected IN (0, 1)),
+            contradiction_details TEXT,
+            response_length_category TEXT CHECK (response_length_category IN ('SHORT', 'MEDIUM', 'LONG')),
+            words_per_minute REAL,
+            pace_category TEXT CHECK (pace_category IN ('FAST', 'NORMAL', 'SLOW', 'UNKNOWN')),
+            processing_version TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS behavioral_analysis_session_idx
+            ON behavioral_analysis(session_id);
+        CREATE TABLE IF NOT EXISTS screening_reports_full (
+            report_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            opening_id TEXT NOT NULL REFERENCES openings(opening_id) ON DELETE CASCADE,
+            report_json TEXT NOT NULL,
+            html_report TEXT,
+            pdf_report BLOB,
+            version INTEGER NOT NULL DEFAULT 1,
+            status TEXT NOT NULL CHECK (status IN ('GENERATING', 'COMPLETED', 'FAILED')),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_reports_full_session_idx
+            ON screening_reports_full(session_id);
         """
     )
     opening_columns = {
@@ -1013,6 +1135,18 @@ def get_screening_session(session_id: str) -> dict[str, Any] | None:
         return dict(row) if row is not None else None
 
 
+def list_screening_sessions(candidate_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM screening_sessions
+            WHERE candidate_id = ? ORDER BY created_at DESC
+            """,
+            (candidate_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+
 def update_screening_session_status(session_id: str, status: str) -> dict[str, Any] | None:
     now = _now()
     completed_at = now if status in {"COMPLETED", "CANCELLED"} else None
@@ -1130,3 +1264,400 @@ def list_screening_interactions(session_id: str) -> list[dict[str, Any]]:
             (session_id,),
         ).fetchall()
         return [dict(row) for row in rows]
+
+
+def save_screening_audio(
+    session_id: str, audio: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_audio (
+                audio_id, session_id, question_id, file_path, file_size_bytes,
+                duration_seconds, mime_type, source, status, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'PENDING', ?, ?)
+            """,
+            (
+                audio["audio_id"],
+                session_id,
+                audio.get("question_id"),
+                audio["file_path"],
+                audio["file_size_bytes"],
+                audio.get("duration_seconds"),
+                audio["mime_type"],
+                audio["source"],
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_audio WHERE audio_id = ?", (audio["audio_id"],)
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def update_screening_audio_status(
+    audio_id: str, status: str
+) -> dict[str, Any] | None:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            UPDATE screening_audio
+            SET status = ?, updated_at = ?
+            WHERE audio_id = ?
+            """,
+            (status, now, audio_id),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_audio WHERE audio_id = ?", (audio_id,)
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def get_screening_audio(audio_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM screening_audio WHERE audio_id = ?", (audio_id,)
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def save_screening_transcript(
+    session_id: str, transcript: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_transcripts (
+                transcript_id, session_id, audio_id, question_id, raw_text,
+                cleaned_text, language, language_probability, partial_answer,
+                processing_version, segment_count, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                transcript["transcript_id"],
+                session_id,
+                transcript.get("audio_id"),
+                transcript.get("question_id"),
+                transcript["raw_text"],
+                transcript["cleaned_text"],
+                transcript.get("language"),
+                transcript.get("language_probability"),
+                1 if transcript.get("partial_answer") else 0,
+                transcript["processing_version"],
+                transcript.get("segment_count", 0),
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_transcripts WHERE transcript_id = ?",
+            (transcript["transcript_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def get_screening_transcript(transcript_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM screening_transcripts WHERE transcript_id = ?",
+            (transcript_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def list_screening_transcripts(session_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM screening_transcripts
+            WHERE session_id = ? ORDER BY created_at
+            """,
+            (session_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+
+def save_screening_answer(
+    session_id: str, answer: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_answers (
+                answer_id, session_id, transcript_id, question_id, question_text,
+                expected_intent, detected_intent, answer_status, raw_answer,
+                cleaned_answer, extracted_information, intent_confidence,
+                needs_clarification, is_off_topic, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                answer["answer_id"],
+                session_id,
+                answer.get("transcript_id"),
+                answer["question_id"],
+                answer["question_text"],
+                answer["expected_intent"],
+                answer.get("detected_intent"),
+                answer["answer_status"],
+                answer["raw_answer"],
+                answer["cleaned_answer"],
+                json.dumps(answer.get("extracted_information", {})),
+                answer.get("intent_confidence"),
+                1 if answer.get("needs_clarification") else 0,
+                1 if answer.get("is_off_topic") else 0,
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_answers WHERE answer_id = ?",
+            (answer["answer_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def get_screening_answer(answer_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM screening_answers WHERE answer_id = ?", (answer_id,)
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def list_screening_answers(session_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM screening_answers
+            WHERE session_id = ? ORDER BY created_at
+            """,
+            (session_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+
+def save_screening_question_score(
+    session_id: str, score: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_question_scores (
+                score_id, session_id, answer_id, question_id, clarity_score,
+                relevance_score, completeness_score, consistency_score,
+                weighted_score, normalized_score, explanation,
+                human_review_required, scoring_version, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                score["score_id"],
+                session_id,
+                score["answer_id"],
+                score["question_id"],
+                score["clarity_score"],
+                score["relevance_score"],
+                score["completeness_score"],
+                score["consistency_score"],
+                score["weighted_score"],
+                score["normalized_score"],
+                score["explanation"],
+                1 if score.get("human_review_required") else 0,
+                score["scoring_version"],
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_question_scores WHERE score_id = ?",
+            (score["score_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def get_screening_question_score(score_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM screening_question_scores WHERE score_id = ?",
+            (score_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def list_screening_question_scores(session_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM screening_question_scores
+            WHERE session_id = ? ORDER BY created_at
+            """,
+            (session_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+
+def save_screening_aggregate_score(
+    aggregate: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_aggregate_scores (
+                aggregate_id, session_id, candidate_id, overall_score,
+                score_status, questions_evaluated, questions_answered,
+                questions_missing, human_review_required, scoring_version,
+                created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                aggregate["aggregate_id"],
+                aggregate["session_id"],
+                aggregate["candidate_id"],
+                aggregate["overall_score"],
+                aggregate["score_status"],
+                aggregate["questions_evaluated"],
+                aggregate["questions_answered"],
+                aggregate["questions_missing"],
+                1 if aggregate.get("human_review_required") else 0,
+                aggregate["scoring_version"],
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_aggregate_scores WHERE aggregate_id = ?",
+            (aggregate["aggregate_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def get_screening_aggregate_score(session_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            """
+            SELECT * FROM screening_aggregate_scores
+            WHERE session_id = ? ORDER BY created_at DESC LIMIT 1
+            """,
+            (session_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+
+def save_behavioral_analysis(
+    session_id: str, analysis: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO behavioral_analysis (
+                analysis_id, session_id, answer_id, sentiment, sentiment_score,
+                confidence_score, hesitation_count, uncertainty_count,
+                contradiction_detected, contradiction_details,
+                response_length_category, words_per_minute, pace_category,
+                processing_version, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                analysis["analysis_id"],
+                session_id,
+                analysis.get("answer_id"),
+                analysis.get("sentiment"),
+                analysis.get("sentiment_score"),
+                analysis.get("confidence_score"),
+                analysis.get("hesitation_count", 0),
+                analysis.get("uncertainty_count", 0),
+                1 if analysis.get("contradiction_detected") else 0,
+                analysis.get("contradiction_details"),
+                analysis.get("response_length_category"),
+                analysis.get("words_per_minute"),
+                analysis.get("pace_category"),
+                analysis["processing_version"],
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM behavioral_analysis WHERE analysis_id = ?",
+            (analysis["analysis_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def get_behavioral_analysis(session_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM behavioral_analysis
+            WHERE session_id = ? ORDER BY created_at
+            """,
+            (session_id,),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+
+def save_screening_report_full(
+    session_id: str, report: dict[str, Any]
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO screening_reports_full (
+                report_id, session_id, candidate_id, opening_id, report_json,
+                html_report, pdf_report, version, status, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, 1, 'COMPLETED', ?, ?)
+            """,
+            (
+                report["report_id"],
+                session_id,
+                report["candidate_id"],
+                report["opening_id"],
+                json.dumps(report),
+                report.get("html_report"),
+                report.get("pdf_report"),
+                now,
+                now,
+            ),
+        )
+        row = connection.execute(
+            "SELECT * FROM screening_reports_full WHERE report_id = ?",
+            (report["report_id"],),
+        ).fetchone()
+        return dict(row) if row is not None else {}
+
+
+def get_screening_report_full(report_id: str) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM screening_reports_full WHERE report_id = ?",
+            (report_id,),
+        ).fetchone()
+        if row is None:
+            return None
+        record = dict(row)
+        record["report_json"] = json.loads(record["report_json"])
+        return record
+
+
+def list_screening_reports_full(session_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            """
+            SELECT * FROM screening_reports_full
+            WHERE session_id = ? ORDER BY created_at DESC
+            """,
+            (session_id,),
+        ).fetchall()
+        results = []
+        for row in rows:
+            record = dict(row)
+            record["report_json"] = json.loads(record["report_json"])
+            results.append(record)
+        return results
