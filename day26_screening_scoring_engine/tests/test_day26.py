@@ -23,8 +23,8 @@ sys.path.insert(
     str(SRC_DIR)
 )
 
-from question_scorer import QuestionScorer
-from scoring_engine import ScreeningScoringEngine
+from day26_screening_scoring_engine.src.question_scorer import QuestionScorer
+from day26_screening_scoring_engine.src.scoring_engine import ScreeningScoringEngine
 
 
 def load_config():

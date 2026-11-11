@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from scoring_engine import ScreeningScoringEngine
+from .scoring_engine import ScreeningScoringEngine
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]

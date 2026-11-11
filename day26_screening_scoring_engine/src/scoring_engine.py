@@ -1,4 +1,4 @@
-from question_scorer import QuestionScorer
+from .question_scorer import QuestionScorer
 
 
 class ScreeningScoringEngine:

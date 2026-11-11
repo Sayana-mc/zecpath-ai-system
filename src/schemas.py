@@ -531,3 +531,189 @@ class ScreeningTranscriptResponse(BaseModel):
     session: ScreeningSessionResponse
     segments: list[TranscriptSegmentResponse]
     interactions: list[ScreeningInteractionResponse]
+
+
+class ScreeningAudioUploadResponse(BaseModel):
+    audio_id: str
+    session_id: str
+    question_id: str | None
+    status: str
+    message: str
+
+
+class ScreeningAudioStatusResponse(BaseModel):
+    audio_id: str
+    session_id: str
+    question_id: str | None
+    file_path: str
+    file_size_bytes: int
+    duration_seconds: float | None
+    mime_type: str
+    source: str
+    status: str
+    created_at: str
+    updated_at: str
+
+
+class ScreeningTranscriptCreate(BaseModel):
+    audio_id: str | None = Field(default=None, min_length=1, max_length=80)
+    question_id: str | None = Field(default=None, min_length=1, max_length=80)
+    raw_text: str = Field(max_length=50_000)
+    cleaned_text: str = Field(max_length=50_000)
+    language: str | None = Field(default=None, min_length=2, max_length=16)
+    language_probability: float | None = Field(default=None, ge=0, le=1)
+    partial_answer: bool = False
+    segment_count: int = Field(default=0, ge=0)
+    processing_version: str = "stt-v1"
+
+
+class ScreeningTranscriptDetailResponse(BaseModel):
+    transcript_id: str
+    session_id: str
+    audio_id: str | None
+    question_id: str | None
+    raw_text: str
+    cleaned_text: str
+    language: str | None
+    language_probability: float | None
+    partial_answer: bool
+    segment_count: int
+    processing_version: str
+    created_at: str
+    updated_at: str
+
+
+class ScreeningAnswerCreate(BaseModel):
+    transcript_id: str | None = Field(default=None, min_length=1, max_length=80)
+    question_id: str = Field(min_length=1, max_length=80)
+    question_text: str = Field(max_length=5_000)
+    expected_intent: str = Field(min_length=1, max_length=80)
+    detected_intent: str | None = Field(default=None, max_length=80)
+    answer_status: Literal["VALID", "INVALID", "PARTIAL", "VAGUE", "OFF_TOPIC", "UNCLEAR", "MISSING"]
+    raw_answer: str = Field(max_length=50_000)
+    cleaned_answer: str = Field(max_length=50_000)
+    extracted_information: dict[str, Any] = Field(default_factory=dict)
+    intent_confidence: float | None = Field(default=None, ge=0, le=1)
+    needs_clarification: bool = False
+    is_off_topic: bool = False
+
+
+class ScreeningAnswerResponse(BaseModel):
+    answer_id: str
+    session_id: str
+    transcript_id: str | None
+    question_id: str
+    question_text: str
+    expected_intent: str
+    detected_intent: str | None
+    answer_status: str
+    raw_answer: str
+    cleaned_answer: str
+    extracted_information: dict[str, Any]
+    intent_confidence: float | None
+    needs_clarification: bool
+    is_off_topic: bool
+    created_at: str
+    updated_at: str
+
+
+class ScreeningQuestionScoreCreate(BaseModel):
+    answer_id: str = Field(min_length=1, max_length=80)
+    question_id: str = Field(min_length=1, max_length=80)
+    clarity_score: int = Field(ge=0, le=5)
+    relevance_score: int = Field(ge=0, le=5)
+    completeness_score: int = Field(ge=0, le=5)
+    consistency_score: int = Field(ge=0, le=5)
+    weighted_score: float
+    normalized_score: float
+    explanation: str
+    human_review_required: bool = False
+    scoring_version: str = "screening-v1"
+
+
+class ScreeningQuestionScoreResponse(BaseModel):
+    score_id: str
+    session_id: str
+    answer_id: str
+    question_id: str
+    clarity_score: int
+    relevance_score: int
+    completeness_score: int
+    consistency_score: int
+    weighted_score: float
+    normalized_score: float
+    explanation: str
+    human_review_required: bool
+    scoring_version: str
+    created_at: str
+    updated_at: str
+
+
+class ScreeningAggregateScoreResponse(BaseModel):
+    aggregate_id: str
+    session_id: str
+    candidate_id: str
+    overall_score: float
+    score_status: Literal["PROVISIONAL", "FINAL", "REVIEW_REQUIRED"]
+    questions_evaluated: int
+    questions_answered: int
+    questions_missing: int
+    human_review_required: bool
+    scoring_version: str
+    created_at: str
+    updated_at: str
+
+
+class BehavioralAnalysisCreate(BaseModel):
+    answer_id: str | None = Field(default=None, min_length=1, max_length=80)
+    sentiment: Literal["POSITIVE", "NEUTRAL", "NEGATIVE", "MIXED", "UNCERTAIN"] | None = None
+    sentiment_score: float | None = Field(default=None, ge=-100, le=100)
+    confidence_score: float | None = Field(default=None, ge=0, le=100)
+    hesitation_count: int = Field(default=0, ge=0)
+    uncertainty_count: int = Field(default=0, ge=0)
+    contradiction_detected: bool = False
+    contradiction_details: str | None = None
+    response_length_category: Literal["SHORT", "MEDIUM", "LONG"] | None = None
+    words_per_minute: float | None = None
+    pace_category: Literal["FAST", "NORMAL", "SLOW", "UNKNOWN"] | None = None
+    processing_version: str = "behavioral-v1"
+
+
+class BehavioralAnalysisResponse(BaseModel):
+    analysis_id: str
+    session_id: str
+    answer_id: str | None
+    sentiment: str | None
+    sentiment_score: float | None
+    confidence_score: float | None
+    hesitation_count: int
+    uncertainty_count: int
+    contradiction_detected: bool
+    contradiction_details: str | None
+    response_length_category: str | None
+    words_per_minute: float | None
+    pace_category: str | None
+    processing_version: str
+    created_at: str
+    updated_at: str
+
+
+class ScreeningReportFullCreate(BaseModel):
+    candidate_id: str
+    opening_id: str
+    report_json: dict[str, Any]
+    html_report: str | None = None
+    pdf_report: bytes | None = None
+
+
+class ScreeningReportFullResponse(BaseModel):
+    report_id: str
+    session_id: str
+    candidate_id: str
+    opening_id: str
+    report_json: dict[str, Any]
+    html_report: str | None
+    version: int
+    status: str
+    created_at: str
+    updated_at: str
