@@ -180,6 +180,128 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
             window_started REAL NOT NULL,
             blocked_until REAL NOT NULL DEFAULT 0
         );
+        CREATE TABLE IF NOT EXISTS screening_audio (
+            audio_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            question_id TEXT,
+            file_path TEXT NOT NULL,
+            file_size_bytes INTEGER NOT NULL,
+            duration_seconds REAL,
+            mime_type TEXT,
+            source TEXT NOT NULL CHECK (source IN ('UPLOAD', 'RECORDING')),
+            status TEXT NOT NULL CHECK (status IN ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED')),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_audio_session_idx
+            ON screening_audio(session_id, created_at);
+        CREATE TABLE IF NOT EXISTS screening_transcripts (
+            transcript_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            audio_id TEXT REFERENCES screening_audio(audio_id) ON DELETE SET NULL,
+            question_id TEXT,
+            raw_text TEXT NOT NULL,
+            cleaned_text TEXT NOT NULL,
+            language TEXT,
+            language_probability REAL,
+            partial_answer INTEGER NOT NULL CHECK (partial_answer IN (0, 1)),
+            processing_version TEXT NOT NULL,
+            segment_count INTEGER NOT NULL DEFAULT 0,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_transcripts_session_idx
+            ON screening_transcripts(session_id, question_id);
+        CREATE TABLE IF NOT EXISTS screening_answers (
+            answer_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            transcript_id TEXT REFERENCES screening_transcripts(transcript_id) ON DELETE SET NULL,
+            question_id TEXT NOT NULL,
+            question_text TEXT NOT NULL,
+            expected_intent TEXT NOT NULL,
+            detected_intent TEXT,
+            answer_status TEXT NOT NULL CHECK (answer_status IN ('VALID', 'INVALID', 'PARTIAL', 'VAGUE', 'OFF_TOPIC', 'UNCLEAR', 'MISSING')),
+            raw_answer TEXT NOT NULL,
+            cleaned_answer TEXT NOT NULL,
+            extracted_information TEXT NOT NULL DEFAULT '{}',
+            intent_confidence REAL,
+            needs_clarification INTEGER NOT NULL CHECK (needs_clarification IN (0, 1)),
+            is_off_topic INTEGER NOT NULL CHECK (is_off_topic IN (0, 1)),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_answers_session_idx
+            ON screening_answers(session_id, question_id);
+        CREATE TABLE IF NOT EXISTS screening_question_scores (
+            score_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            answer_id TEXT NOT NULL REFERENCES screening_answers(answer_id) ON DELETE CASCADE,
+            question_id TEXT NOT NULL,
+            clarity_score INTEGER NOT NULL CHECK (clarity_score BETWEEN 0 AND 5),
+            relevance_score INTEGER NOT NULL CHECK (relevance_score BETWEEN 0 AND 5),
+            completeness_score INTEGER NOT NULL CHECK (completeness_score BETWEEN 0 AND 5),
+            consistency_score INTEGER NOT NULL CHECK (consistency_score BETWEEN 0 AND 5),
+            weighted_score REAL NOT NULL,
+            normalized_score REAL NOT NULL,
+            explanation TEXT NOT NULL,
+            human_review_required INTEGER NOT NULL CHECK (human_review_required IN (0, 1)),
+            scoring_version TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_question_scores_session_idx
+            ON screening_question_scores(session_id, question_id);
+        CREATE TABLE IF NOT EXISTS screening_aggregate_scores (
+            aggregate_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            overall_score REAL NOT NULL,
+            score_status TEXT NOT NULL CHECK (score_status IN ('PROVISIONAL', 'FINAL', 'REVIEW_REQUIRED')),
+            questions_evaluated INTEGER NOT NULL,
+            questions_answered INTEGER NOT NULL,
+            questions_missing INTEGER NOT NULL,
+            human_review_required INTEGER NOT NULL CHECK (human_review_required IN (0, 1)),
+            scoring_version TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_aggregate_scores_session_idx
+            ON screening_aggregate_scores(session_id);
+        CREATE TABLE IF NOT EXISTS behavioral_analysis (
+            analysis_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            answer_id TEXT REFERENCES screening_answers(answer_id) ON DELETE SET NULL,
+            sentiment TEXT CHECK (sentiment IN ('POSITIVE', 'NEUTRAL', 'NEGATIVE', 'MIXED', 'UNCERTAIN')),
+            sentiment_score REAL,
+            confidence_score REAL,
+            hesitation_count INTEGER NOT NULL DEFAULT 0,
+            uncertainty_count INTEGER NOT NULL DEFAULT 0,
+            contradiction_detected INTEGER NOT NULL CHECK (contradiction_detected IN (0, 1)),
+            contradiction_details TEXT,
+            response_length_category TEXT CHECK (response_length_category IN ('SHORT', 'MEDIUM', 'LONG')),
+            words_per_minute REAL,
+            pace_category TEXT CHECK (pace_category IN ('FAST', 'NORMAL', 'SLOW', 'UNKNOWN')),
+            processing_version TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS behavioral_analysis_session_idx
+            ON behavioral_analysis(session_id);
+        CREATE TABLE IF NOT EXISTS screening_reports_full (
+            report_id TEXT PRIMARY KEY,
+            session_id TEXT NOT NULL REFERENCES screening_sessions(session_id) ON DELETE CASCADE,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            opening_id TEXT NOT NULL REFERENCES openings(opening_id) ON DELETE CASCADE,
+            report_json TEXT NOT NULL,
+            html_report TEXT,
+            pdf_report BLOB,
+            version INTEGER NOT NULL DEFAULT 1,
+            status TEXT NOT NULL CHECK (status IN ('GENERATING', 'COMPLETED', 'FAILED')),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS screening_reports_full_session_idx
+            ON screening_reports_full(session_id);
         """
     )
     opening_columns = {

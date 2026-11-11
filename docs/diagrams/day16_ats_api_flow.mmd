@@ -1,0 +1,131 @@
+```mermaid
+flowchart TD
+    subgraph "Client Layer"
+        DASH[Recruiter Dashboard]
+        API_CLIENT[API Client]
+    end
+
+    subgraph "API Gateway"
+        AUTH[Auth Middleware]
+        ROUTER[FastAPI Router]
+    end
+
+    subgraph "Core Services"
+        JD_PARSER[Job Description Parser]
+        RESUME_UPLOAD[Resume Upload Handler]
+        BG_TASKS[Background Tasks]
+        PARSE_RESUME[Resume Parser Day 5]
+        EXTRACT_DATA[Data Extraction Day 8-11]
+        CALC_MATCH[Candidate Match Day 9-11]
+        INTEGRATED_SCORE[Integrated Scoring Day 12-13]
+        SHORTLIST[Shortlisting Day 14]
+        ELIGIBILITY[Eligibility Engine Day 21]
+        SCREENING_Q[Screening Questions Day 22]
+        TRANSCRIPT[Transcript Storage Day 23]
+    end
+
+    subgraph "AI/ML Engines"
+        EMBEDDING[Embedding Engine Day 12]
+        SEMANTIC[Semantic Similarity Day 12]
+        WEIGHTED_SCORING[Weighted ATS Formula Day 13]
+    end
+
+    subgraph "Persistence"
+        SQLITE[(SQLite Database)]
+        UPLOADS[(File Storage)]
+    end
+
+    %% Authentication Flow
+    DASH -->|Login| API_CLIENT
+    API_CLIENT -->|POST /auth/session| ROUTER
+    ROUTER --> AUTH
+    AUTH --> SQLITE
+    SQLITE --> AUTH
+    AUTH -->|Session Cookie| API_CLIENT
+
+    %% Job Description Parsing
+    API_CLIENT -->|POST /openings/parse-description| ROUTER
+    ROUTER --> JD_PARSER
+    JD_PARSER -->|Parsed JD| ROUTER
+
+    %% Opening CRUD
+    API_CLIENT -->|POST /openings| ROUTER
+    ROUTER --> SQLITE
+
+    %% Candidate Application
+    API_CLIENT -->|POST /candidates| ROUTER
+    ROUTER --> SQLITE
+
+    %% Resume Upload
+    API_CLIENT -->|POST /resumes/upload| ROUTER
+    ROUTER --> RESUME_UPLOAD
+    RESUME_UPLOAD --> UPLOADS
+    RESUME_UPLOAD -->|Create Job| SQLITE
+    RESUME_UPLOAD -->|Background Task| BG_TASKS
+
+    %% Background Processing
+    BG_TASKS --> PARSE_RESUME
+    PARSE_RESUME --> EXTRACT_DATA
+    EXTRACT_DATA -->|Structured Data| BG_TASKS
+    BG_TASKS -->|Update Candidate| SQLITE
+    BG_TASKS -->|Complete Job| SQLITE
+
+    %% Parse Result
+    API_CLIENT -->|POST /resumes/parse| ROUTER
+    ROUTER --> SQLITE
+
+    %% ATS Scoring
+    API_CLIENT -->|POST /candidates/score| ROUTER
+    ROUTER --> CALC_MATCH
+    CALC_MATCH --> INTEGRATED_SCORE
+    INTEGRATED_SCORE --> EMBEDDING
+    EMBEDDING --> SEMANTIC
+    INTEGRATED_SCORE --> WEIGHTED_SCORING
+    WEIGHTED_SCORING --> INTEGRATED_SCORE
+    INTEGRATED_SCORE -->|Score & Evidence| SQLITE
+    SQLITE -->|Ranking| SHORTLIST
+    SHORTLIST --> ROUTER
+
+    %% Shortlisting
+    API_CLIENT -->|POST /openings/{id}/shortlist| ROUTER
+    ROUTER --> SHORTLIST
+    SHORTLIST --> SQLITE
+
+    %% Eligibility
+    API_CLIENT -->|PUT /openings/{id}/eligibility-config| ROUTER
+    ROUTER --> SQLITE
+    API_CLIENT -->|POST /candidates/{id}/eligibility/evaluate| ROUTER
+    ROUTER --> ELIGIBILITY
+    ELIGIBILITY --> SQLITE
+    SQLITE --> ELIGIBILITY
+    ELIGIBILITY --> ROUTER
+
+    %% Screening Questions
+    API_CLIENT -->|GET /screening/questions| ROUTER
+    ROUTER --> SCREENING_Q
+    SCREENING_Q --> SQLITE
+
+    %% Transcript Sessions
+    API_CLIENT -->|POST /screening/sessions| ROUTER
+    ROUTER --> TRANSCRIPT
+    TRANSCRIPT --> SQLITE
+    API_CLIENT -->|POST /screening/sessions/{id}/segments| ROUTER
+    ROUTER --> TRANSCRIPT
+    TRANSCRIPT --> SQLITE
+    API_CLIENT -->|POST /screening/sessions/{id}/interactions| ROUTER
+    ROUTER --> TRANSCRIPT
+    TRANSCRIPT --> SQLITE
+
+    %% Styling
+    classDef client fill:#e1f5fe
+    classDef api fill:#f3e5f5
+    classDef service fill:#e8f5e9
+    classDef ai fill:#fff3e0
+    classDef storage fill:#fce4ec
+
+    class DASH,API_CLIENT client
+    class AUTH,ROUTER api
+    class JD_PARSER,RESUME_UPLOAD,BG_TASKS,PARSE_RESUME,EXTRACT_DATA,CALC_MATCH,INTEGRATED_SCORE,SHORTLIST,ELIGIBILITY,SCREENING_Q,TRANSCRIPT service
+    class EMBEDDING,SEMANTIC,WEIGHTED_SCORING ai
+    class SQLITE,UPLOADS storage
+```
