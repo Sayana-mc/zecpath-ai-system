@@ -1,0 +1,24 @@
+POOJA HEGDE
+Email: pooja.hegde@example.synthetic | Location: Mumbai, India
+
+SUMMARY
+Lead Data Analyst with 5 years of experience delivering actionable business intelligence and statistical modeling. Expert in advanced SQL data warehousing, Tableau dashboard engineering, Python data analysis, and predictive metrics.
+
+SKILLS
+- Data & Analytics: SQL, Python (Pandas, NumPy, Scikit-learn), Tableau, PowerBI, Excel, Data Modeling
+- Warehouses: Snowflake, PostgreSQL, BigQuery
+
+EXPERIENCE
+Lead Business Intelligence Analyst | RetailInsights Global (2021 - Present) | 3 years
+- Designed enterprise Tableau dashboards tracking $80M in annual revenue.
+- Authored complex SQL queries, stored procedures, and star-schema dimensional models.
+- Performed statistical segmentation and churn analysis in Python.
+
+Data Analyst | MarketTrends Corp (2019 - 2021) | 2 years
+- Built automated reporting pipelines using SQL and Excel macros.
+- Extracted and cleaned customer behavior datasets for quarterly executive presentations.
+
+EDUCATION
+Master of Science (M.S.) in Applied Statistics | Mumbai University | 2019
+B.Sc in Mathematics | 2017
+

@@ -8,12 +8,12 @@ from typing import Any
 from day24_speech_to_text.src.stt_processor import SpeechToTextProcessor
 from day24_speech_to_text.src.transcript_normalizer import normalize_transcription
 
-from . import database
+from src import database
 from .schemas import (
     ScreeningAudioUploadResponse,
     ScreeningAudioStatusResponse,
     ScreeningTranscriptCreate,
-    ScreeningTranscriptResponse,
+    ScreeningTranscriptDetailResponse,
 )
 
 UPLOAD_DIR = Path(__file__).resolve().parents[1] / "uploads" / "screening_audio"
@@ -45,6 +45,14 @@ class STTIntegration:
 
         if mime_type and mime_type not in ALLOWED_AUDIO_TYPES[extension]:
             raise ValueError(f"MIME type {mime_type} does not match extension {extension}")
+
+    def clean_transcript(self, raw_text: str) -> str:
+        """Clean raw transcript text using transcript cleaner rules."""
+        from day24_speech_to_text.src.transcript_cleaner import clean_transcript
+        res = clean_transcript(raw_text)
+        if isinstance(res, dict):
+            return res.get("clean_text", "")
+        return str(res)
 
     def transcribe_audio(self, audio_path: Path, timeout_seconds: int = 60) -> dict[str, Any]:
         """Transcribe audio file and return normalized result."""
@@ -89,7 +97,7 @@ class STTIntegration:
             message="Audio uploaded successfully. Ready for transcription.",
         )
 
-    def process_audio(self, audio_id: str) -> ScreeningTranscriptResponse:
+    def process_audio(self, audio_id: str) -> ScreeningTranscriptDetailResponse:
         """Process audio file through STT and save transcript."""
         audio = database.get_screening_audio(audio_id)
         if not audio:
@@ -115,9 +123,11 @@ class STTIntegration:
                 processing_version="stt-v1",
             )
 
-            saved = database.save_screening_transcript(audio["session_id"], transcript.model_dump())
+            transcript_data = transcript.model_dump()
+            transcript_data["transcript_id"] = transcript_id
+            saved = database.save_screening_transcript(audio["session_id"], transcript_data)
             database.update_screening_audio_status(audio_id, "COMPLETED")
-            return ScreeningTranscriptResponse(**saved)
+            return ScreeningTranscriptDetailResponse(**saved)
 
         except Exception as exc:
             database.update_screening_audio_status(audio_id, "FAILED")
@@ -130,12 +140,12 @@ class STTIntegration:
             raise ValueError("Audio record not found")
         return ScreeningAudioStatusResponse(**audio)
 
-    def get_transcript(self, transcript_id: str) -> ScreeningTranscriptResponse:
+    def get_transcript(self, transcript_id: str) -> ScreeningTranscriptDetailResponse:
         """Get transcript by ID."""
         transcript = database.get_screening_transcript(transcript_id)
         if not transcript:
             raise ValueError("Transcript not found")
-        return ScreeningTranscriptResponse(**transcript)
+        return ScreeningTranscriptDetailResponse(**transcript)
 
 
 stt_integration = STTIntegration()

@@ -1,0 +1,11 @@
+{
+  "title": "Full Stack Software Developer",
+  "description": "Seeking a versatile Full Stack Developer to build modern web applications. You will work across modern React and TypeScript frontend user interfaces, robust Node.js/Python backend services, and cloud databases.",
+  "required_skills": ["JavaScript", "TypeScript", "React", "Python", "SQL"],
+  "preferred_skills": ["Node.js", "GraphQL", "Docker", "Tailwind CSS", "Git"],
+  "minimum_education": "Bachelor's Degree in Computer Science or Software Engineering",
+  "minimum_years_experience": 3.0,
+  "location": "Kochi, India (Onsite)",
+  "work_mode": "ONSITE"
+}
+

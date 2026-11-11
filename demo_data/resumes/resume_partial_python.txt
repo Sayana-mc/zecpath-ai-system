@@ -1,0 +1,23 @@
+MEERA PATEL
+Email: meera.patel@example.synthetic | Location: Pune, India
+
+SUMMARY
+Backend Software Engineer with 4.5 years of experience building monolithic and service-oriented web applications using Python and Django. Experienced in PostgreSQL relational data modeling and REST API integrations.
+
+TECHNICAL SKILLS
+- Programming: Python, JavaScript, SQL
+- Frameworks: Django, Django REST Framework, Flask
+- Databases: PostgreSQL, SQLite
+- Version Control: Git, GitHub
+
+WORK EXPERIENCE
+Backend Developer | WebSphere Digital (2020 - Present) | 4.5 years
+- Developed customer-facing web services using Python, Django, and PostgreSQL.
+- Designed relational database models and wrote migration scripts.
+- Integrated third-party payment gateways and external partner REST APIs.
+- Collaborated with frontend engineers to deliver intuitive dashboard interfaces.
+
+EDUCATION
+B.Tech in Information Technology
+Pune Institute of Technology | Graduated: 2019
+

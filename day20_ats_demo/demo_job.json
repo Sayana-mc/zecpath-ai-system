@@ -1,0 +1,18 @@
+{
+  "title": "Senior Python Developer",
+  "description": "Looking for a Python Developer to build high-performance data pipelines and APIs with FastAPI, PostgreSQL, and Docker.",
+  "required_skills": [
+    "Python",
+    "FastAPI",
+    "SQL",
+    "PostgreSQL",
+    "Docker"
+  ],
+  "preferred_skills": [
+    "Redis",
+    "Kubernetes"
+  ],
+  "minimum_education": "Bachelor's Degree",
+  "minimum_years_experience": 3.0
+}
+

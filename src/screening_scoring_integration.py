@@ -7,7 +7,7 @@ from typing import Any
 from day26_screening_scoring_engine.src.scoring_engine import ScreeningScoringEngine
 from day26_screening_scoring_engine.src.question_scorer import QuestionScorer
 
-from . import database
+from src import database
 from .schemas import (
     ScreeningQuestionScoreCreate,
     ScreeningQuestionScoreResponse,
@@ -30,6 +30,36 @@ class ScreeningScoringIntegration:
         }
         self.engine = ScreeningScoringEngine(scoring_config)
         self.question_scorer = QuestionScorer(scoring_config)
+
+    @property
+    def scorer(self):
+        return self
+
+    def score_answer(
+        self,
+        question_text: str,
+        answer_text: str,
+        expected_intent: str,
+        extracted_data: dict[str, Any] | None = None,
+    ) -> Any:
+        intent = expected_intent.lower()
+        if intent == "skill_experience":
+            intent = "skills"
+        result = self.question_scorer.calculate_score(
+            answer=answer_text,
+            expected_intent=intent,
+            previous_information=extracted_data or {},
+        )
+        class ScoreWrapper:
+            def __init__(self, res):
+                self.clarity = res["parameter_scores"]["clarity"]
+                self.relevance = res["parameter_scores"]["relevance"]
+                self.completeness = res["parameter_scores"]["completeness"]
+                self.consistency = res["parameter_scores"]["consistency"]
+                self.weighted_score = res["weighted_score"]
+                self.normalized_score = res["normalized_score"]
+                self.explanation = "Scored based on clarity, relevance, completeness, consistency."
+        return ScoreWrapper(result)
 
     def score_question(
         self,
@@ -71,7 +101,9 @@ class ScreeningScoringIntegration:
             scoring_version="screening-v1",
         )
 
-        saved = database.save_screening_question_score(session_id, score.model_dump())
+        score_data = score.model_dump()
+        score_data["score_id"] = score_id
+        saved = database.save_screening_question_score(session_id, score_data)
         return ScreeningQuestionScoreResponse(**saved)
 
     def score_session(

@@ -7,7 +7,7 @@ from day27_confidence_sentiment_analysis.src.sentiment_analyzer import Sentiment
 from day27_confidence_sentiment_analysis.src.confidence_analyzer import ConfidenceAnalyzer
 from day27_confidence_sentiment_analysis.src.behavioral_analyzer import BehavioralAnalyzer
 
-from . import database
+from src import database
 from .schemas import (
     BehavioralAnalysisCreate,
     BehavioralAnalysisResponse,
@@ -86,9 +86,9 @@ class BehavioralAnalysisIntegration:
             contradiction=False,
         )
 
-        contradictions = self.behavioral_analyzer.detect_contradictions(
-            text,
+        contradiction = self.behavioral_analyzer.detect_contradiction(
             previous_answers,
+            text,
         )
 
         analysis_id = str(uuid.uuid4())
@@ -99,16 +99,45 @@ class BehavioralAnalysisIntegration:
             confidence_score=confidence_result["confidence_score"],
             hesitation_count=confidence_result["hesitation"]["count"],
             uncertainty_count=confidence_result["uncertainty"]["count"],
-            contradiction_detected=len(contradictions) > 0,
-            contradiction_details=json.dumps(contradictions) if contradictions else None,
-            response_length_category=confidence_result["response_length"]["category"],
+            contradiction_detected=bool(contradiction),
+            contradiction_details=json.dumps({"detected": True}) if contradiction else None,
+            response_length_category=(
+                confidence_result["response_length"]["category"].upper()
+                if confidence_result["response_length"].get("category")
+                else "MEDIUM"
+            ),
             words_per_minute=confidence_result["pace"]["words_per_minute"],
-            pace_category=confidence_result["pace"]["pace"],
+            pace_category=(
+                confidence_result["pace"]["pace"].upper()
+                if confidence_result["pace"].get("pace")
+                else "UNKNOWN"
+            ),
             processing_version="behavioral-v1",
         )
 
-        saved = database.save_behavioral_analysis(session_id, analysis.model_dump())
+        analysis_data = analysis.model_dump()
+        analysis_data["analysis_id"] = analysis_id
+        saved = database.save_behavioral_analysis(session_id, analysis_data)
         return BehavioralAnalysisResponse(**saved)
+
+    def analyze_text(self, text: str, duration_seconds: float = 0.0) -> dict[str, Any]:
+        """Analyze standalone text without database persistence."""
+        sentiment_result = self.sentiment_analyzer.analyze(text)
+        confidence_result = self.confidence_analyzer.analyze(
+            text,
+            duration_seconds,
+            contradiction=False,
+        )
+        return {
+            "sentiment": sentiment_result["sentiment"].upper(),
+            "sentiment_score": sentiment_result["sentiment_score"],
+            "confidence_score": confidence_result["confidence_score"],
+            "hesitation_count": confidence_result["hesitation"]["count"],
+            "uncertainty_count": confidence_result["uncertainty"]["count"],
+            "words_per_minute": confidence_result["pace"]["words_per_minute"],
+            "pace_category": confidence_result["pace"]["pace"],
+            "response_length_category": confidence_result["response_length"]["category"],
+        }
 
     def get_session_analysis(self, session_id: str) -> list[BehavioralAnalysisResponse]:
         """Get all behavioral analyses for a session."""

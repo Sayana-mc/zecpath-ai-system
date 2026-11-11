@@ -1,0 +1,55 @@
+erDiagram
+    openings ||--o{ candidates : "has many"
+    candidates ||--o{ screening_sessions : "undergoes"
+    openings ||--o{ screening_sessions : "evaluates for"
+    screening_sessions ||--o{ transcript_segments : "contains"
+    screening_sessions ||--o{ screening_interactions : "records"
+    openings ||--o| eligibility_configurations : "governed by"
+    candidates ||--o{ eligibility_results : "evaluated into"
+
+    openings {
+        string opening_id PK
+        string title
+        string required_skills
+        string preferred_skills
+        string status
+    }
+
+    candidates {
+        string candidate_id PK
+        string opening_id FK
+        string name
+        string email
+        float score
+        string score_evidence
+    }
+
+    screening_sessions {
+        string session_id PK
+        string candidate_id FK
+        string opening_id FK
+        string status
+        string language
+        string started_at
+        string completed_at
+    }
+
+    transcript_segments {
+        string segment_id PK
+        string session_id FK
+        string question_id
+        string speaker
+        string text
+        integer sequence_number
+        float confidence
+    }
+
+    screening_interactions {
+        string interaction_id PK
+        string session_id FK
+        string question_id
+        string candidate_answer
+        string validation_status
+        integer display_order
+    }
+

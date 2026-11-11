@@ -1,0 +1,54 @@
+{
+  "screening_responses": {
+    "cand_demo_01": [
+      {
+        "question_id": "scr_q1",
+        "question_text": "Can you briefly describe your experience with modern backend architecture and FastAPI?",
+        "transcript": "Over the past 7 years I have specialized in building distributed microservices using Python and FastAPI. In my recent role at CloudScale Technologies, I architected the core payments backend which handles around 25,000 requests per minute with sub-50ms latency backed by PostgreSQL and Redis.",
+        "clarity_score": 92.0,
+        "relevance_score": 95.0,
+        "completeness_score": 90.0,
+        "pacing_wpm": 135
+      },
+      {
+        "question_id": "scr_q2",
+        "question_text": "How do you approach database performance and connection management under high concurrency?",
+        "transcript": "I implement connection pooling with PgBouncer or SQLAlchemy async engines, ensure selective indexing on hot query paths, and use Redis read-through caching for high-read, low-write entities. We also utilize read replicas for intensive reporting queries.",
+        "clarity_score": 95.0,
+        "relevance_score": 94.0,
+        "completeness_score": 92.0,
+        "pacing_wpm": 140
+      }
+    ],
+    "cand_demo_02": [
+      {
+        "question_id": "scr_q1",
+        "question_text": "Can you briefly describe your experience with modern backend architecture and FastAPI?",
+        "transcript": "I have spent four and a half years working mainly with Python and Django. While I haven't used FastAPI in production daily, I understand ASGI fundamentals and have worked on smaller internal asynchronous scripts.",
+        "clarity_score": 82.0,
+        "relevance_score": 78.0,
+        "completeness_score": 75.0,
+        "pacing_wpm": 125
+      }
+    ]
+  },
+  "technical_responses": {
+    "cand_demo_01": [
+      {
+        "question_id": "tech_q_arch_01",
+        "question_text": "Explain how you would design an asynchronous task execution system with failover and retries.",
+        "answer_text": "I would use a task queue like Celery or RQ backed by Redis or RabbitMQ. Tasks are designed to be idempotent using unique transaction tokens stored in PostgreSQL. If a worker fails, a dead-letter exchange captures unacknowledged tasks, allowing exponential backoff retries with jitter to prevent thundering herd problems on downstream services.",
+        "score": 94.0,
+        "depth_level": "deep",
+        "parameter_scores": {
+          "accuracy": 4.8,
+          "depth": 4.7,
+          "reasoning": 4.8,
+          "applicability": 4.6
+        },
+        "feedback": "Outstanding architectural depth with concrete idempotency and backoff patterns."
+      }
+    ]
+  }
+}
+

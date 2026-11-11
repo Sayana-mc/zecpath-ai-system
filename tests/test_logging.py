@@ -1,9 +1,10 @@
+import logging
 from utils.logger import get_logger
 
 
-logger = get_logger(__name__)
-
-logger.info("Zecpath AI system started")
-logger.info("Logging system test completed")
-
-print("Logging test completed successfully.")
+def test_logging():
+    logger = get_logger("test_zecpath_logger")
+    assert isinstance(logger, logging.Logger)
+    logger.info("Zecpath AI system test started")
+    logger.info("Logging system test completed")
+    assert len(logger.handlers) > 0

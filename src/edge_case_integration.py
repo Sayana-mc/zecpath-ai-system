@@ -7,7 +7,7 @@ from day31_edge_case_failure_handling.src.edge_case_handler import EdgeCaseHandl
 from day31_edge_case_failure_handling.src.retry_manager import RetryManager
 from day31_edge_case_failure_handling.src.clarification_manager import ClarificationManager
 
-from . import database
+from src import database
 from .schemas import (
     ScreeningAnswerResponse,
 )
@@ -52,6 +52,22 @@ class EdgeCaseIntegration:
             error_type,
             error_message,
         )
+
+    def handle_empty_transcript(self) -> dict[str, Any]:
+        """Handle empty or missing transcript."""
+        return {
+            "action": "PROMPT_AGAIN",
+            "message": "I didn't receive an answer. Could you please answer the question?",
+            "status": "RETRY_REQUESTED",
+        }
+
+    def handle_low_confidence(self) -> dict[str, Any]:
+        """Handle low STT confidence."""
+        return {
+            "action": "CLARIFY",
+            "message": "I'm sorry, I couldn't hear that clearly. Could you please repeat your answer?",
+            "status": "CLARIFICATION_REQUESTED",
+        }
 
     def handle_missing_answer(
         self,

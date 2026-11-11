@@ -1,0 +1,34 @@
+AARAV SHARMA
+Email: aarav.sharma@example.synthetic | Phone: +91-9876543210 | Location: Bengaluru, India
+LinkedIn: linkedin.com/in/aarav-sharma-synthetic | GitHub: github.com/aarav-synthetic
+
+SUMMARY
+Senior Python Backend Architect with 7 years of experience designing, building, and deploying fault-tolerant distributed systems. Expert in FastAPI, PostgreSQL performance tuning, Docker containerization, and REST API microservices architecture. Proven track record leading engineering teams to reduce latency by 45%.
+
+TECHNICAL SKILLS
+- Languages: Python, SQL, Bash
+- Frameworks & Libraries: FastAPI, Pydantic, SQLAlchemy, Celery, Pytest
+- Databases: PostgreSQL, Redis, Elasticsearch
+- DevOps & Cloud: Docker, Kubernetes, AWS (ECS, S3, RDS), Git, CI/CD GitHub Actions
+- Architecture: REST API Design, Microservices, Event-Driven Systems, Caching Strategies
+
+WORK EXPERIENCE
+Lead Backend Architect | CloudScale Technologies (2021 - Present) | 3 years
+- Architected and implemented high-throughput REST APIs using FastAPI and Pydantic, handling 25,000 requests per minute with sub-50ms latency.
+- Optimized PostgreSQL database schemas, indexing strategies, and connection pooling, reducing query execution times by 40%.
+- Containerized entire microservices fleet with Docker and orchestrated deployment via Kubernetes clusters.
+- Mentored a team of 6 engineers in asynchronous programming patterns and clean architecture standards.
+
+Senior Software Engineer | FinTech Platform Inc (2019 - 2021) | 2 years
+- Built secure financial transaction microservices using Python and PostgreSQL.
+- Implemented Celery distributed task queues backed by Redis caching layers.
+- Integrated comprehensive automated unit and integration tests achieving 92% test coverage.
+
+Software Engineer | Innovatech Solutions (2017 - 2019) | 2 years
+- Developed REST API endpoints and data ingestion pipelines in Python.
+- Maintained Docker configurations for local development and CI/CD pipelines.
+
+EDUCATION
+Bachelor of Technology (B.Tech) in Computer Science & Engineering
+National Institute of Technology (NIT) | Graduated: 2017 | GPA: 8.8/10
+

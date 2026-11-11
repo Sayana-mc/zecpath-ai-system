@@ -1,0 +1,40 @@
+/// CURRICULUM VITAE ///
+NAME: VIKRAM SEN
+CONTACT >>> vikram.sen@example.synthetic | +91-9988776655 | Kolkata, India
+
+**************************************************
+== PROFESSIONAL SUMMARY ==
+**************************************************
+Backend engineer with 5.5 years hands-on production experience. Focused on Python, FastAPI, Docker, and PostgreSQL.
+
+##################################################
+== CORE COMPETENCIES ==
+##################################################
+* Python
+* FastAPI
+* PostgreSQL
+* Docker
+* REST API
+* Linux
+
+--------------------------------------------------
+== EMPLOYMENT HISTORY ==
+--------------------------------------------------
+ROLE: Senior Backend Developer
+COMPANY: Apex Cloud Networks
+DURATION: 2021 - Present (3.5 years)
+- Built FastAPI microservices and PostgreSQL schemas.
+- Packaged services in Docker containers for cloud hosting.
+
+ROLE: Software Engineer
+COMPANY: Matrix InfoTech
+DURATION: 2019 - 2021 (2.0 years)
+- Developed Python backend endpoints and integrated PostgreSQL.
+
+==================================================
+== ACADEMIC BACKGROUND ==
+==================================================
+DEGREE: Bachelor of Engineering (B.E.) in Computer Engineering
+INSTITUTION: Jadavpur University
+YEAR: 2019
+

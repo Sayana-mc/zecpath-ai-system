@@ -1,0 +1,21 @@
+DEV KAPOOR
+Email: dev.kapoor@example.synthetic | GitHub: github.com/dev-kapoor-synthetic | Location: Delhi, India
+
+SUMMARY
+Passionate Backend Engineer with 1.5 years of industry experience and deep proficiency in modern asynchronous Python architectures, FastAPI microservices, Docker, Kubernetes, and PostgreSQL. Active contributor to open-source developer tooling.
+
+TECHNICAL SKILLS
+- Programming: Python, Go, SQL, Bash
+- Frameworks: FastAPI, Asyncio, Pydantic, SQLAlchemy, Celery
+- Infrastructure: Docker, Kubernetes, Redis, GitHub Actions CI/CD
+- Databases: PostgreSQL
+
+EXPERIENCE
+Junior Backend Engineer | NextGen Cloud Labs (2023 - Present) | 1.5 years
+- Designed and maintained asynchronous microservices using FastAPI and Docker.
+- Implemented real-time WebSocket communication and Redis caching.
+- Created automated Docker Compose testing environments for continuous integration.
+
+EDUCATION
+B.Tech in Computer Science | Delhi Technological University | 2023 | GPA: 9.1/10
+

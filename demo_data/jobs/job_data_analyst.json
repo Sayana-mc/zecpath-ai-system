@@ -1,0 +1,11 @@
+{
+  "title": "Lead Data Analyst",
+  "description": "Looking for an analytical leader to transform complex datasets into executive business intelligence dashboards. The ideal candidate has deep expertise in SQL data modeling, Tableau/PowerBI reporting, Python statistical analysis, and cross-functional stakeholder communication.",
+  "required_skills": ["SQL", "Python", "Tableau", "Data Modeling", "Excel"],
+  "preferred_skills": ["PowerBI", "Snowflake", "dbt", "Statistics", "Looker"],
+  "minimum_education": "Bachelor's Degree in Statistics, Mathematics, or Computer Science",
+  "minimum_years_experience": 4.0,
+  "location": "Mumbai, India (Remote Allowed)",
+  "work_mode": "REMOTE"
+}
+

@@ -1,0 +1,107 @@
+[
+  {
+    "candidate_id": "cand_demo_01",
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@example.synthetic",
+    "target_role": "Senior Python Backend Architect",
+    "job_key": "job_python_developer",
+    "archetype": "Strong Match",
+    "skills": ["Python", "FastAPI", "PostgreSQL", "Docker", "REST API", "Redis", "Kubernetes"],
+    "experience_years": 7.0,
+    "education": "B.Tech in Computer Science",
+    "resume_file": "resume_strong_python.txt",
+    "notes": "Ideal profile with deep microservices background."
+  },
+  {
+    "candidate_id": "cand_demo_02",
+    "name": "Meera Patel",
+    "email": "meera.patel@example.synthetic",
+    "target_role": "Senior Python Backend Architect",
+    "job_key": "job_python_developer",
+    "archetype": "Partial Match",
+    "skills": ["Python", "Django", "PostgreSQL", "REST API"],
+    "experience_years": 4.5,
+    "education": "B.Tech in Information Technology",
+    "resume_file": "resume_partial_python.txt",
+    "notes": "Strong Python/Django background, lacks FastAPI and Docker."
+  },
+  {
+    "candidate_id": "cand_demo_03",
+    "name": "Rohan Verma",
+    "email": "rohan.verma@example.synthetic",
+    "target_role": "Senior Python Backend Architect",
+    "job_key": "job_python_developer",
+    "archetype": "Low Match",
+    "skills": ["PHP", "WordPress", "MySQL", "HTML", "CSS"],
+    "experience_years": 5.0,
+    "education": "B.Sc in Computer Science",
+    "resume_file": "resume_low_match.txt",
+    "notes": "Web CMS developer with minimal modern backend/Python experience."
+  },
+  {
+    "candidate_id": "cand_demo_04",
+    "name": "Dev Kapoor",
+    "email": "dev.kapoor@example.synthetic",
+    "target_role": "Senior Python Backend Architect",
+    "job_key": "job_python_developer",
+    "archetype": "High Skills Low Experience",
+    "skills": ["Python", "FastAPI", "PostgreSQL", "Docker", "REST API", "Kubernetes", "Redis", "Celery"],
+    "experience_years": 1.5,
+    "education": "B.Tech in Computer Science",
+    "resume_file": "resume_high_skills_low_exp.txt",
+    "notes": "Exceptional open-source contributor and fast learner, but junior tenure."
+  },
+  {
+    "candidate_id": "cand_demo_05",
+    "name": "Isha Iyer",
+    "email": "isha.iyer@example.synthetic",
+    "target_role": "Senior Python Backend Architect",
+    "job_key": "job_python_developer",
+    "archetype": "Missing Mandatory Skills",
+    "skills": ["Java", "Spring Boot", "PostgreSQL", "Docker", "Kubernetes"],
+    "experience_years": 6.0,
+    "education": "B.Tech in Computer Science",
+    "resume_file": "resume_missing_mandatory_skills.txt",
+    "notes": "Experienced backend engineer, but missing core Python/FastAPI requirements."
+  },
+  {
+    "candidate_id": "cand_demo_06",
+    "name": "Vikram Sen",
+    "email": "vikram.sen@example.synthetic",
+    "target_role": "Senior Python Backend Architect",
+    "job_key": "job_python_developer",
+    "archetype": "Formatting Edge Case",
+    "skills": ["Python", "FastAPI", "PostgreSQL", "Docker"],
+    "experience_years": 5.5,
+    "education": "B.E. in Computer Engineering",
+    "resume_file": "resume_formatting_edge_case.txt",
+    "notes": "Unconventional layout and noisy separators, tests parser resilience."
+  },
+  {
+    "candidate_id": "cand_demo_07",
+    "name": "Pooja Hegde",
+    "email": "pooja.hegde@example.synthetic",
+    "target_role": "Lead Data Analyst",
+    "job_key": "job_data_analyst",
+    "archetype": "Strong Match - Data",
+    "skills": ["SQL", "Python", "Tableau", "Data Modeling", "Excel", "PowerBI"],
+    "experience_years": 5.0,
+    "education": "M.S. in Applied Statistics",
+    "resume_file": "resume_data_analyst_strong.txt",
+    "notes": "Top tier statistical and visualization expert."
+  },
+  {
+    "candidate_id": "cand_demo_08",
+    "name": "Dr. Fatima Al-Mansoor",
+    "email": "fatima.mansoor@example.synthetic",
+    "target_role": "Senior Machine Learning Engineer",
+    "job_key": "job_ml_engineer",
+    "archetype": "Strong Match - ML",
+    "skills": ["Python", "PyTorch", "Machine Learning", "NLP", "Docker", "Transformers"],
+    "experience_years": 6.0,
+    "education": "Ph.D. in Artificial Intelligence",
+    "resume_file": "resume_ml_engineer_strong.txt",
+    "notes": "Published researcher with deep production PyTorch deployments."
+  }
+]
+

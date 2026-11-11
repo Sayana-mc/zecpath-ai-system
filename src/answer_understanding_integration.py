@@ -9,7 +9,7 @@ from day25_answer_intent_engine.src.intent_classifier import IntentClassifier
 from day25_answer_intent_engine.src.information_extractor import extract_information
 from day25_answer_intent_engine.src.answer_validator import validate_answer
 
-from . import database
+from src import database
 from .schemas import (
     ScreeningAnswerCreate,
     ScreeningAnswerResponse,
@@ -45,8 +45,15 @@ class AnswerUnderstandingIntegration:
         validation = understanding["validation"]
         extracted_info = understanding["extracted_information"]
 
-        needs_clarification = validation.get("needs_clarification", False)
-        is_off_topic = validation.get("is_off_topic", False)
+        needs_clarification = (
+            validation.get("needs_clarification", False)
+            or validation.get("vague", False)
+            or validation.get("missing", False)
+        )
+        is_off_topic = (
+            validation.get("is_off_topic", False)
+            or validation.get("off_topic", False)
+        )
 
         answer_id = str(uuid.uuid4())
         answer = ScreeningAnswerCreate(
@@ -64,7 +71,9 @@ class AnswerUnderstandingIntegration:
             is_off_topic=is_off_topic,
         )
 
-        saved = database.save_screening_answer(session_id, answer.model_dump())
+        answer_data = answer.model_dump()
+        answer_data["answer_id"] = answer_id
+        saved = database.save_screening_answer(session_id, answer_data)
         return ScreeningAnswerResponse(**saved)
 
     def get_answer(self, answer_id: str) -> ScreeningAnswerResponse | None:
@@ -72,7 +81,8 @@ class AnswerUnderstandingIntegration:
         answer = database.get_screening_answer(answer_id)
         if not answer:
             return None
-        answer["extracted_information"] = json.loads(answer["extracted_information"])
+        if isinstance(answer["extracted_information"], str):
+            answer["extracted_information"] = json.loads(answer["extracted_information"])
         return ScreeningAnswerResponse(**answer)
 
     def list_session_answers(self, session_id: str) -> list[ScreeningAnswerResponse]:

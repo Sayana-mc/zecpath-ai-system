@@ -267,6 +267,12 @@ class PersistedShortlistRequest(BaseModel):
     minimum_score: float = Field(default=60.0, ge=0.0, le=100.0)
 
 
+class ATSShortlistRequest(BaseModel):
+    job_id: str
+    minimum_score: float = Field(default=60.0, ge=0.0, le=100.0)
+
+
+
 ScreeningIntent = Literal[
     "skills",
     "experience",
@@ -717,3 +723,518 @@ class ScreeningReportFullResponse(BaseModel):
     status: str
     created_at: str
     updated_at: str
+
+
+# ============================================================================
+# HR INTERVIEW SUBSYSTEM (DAYS 33-40) SCHEMAS
+# ============================================================================
+
+class HRInterviewSessionCreate(BaseModel):
+    candidate_id: str
+    opening_id: str
+    experience_level: Literal["FRESHER", "EXPERIENCED"] = "FRESHER"
+    role_type: Literal["TECHNICAL", "NON_TECHNICAL"] = "NON_TECHNICAL"
+    recruiter_id: str | None = None
+
+
+class HRInterviewSessionResponse(BaseModel):
+    interview_id: str
+    candidate_id: str
+    opening_id: str
+    status: str
+    current_phase: str
+    current_question_id: str | None
+    experience_level: str
+    role_type: str
+    recruiter_id: str | None
+    created_at: str
+    updated_at: str
+
+
+class HRInterviewSessionStatusUpdate(BaseModel):
+    status: Literal["CREATED", "IN_PROGRESS", "PAUSED", "COMPLETED", "CANCELLED", "FAILED"]
+    current_phase: Literal["CREATED", "INTRODUCTION", "CORE_HR_QUESTIONS", "ROLE_BASED_EVALUATION", "CLOSING", "COMPLETED"] | None = None
+    current_question_id: str | None = None
+
+
+class HRInterviewQuestionResponse(BaseModel):
+    question_id: str
+    interview_id: str
+    category: str
+    question_text: str
+    role_type: str
+    experience_level: str
+    difficulty: str
+    expected_answer_criteria: str | None = None
+    evaluation_parameters: dict[str, Any] | None = None
+    follow_up_eligibility: bool = True
+    question_order: int = 0
+    active_status: bool = True
+    created_at: str
+
+
+class HRInterviewAnswerSubmit(BaseModel):
+    question_id: str
+    answer_text: str
+
+
+class HRInterviewAnswerResponse(BaseModel):
+    response_id: str
+    interview_id: str
+    question_id: str
+    raw_response: str
+    cleaned_response: str
+    quality: str
+    follow_up_eligible: bool
+    follow_up_count: int
+    created_at: str
+    updated_at: str
+
+
+class HRInterviewFollowUpSubmit(BaseModel):
+    parent_question_id: str
+    followup_type: Literal["clarification", "deepening", "example_based", "scenario_based"]
+    followup_question: str
+    candidate_response: str
+
+
+class HRInterviewFollowUpResponse(BaseModel):
+    followup_id: str
+    interview_id: str
+    parent_question_id: str
+    followup_type: str
+    followup_question: str
+    candidate_response: str | None
+    difficulty_level: str
+    created_at: str
+    updated_at: str
+
+
+class HRCommunicationEvaluationResponse(BaseModel):
+    evaluation_id: str
+    interview_id: str
+    response_id: str | None
+    fluency_score: float
+    grammar_score: float
+    vocabulary_score: float
+    clarity_score: float
+    structure_score: float
+    filler_control_score: float
+    total_communication_score: float
+    fillers_detected: list[str]
+    evidence: list[str]
+    created_at: str
+
+
+class HRBehavioralSignalsResponse(BaseModel):
+    signal_id: str
+    interview_id: str
+    response_id: str | None
+    hesitation_count: int
+    pause_count: int
+    uncertainty_count: int
+    repeated_word_count: int
+    sentiment: str
+    sentiment_score: float
+    stress_score: float
+    confidence_score: float
+    contradiction_detected: bool
+    contradiction_reason: str | None
+    disclaimer: str
+    created_at: str
+
+
+class HRAptitudeEvaluationResponse(BaseModel):
+    aptitude_id: str
+    interview_id: str
+    question_id: str
+    category: str
+    candidate_answer: str
+    logic_score: float
+    clarity_score: float
+    problem_solving_score: float
+    decision_making_score: float
+    communication_score: float
+    overall_score: float
+    evaluation_details: dict[str, Any]
+    created_at: str
+
+
+class HRInterviewScoreResponse(BaseModel):
+    score_id: str
+    interview_id: str
+    candidate_id: str
+    relevance_score: float
+    communication_score: float
+    confidence_score: float
+    consistency_score: float
+    overall_hr_score: float
+    score_status: str
+    breakdown: dict[str, Any]
+    human_review_required: bool
+    created_at: str
+    updated_at: str
+
+
+class HRInterviewReportResponse(BaseModel):
+    report_id: str
+    interview_id: str
+    candidate_id: str
+    opening_id: str
+    report_json: dict[str, Any]
+    html_report: str | None
+    version: int
+    recruiter_decision: str | None
+    recruiter_notes: str | None
+    created_at: str
+    updated_at: str
+
+
+class HRInterviewDecisionRequest(BaseModel):
+    decision: Literal["PROCEED", "HOLD", "REJECT", "MANUAL_REVIEW"]
+    notes: str | None = None
+
+
+# ---------------------------------------------------------------------------
+# Days 41–52: Technical Interview, Machine Test, Integrity & Final Recommendation
+# ---------------------------------------------------------------------------
+
+
+class TechnicalInterviewSessionCreate(BaseModel):
+    candidate_id: str
+    opening_id: str
+    target_role: str | None = None
+    experience_level: str | None = None
+
+
+class TechnicalInterviewQuestionResponse(BaseModel):
+    question_id: str
+    session_id: str
+    question_text: str
+    topic: str
+    question_type: str
+    difficulty: str
+    sequence_order: int
+    expected_criteria: list[str] = Field(default_factory=list)
+    created_at: str
+
+
+class TechnicalInterviewSessionResponse(BaseModel):
+    session_id: str
+    candidate_id: str
+    opening_id: str
+    target_role: str
+    experience_level: str
+    status: str
+    current_stage: str
+    total_questions: int
+    overall_score: float
+    rubric_breakdown: dict[str, Any] = Field(default_factory=dict)
+    created_at: str
+    updated_at: str
+
+
+class TechnicalInterviewAnswerSubmit(BaseModel):
+    question_id: str
+    answer_text: str
+
+
+class TechnicalInterviewResponseResult(BaseModel):
+    response_id: str
+    session_id: str
+    question_id: str
+    raw_answer: str
+    score: float
+    depth_level: str
+    parameter_scores: dict[str, Any] = Field(default_factory=dict)
+    feedback: str
+    created_at: str
+
+
+class TechnicalInterviewCompleteResponse(BaseModel):
+    session_id: str
+    status: str
+    overall_score: float
+    rubric_breakdown: dict[str, Any]
+    total_questions: int
+    completed_at: str
+
+
+class MachineTestAssignmentCreate(BaseModel):
+    candidate_id: str
+    opening_id: str
+    task_type: Literal["coding", "debugging", "file_based", "mini_system_design"]
+    task_id: str | None = None
+    title: str | None = None
+    description: str | None = None
+    time_limit_minutes: int = 60
+
+
+class MachineTestAssignmentResponse(BaseModel):
+    assignment_id: str
+    candidate_id: str
+    opening_id: str
+    task_type: str
+    task_id: str
+    title: str
+    description: str
+    time_limit_minutes: int
+    status: str
+    assigned_at: str
+    completed_at: str | None = None
+
+
+class MachineTestSubmissionCreate(BaseModel):
+    code_content: str
+    language: str = "python"
+    time_spent_minutes: float = 0.0
+
+
+class MachineTestSubmissionResponse(BaseModel):
+    submission_id: str
+    assignment_id: str
+    code_content: str
+    language: str
+    time_spent_minutes: float
+    total_score: float
+    rubric_scores: dict[str, Any]
+    execution_details: dict[str, Any]
+    status: str
+    submitted_at: str
+
+
+class CandidateIntegrityRecordCreate(BaseModel):
+    session_id: str
+    round_type: str
+    has_consent: bool = True
+    events: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class CandidateIntegrityRecordResponse(BaseModel):
+    record_id: str
+    candidate_id: str
+    session_id: str
+    round_type: str
+    has_consent: bool
+    total_risk_points: int
+    risk_level: str
+    requires_human_review: bool
+    events: list[dict[str, Any]] = Field(default_factory=list)
+    review_flags: list[dict[str, Any]] = Field(default_factory=list)
+    created_at: str
+
+
+class CandidateBehavioralRecordCreate(BaseModel):
+    session_id: str
+    round_type: str
+    has_consent: bool = True
+    observations: list[dict[str, Any]] = Field(default_factory=list)
+
+
+class CandidateBehavioralRecordResponse(BaseModel):
+    record_id: str
+    candidate_id: str
+    session_id: str
+    round_type: str
+    has_consent: bool
+    consistency_index: float
+    requires_human_review: bool
+    observations: list[dict[str, Any]] = Field(default_factory=list)
+    disclaimer: str
+    created_at: str
+
+
+class CrossRoundEvaluationRequest(BaseModel):
+    opening_id: str | None = None
+    target_role: str | None = None
+    round_scores: dict[str, float] | None = None
+    role_weights: dict[str, float] | None = None
+    missing_strategy: Literal["exclude_and_renormalize", "strict_zero", "flag_review"] = "exclude_and_renormalize"
+
+
+class CrossRoundEvaluationResponse(BaseModel):
+    evaluation_id: str
+    candidate_id: str
+    opening_id: str
+    target_role: str
+    hiring_fit_percentage: float
+    round_scores: dict[str, Any]
+    effective_weights: dict[str, Any]
+    completed_rounds: int
+    missing_rounds: list[str]
+    anomalies: list[str]
+    created_at: str
+
+
+class FinalRecommendationRequest(BaseModel):
+    opening_id: str | None = None
+    target_role: str | None = None
+    session_id: str | None = None
+    evidence_quality: float = 85.0
+    data_consistency: float = 85.0
+    custom_rules: dict[str, Any] | None = None
+
+
+class FinalRecommendationResponse(BaseModel):
+    recommendation_id: str
+    candidate_id: str
+    opening_id: str
+    target_role: str
+    decision: Literal["SELECTED", "HOLD_REVIEW", "REJECTED"]
+    score: float
+    confidence: float
+    confidence_interpretation: str = "Evidence completeness indicator; not a probability of job success."
+    completed_rounds: int
+    expected_rounds: int
+    reasons: list[str]
+    risk_factors: dict[str, Any]
+    recruiter_decision: Literal["PENDING_REVIEW", "APPROVED", "OVERRIDDEN", "REJECTED"]
+    recruiter_notes: str | None = None
+    created_at: str
+    updated_at: str
+
+
+class FinalRecommendationDecisionRequest(BaseModel):
+    recruiter_decision: Literal["APPROVED", "OVERRIDDEN", "REJECTED"]
+    notes: str | None = None
+
+
+# ============================================================================
+# Days 53-60: Reporting, Security, Simulation, Coaching & Scalability Schemas
+# ============================================================================
+
+class HiringIntelligenceReportResponse(BaseModel):
+    report_id: str
+    candidate_id: str
+    opening_id: str
+    version: int
+    report_title: str
+    unified_hiring_fit_score: float | None = None
+    evaluation_summary: dict[str, Any]
+    strengths: list[str]
+    weaknesses_and_skill_gaps: list[str]
+    missing_evaluation_evidence: list[str]
+    risk_indicators: list[dict[str, Any]]
+    final_recommendation: dict[str, Any]
+    recruiter_decision_workflow: dict[str, Any]
+    disclaimer: str
+    created_at: str
+
+
+class AuditEventResponse(BaseModel):
+    event_id: str
+    event_type: str
+    actor_id: str
+    subject_id: str
+    details: dict[str, Any]
+    previous_hash: str
+    event_hash: str
+    created_at: str
+
+
+class AuditVerificationResponse(BaseModel):
+    verified: bool
+    event_count: int
+    status: str
+    tampered_at_index: int | None = None
+    event_id: str | None = None
+    expected_hash: str | None = None
+    stored_hash: str | None = None
+
+
+class CandidateCoachingResponse(BaseModel):
+    coaching_id: str
+    candidate_id: str
+    target_role: str
+    identified_skill_gaps: list[str]
+    recommended_preparation: list[str]
+    practice_questions: list[str]
+    governance_guardrails: dict[str, Any]
+    disclaimer: str
+    created_at: str
+
+
+class SimulationRunRequest(BaseModel):
+    candidate: dict[str, Any]
+    opening: dict[str, Any]
+
+
+class SimulationRunResponse(BaseModel):
+    candidate_id: str
+    opening_id: str
+    unified_fit_score: float
+    ai_recommendation: str
+    report_id: str | None = None
+    stage_statuses: dict[str, str]
+    stage_timings_ms: dict[str, float]
+    total_execution_ms: float
+    pipeline_success: bool
+
+
+class BenchmarkComparisonRequest(BaseModel):
+    simulations: list[dict[str, Any]]
+    human_evaluations: list[dict[str, Any]]
+
+
+class BenchmarkComparisonResponse(BaseModel):
+    total_evaluated: int
+    decision_alignment_rate_percent: float
+    average_score_gap: float
+    max_score_gap: float
+    comparisons: list[dict[str, Any]]
+
+
+class BatchResumeProcessRequest(BaseModel):
+    resumes: list[dict[str, Any]]
+    batch_size: int = 4
+    max_concurrency: int = 2
+
+
+class BatchResumeProcessResponse(BaseModel):
+    total_submitted: int
+    successful_count: int
+    failure_count: int
+    cache_hits: int
+    cache_hit_rate: float
+    results: list[dict[str, Any]]
+    failures: list[dict[str, Any]]
+
+
+# Day 61: Observability & Monitoring Schemas
+# ---------------------------------------------------------------------------
+
+
+class MonitoringLogEventRequest(BaseModel):
+    event_type: Literal["api_request", "model_run", "error", "decision_audit"]
+    payload: dict[str, Any]
+
+
+class MonitoringAlertItem(BaseModel):
+    rule: str
+    severity: Literal["WARNING", "HIGH", "CRITICAL"]
+    message: str
+    value: float
+    timestamp: str
+
+
+class MonitoringDashboardResponse(BaseModel):
+    generated_at: str
+    service: str
+    operational_metrics: dict[str, Any]
+    ai_model_metrics: dict[str, Any]
+    recruitment_decisions: dict[str, Any]
+    recent_errors: list[dict[str, Any]]
+    ai_quality_guidance: str
+
+
+class DecisionAuditLogResponse(BaseModel):
+    event_id: str
+    timestamp: str
+    event_type: str
+    candidate_ref: str
+    opening_ref: str | None = None
+    decision: str
+    reason: str
+    actor: str
+    model_version: str
+    human_reviewed: bool

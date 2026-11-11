@@ -1,0 +1,11 @@
+{
+  "title": "Senior Machine Learning Engineer",
+  "description": "We are looking for an ML Engineer to design, train, and deploy production NLP and predictive models. Experience with PyTorch, Transformers, model inference optimization, vector search databases, and MLOps deployment pipelines is required.",
+  "required_skills": ["Python", "PyTorch", "Machine Learning", "NLP", "Docker"],
+  "preferred_skills": ["Transformers", "MLflow", "Kubernetes", "AWS", "FastAPI"],
+  "minimum_education": "Master's or Bachelor's Degree in Computer Science, AI, or Data Science",
+  "minimum_years_experience": 4.0,
+  "location": "Bengaluru, India (Hybrid)",
+  "work_mode": "HYBRID"
+}
+

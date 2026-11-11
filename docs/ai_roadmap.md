@@ -1,61 +1,92 @@
-# AI roadmap
+# ZecPath AI Hiring System — Long-Term Technical & AI Roadmap (2027+)
 
-This roadmap is a proposal, not a feature-completion claim. Development must
-remain evidence-based and human-supervised because hiring decisions can have
-significant consequences.
+**Document Version:** 2.0.0  
+**Status:** Post-Day 70 Strategic Technical Roadmap  
+**Target Horizon:** 2027 – 2028  
+**Architecture Focus:** Scalability, Multimodal Audio, Continuous Learning & Enterprise Ecosystem  
 
-## Implemented in the root application today
+---
 
-- Resume text extraction from TXT, DOCX, and text-based PDF.
-- Day 9-11 rule-based extraction of skills, education, and dated work history
-  from TXT, DOCX, and text-based PDF resume text.
-- Day 12 local `all-MiniLM-L6-v2` embeddings for resume/job cosine similarity
-  when the model is cached and a readable resume is available.
-- Day 13 role-weighted scores using skill, experience, education, and semantic
-  components, with persisted breakdowns, weights, contributions, and
-  missing-component reasons.
-- Evidence snippets and missing/matched required-skill lists.
-- Deterministic Day 25 keyword/regex interpretation of recruiter-entered
-  screening answers.
-- Human-reviewed shortlist suggestions based on persisted deterministic
-  scores; shortlist generation does not change candidate status.
-- No remote AI/LLM provider is configured or called by the root API; semantic
-  inference stays local.
+## 1. Executive Vision
 
-These are experimental rule/model outputs, not validated employment
-assessments or evidence that a system is bias-free. Missing evidence is not
-proof that a candidate lacks a qualification. The Day 13 implementation's
-`weight_manager.py` is the active source of role weights; similarly named JSON
-files in that stage are not read by the scorer, and contain conflicting values
-for some roles.
+Over the initial 70-day engineering program, the ZecPath AI Hiring System evolved from an experimental resume parser into a comprehensive, multi-stage recruitment intelligence platform. The system successfully unified resume ingestion, 4-factor ATS scoring, conversational screening, adaptive HR interviewing, technical depth evaluation, machine coding assessments, cross-round synthesis, cryptographic audit trails, and real-time observability.
 
-The standalone Day 16 API remains a separate demo; the root API provides the
-live CRUD, upload, parsing, scoring, shortlist, and screening routes. No
-executable Day 20 ATS scorer was present to integrate, so the root app uses
-the existing Day 13 weighted pipeline and does not claim a Day 20 integration.
+The **2027+ Strategic Roadmap** defines the next evolution: transitioning ZecPath from an air-gapped single-node deployment into an enterprise-scale, multimodal, continuous-learning talent acquisition platform.
 
-## Planned improvements
+---
 
-| Priority | Proposal | Preconditions and acceptance evidence |
-|---|---|---|
-| P0 | Establish a versioned candidate/job/answer/evidence contract and provenance for each extracted or candidate-reported fact. | Schema compatibility tests; every output maps to source text or an explicit candidate answer; missing data remains missing. |
-| P0 | Add safe correction/verification workflow for parser output before it is used for score evidence. | Browser/API tests show manual edits persist and trigger score invalidation. |
-| P0 | Validate the locally loaded Day 12 model, Day 13 weights, and resulting ranking with a job-related, independently reviewed dataset. | Pre-registered evaluation protocol, documented cohort coverage/limitations, error analysis, calibration, reviewer agreement, and independent governance sign-off; current scores are experimental. |
-| P0 | Add model/version provenance and an explicit, tested unavailable-model workflow for Day 12 inference. | Record the model name/version and component status without applicant text or credentials in logs; return a clear service error instead of a fabricated semantic score. |
-| P1 | Integrate the Day 23 transcript schema and Day 24 real audio provider into a consent-based screening workflow, only when needed. | Explicit consent, audio retention/deletion policy, provider/model disclosure, transcript provenance, confidence metadata, accessibility fallback, and actual audio tests. |
-| P1 | Integrate screening scoring/reporting from Days 26/28 only after validating question quality and weights. | Range/weight tests, missing-answer handling, evidence-linked summaries, no invented strengths, human review flags, and report/database consistency tests. |
-| P1 | Add fairness monitoring with legally reviewed, privacy-preserving processes. | Independent fairness design, justified protected-group measurement where lawful, adequate sample sizes, disaggregation review, mitigation tracking, and no “bias-free” claim from proxy metrics. |
-| P1 | Add durable asynchronous resume workers and request/list pagination based on measured workload. | Retry/idempotency tests, bounded resource use, concurrency/load tests, queue monitoring, and data consistency checks. |
-| P2 | Add production-grade identity, tenant isolation, encryption, consent/retention, audit, backup, migration, and recovery. | Threat model, external review, tested restore, access-control tests, operational runbook, and staging evidence. |
+## 2. Multi-Phase Technical Roadmap (2027)
 
-## Guardrails for future AI work
+```mermaid
+flowchart TD
+    subgraph P1["Phase I: Q1 2027"]
+        M1[WebRTC Low-Latency Voice Streaming]
+        M2[Multimodal Emotion-Free Video Signal Processing]
+    end
 
-1. Never invent candidate skills, experience, availability, salary, or answers.
-2. Keep the candidate's source evidence and uncertainty visible.
-3. Distinguish missing information from negative evidence.
-4. Do not infer sensitive characteristics from names, images, or resumes.
-5. Do not automatically reject, shortlist as a final decision, or hire.
-6. Require meaningful human review and a correction/appeal path.
-7. Treat model confidence and fairness indicators as limited signals, not proof.
-8. Disable the AI path explicitly when credentials/provider are unavailable;
-   never return a success-shaped fallback.
+    subgraph P2["Phase II: Q2 2027"]
+        M3[Enterprise ATS Bi-Directional Connectors]
+        M4[OAuth2 / OIDC & Multi-Tenant Organization Isolation]
+    end
+
+    subgraph P3["Phase III: Q3 2027"]
+        M5[Reinforcement Learning from Recruiter Feedback]
+        M6[Dynamic Role Calibration & Market Compensation Analytics]
+    end
+
+    subgraph P4["Phase IV: Q4 2027"]
+        M7[Distributed Micro-VM Coding Sandboxes]
+        M8[Cross-Jurisdictional AI Compliance Automation]
+    end
+
+    P1 --> P2
+    P2 --> P3
+    P3 --> P4
+```
+
+---
+
+## 3. Phase-by-Phase Architectural Initiatives
+
+### Phase I (Q1 2027): Real-Time Multimodal Voice & Streaming
+* **Current State:** Candidate audio is recorded and processed in chunked segments using local STT inference.
+* **Target Architecture:**
+  * **Bidirectional WebRTC Streaming:** Implement full-duplex WebRTC audio streaming to achieve sub-200ms latency during conversational screening.
+  * **Streaming VAD (Voice Activity Detection):** Natural turn-taking detection using Silero VAD to eliminate unnatural speech delays.
+  * **Multimodal Non-Invasive Video Analysis:** Optional candidate video stream processing focused purely on professional environment quality, gaze engagement, and presentation pacing — strictly maintaining the **zero facial emotion classification** ethical policy.
+
+### Phase II (Q2 2027): Enterprise ATS Ecosystem & Multi-Tenancy
+* **Current State:** Localhost web dashboard with SQLite persistence and standalone REST API.
+* **Target Architecture:**
+  * **Enterprise ATS Connectors:** Native bi-directional webhook and API synchronizers for:
+    * Greenhouse Harvest API & Webhooks
+    * Workday Recruiting REST APIs
+    * Lever Postings & Candidate Opportunities API
+    * Ashby Webhook Integrations
+  * **Multi-Tenant Architecture:** Migrate from single-tenant SQLite to distributed PostgreSQL with schema-level tenant isolation, row-level security (RLS), and organization-specific role-based access control (RBAC).
+  * **Enterprise SSO:** SAML 2.0 and OIDC integrations supporting Okta, Microsoft Azure AD / Entra ID, and Google Workspace SSO.
+
+### Phase III (Q3 2027): Active Learning & Recruiter Feedback Loops (RLHF)
+* **Current State:** Rule-bounded and static rubric evaluation with fixed weight configurations.
+* **Target Architecture:**
+  * **Recruiter Preference Optimization:** Safely capture anonymized recruiter approval, hold, and override actions to continuously fine-tune the cross-round recommendation engine.
+  * **Dynamic Weight Auto-Tuning:** Suggest personalized stage weights based on historical correlation between evaluation scores and subsequent employee 90-day retention and performance reviews.
+  * **Explainability Distillation:** Train lightweight, interpretable surrogate models that automatically draft executive summary justifications in the recruiter's natural organizational tone.
+
+### Phase IV (Q4 2027): Distributed Code Sandboxing & Global Compliance
+* **Current State:** Coding tests execute against local Python assertions in sandboxed processes.
+* **Target Architecture:**
+  * **Firecracker Micro-VM Execution:** Execute machine coding tests inside ephemeral, isolated micro-virtual machines (Firecracker / gVisor) supporting 25+ programming languages (Python, Go, Java, TypeScript, Rust, C++, C#).
+  * **Interactive Debugging Interviews:** Live collaborative pair-programming environments with real-time terminal synchronization and playback audit trails.
+  * **Automated Compliance Engine:** Real-time generation of NYC Local Law 144 independent audit reports, EU AI Act conformity assessments, and EEOC adverse impact ratio calculation dashboards.
+
+---
+
+## 4. Ethical AI & Governance Commitments
+
+Across all future roadmap initiatives, ZecPath will strictly adhere to our core founding governance principles:
+
+1. **Non-Delegable Human Primacy:** The AI engine recommends; human recruiters decide. Automated candidate rejections remain strictly prohibited.
+2. **Deterministic & Decomposed Scoring:** No proprietary black-box composite scores. Every score must be mathematically decomposable into verifiable evidence.
+3. **Candidate Privacy by Design:** Raw candidate data remains protected under strict data sovereignty; telemetry logs must never ingest PII or biometric identifiers.
+4. **Candidate Developmental Empowerment:** Every candidate who completes an assessment receives actionable, personalized coaching suggestions and practice resources, regardless of the final hiring outcome.

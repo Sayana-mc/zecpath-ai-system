@@ -288,6 +288,16 @@
         </table>
       </div>
     </section>
+
+    <section class="panel" id="monitoringSection" style="margin-top: 24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="margin:0;">System Observability & AI Monitoring</h2>
+        <button id="refreshMonitoringButton" type="button" class="secondary" style="margin:0;">Refresh Metrics</button>
+      </div>
+      <p class="muted">Real-time operational metrics, AI inference latency, alerting status, and decision audit logs.</p>
+      <div id="monitoringMetricsCards" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;"></div>
+      <div id="monitoringAlertsList" style="margin-top: 12px;" hidden></div>
+    </section>
     </div>
   </main>
 
@@ -671,6 +681,122 @@
           screeningDetails.append(screeningForm, reports);
           actions.append(screeningDetails);
 
+          // Technical Interview Section (Days 46-47)
+          const techDetails = document.createElement("details");
+          techDetails.style.marginTop = "6px";
+          const techSummary = document.createElement("summary");
+          techSummary.textContent = "Technical Interview";
+          techDetails.append(techSummary);
+          const techBtn = document.createElement("button");
+          techBtn.type = "button";
+          techBtn.textContent = "Launch Technical Interview";
+          techBtn.addEventListener("click", async () => {
+            techBtn.disabled = true;
+            try {
+              await request("/api/v1/technical-interviews", jsonOptions("POST", {
+                candidate_id: candidate.candidate_id,
+                opening_id: candidate.opening_id,
+                target_role: (opening && opening.title) || "Software Engineer",
+                experience_level: "mid",
+              }));
+              showNotice("Technical interview session created.");
+            } catch (err) {
+              showNotice(err.message, true);
+            } finally {
+              techBtn.disabled = false;
+            }
+          });
+          techDetails.append(techBtn);
+          actions.append(techDetails);
+
+          // Machine Test Section (Day 50)
+          const mtDetails = document.createElement("details");
+          mtDetails.style.marginTop = "6px";
+          const mtSummary = document.createElement("summary");
+          mtSummary.textContent = "Machine Test";
+          mtDetails.append(mtSummary);
+          const mtBtn = document.createElement("button");
+          mtBtn.type = "button";
+          mtBtn.textContent = "Assign Machine Test";
+          mtBtn.addEventListener("click", async () => {
+            mtBtn.disabled = true;
+            try {
+              await request("/api/v1/machine-tests/assignments", jsonOptions("POST", {
+                candidate_id: candidate.candidate_id,
+                opening_id: candidate.opening_id,
+                task_type: "coding",
+              }));
+              showNotice("Machine test assigned.");
+            } catch (err) {
+              showNotice(err.message, true);
+            } finally {
+              mtBtn.disabled = false;
+            }
+          });
+          mtDetails.append(mtBtn);
+          actions.append(mtDetails);
+
+          // Unified Fit & Final Recommendation (Days 41, 51, 52)
+          const finalRecDetails = document.createElement("details");
+          finalRecDetails.style.marginTop = "6px";
+          const finalRecSummary = document.createElement("summary");
+          finalRecSummary.textContent = "Final Recommendation AI";
+          finalRecDetails.append(finalRecSummary);
+          const finalRecBtn = document.createElement("button");
+          finalRecBtn.type = "button";
+          finalRecBtn.textContent = "Calculate Final Recommendation";
+          finalRecBtn.addEventListener("click", async () => {
+            finalRecBtn.disabled = true;
+            try {
+              await request(`/api/v1/candidates/${encodeURIComponent(candidate.candidate_id)}/final-recommendation`, jsonOptions("POST", {
+                opening_id: candidate.opening_id,
+                target_role: (opening && opening.title) || "Software Engineer",
+              }));
+              showNotice("Final AI recommendation calculated.");
+            } catch (err) {
+              showNotice(err.message, true);
+            } finally {
+              finalRecBtn.disabled = false;
+            }
+          });
+          finalRecDetails.append(finalRecBtn);
+          actions.append(finalRecDetails);
+
+          // Hiring Intelligence Report (Day 53)
+          const repDetails = document.createElement("details");
+          repDetails.style.marginTop = "6px";
+          const repSummary = document.createElement("summary");
+          repSummary.textContent = "Hiring Intelligence Report (Day 53)";
+          repDetails.append(repSummary);
+
+          const repContainer = document.createElement("div");
+          repContainer.style.marginTop = "8px";
+          const repBtn = document.createElement("button");
+          repBtn.type = "button";
+          repBtn.textContent = "Generate Intelligence Report";
+          repBtn.addEventListener("click", async () => {
+            repBtn.disabled = true;
+            try {
+              const rep = await request(`/api/v1/candidates/${encodeURIComponent(candidate.candidate_id)}/hiring-intelligence-report`, jsonOptions("POST", {}));
+              renderHiringReportCard(rep, repContainer);
+              showNotice("Hiring intelligence report generated.");
+            } catch (err) {
+              showNotice(err.message, true);
+            } finally {
+              repBtn.disabled = false;
+            }
+          });
+
+          repDetails.addEventListener("toggle", () => {
+            if (repDetails.open) {
+              request(`/api/v1/candidates/${encodeURIComponent(candidate.candidate_id)}/hiring-intelligence-report`)
+                .then(rep => renderHiringReportCard(rep, repContainer))
+                .catch(err => showNotice(err.message, true));
+            }
+          });
+          repDetails.append(repBtn, repContainer);
+          actions.append(repDetails);
+
           const resumeButton = document.createElement("button");
           resumeButton.type = "button";
           resumeButton.className = "secondary";
@@ -720,6 +846,75 @@
         if (!reports.length) container.textContent = "No screening reports saved.";
       }
 
+      function renderHiringReportCard(report, container) {
+        container.replaceChildren();
+        if (!report) {
+          const empty = document.createElement("p");
+          empty.textContent = "No hiring report available.";
+          empty.style.color = "#64748b";
+          container.append(empty);
+          return;
+        }
+
+        const card = document.createElement("div");
+        card.style.border = "1px solid #cbd5e1";
+        card.style.borderRadius = "6px";
+        card.style.padding = "12px";
+        card.style.marginTop = "6px";
+        card.style.background = "#fff";
+
+        const rec = report.final_recommendation || {};
+        const badgeColor = rec.decision === "SELECTED" ? "#16a34a" : rec.decision === "HOLD_REVIEW" ? "#d97706" : "#dc2626";
+
+        card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
+          <h4 style="margin:0;font-size:1em;color:#1e293b;">${report.report_title} (v${report.version || 1})</h4>
+          <span style="font-weight:700;color:${badgeColor};border:1px solid ${badgeColor};padding:2px 8px;border-radius:4px;">${rec.decision || "PENDING"}</span>
+        </div>
+        <p style="margin:4px 0;font-size:0.9em;color:#475569;">
+          <strong>Target:</strong> ${report.target_role} &bull; <strong>Fit Score:</strong> ${report.unified_hiring_fit_score != null ? report.unified_hiring_fit_score.toFixed(1) + '%' : 'N/A'}
+        </p>
+        <div style="margin:8px 0;display:flex;gap:8px;">
+          <a href="/api/v1/hiring-intelligence-reports/${report.report_id}/html" target="_blank" style="font-size:0.85em;padding:4px 10px;background:#2563eb;color:#fff;border-radius:4px;text-decoration:none;">View HTML Report</a>
+          <a href="/api/v1/hiring-intelligence-reports/${report.report_id}/markdown" target="_blank" style="font-size:0.85em;padding:4px 10px;background:#475569;color:#fff;border-radius:4px;text-decoration:none;">View Markdown</a>
+        </div>`;
+
+        if (report.strengths && report.strengths.length) {
+          const sTitle = document.createElement("strong");
+          sTitle.textContent = "Strengths:";
+          sTitle.style.fontSize = "0.85em";
+          sTitle.style.color = "#166534";
+          const sList = document.createElement("ul");
+          sList.style.fontSize = "0.85em";
+          sList.style.margin = "4px 0";
+          sList.style.paddingLeft = "20px";
+          for (const s of report.strengths) {
+            const li = document.createElement("li");
+            li.textContent = s;
+            sList.append(li);
+          }
+          card.append(sTitle, sList);
+        }
+
+        if (report.weaknesses_and_skill_gaps && report.weaknesses_and_skill_gaps.length) {
+          const wTitle = document.createElement("strong");
+          wTitle.textContent = "Skill Gaps / Weaknesses:";
+          wTitle.style.fontSize = "0.85em";
+          wTitle.style.color = "#991b1b";
+          const wList = document.createElement("ul");
+          wList.style.fontSize = "0.85em";
+          wList.style.margin = "4px 0";
+          wList.style.paddingLeft = "20px";
+          for (const w of report.weaknesses_and_skill_gaps) {
+            const li = document.createElement("li");
+            li.textContent = w;
+            wList.append(li);
+          }
+          card.append(wTitle, wList);
+        }
+
+        container.append(card);
+      }
+
       async function refresh() {
         const current = byId("openingSelect").value;
         state.openings = await request("/openings");
@@ -730,6 +925,7 @@
         }
         await loadEligibilityConfiguration();
         await loadCandidates();
+        await loadMonitoringDashboard();
       }
 
       async function loadEligibilityConfiguration() {
@@ -1051,6 +1247,67 @@
           button.disabled = false;
         }
       });
+
+      async function loadMonitoringDashboard() {
+        const cards = byId("monitoringMetricsCards");
+        const alertsEl = byId("monitoringAlertsList");
+        if (!cards) return;
+        try {
+          const [dashboard, alerts] = await Promise.all([
+            request("/monitoring/dashboard"),
+            request("/monitoring/alerts"),
+          ]);
+          const ops = dashboard.operational_metrics || {};
+          const aiM = dashboard.ai_model_metrics || {};
+          const dec = dashboard.recruitment_decisions || {};
+
+          cards.innerHTML = `
+            <div style="background:#f1f5f9; padding:12px; border-radius:8px; border:1px solid #cbd5e1;">
+              <div style="font-size:0.75rem; color:#64748b; font-weight:700;">API REQUESTS</div>
+              <div style="font-size:1.4rem; font-weight:800; color:#0f172a;">${ops.total_api_requests || 0}</div>
+              <small style="color:${(ops.api_failure_rate_percent || 0) > 5 ? '#ef4444' : '#10b981'};">Failures: ${ops.api_failure_rate_percent || 0}%</small>
+            </div>
+            <div style="background:#f1f5f9; padding:12px; border-radius:8px; border:1px solid #cbd5e1;">
+              <div style="font-size:0.75rem; color:#64748b; font-weight:700;">LATENCY (P95)</div>
+              <div style="font-size:1.4rem; font-weight:800; color:#0f172a;">${ops.p95_latency_ms || 0} ms</div>
+              <small style="color:#64748b;">P50: ${ops.p50_latency_ms || 0} ms</small>
+            </div>
+            <div style="background:#f1f5f9; padding:12px; border-radius:8px; border:1px solid #cbd5e1;">
+              <div style="font-size:0.75rem; color:#64748b; font-weight:700;">AI MODEL RUNS</div>
+              <div style="font-size:1.4rem; font-weight:800; color:#0f172a;">${aiM.total_model_runs || 0}</div>
+              <small style="color:#64748b;">Failures: ${aiM.model_failures || 0}</small>
+            </div>
+            <div style="background:#f1f5f9; padding:12px; border-radius:8px; border:1px solid #cbd5e1;">
+              <div style="font-size:0.75rem; color:#64748b; font-weight:700;">DECISION AUDIT</div>
+              <div style="font-size:1.4rem; font-weight:800; color:#0f172a;">${dec.total_decisions_logged || 0}</div>
+              <small style="color:#10b981;">Human Review: ${dec.human_reviewed_percentage || 100}%</small>
+            </div>
+          `;
+
+          if (alerts && alerts.length > 0) {
+            alertsEl.hidden = false;
+            alertsEl.innerHTML = `
+              <div style="background:#fef2f2; border:1px solid #f87171; border-radius:8px; padding:12px;">
+                <strong style="color:#991b1b;">Active Alerts (${alerts.length})</strong>
+                <ul style="margin:6px 0 0 16px; color:#b91c1c;">
+                  ${alerts.map(a => `<li><strong>[${a.severity}]</strong> ${a.message}</li>`).join("")}
+                </ul>
+              </div>
+            `;
+          } else {
+            alertsEl.hidden = true;
+          }
+        } catch (e) {
+          // ignore when not authenticated
+        }
+      }
+
+      if (byId("refreshMonitoringButton")) {
+        byId("refreshMonitoringButton").addEventListener("click", async () => {
+          await loadMonitoringDashboard();
+          showNotice("Refreshed observability metrics.");
+        });
+      }
 
       for (const id of ["refreshButton", "reloadButton"]) {
         byId(id).addEventListener("click", async () => {

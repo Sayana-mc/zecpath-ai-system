@@ -7,7 +7,7 @@ from typing import Any
 from day28_ai_screening_report_generator.src.report_builder import ScreeningReportBuilder
 from day28_ai_screening_report_generator.src.report_formatter import RecruiterReportFormatter
 
-from . import database
+from src import database
 from .schemas import (
     ScreeningReportFullCreate,
     ScreeningReportFullResponse,
@@ -76,7 +76,11 @@ class ScreeningReportIntegration:
                     "answer": a["cleaned_answer"],
                     "intent": a["detected_intent"],
                     "status": a["answer_status"].lower(),
-                    "extracted_information": json.loads(a["extracted_information"]),
+                    "extracted_information": (
+                        json.loads(a["extracted_information"])
+                        if isinstance(a["extracted_information"], str)
+                        else a["extracted_information"]
+                    ),
                     "score": next((s for s in scores if s["answer_id"] == a["answer_id"]), None),
                 }
                 for a in answers

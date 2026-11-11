@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Alex Mercer",
+    "email": "alex.mercer@example.test",
+    "skills": ["Python", "FastAPI", "SQL", "PostgreSQL", "Docker", "Redis"],
+    "resume_text": "Alex Mercer\nSenior Backend Engineer\n\nPROFESSIONAL SUMMARY\nOver 4 years of backend engineering experience developing scalable RESTful services using Python, FastAPI, SQL, and Docker.\n\nWORK EXPERIENCE\nBackend Developer | TechCorp Solutions (2021 - Present)\n- Designed and implemented microservices using Python, FastAPI, and PostgreSQL.\n- Deployed containerized applications with Docker and managed caching with Redis.\n\nEDUCATION\nBachelor of Science in Computer Science | State University (2017 - 2021)\n\nSKILLS\nPython, FastAPI, SQL, PostgreSQL, Docker, Redis, Git, Linux"
+  },
+  {
+    "name": "Jordan Lee",
+    "email": "jordan.lee@example.test",
+    "skills": ["Python", "Django", "SQL"],
+    "resume_text": "Jordan Lee\nSoftware Engineer\n\nPROFESSIONAL SUMMARY\n2 years of web development experience building database-backed applications with Python and Django.\n\nWORK EXPERIENCE\nJunior Developer | DataWorks (2022 - Present)\n- Built web endpoints and queried SQL databases for data reporting.\n\nEDUCATION\nBachelor of Computer Applications | City College (2019 - 2022)\n\nSKILLS\nPython, Django, SQL, HTML, CSS"
+  },
+  {
+    "name": "Morgan Taylor",
+    "email": "morgan.taylor@example.test",
+    "skills": ["Java", "Spring Boot", "MySQL"],
+    "resume_text": "Morgan Taylor\nJava Enterprise Developer\n\nPROFESSIONAL SUMMARY\n3 years of Java Enterprise application development with Spring Boot and MySQL databases.\n\nWORK EXPERIENCE\nEnterprise Developer | Apex Financial (2021 - Present)\n- Developed Java and Spring Boot banking modules.\n\nEDUCATION\nBachelor of Technology | National Institute (2017 - 2021)\n\nSKILLS\nJava, Spring Boot, MySQL, Maven"
+  }
+]
+

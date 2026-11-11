@@ -1,0 +1,18 @@
+sequenceDiagram
+    autonumber
+    actor Candidate as Candidate
+    participant Voice as Voice Channel
+    participant STT as Speech-to-Text Pipeline
+    participant Normalizer as Transcript Normalizer
+    participant Router as API / Backend (/api/v1)
+    participant DB as SQLite3 Database
+
+    Voice->>Candidate: Plays Question (Speaker: AI)
+    Candidate->>Voice: Speaks Answer (Audio Stream)
+    Voice->>STT: Raw Audio Data
+    STT->>Normalizer: Raw Transcription + Timestamps
+    Normalizer->>Router: POST /screening/sessions/{id}/segments
+    Router->>DB: INSERT transcript_segments (seq_num, text, confidence)
+    Router->>DB: INSERT screening_interactions (question_id, candidate_answer)
+    Router-->>Normalizer: 201 Created (Segments Persisted)
+

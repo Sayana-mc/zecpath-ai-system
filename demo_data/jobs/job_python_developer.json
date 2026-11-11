@@ -1,0 +1,11 @@
+{
+  "title": "Senior Python Backend Architect",
+  "description": "We are seeking a Senior Python Architect to lead the design and implementation of scalable, high-throughput distributed microservices. You will architect FastAPI REST backends, optimize PostgreSQL relational databases, manage Docker/Kubernetes containerized deployments, and ensure zero-downtime reliability.",
+  "required_skills": ["Python", "FastAPI", "PostgreSQL", "Docker", "REST API"],
+  "preferred_skills": ["Kubernetes", "Redis", "Celery", "AWS", "CI/CD"],
+  "minimum_education": "Bachelor's Degree in Computer Science or related field",
+  "minimum_years_experience": 5.0,
+  "location": "Bengaluru, India (Hybrid)",
+  "work_mode": "HYBRID"
+}
+

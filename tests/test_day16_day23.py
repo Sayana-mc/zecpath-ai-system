@@ -607,3 +607,30 @@ def test_root_day16_to_day23_workflow_with_synthetic_resume(client):
         )
     )
     Draft202012Validator(transcript_schema).validate(transcript.json())
+
+
+def test_ats_logical_score_and_shortlist_routes(client):
+    opening = create_opening(client, title="Software Developer")
+    candidate = create_candidate(client, opening["opening_id"], skills=["Python", "SQL"])
+
+    score_resp = client.post(
+        "/api/v1/ats/score",
+        json={
+            "candidate_id": candidate["candidate_id"],
+            "job_id": opening["opening_id"],
+        },
+    )
+    assert score_resp.status_code == 200
+    assert score_resp.json()["score"] is not None
+    assert score_resp.json()["status"] == "SCORED"
+
+    shortlist_resp = client.post(
+        "/api/v1/ats/shortlist",
+        json={
+            "job_id": opening["opening_id"],
+            "minimum_score": 10.0,
+        },
+    )
+    assert shortlist_resp.status_code == 200
+    assert shortlist_resp.json()["shortlisted_count"] == 1
+    assert shortlist_resp.json()["candidates"][0]["candidate_id"] == candidate["candidate_id"]

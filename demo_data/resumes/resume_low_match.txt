@@ -1,0 +1,21 @@
+ROHAN VERMA
+Email: rohan.verma@example.synthetic | Location: Jaipur, India
+
+SUMMARY
+Web Developer with 5 years of experience building dynamic websites and portals utilizing PHP, WordPress, and MySQL.
+
+TECHNICAL SKILLS
+- Languages: PHP, HTML5, CSS3, JavaScript
+- Content Management: WordPress, Joomla, WooCommerce
+- Database: MySQL
+- Tools: cPanel, phpMyAdmin, FileZilla
+
+EXPERIENCE
+Senior Web Designer & Developer | Creative Studio (2019 - Present) | 5 years
+- Built custom WordPress themes and customized plugins for e-commerce clients.
+- Managed MySQL databases and site migrations across shared hosting environments.
+- Optimized web page assets and front-end rendering performance.
+
+EDUCATION
+B.Sc in Computer Science | Rajasthan University | 2018
+

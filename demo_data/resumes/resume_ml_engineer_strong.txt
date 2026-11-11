@@ -1,0 +1,24 @@
+DR. FATIMA AL-MANSOOR
+Email: fatima.mansoor@example.synthetic | Location: Bengaluru, India
+
+SUMMARY
+Senior Machine Learning Engineer and AI Researcher with 6 years of production experience in Natural Language Processing, Transformer architectures, PyTorch, Docker, and scalable model deployment.
+
+SKILLS
+- Core AI/ML: Python, PyTorch, Machine Learning, NLP, Transformers, HuggingFace, Scikit-learn
+- MLOps & Infrastructure: Docker, Kubernetes, MLflow, FastAPI, AWS
+
+EXPERIENCE
+Senior ML Research Engineer | CognitiveAI Systems (2021 - Present) | 3 years
+- Fine-tuned transformer models for multi-lingual semantic document search with PyTorch.
+- Packaged model inference pipelines using FastAPI and Docker, reducing latency to under 30ms.
+- Implemented automated evaluation harnesses and drift monitoring in production.
+
+ML Engineer | DataLogic Corp (2018 - 2021) | 3 years
+- Developed NLP classification algorithms and feature extraction pipelines.
+- Containerized training jobs using Docker for distributed GPU clusters.
+
+EDUCATION
+Ph.D. in Artificial Intelligence & Computer Science | Indian Institute of Science (IISc) | 2018
+B.Tech in Computer Science | 2014
+

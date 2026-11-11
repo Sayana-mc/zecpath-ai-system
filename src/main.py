@@ -1,13 +1,15 @@
 import logging
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 
-from . import database
+from src import database
 from .api import router, system_router
 from .logging_config import configure_logging
+from .observability import observability
 
 
 configure_logging()
@@ -32,6 +34,24 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
+
+
+@app.middleware("http")
+async def observability_middleware(request: Request, call_next):
+    start = time.perf_counter()
+    response = await call_next(request)
+    duration_ms = (time.perf_counter() - start) * 1000.0
+    path = request.url.path
+    if path.startswith("/api/"):
+        observability.log_api_request(
+            endpoint=path,
+            method=request.method,
+            status_code=response.status_code,
+            duration_ms=duration_ms,
+        )
+    return response
+
+
 app.include_router(system_router)
 app.include_router(router)
 

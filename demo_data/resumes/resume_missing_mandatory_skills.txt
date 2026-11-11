@@ -1,0 +1,24 @@
+ISHA IYER
+Email: isha.iyer@example.synthetic | Location: Chennai, India
+
+SUMMARY
+Senior Software Engineer with 6 years of enterprise experience building robust backend microservices in Java and Spring Boot. Strong background in relational databases, Docker containerization, and Kubernetes deployments.
+
+TECHNICAL SKILLS
+- Languages: Java, SQL
+- Frameworks: Spring Boot, Spring Cloud, Hibernate
+- Databases: PostgreSQL, Oracle DB
+- DevOps: Docker, Kubernetes, Jenkins, Maven
+
+EXPERIENCE
+Lead Java Developer | Enterprise Systems Corp (2020 - Present) | 4 years
+- Architected enterprise banking microservices using Java and Spring Boot.
+- Managed PostgreSQL database schemas and optimized SQL query execution.
+- Deployed distributed services to Kubernetes clusters with Docker containers.
+
+Java Developer | TechSolutions India (2018 - 2020) | 2 years
+- Built core REST services and integrated relational persistence layers.
+
+EDUCATION
+B.Tech in Computer Science | Anna University | 2018
+
