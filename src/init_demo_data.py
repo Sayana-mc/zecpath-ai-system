@@ -14,7 +14,10 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .services import calculate_candidate_match
 from .coaching_engine import generate_candidate_coaching
 from .cross_round_scoring_engine import calculate_cross_round_score
@@ -228,6 +231,17 @@ def seed_demo_environment(target_db: str | None = None, reset: bool = False) -> 
                 reason=f"Seeded demo candidate: {c_data['archetype']}",
                 actor="demo_seeder",
                 human_reviewed=True,
+            )
+            database.append_audit_event(
+                event_type="DEMO_CANDIDATE_DECISION",
+                actor_id="demo_seeder",
+                subject_id=cand_id,
+                details={
+                    "opening_id": opening["opening_id"],
+                    "decision": decision,
+                    "fit_score": cross_eval["hiring_fit_percentage"],
+                    "archetype": c_data["archetype"],
+                },
             )
 
             seeded_candidates.append({

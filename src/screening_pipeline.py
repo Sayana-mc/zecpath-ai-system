@@ -3,7 +3,10 @@
 import uuid
 from typing import Any
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .stt_integration import stt_integration
 from .answer_understanding_integration import answer_understanding_integration
 from .screening_scoring_integration import screening_scoring_integration

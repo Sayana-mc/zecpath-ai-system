@@ -3,7 +3,10 @@
 import uuid
 from typing import Any
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 DEFAULT_INTEGRITY_THRESHOLDS: dict[str, dict[str, Any]] = {

@@ -7,7 +7,10 @@ from typing import Any
 from day26_screening_scoring_engine.src.scoring_engine import ScreeningScoringEngine
 from day26_screening_scoring_engine.src.question_scorer import QuestionScorer
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .schemas import (
     ScreeningQuestionScoreCreate,
     ScreeningQuestionScoreResponse,

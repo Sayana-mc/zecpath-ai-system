@@ -2,7 +2,10 @@
 
 from datetime import datetime, timezone, timedelta
 from typing import Any
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 PERMITTED_ROLES: dict[str, list[str]] = {

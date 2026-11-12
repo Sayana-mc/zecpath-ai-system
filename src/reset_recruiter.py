@@ -2,7 +2,10 @@
 
 from getpass import getpass
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .auth import hash_recruiter_password
 
 

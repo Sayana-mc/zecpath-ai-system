@@ -7,7 +7,10 @@ from day31_edge_case_failure_handling.src.edge_case_handler import EdgeCaseHandl
 from day31_edge_case_failure_handling.src.retry_manager import RetryManager
 from day31_edge_case_failure_handling.src.clarification_manager import ClarificationManager
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .schemas import (
     ScreeningAnswerResponse,
 )

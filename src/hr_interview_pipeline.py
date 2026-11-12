@@ -3,7 +3,10 @@
 import uuid
 from typing import Any
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .hr_interview_engine import hr_interview_engine, InterviewFlowStateMachine
 from .hr_followup_engine import hr_followup_engine
 from .hr_communication_evaluator import hr_communication_evaluator

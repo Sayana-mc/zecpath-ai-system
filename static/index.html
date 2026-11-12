@@ -364,10 +364,11 @@
       }
 
       async function request(path, options = {}) {
+        const cleanPath = path.startsWith(api) ? path.slice(api.length) : path;
         const headers = new Headers(options.headers || {});
         let response;
         try {
-          response = await fetch(`${api}${path}`, {
+          response = await fetch(`${api}${cleanPath}`, {
             ...options,
             headers,
             credentials: "same-origin"
@@ -865,17 +866,26 @@
 
         const rec = report.final_recommendation || {};
         const badgeColor = rec.decision === "SELECTED" ? "#16a34a" : rec.decision === "HOLD_REVIEW" ? "#d97706" : "#dc2626";
+        const targetRole = report.target_role || (report.evaluation_summary && report.evaluation_summary.target_role) || "Evaluated Role";
+        const fitScore = report.unified_hiring_fit_score != null ? report.unified_hiring_fit_score.toFixed(1) + '%' : 'N/A';
+        const candId = report.candidate_id || (candidate && candidate.candidate_id) || "";
+        const htmlUrl = report.report_id 
+          ? `/api/v1/hiring-intelligence-reports/${encodeURIComponent(report.report_id)}/html` 
+          : `/api/v1/candidates/${encodeURIComponent(candId)}/hiring-intelligence-report/html`;
+        const mdUrl = report.report_id 
+          ? `/api/v1/hiring-intelligence-reports/${encodeURIComponent(report.report_id)}/markdown` 
+          : `/api/v1/candidates/${encodeURIComponent(candId)}/hiring-intelligence-report/markdown`;
 
         card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;">
-          <h4 style="margin:0;font-size:1em;color:#1e293b;">${report.report_title} (v${report.version || 1})</h4>
+          <h4 style="margin:0;font-size:1em;color:#1e293b;">${report.report_title || "Hiring Intelligence Report"} (v${report.version || 1})</h4>
           <span style="font-weight:700;color:${badgeColor};border:1px solid ${badgeColor};padding:2px 8px;border-radius:4px;">${rec.decision || "PENDING"}</span>
         </div>
         <p style="margin:4px 0;font-size:0.9em;color:#475569;">
-          <strong>Target:</strong> ${report.target_role} &bull; <strong>Fit Score:</strong> ${report.unified_hiring_fit_score != null ? report.unified_hiring_fit_score.toFixed(1) + '%' : 'N/A'}
+          <strong>Target:</strong> ${targetRole} &bull; <strong>Fit Score:</strong> ${fitScore}
         </p>
         <div style="margin:8px 0;display:flex;gap:8px;">
-          <a href="/api/v1/hiring-intelligence-reports/${report.report_id}/html" target="_blank" style="font-size:0.85em;padding:4px 10px;background:#2563eb;color:#fff;border-radius:4px;text-decoration:none;">View HTML Report</a>
-          <a href="/api/v1/hiring-intelligence-reports/${report.report_id}/markdown" target="_blank" style="font-size:0.85em;padding:4px 10px;background:#475569;color:#fff;border-radius:4px;text-decoration:none;">View Markdown</a>
+          <a href="${htmlUrl}" target="_blank" style="font-size:0.85em;padding:4px 10px;background:#2563eb;color:#fff;border-radius:4px;text-decoration:none;">View HTML Report</a>
+          <a href="${mdUrl}" target="_blank" style="font-size:0.85em;padding:4px 10px;background:#475569;color:#fff;border-radius:4px;text-decoration:none;">View Markdown</a>
         </div>`;
 
         if (report.strengths && report.strengths.length) {

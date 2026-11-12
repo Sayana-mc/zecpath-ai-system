@@ -2,7 +2,10 @@
 
 import json
 from typing import Any
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 ADVISORY_DISCLAIMER: str = (

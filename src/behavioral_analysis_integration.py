@@ -7,7 +7,10 @@ from day27_confidence_sentiment_analysis.src.sentiment_analyzer import Sentiment
 from day27_confidence_sentiment_analysis.src.confidence_analyzer import ConfidenceAnalyzer
 from day27_confidence_sentiment_analysis.src.behavioral_analyzer import BehavioralAnalyzer
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .schemas import (
     BehavioralAnalysisCreate,
     BehavioralAnalysisResponse,

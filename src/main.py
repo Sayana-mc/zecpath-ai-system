@@ -6,7 +6,10 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .api import router, system_router
 from .logging_config import configure_logging
 from .observability import observability

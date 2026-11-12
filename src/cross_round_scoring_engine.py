@@ -3,7 +3,10 @@
 import uuid
 from typing import Any, Mapping
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 ROLE_ROUND_WEIGHTS: dict[str, dict[str, float]] = {
@@ -189,7 +192,7 @@ class CrossRoundScoringEngine:
 
     def calculate_unified_fit(
         self,
-        round_scores: Mapping[str, float | None],
+        round_scores: Mapping[str, Any],
         target_role: str = "software_engineer",
         candidate_id: str = "default_cand",
         role_weights: dict[str, float] | None = None,

@@ -3,7 +3,10 @@
 import uuid
 from typing import Any
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 ROLE_SKILL_MAPPING: dict[str, list[str]] = {

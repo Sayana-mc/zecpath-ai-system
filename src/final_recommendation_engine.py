@@ -15,7 +15,10 @@ import json
 from pathlib import Path
 from typing import Any
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 VALID_DECISIONS = {"SELECTED", "HOLD_REVIEW", "REJECTED"}

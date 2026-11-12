@@ -9,7 +9,10 @@ from day25_answer_intent_engine.src.intent_classifier import IntentClassifier
 from day25_answer_intent_engine.src.information_extractor import extract_information
 from day25_answer_intent_engine.src.answer_validator import validate_answer
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .schemas import (
     ScreeningAnswerCreate,
     ScreeningAnswerResponse,

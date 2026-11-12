@@ -1,7 +1,10 @@
 """Day 58: Candidate AI Coaching, Developmental Feedback & Ethical Guardrails."""
 
 from typing import Any
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 COACHING_DISCLAIMER: str = (

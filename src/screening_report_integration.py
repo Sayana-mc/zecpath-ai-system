@@ -7,7 +7,10 @@ from typing import Any
 from day28_ai_screening_report_generator.src.report_builder import ScreeningReportBuilder
 from day28_ai_screening_report_generator.src.report_formatter import RecruiterReportFormatter
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .schemas import (
     ScreeningReportFullCreate,
     ScreeningReportFullResponse,

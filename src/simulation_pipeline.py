@@ -2,7 +2,10 @@
 
 import time
 from typing import Any
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .cross_round_scoring_engine import cross_round_scoring_engine
 from .final_recommendation_engine import recommend_candidate
 from .hiring_intelligence_report_generator import generate_candidate_hiring_report

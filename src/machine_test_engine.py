@@ -1,9 +1,44 @@
 """Day 50: Machine Test AI Design, Sandbox Execution Records, and Task Evaluator."""
 
+import ast
 import uuid
 from typing import Any
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
+
+
+FORBIDDEN_CALLS = {"system", "popen", "spawn", "fork", "kill", "eval", "exec"}
+FORBIDDEN_MODULES = {"os", "subprocess", "sys", "shutil", "socket", "http", "urllib", "requests", "pty"}
+
+
+def validate_code_security(code_str: str) -> tuple[bool, list[str]]:
+    """Statically analyzes submitted code via AST to detect forbidden system calls or unapproved module imports."""
+    if not code_str.strip():
+        return True, []
+    try:
+        tree = ast.parse(code_str)
+    except SyntaxError as e:
+        return False, [f"SyntaxError: {str(e)}"]
+
+    violations = []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            mod_name = getattr(node, "module", None) or (node.names[0].name if node.names else "")
+            root_mod = mod_name.split(".")[0] if mod_name else ""
+            if root_mod in FORBIDDEN_MODULES:
+                violations.append(f"Forbidden security import: '{root_mod}'")
+        elif isinstance(node, ast.Call):
+            func_name = ""
+            if isinstance(node.func, ast.Name):
+                func_name = node.func.id
+            elif isinstance(node.func, ast.Attribute):
+                func_name = node.func.attr
+            if func_name in FORBIDDEN_CALLS:
+                violations.append(f"Forbidden security call: '{func_name}'")
+    return (len(violations) == 0, violations)
 
 
 MACHINE_TEST_WEIGHTS: dict[str, float] = {
@@ -110,8 +145,16 @@ class MachineTestEngine:
         code_str = code if code is not None else (code_content or "")
         time_spent = time_spent_minutes if time_spent_minutes is not None else (elapsed_time_minutes or 20.0)
 
+        # 0. Static AST Security Analysis
+        is_safe, security_violations = validate_code_security(code_str)
+
         # 1. Correctness from unit tests
-        if test_results:
+        if not is_safe:
+            correctness = 0.0
+            efficiency = 0.0
+            code_quality = 0.0
+            problem_solving = 0.0
+        elif test_results:
             passed_count = sum(1 for t in test_results if t.get("passed", False))
             correctness = (passed_count / len(test_results)) * 100.0
         else:
@@ -127,9 +170,11 @@ class MachineTestEngine:
             time_score = 50.0
 
         scores = custom_scores or {}
-        efficiency = scores.get("efficiency", 85.0)
-        code_quality = scores.get("code_quality", 88.0)
-        problem_solving = scores.get("problem_solving", 90.0)
+        efficiency = 0.0 if not is_safe else scores.get("efficiency", 85.0)
+        code_quality = 0.0 if not is_safe else scores.get("code_quality", 88.0)
+        problem_solving = 0.0 if not is_safe else scores.get("problem_solving", 90.0)
+        if not is_safe:
+            time_score = 0.0
 
         total_score = round(
             (correctness * (self.weights["correctness"] / 100.0))
@@ -166,7 +211,7 @@ class MachineTestEngine:
                     "time_management_score": round(time_score, 2),
                     "total_score": total_score,
                     "test_results": test_results or [],
-                    "evaluation_summary": f"Scored {total_score}/100. Status: {'STRONG' if total_score >= 80 else 'COMPETENT' if total_score >= 60 else 'DEVELOPING'}",
+                    "evaluation_summary": f"SECURITY VIOLATION: {', '.join(security_violations)}" if not is_safe else f"Scored {total_score}/100. Status: {'STRONG' if total_score >= 80 else 'COMPETENT' if total_score >= 60 else 'DEVELOPING'}",
                 }
                 saved_sub = database.save_machine_test_submission(sub_record)
                 database.update_machine_test_assignment_status(test_id, "EVALUATED")

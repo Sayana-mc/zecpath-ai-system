@@ -8,7 +8,10 @@ from day29_ai_conversation_flow.src.conversation_state import ConversationState
 from day29_ai_conversation_flow.src.decision_tree import ConversationDecisionTree
 from day29_ai_conversation_flow.src.error_handler import ConversationErrorHandler as ErrorHandler
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .schemas import (
     ScreeningSessionCreate,
     ScreeningSessionResponse,

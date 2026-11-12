@@ -8,7 +8,10 @@ from typing import Any
 from day24_speech_to_text.src.stt_processor import SpeechToTextProcessor
 from day24_speech_to_text.src.transcript_normalizer import normalize_transcription
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .schemas import (
     ScreeningAudioUploadResponse,
     ScreeningAudioStatusResponse,

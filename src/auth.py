@@ -5,7 +5,10 @@ import secrets
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 
 
 _basic_auth = HTTPBasic(auto_error=False)

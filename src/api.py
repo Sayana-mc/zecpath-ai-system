@@ -21,7 +21,10 @@ from fastapi import (
 )
 from pydantic import BaseModel
 
-from src import database
+try:
+    from . import database
+except ImportError:
+    from src import database
 from .auth import (
     SESSION_COOKIE_NAME,
     SESSION_LIFETIME_SECONDS,
@@ -2083,6 +2086,16 @@ def update_final_recommendation_recruiter_decision(
         recruiter_decision=payload.recruiter_decision,
         recruiter_notes=payload.notes,
     )
+    security_governance.log_audit_event(
+        event_type="RECRUITER_DECISION_UPDATED",
+        actor_id="recruiter",
+        subject_id=rec["candidate_id"],
+        details={
+            "recommendation_id": recommendation_id,
+            "decision": payload.recruiter_decision,
+            "notes": payload.notes,
+        },
+    )
     return FinalRecommendationResponse(**updated)
 
 
@@ -2160,11 +2173,33 @@ def get_hiring_intelligence_report_html_endpoint(report_id: str) -> Response:
     return Response(content=record["html_content"], media_type="text/html")
 
 
+@router.get("/candidates/{candidate_id}/hiring-intelligence-report/html")
+def get_candidate_hiring_intelligence_report_html_endpoint(candidate_id: str) -> Response:
+    record = database.get_latest_hiring_intelligence_report(candidate_id)
+    if not record:
+        generate_candidate_hiring_report(candidate_id, save_to_db=True)
+        record = database.get_latest_hiring_intelligence_report(candidate_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Hiring report not found for candidate.")
+    return Response(content=record["html_content"], media_type="text/html")
+
+
 @router.get("/hiring-intelligence-reports/{report_id}/markdown")
 def get_hiring_intelligence_report_markdown_endpoint(report_id: str) -> Response:
     record = database.get_hiring_intelligence_report(report_id)
     if not record:
         raise HTTPException(status_code=404, detail="Hiring report not found.")
+    return Response(content=record["markdown_content"], media_type="text/markdown")
+
+
+@router.get("/candidates/{candidate_id}/hiring-intelligence-report/markdown")
+def get_candidate_hiring_intelligence_report_markdown_endpoint(candidate_id: str) -> Response:
+    record = database.get_latest_hiring_intelligence_report(candidate_id)
+    if not record:
+        generate_candidate_hiring_report(candidate_id, save_to_db=True)
+        record = database.get_latest_hiring_intelligence_report(candidate_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Hiring report not found for candidate.")
     return Response(content=record["markdown_content"], media_type="text/markdown")
 
 
