@@ -34,7 +34,7 @@ class STTIntegration:
     """Wrapper for STT processing with provider abstraction."""
 
     def __init__(self):
-        provider = os.environ.get("STT_PROVIDER", "faster_whisper")
+        provider = os.environ.get("STT_PROVIDER", "mock")
         self.processor = SpeechToTextProcessor(provider=provider)
 
     def validate_audio_file(self, file_path: Path, file_size: int, mime_type: str) -> None:
