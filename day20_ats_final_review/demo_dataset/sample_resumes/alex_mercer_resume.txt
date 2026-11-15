@@ -1,0 +1,22 @@
+Alex Mercer
+Email: alex.mercer@example.test | Phone: +1-555-0199 | Location: San Francisco, CA
+
+PROFESSIONAL SUMMARY
+Senior Backend Engineer with 4.5 years of professional experience specializing in distributed systems, asynchronous API architectures, and data engineering. Proven track record in developing high-throughput microservices using Python, FastAPI, SQL, and PostgreSQL, deployed across Docker container clusters.
+
+WORK EXPERIENCE
+Senior Backend Engineer | CloudScale Systems (2022 - Present)
+- Architected and delivered 14 microservices utilizing Python and FastAPI processing over 12 million transactions daily.
+- Optimized complex PostgreSQL and SQL analytical queries, reducing query response latencies by 42%.
+- Standardized Docker multi-stage container builds and integrated Redis caching layers for high concurrency.
+
+Backend Developer | Nexus Data Labs (2020 - 2022)
+- Implemented RESTful APIs with Python and integrated relational PostgreSQL database persistence.
+- Maintained Docker environments for CI/CD test automation and staging deployments.
+
+EDUCATION
+Bachelor of Science in Computer Science | State University of Technology (2016 - 2020)
+
+CORE SKILLS
+Python, FastAPI, SQL, PostgreSQL, Docker, Redis, Git, Linux, REST APIs
+

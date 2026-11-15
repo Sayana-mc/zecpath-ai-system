@@ -1,0 +1,18 @@
+Morgan Taylor
+Email: morgan.taylor@example.test | Phone: +1-555-0182 | Location: Chicago, IL
+
+PROFESSIONAL SUMMARY
+Enterprise Java Developer with 3 years of experience in enterprise banking applications, distributed transactions, and object-relational mapping using Java, Spring Boot, and MySQL.
+
+WORK EXPERIENCE
+Java Developer | Apex Financial Technologies (2021 - Present)
+- Engineered financial ledger services using Java 17 and Spring Boot microservices.
+- Administered MySQL database clusters, configured index tuning, and managed transactional integrity.
+- Automated Maven builds and maintained unit test suites using JUnit and Mockito.
+
+EDUCATION
+Bachelor of Technology in Information Technology | National Institute of Technology (2017 - 2021)
+
+CORE SKILLS
+Java, Spring Boot, MySQL, Maven, Hibernate, JUnit, Microservices
+

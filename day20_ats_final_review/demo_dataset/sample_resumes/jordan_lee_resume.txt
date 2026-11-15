@@ -1,0 +1,18 @@
+Jordan Lee
+Email: jordan.lee@example.test | Phone: +1-555-0144 | Location: Austin, TX
+
+PROFESSIONAL SUMMARY
+Software Engineer with 2 years of experience in web application development, relational database integration, and backend scripting using Python, Django, and SQL.
+
+WORK EXPERIENCE
+Software Developer | WebFlow Solutions (2022 - Present)
+- Developed and maintained web applications utilizing Python and Django framework.
+- Authored SQL database schemas and reporting views for business intelligence data.
+- Built internal tooling and automated routine ETL cron jobs using Python scripts.
+
+EDUCATION
+Bachelor of Computer Applications (BCA) | City Metropolitan University (2019 - 2022)
+
+CORE SKILLS
+Python, Django, SQL, PostgreSQL, HTML5, CSS3, Git
+

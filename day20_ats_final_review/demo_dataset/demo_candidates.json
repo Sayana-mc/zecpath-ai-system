@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Alex Mercer",
+    "email": "alex.mercer@example.test",
+    "skills": ["Python", "FastAPI", "SQL", "PostgreSQL", "Docker", "Redis"],
+    "experience_years": 4.5,
+    "education": "Bachelor of Science in Computer Science",
+    "resume_filename": "alex_mercer_resume.txt"
+  },
+  {
+    "name": "Jordan Lee",
+    "email": "jordan.lee@example.test",
+    "skills": ["Python", "Django", "SQL"],
+    "experience_years": 2.0,
+    "education": "Bachelor of Computer Applications",
+    "resume_filename": "jordan_lee_resume.txt"
+  },
+  {
+    "name": "Morgan Taylor",
+    "email": "morgan.taylor@example.test",
+    "skills": ["Java", "Spring Boot", "MySQL"],
+    "experience_years": 3.0,
+    "education": "Bachelor of Technology",
+    "resume_filename": "morgan_taylor_resume.txt"
+  }
+]
+
