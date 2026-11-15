@@ -10,11 +10,14 @@ for _p in [str(_LOCAL_DIR), str(_PROJECT_ROOT)]:
         sys.path.insert(0, _p)
 
 try:
-    from day32_screening_system_finalization.src.screening_pipeline import (
-        ScreeningPipeline,
-    )
-except ImportError:
-    from screening_pipeline import ScreeningPipeline
+    from .screening_pipeline import ScreeningPipeline
+except (ImportError, ValueError):
+    try:
+        from day32_screening_system_finalization.src.screening_pipeline import (
+            ScreeningPipeline,
+        )
+    except ImportError:
+        from screening_pipeline import ScreeningPipeline
 
 
 def main():
@@ -22,7 +25,7 @@ def main():
     print("DAY 32 - FINAL AI SCREENING SYSTEM: LIVE DEMONSTRATION")
     print("=" * 70)
 
-    pipeline = ScreeningPipeline()
+    pipeline: ScreeningPipeline = ScreeningPipeline()
 
     # Demonstration input values matching Day 32 specification:
     # Candidate ID: C001

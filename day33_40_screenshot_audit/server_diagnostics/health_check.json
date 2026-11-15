@@ -1,0 +1,9 @@
+{
+  "status_code": 200,
+  "response": {
+    "status": "healthy",
+    "service": "ZecPath ATS API",
+    "version": "1.0.0",
+    "authentication_configured": true
+  }
+}

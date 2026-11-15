@@ -1,0 +1,1641 @@
+[
+  {
+    "test_name": "Create Session",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews",
+    "expected_status": 201,
+    "actual_status": 201,
+    "pass": true,
+    "request_body": {
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "experience_level": "EXPERIENCED",
+      "role_type": "TECHNICAL"
+    },
+    "response_preview": {
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "status": "CREATED",
+      "current_phase": "CREATED",
+      "current_question_id": null,
+      "experience_level": "EXPERIENCED",
+      "role_type": "TECHNICAL",
+      "recruiter_id": null,
+      "created_at": "2026-11-15T11:18:23.872751+00:00",
+      "updated_at": "2026-11-15T11:18:23.872751+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Create Session - Invalid Candidate",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews",
+    "expected_status": 404,
+    "actual_status": 404,
+    "pass": true,
+    "request_body": {
+      "candidate_id": "non_existent_c999",
+      "opening_id": "job_fb5b1b8c",
+      "experience_level": "EXPERIENCED",
+      "role_type": "TECHNICAL"
+    },
+    "response_preview": {
+      "detail": "Candidate not found."
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Get Session",
+    "method": "GET",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": {
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "status": "CREATED",
+      "current_phase": "CREATED",
+      "current_question_id": null,
+      "experience_level": "EXPERIENCED",
+      "role_type": "TECHNICAL",
+      "recruiter_id": null,
+      "created_at": "2026-11-15T11:18:23.872751+00:00",
+      "updated_at": "2026-11-15T11:18:23.872751+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Get Questions",
+    "method": "GET",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/questions",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": [
+      {
+        "question_id": "HRQ_15FDED63",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "SELF_INTRODUCTION",
+        "question_text": "Please introduce yourself and highlight your academic or professional background.",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "simple",
+        "expected_answer_criteria": "Clear concise introduction with core competencies and education/experience.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 1,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.888179+00:00"
+      },
+      {
+        "question_id": "HRQ_0997D96C",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "CAREER_JOURNEY",
+        "question_text": "Can you walk me through your professional journey and the responsibilities you held in your most recent role?",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "medium",
+        "expected_answer_criteria": "Career progression, key transitions, leadership/contributor responsibilities.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 2,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.895270+00:00"
+      },
+      {
+        "question_id": "HRQ_7878822D",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "STRENGTHS_WEAKNESSES",
+        "question_text": "What do you consider your greatest professional strength, and what is an area you are currently working to improve?",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "simple",
+        "expected_answer_criteria": "Identifies relevant strength with example, and constructive self-improvement step.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 3,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.902703+00:00"
+      },
+      {
+        "question_id": "HRQ_3851E116",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "TEAMWORK",
+        "question_text": "Can you describe a time you worked closely with a team to achieve a common goal or resolve a disagreement?",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "medium",
+        "expected_answer_criteria": "Collaboration approach, team dynamic understanding, resolution outcome.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 4,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.911079+00:00"
+      },
+      {
+        "question_id": "HRQ_75DC0515",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "CULTURE_FIT",
+        "question_text": "What kind of workplace culture and team environment allows you to do your best work?",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "simple",
+        "expected_answer_criteria": "Honest articulation of work style, autonomy vs guidance balance.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 5,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.919971+00:00"
+      },
+      {
+        "question_id": "HRQ_67062D8C",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "CAREER_GOALS",
+        "question_text": "What are your career goals for the next 2 to 3 years, and how does the Software Engineer position fit into that vision?",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "simple",
+        "expected_answer_criteria": "Clear aspirational direction aligned with professional growth.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 6,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.929325+00:00"
+      },
+      {
+        "question_id": "HRQ_BE9BBA50",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "AVAILABILITY_COMMITMENT",
+        "question_text": "What is your current notice period or earliest available joining date, and are you comfortable committing to the Software Engineer position?",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "simple",
+        "expected_answer_criteria": "Specific joining timeline, notice period in days/months, work commitment.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": false,
+        "question_order": 7,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.937319+00:00"
+      },
+      {
+        "question_id": "HRQ_7CF09AAE",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "ROLE_BASED_TECHNICAL",
+        "question_text": "Describe an architectural or technical problem you solved in production, and how you ensured system reliability.",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "advanced",
+        "expected_answer_criteria": "System architecture, trade-offs, root cause analysis, monitoring.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 8,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.945369+00:00"
+      }
+    ],
+    "note": ""
+  },
+  {
+    "test_name": "Start Session",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/start",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": {
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "status": "IN_PROGRESS",
+      "current_phase": "INTRODUCTION",
+      "current_question_id": "HRQ_15FDED63",
+      "experience_level": "EXPERIENCED",
+      "role_type": "TECHNICAL",
+      "recruiter_id": null,
+      "created_at": "2026-11-15T11:18:23.872751+00:00",
+      "updated_at": "2026-11-15T11:18:24.037305+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Submit Answer",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/answers",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": {
+      "question_id": "HRQ_15FDED63",
+      "answer_text": "I designed and deployed scalable microservices using Python FastAPI and AWS EKS with zero downtime deployments."
+    },
+    "response_preview": {
+      "response": {
+        "response_id": "HRRSP_66D164DF",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "question_id": "HRQ_15FDED63",
+        "raw_response": "I designed and deployed scalable microservices using Python FastAPI and AWS EKS with zero downtime deployments.",
+        "cleaned_response": "I designed and deployed scalable microservices using Python FastAPI and AWS EKS with zero downtime deployments.",
+        "quality": "complete",
+        "follow_up_eligible": true,
+        "follow_up_count": 0,
+        "created_at": "2026-11-15T11:18:24.071532+00:00",
+        "updated_at": "2026-11-15T11:18:24.071532+00:00"
+      },
+      "communication_evaluation": {
+        "evaluation_id": "HREVAL_E60115CE",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "response_id": "HRRSP_66D164DF",
+        "fluency_score": 80.0,
+        "grammar_score": 90.0,
+        "vocabulary_score": 90.0,
+        "clarity_score": 75.0,
+        "structure_score": 80.0,
+        "filler_control_score": 100.0,
+        "total_communication_score": 81.5,
+        "fillers_detected": [],
+        "evidence": [
+          "Fluency evaluated at 80.0 based on pacing and length (16 words).",
+          "Clarity evaluated at 75.0; directness of response confirmed.",
+          "Answer structure scored at 80.0."
+        ],
+        "created_at": "2026-11-15T11:18:24.083126+00:00"
+      },
+      "behavioral_signals": {
+        "signal_id": "HRSIG_B7B44C39",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "response_id": "HRRSP_66D164DF",
+        "hesitation_count": 0,
+        "pause_count": 0,
+        "uncertainty_count": 0,
+        "repeated_word_count": 0,
+        "sentiment": "NEUTRAL",
+        "sentiment_score": 0.0,
+        "stress_score": 0.0,
+        "confidence_score": 85.0,
+        "contradiction_detected": 0,
+        "contradiction_reason": null,
+        "contradictions_detected": [],
+        "disclaimer": "Behavioral signals reflect observable communication markers (fillers, qualifiers, pacing). They do NOT constitute psychological diagnosis, emotion evaluation, or internal stress measurement.",
+        "ethical_disclaimer": "Behavioral signals reflect observable communication markers (fillers, qualifiers, pacing). They do NOT constitute psychological diagnosis, emotion evaluation, or internal stress measurement.",
+        "created_at": "2026-11-15T11:18:24.098267+00:00"
+      },
+      "followup_decision": {
+        "needs_followup": true,
+        "needed": true,
+        "quality": "complete",
+        "type": "scenario_based",
+        "followup": {
+          "followup_id": "HRFU_65D2F048",
+          "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+          "parent_question_id": "HRQ_15FDED63",
+          "followup_type": "scenario_based",
+          "followup_question": "That is a great overview. Can you describe a challenging scenario you encountered while doing that, and how you resolved it?",
+          "candidate_response": null,
+          "difficulty_level": "advanced",
+          "created_at": "2026-11-15T11:18:24.115689+00:00",
+          "updated_at": "2026-11-15T11:18:24.115689+00:00"
+        },
+        "reason": "Response categorized as complete; triggered scenario_based follow-up."
+      },
+      "next_question": {
+        "question_id": "HRQ_0997D96C",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "category": "CAREER_JOURNEY",
+        "question_text": "Can you walk me through your professional journey and the responsibilities you held in your most recent role?",
+        "role_type": "TECHNICAL",
+        "experience_level": "EXPERIENCED",
+        "difficulty": "medium",
+        "expected_answer_criteria": "Career progression, key transitions, leadership/contributor responsibilities.",
+        "evaluation_parameters": {
+          "clarity": true,
+          "relevance": true,
+          "completeness": true,
+          "consistency": true
+        },
+        "follow_up_eligibility": true,
+        "question_order": 2,
+        "active_status": true,
+        "created_at": "2026-11-15T11:18:23.895270+00:00"
+      }
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Submit Follow-up",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/follow-ups",
+    "expected_status": 201,
+    "actual_status": 201,
+    "pass": true,
+    "request_body": {
+      "parent_question_id": "HRQ_15FDED63",
+      "followup_type": "deepening",
+      "followup_question": "How did you handle distributed transactions and database rollback scenarios?",
+      "candidate_response": "We implemented the Saga pattern with compensating transactions orchestrated via Kafka event topics."
+    },
+    "response_preview": {
+      "followup_id": "HRFU_EA79AA49",
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "parent_question_id": "HRQ_15FDED63",
+      "followup_type": "deepening",
+      "followup_question": "How did you handle distributed transactions and database rollback scenarios?",
+      "candidate_response": "We implemented the Saga pattern with compensating transactions orchestrated via Kafka event topics.",
+      "difficulty_level": "medium",
+      "created_at": "2026-11-15T11:18:24.153783+00:00",
+      "updated_at": "2026-11-15T11:18:24.153783+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Pause Session",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/pause",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": {
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "status": "PAUSED",
+      "current_phase": "INTRODUCTION",
+      "current_question_id": "HRQ_0997D96C",
+      "experience_level": "EXPERIENCED",
+      "role_type": "TECHNICAL",
+      "recruiter_id": null,
+      "created_at": "2026-11-15T11:18:23.872751+00:00",
+      "updated_at": "2026-11-15T11:18:24.180202+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Resume Session",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/resume",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": {
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "status": "IN_PROGRESS",
+      "current_phase": "INTRODUCTION",
+      "current_question_id": "HRQ_0997D96C",
+      "experience_level": "EXPERIENCED",
+      "role_type": "TECHNICAL",
+      "recruiter_id": null,
+      "created_at": "2026-11-15T11:18:23.872751+00:00",
+      "updated_at": "2026-11-15T11:18:24.209946+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Complete Session",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/complete",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": {
+      "session": {
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "candidate_id": "cand_0b8dad2d",
+        "opening_id": "job_fb5b1b8c",
+        "status": "COMPLETED",
+        "current_phase": "COMPLETED",
+        "current_question_id": "HRQ_0997D96C",
+        "experience_level": "EXPERIENCED",
+        "role_type": "TECHNICAL",
+        "recruiter_id": null,
+        "created_at": "2026-11-15T11:18:23.872751+00:00",
+        "updated_at": "2026-11-15T11:18:24.248502+00:00"
+      },
+      "score": {
+        "score_id": "HRSCR_49AF406A",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "candidate_id": "cand_0b8dad2d",
+        "relevance_score": 80.0,
+        "communication_score": 81.5,
+        "confidence_score": 85.0,
+        "consistency_score": 95.0,
+        "overall_hr_score": 84.12,
+        "score_status": "REVIEW_REQUIRED",
+        "breakdown": {
+          "answer_relevance": {
+            "raw_score": 80.0,
+            "weight": 0.4,
+            "weighted_contribution": 32.0
+          },
+          "communication": {
+            "raw_score": 81.5,
+            "weight": 0.25,
+            "weighted_contribution": 20.38
+          },
+          "confidence": {
+            "raw_score": 85.0,
+            "weight": 0.15,
+            "weighted_contribution": 12.75
+          },
+          "consistency": {
+            "raw_score": 95.0,
+            "weight": 0.2,
+            "weighted_contribution": 19.0
+          }
+        },
+        "human_review_required": true,
+        "created_at": "2026-11-15T11:18:24.270300+00:00",
+        "updated_at": "2026-11-15T11:18:24.270300+00:00"
+      },
+      "report": {
+        "report_id": "HRREP_09660812",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "candidate_id": "cand_0b8dad2d",
+        "opening_id": "job_fb5b1b8c",
+        "report_json": {
+          "interview_details": {
+            "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+            "candidate_id": "cand_0b8dad2d",
+            "candidate_name": "Jane Doe",
+            "job_id": "job_fb5b1b8c",
+            "job_title": "Software Engineer",
+            "status": "COMPLETED",
+            "current_phase": "COMPLETED",
+            "experience_level": "EXPERIENCED",
+            "role_type": "TECHNICAL"
+          },
+          "candidate_summary": {
+            "name": "Jane Doe",
+            "skills": [
+              "Python",
+              "FastAPI"
+            ],
+            "experience_level": "EXPERIENCED"
+          },
+          "performance": {
+            "overall_hr_score": 84.12,
+            "score_status": "REVIEW_REQUIRED",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 80.0,
+                "weight": 0.4,
+                "weighted_contribution": 32.0
+              },
+              "communication": {
+                "raw_score": 81.5,
+                "weight": 0.25,
+                "weighted_contribution": 20.38
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "performance_breakdown": {
+            "overall_hr_score": 84.12,
+            "score_status": "REVIEW_REQUIRED",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 80.0,
+                "weight": 0.4,
+                "weighted_contribution": 32.0
+              },
+              "communication": {
+                "raw_score": 81.5,
+                "weight": 0.25,
+                "weighted_contribution": 20.38
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "identified_strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "improvement_areas": [],
+          "areas_for_improvement": [],
+          "teamwork_workplace_responses": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "teamwork_and_culture": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "career_goals": [
+            "Expressed commitment to role-focused professional growth."
+          ],
+          "career_alignment": [
+            "Expressed commitment to role-focused professional growth."
+          ],
+          "availability_commitment": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "availability_and_expectations": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "aptitude_evaluation": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "aptitude_assessment": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "risk_review_flags": [
+            "Overall score or completeness warrants human recruiter verification."
+          ],
+          "review_flags_and_contradictions": [
+            "Overall score or completeness warrants human recruiter verification."
+          ],
+          "recruiter_review": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "recruiter_review_and_decision": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "summary": "Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.",
+          "summary_recommendation": "PROCEED_TO_FINAL_ROUND"
+        },
+        "html_report": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 900px; margin: 30px auto; padding: 0 20px; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; background: #e2e8f0; }\n    .score-badge { font-size: 1.4em; font-weight: bold; color: #2563eb; }\n    .card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 20px; }\n    h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }\n    h3 { color: #334155; margin-top: 24px; }\n    ul { padding-left: 20px; }\n  </style>\n</head>\n<body>\n  <h2>ZecPath AI HR Interview Report</h2>\n  <div class=\"card\">\n    <p><strong>Candidate:</strong> Jane Doe (cand_0b8dad2d)</p>\n    <p><strong>Job Opening:</strong> Software Engineer (job_fb5b1b8c)</p>\n    <p><strong>Overall HR Score:</strong> <span class=\"score-badge\">84.12/100</span> (REVIEW_REQUIRED)</p>\n    <p><strong>Status:</strong> COMPLETED | <strong>Phase:</strong> COMPLETED</p>\n  </div>\n  <h3>Executive Summary</h3>\n  <p>Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.</p>\n  <h3>Key Strengths</h3>\n  <ul><li>Strong and articulated communication skills.</li><li>Maintained clear composure and confidence across responses.</li><li>Provided direct, highly relevant answers aligned with question topics.</li><li>Demonstrated factual consistency across all interview stages.</li></ul>\n  <h3>Improvement Opportunities</h3>\n  <ul><li>No material shortcomings identified.</li></ul>\n  <h3>Recruiter Review Recommendation</h3>\n  <p><strong>Suggested Action:</strong> PROCEED_TO_FINAL_ROUND</p>\n</body>\n</html>",
+        "version": 1,
+        "recruiter_decision": null,
+        "recruiter_notes": null,
+        "created_at": "2026-11-15T11:18:24.309436+00:00",
+        "updated_at": "2026-11-15T11:18:24.309436+00:00"
+      },
+      "status": "COMPLETED"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Get Evaluation Breakdown",
+    "method": "GET",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/evaluation",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": {
+      "score": {
+        "score_id": "HRSCR_49AF406A",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "candidate_id": "cand_0b8dad2d",
+        "relevance_score": 80.0,
+        "communication_score": 81.5,
+        "confidence_score": 85.0,
+        "consistency_score": 95.0,
+        "overall_hr_score": 84.12,
+        "score_status": "REVIEW_REQUIRED",
+        "breakdown": {
+          "answer_relevance": {
+            "raw_score": 80.0,
+            "weight": 0.4,
+            "weighted_contribution": 32.0
+          },
+          "communication": {
+            "raw_score": 81.5,
+            "weight": 0.25,
+            "weighted_contribution": 20.38
+          },
+          "confidence": {
+            "raw_score": 85.0,
+            "weight": 0.15,
+            "weighted_contribution": 12.75
+          },
+          "consistency": {
+            "raw_score": 95.0,
+            "weight": 0.2,
+            "weighted_contribution": 19.0
+          }
+        },
+        "human_review_required": true,
+        "created_at": "2026-11-15T11:18:24.270300+00:00",
+        "updated_at": "2026-11-15T11:18:24.270300+00:00"
+      },
+      "communication": [
+        {
+          "evaluation_id": "HREVAL_E60115CE",
+          "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+          "response_id": "HRRSP_66D164DF",
+          "fluency_score": 80.0,
+          "grammar_score": 90.0,
+          "vocabulary_score": 90.0,
+          "clarity_score": 75.0,
+          "structure_score": 80.0,
+          "filler_control_score": 100.0,
+          "total_communication_score": 81.5,
+          "fillers_detected": [],
+          "evidence": [
+            "Fluency evaluated at 80.0 based on pacing and length (16 words).",
+            "Clarity evaluated at 75.0; directness of response confirmed.",
+            "Answer structure scored at 80.0."
+          ],
+          "created_at": "2026-11-15T11:18:24.083126+00:00"
+        }
+      ],
+      "signals": [
+        {
+          "signal_id": "HRSIG_B7B44C39",
+          "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+          "response_id": "HRRSP_66D164DF",
+          "hesitation_count": 0,
+          "pause_count": 0,
+          "uncertainty_count": 0,
+          "repeated_word_count": 0,
+          "sentiment": "NEUTRAL",
+          "sentiment_score": 0.0,
+          "stress_score": 0.0,
+          "confidence_score": 85.0,
+          "contradiction_detected": false,
+          "contradiction_reason": null,
+          "disclaimer": "Behavioral signals reflect observable communication markers (fillers, qualifiers, pacing). They do NOT constitute psychological diagnosis, emotion evaluation, or internal stress measurement.",
+          "created_at": "2026-11-15T11:18:24.098267+00:00"
+        }
+      ],
+      "aptitude": []
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Get JSON Report",
+    "method": "GET",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/report",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": {
+      "report_id": "HRREP_09660812",
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "report_json": {
+        "interview_details": {
+          "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+          "candidate_id": "cand_0b8dad2d",
+          "candidate_name": "Jane Doe",
+          "job_id": "job_fb5b1b8c",
+          "job_title": "Software Engineer",
+          "status": "COMPLETED",
+          "current_phase": "COMPLETED",
+          "experience_level": "EXPERIENCED",
+          "role_type": "TECHNICAL"
+        },
+        "candidate_summary": {
+          "name": "Jane Doe",
+          "skills": [
+            "Python",
+            "FastAPI"
+          ],
+          "experience_level": "EXPERIENCED"
+        },
+        "performance": {
+          "overall_hr_score": 84.12,
+          "score_status": "REVIEW_REQUIRED",
+          "breakdown": {
+            "answer_relevance": {
+              "raw_score": 80.0,
+              "weight": 0.4,
+              "weighted_contribution": 32.0
+            },
+            "communication": {
+              "raw_score": 81.5,
+              "weight": 0.25,
+              "weighted_contribution": 20.38
+            },
+            "confidence": {
+              "raw_score": 85.0,
+              "weight": 0.15,
+              "weighted_contribution": 12.75
+            },
+            "consistency": {
+              "raw_score": 95.0,
+              "weight": 0.2,
+              "weighted_contribution": 19.0
+            }
+          }
+        },
+        "performance_breakdown": {
+          "overall_hr_score": 84.12,
+          "score_status": "REVIEW_REQUIRED",
+          "breakdown": {
+            "answer_relevance": {
+              "raw_score": 80.0,
+              "weight": 0.4,
+              "weighted_contribution": 32.0
+            },
+            "communication": {
+              "raw_score": 81.5,
+              "weight": 0.25,
+              "weighted_contribution": 20.38
+            },
+            "confidence": {
+              "raw_score": 85.0,
+              "weight": 0.15,
+              "weighted_contribution": 12.75
+            },
+            "consistency": {
+              "raw_score": 95.0,
+              "weight": 0.2,
+              "weighted_contribution": 19.0
+            }
+          }
+        },
+        "strengths": [
+          "Strong and articulated communication skills.",
+          "Maintained clear composure and confidence across responses.",
+          "Provided direct, highly relevant answers aligned with question topics.",
+          "Demonstrated factual consistency across all interview stages."
+        ],
+        "identified_strengths": [
+          "Strong and articulated communication skills.",
+          "Maintained clear composure and confidence across responses.",
+          "Provided direct, highly relevant answers aligned with question topics.",
+          "Demonstrated factual consistency across all interview stages."
+        ],
+        "improvement_areas": [],
+        "areas_for_improvement": [],
+        "teamwork_workplace_responses": [
+          "Standard workplace collaboration principles acknowledged."
+        ],
+        "teamwork_and_culture": [
+          "Standard workplace collaboration principles acknowledged."
+        ],
+        "career_goals": [
+          "Expressed commitment to role-focused professional growth."
+        ],
+        "career_alignment": [
+          "Expressed commitment to role-focused professional growth."
+        ],
+        "availability_commitment": {
+          "notice_period": "Not explicitly stated",
+          "immediate_joining": false
+        },
+        "availability_and_expectations": {
+          "notice_period": "Not explicitly stated",
+          "immediate_joining": false
+        },
+        "aptitude_evaluation": {
+          "evaluated_count": 0,
+          "evaluations": []
+        },
+        "aptitude_assessment": {
+          "evaluated_count": 0,
+          "evaluations": []
+        },
+        "risk_review_flags": [
+          "Overall score or completeness warrants human recruiter verification."
+        ],
+        "review_flags_and_contradictions": [
+          "Overall score or completeness warrants human recruiter verification."
+        ],
+        "recruiter_review": {
+          "suggested_action": "PROCEED_TO_FINAL_ROUND",
+          "recruiter_decision": null,
+          "recruiter_notes": null
+        },
+        "recruiter_review_and_decision": {
+          "suggested_action": "PROCEED_TO_FINAL_ROUND",
+          "recruiter_decision": null,
+          "recruiter_notes": null
+        },
+        "summary": "Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.",
+        "summary_recommendation": "PROCEED_TO_FINAL_ROUND"
+      },
+      "html_report": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 900px; margin: 30px auto; padding: 0 20px; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; background: #e2e8f0; }\n    .score-badge { font-size: 1.4em; font-weight: bold; color: #2563eb; }\n    .card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 20px; }\n    h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }\n    h3 { color: #334155; margin-top: 24px; }\n    ul { padding-left: 20px; }\n  </style>\n</head>\n<body>\n  <h2>ZecPath AI HR Interview Report</h2>\n  <div class=\"card\">\n    <p><strong>Candidate:</strong> Jane Doe (cand_0b8dad2d)</p>\n    <p><strong>Job Opening:</strong> Software Engineer (job_fb5b1b8c)</p>\n    <p><strong>Overall HR Score:</strong> <span class=\"score-badge\">84.12/100</span> (REVIEW_REQUIRED)</p>\n    <p><strong>Status:</strong> COMPLETED | <strong>Phase:</strong> COMPLETED</p>\n  </div>\n  <h3>Executive Summary</h3>\n  <p>Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.</p>\n  <h3>Key Strengths</h3>\n  <ul><li>Strong and articulated communication skills.</li><li>Maintained clear composure and confidence across responses.</li><li>Provided direct, highly relevant answers aligned with question topics.</li><li>Demonstrated factual consistency across all interview stages.</li></ul>\n  <h3>Improvement Opportunities</h3>\n  <ul><li>No material shortcomings identified.</li></ul>\n  <h3>Recruiter Review Recommendation</h3>\n  <p><strong>Suggested Action:</strong> PROCEED_TO_FINAL_ROUND</p>\n</body>\n</html>",
+      "version": 1,
+      "recruiter_decision": null,
+      "recruiter_notes": null,
+      "created_at": "2026-11-15T11:18:24.309436+00:00",
+      "updated_at": "2026-11-15T11:18:24.309436+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "Get HTML Report",
+    "method": "GET",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/report?format=html",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe ",
+    "note": "Rendered HTML report"
+  },
+  {
+    "test_name": "Record Decision",
+    "method": "POST",
+    "url": "/api/v1/hr-interviews/f127fad4-1a5b-44b7-b3a5-514b161ce163/decision",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": {
+      "decision": "PROCEED",
+      "notes": "Exceptional architecture depth, articulate communication, strong aptitude."
+    },
+    "response_preview": {
+      "report_id": "HRREP_09660812",
+      "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+      "candidate_id": "cand_0b8dad2d",
+      "opening_id": "job_fb5b1b8c",
+      "report_json": {
+        "interview_details": {
+          "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+          "candidate_id": "cand_0b8dad2d",
+          "candidate_name": "Jane Doe",
+          "job_id": "job_fb5b1b8c",
+          "job_title": "Software Engineer",
+          "status": "COMPLETED",
+          "current_phase": "COMPLETED",
+          "experience_level": "EXPERIENCED",
+          "role_type": "TECHNICAL"
+        },
+        "candidate_summary": {
+          "name": "Jane Doe",
+          "skills": [
+            "Python",
+            "FastAPI"
+          ],
+          "experience_level": "EXPERIENCED"
+        },
+        "performance": {
+          "overall_hr_score": 84.12,
+          "score_status": "REVIEW_REQUIRED",
+          "breakdown": {
+            "answer_relevance": {
+              "raw_score": 80.0,
+              "weight": 0.4,
+              "weighted_contribution": 32.0
+            },
+            "communication": {
+              "raw_score": 81.5,
+              "weight": 0.25,
+              "weighted_contribution": 20.38
+            },
+            "confidence": {
+              "raw_score": 85.0,
+              "weight": 0.15,
+              "weighted_contribution": 12.75
+            },
+            "consistency": {
+              "raw_score": 95.0,
+              "weight": 0.2,
+              "weighted_contribution": 19.0
+            }
+          }
+        },
+        "performance_breakdown": {
+          "overall_hr_score": 84.12,
+          "score_status": "REVIEW_REQUIRED",
+          "breakdown": {
+            "answer_relevance": {
+              "raw_score": 80.0,
+              "weight": 0.4,
+              "weighted_contribution": 32.0
+            },
+            "communication": {
+              "raw_score": 81.5,
+              "weight": 0.25,
+              "weighted_contribution": 20.38
+            },
+            "confidence": {
+              "raw_score": 85.0,
+              "weight": 0.15,
+              "weighted_contribution": 12.75
+            },
+            "consistency": {
+              "raw_score": 95.0,
+              "weight": 0.2,
+              "weighted_contribution": 19.0
+            }
+          }
+        },
+        "strengths": [
+          "Strong and articulated communication skills.",
+          "Maintained clear composure and confidence across responses.",
+          "Provided direct, highly relevant answers aligned with question topics.",
+          "Demonstrated factual consistency across all interview stages."
+        ],
+        "identified_strengths": [
+          "Strong and articulated communication skills.",
+          "Maintained clear composure and confidence across responses.",
+          "Provided direct, highly relevant answers aligned with question topics.",
+          "Demonstrated factual consistency across all interview stages."
+        ],
+        "improvement_areas": [],
+        "areas_for_improvement": [],
+        "teamwork_workplace_responses": [
+          "Standard workplace collaboration principles acknowledged."
+        ],
+        "teamwork_and_culture": [
+          "Standard workplace collaboration principles acknowledged."
+        ],
+        "career_goals": [
+          "Expressed commitment to role-focused professional growth."
+        ],
+        "career_alignment": [
+          "Expressed commitment to role-focused professional growth."
+        ],
+        "availability_commitment": {
+          "notice_period": "Not explicitly stated",
+          "immediate_joining": false
+        },
+        "availability_and_expectations": {
+          "notice_period": "Not explicitly stated",
+          "immediate_joining": false
+        },
+        "aptitude_evaluation": {
+          "evaluated_count": 0,
+          "evaluations": []
+        },
+        "aptitude_assessment": {
+          "evaluated_count": 0,
+          "evaluations": []
+        },
+        "risk_review_flags": [
+          "Overall score or completeness warrants human recruiter verification."
+        ],
+        "review_flags_and_contradictions": [
+          "Overall score or completeness warrants human recruiter verification."
+        ],
+        "recruiter_review": {
+          "suggested_action": "PROCEED_TO_FINAL_ROUND",
+          "recruiter_decision": null,
+          "recruiter_notes": null
+        },
+        "recruiter_review_and_decision": {
+          "suggested_action": "PROCEED_TO_FINAL_ROUND",
+          "recruiter_decision": null,
+          "recruiter_notes": null
+        },
+        "summary": "Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.",
+        "summary_recommendation": "PROCEED_TO_FINAL_ROUND"
+      },
+      "html_report": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 900px; margin: 30px auto; padding: 0 20px; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; background: #e2e8f0; }\n    .score-badge { font-size: 1.4em; font-weight: bold; color: #2563eb; }\n    .card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 20px; }\n    h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }\n    h3 { color: #334155; margin-top: 24px; }\n    ul { padding-left: 20px; }\n  </style>\n</head>\n<body>\n  <h2>ZecPath AI HR Interview Report</h2>\n  <div class=\"card\">\n    <p><strong>Candidate:</strong> Jane Doe (cand_0b8dad2d)</p>\n    <p><strong>Job Opening:</strong> Software Engineer (job_fb5b1b8c)</p>\n    <p><strong>Overall HR Score:</strong> <span class=\"score-badge\">84.12/100</span> (REVIEW_REQUIRED)</p>\n    <p><strong>Status:</strong> COMPLETED | <strong>Phase:</strong> COMPLETED</p>\n  </div>\n  <h3>Executive Summary</h3>\n  <p>Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.</p>\n  <h3>Key Strengths</h3>\n  <ul><li>Strong and articulated communication skills.</li><li>Maintained clear composure and confidence across responses.</li><li>Provided direct, highly relevant answers aligned with question topics.</li><li>Demonstrated factual consistency across all interview stages.</li></ul>\n  <h3>Improvement Opportunities</h3>\n  <ul><li>No material shortcomings identified.</li></ul>\n  <h3>Recruiter Review Recommendation</h3>\n  <p><strong>Suggested Action:</strong> PROCEED_TO_FINAL_ROUND</p>\n</body>\n</html>",
+      "version": 1,
+      "recruiter_decision": "PROCEED",
+      "recruiter_notes": "Exceptional architecture depth, articulate communication, strong aptitude.",
+      "created_at": "2026-11-15T11:18:24.309436+00:00",
+      "updated_at": "2026-11-15T11:18:24.415199+00:00"
+    },
+    "note": ""
+  },
+  {
+    "test_name": "List Candidate Reports",
+    "method": "GET",
+    "url": "/api/v1/hr-interviews/candidates/cand_0b8dad2d/reports",
+    "expected_status": 200,
+    "actual_status": 200,
+    "pass": true,
+    "request_body": null,
+    "response_preview": [
+      {
+        "report_id": "HRREP_09660812",
+        "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+        "candidate_id": "cand_0b8dad2d",
+        "opening_id": "job_fb5b1b8c",
+        "report_json": {
+          "interview_details": {
+            "interview_id": "f127fad4-1a5b-44b7-b3a5-514b161ce163",
+            "candidate_id": "cand_0b8dad2d",
+            "candidate_name": "Jane Doe",
+            "job_id": "job_fb5b1b8c",
+            "job_title": "Software Engineer",
+            "status": "COMPLETED",
+            "current_phase": "COMPLETED",
+            "experience_level": "EXPERIENCED",
+            "role_type": "TECHNICAL"
+          },
+          "candidate_summary": {
+            "name": "Jane Doe",
+            "skills": [
+              "Python",
+              "FastAPI"
+            ],
+            "experience_level": "EXPERIENCED"
+          },
+          "performance": {
+            "overall_hr_score": 84.12,
+            "score_status": "REVIEW_REQUIRED",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 80.0,
+                "weight": 0.4,
+                "weighted_contribution": 32.0
+              },
+              "communication": {
+                "raw_score": 81.5,
+                "weight": 0.25,
+                "weighted_contribution": 20.38
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "performance_breakdown": {
+            "overall_hr_score": 84.12,
+            "score_status": "REVIEW_REQUIRED",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 80.0,
+                "weight": 0.4,
+                "weighted_contribution": 32.0
+              },
+              "communication": {
+                "raw_score": 81.5,
+                "weight": 0.25,
+                "weighted_contribution": 20.38
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "identified_strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "improvement_areas": [],
+          "areas_for_improvement": [],
+          "teamwork_workplace_responses": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "teamwork_and_culture": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "career_goals": [
+            "Expressed commitment to role-focused professional growth."
+          ],
+          "career_alignment": [
+            "Expressed commitment to role-focused professional growth."
+          ],
+          "availability_commitment": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "availability_and_expectations": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "aptitude_evaluation": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "aptitude_assessment": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "risk_review_flags": [
+            "Overall score or completeness warrants human recruiter verification."
+          ],
+          "review_flags_and_contradictions": [
+            "Overall score or completeness warrants human recruiter verification."
+          ],
+          "recruiter_review": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "recruiter_review_and_decision": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "summary": "Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.",
+          "summary_recommendation": "PROCEED_TO_FINAL_ROUND"
+        },
+        "html_report": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 900px; margin: 30px auto; padding: 0 20px; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; background: #e2e8f0; }\n    .score-badge { font-size: 1.4em; font-weight: bold; color: #2563eb; }\n    .card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 20px; }\n    h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }\n    h3 { color: #334155; margin-top: 24px; }\n    ul { padding-left: 20px; }\n  </style>\n</head>\n<body>\n  <h2>ZecPath AI HR Interview Report</h2>\n  <div class=\"card\">\n    <p><strong>Candidate:</strong> Jane Doe (cand_0b8dad2d)</p>\n    <p><strong>Job Opening:</strong> Software Engineer (job_fb5b1b8c)</p>\n    <p><strong>Overall HR Score:</strong> <span class=\"score-badge\">84.12/100</span> (REVIEW_REQUIRED)</p>\n    <p><strong>Status:</strong> COMPLETED | <strong>Phase:</strong> COMPLETED</p>\n  </div>\n  <h3>Executive Summary</h3>\n  <p>Jane Doe completed the structured AI HR interview session with an overall score of 84.12/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.</p>\n  <h3>Key Strengths</h3>\n  <ul><li>Strong and articulated communication skills.</li><li>Maintained clear composure and confidence across responses.</li><li>Provided direct, highly relevant answers aligned with question topics.</li><li>Demonstrated factual consistency across all interview stages.</li></ul>\n  <h3>Improvement Opportunities</h3>\n  <ul><li>No material shortcomings identified.</li></ul>\n  <h3>Recruiter Review Recommendation</h3>\n  <p><strong>Suggested Action:</strong> PROCEED_TO_FINAL_ROUND</p>\n</body>\n</html>",
+        "version": 1,
+        "recruiter_decision": "PROCEED",
+        "recruiter_notes": "Exceptional architecture depth, articulate communication, strong aptitude.",
+        "created_at": "2026-11-15T11:18:24.309436+00:00",
+        "updated_at": "2026-11-15T11:18:24.415199+00:00"
+      },
+      {
+        "report_id": "HRREP_CA94C2A1",
+        "interview_id": "1171892a-58dc-4c4b-964e-26398ee4c313",
+        "candidate_id": "cand_0b8dad2d",
+        "opening_id": "job_fb5b1b8c",
+        "report_json": {
+          "interview_details": {
+            "interview_id": "1171892a-58dc-4c4b-964e-26398ee4c313",
+            "candidate_id": "cand_0b8dad2d",
+            "candidate_name": "Jane Doe",
+            "job_id": "job_fb5b1b8c",
+            "job_title": "Software Engineer",
+            "status": "COMPLETED",
+            "current_phase": "COMPLETED",
+            "experience_level": "EXPERIENCED",
+            "role_type": "TECHNICAL"
+          },
+          "candidate_summary": {
+            "name": "Jane Doe",
+            "skills": [
+              "Python",
+              "FastAPI"
+            ],
+            "experience_level": "EXPERIENCED"
+          },
+          "performance": {
+            "overall_hr_score": 90.41,
+            "score_status": "FINAL",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 95.0,
+                "weight": 0.4,
+                "weighted_contribution": 38.0
+              },
+              "communication": {
+                "raw_score": 84.12,
+                "weight": 0.25,
+                "weighted_contribution": 21.03
+              },
+              "confidence": {
+                "raw_score": 82.5,
+                "weight": 0.15,
+                "weighted_contribution": 12.38
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "performance_breakdown": {
+            "overall_hr_score": 90.41,
+            "score_status": "FINAL",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 95.0,
+                "weight": 0.4,
+                "weighted_contribution": 38.0
+              },
+              "communication": {
+                "raw_score": 84.12,
+                "weight": 0.25,
+                "weighted_contribution": 21.03
+              },
+              "confidence": {
+                "raw_score": 82.5,
+                "weight": 0.15,
+                "weighted_contribution": 12.38
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "identified_strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "improvement_areas": [],
+          "areas_for_improvement": [],
+          "teamwork_workplace_responses": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "teamwork_and_culture": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "career_goals": [
+            "Aimed at progressive technical growth, ownership, and impactful delivery."
+          ],
+          "career_alignment": [
+            "Aimed at progressive technical growth, ownership, and impactful delivery."
+          ],
+          "availability_commitment": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "availability_and_expectations": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "aptitude_evaluation": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "aptitude_assessment": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "risk_review_flags": [],
+          "review_flags_and_contradictions": [],
+          "recruiter_review": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "recruiter_review_and_decision": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "summary": "Jane Doe completed the structured AI HR interview session with an overall score of 90.41/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.",
+          "summary_recommendation": "PROCEED_TO_FINAL_ROUND"
+        },
+        "html_report": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 900px; margin: 30px auto; padding: 0 20px; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; background: #e2e8f0; }\n    .score-badge { font-size: 1.4em; font-weight: bold; color: #2563eb; }\n    .card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 20px; }\n    h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }\n    h3 { color: #334155; margin-top: 24px; }\n    ul { padding-left: 20px; }\n  </style>\n</head>\n<body>\n  <h2>ZecPath AI HR Interview Report</h2>\n  <div class=\"card\">\n    <p><strong>Candidate:</strong> Jane Doe (cand_0b8dad2d)</p>\n    <p><strong>Job Opening:</strong> Software Engineer (job_fb5b1b8c)</p>\n    <p><strong>Overall HR Score:</strong> <span class=\"score-badge\">90.41/100</span> (FINAL)</p>\n    <p><strong>Status:</strong> COMPLETED | <strong>Phase:</strong> COMPLETED</p>\n  </div>\n  <h3>Executive Summary</h3>\n  <p>Jane Doe completed the structured AI HR interview session with an overall score of 90.41/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.</p>\n  <h3>Key Strengths</h3>\n  <ul><li>Strong and articulated communication skills.</li><li>Maintained clear composure and confidence across responses.</li><li>Provided direct, highly relevant answers aligned with question topics.</li><li>Demonstrated factual consistency across all interview stages.</li></ul>\n  <h3>Improvement Opportunities</h3>\n  <ul><li>No material shortcomings identified.</li></ul>\n  <h3>Recruiter Review Recommendation</h3>\n  <p><strong>Suggested Action:</strong> PROCEED_TO_FINAL_ROUND</p>\n</body>\n</html>",
+        "version": 1,
+        "recruiter_decision": null,
+        "recruiter_notes": null,
+        "created_at": "2026-11-15T10:51:00.359373+00:00",
+        "updated_at": "2026-11-15T10:51:00.359373+00:00"
+      },
+      {
+        "report_id": "HRREP_6C36628D",
+        "interview_id": "1171892a-58dc-4c4b-964e-26398ee4c313",
+        "candidate_id": "cand_0b8dad2d",
+        "opening_id": "job_fb5b1b8c",
+        "report_json": {
+          "interview_details": {
+            "interview_id": "1171892a-58dc-4c4b-964e-26398ee4c313",
+            "candidate_id": "cand_0b8dad2d",
+            "candidate_name": "Jane Doe",
+            "job_id": "job_fb5b1b8c",
+            "job_title": "Software Engineer",
+            "status": "COMPLETED",
+            "current_phase": "COMPLETED",
+            "experience_level": "EXPERIENCED",
+            "role_type": "TECHNICAL"
+          },
+          "candidate_summary": {
+            "name": "Jane Doe",
+            "skills": [
+              "Python",
+              "FastAPI"
+            ],
+            "experience_level": "EXPERIENCED"
+          },
+          "performance": {
+            "overall_hr_score": 90.5,
+            "score_status": "FINAL",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 95.0,
+                "weight": 0.4,
+                "weighted_contribution": 38.0
+              },
+              "communication": {
+                "raw_score": 83.0,
+                "weight": 0.25,
+                "weighted_contribution": 20.75
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "performance_breakdown": {
+            "overall_hr_score": 90.5,
+            "score_status": "FINAL",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 95.0,
+                "weight": 0.4,
+                "weighted_contribution": 38.0
+              },
+              "communication": {
+                "raw_score": 83.0,
+                "weight": 0.25,
+                "weighted_contribution": 20.75
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "identified_strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "improvement_areas": [],
+          "areas_for_improvement": [],
+          "teamwork_workplace_responses": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "teamwork_and_culture": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "career_goals": [
+            "Aimed at progressive technical growth, ownership, and impactful delivery."
+          ],
+          "career_alignment": [
+            "Aimed at progressive technical growth, ownership, and impactful delivery."
+          ],
+          "availability_commitment": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "availability_and_expectations": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "aptitude_evaluation": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "aptitude_assessment": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "risk_review_flags": [],
+          "review_flags_and_contradictions": [],
+          "recruiter_review": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "recruiter_review_and_decision": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "summary": "Jane Doe completed the structured AI HR interview session with an overall score of 90.5/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.",
+          "summary_recommendation": "PROCEED_TO_FINAL_ROUND"
+        },
+        "html_report": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 900px; margin: 30px auto; padding: 0 20px; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; background: #e2e8f0; }\n    .score-badge { font-size: 1.4em; font-weight: bold; color: #2563eb; }\n    .card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 20px; }\n    h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }\n    h3 { color: #334155; margin-top: 24px; }\n    ul { padding-left: 20px; }\n  </style>\n</head>\n<body>\n  <h2>ZecPath AI HR Interview Report</h2>\n  <div class=\"card\">\n    <p><strong>Candidate:</strong> Jane Doe (cand_0b8dad2d)</p>\n    <p><strong>Job Opening:</strong> Software Engineer (job_fb5b1b8c)</p>\n    <p><strong>Overall HR Score:</strong> <span class=\"score-badge\">90.5/100</span> (FINAL)</p>\n    <p><strong>Status:</strong> COMPLETED | <strong>Phase:</strong> COMPLETED</p>\n  </div>\n  <h3>Executive Summary</h3>\n  <p>Jane Doe completed the structured AI HR interview session with an overall score of 90.5/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.</p>\n  <h3>Key Strengths</h3>\n  <ul><li>Strong and articulated communication skills.</li><li>Maintained clear composure and confidence across responses.</li><li>Provided direct, highly relevant answers aligned with question topics.</li><li>Demonstrated factual consistency across all interview stages.</li></ul>\n  <h3>Improvement Opportunities</h3>\n  <ul><li>No material shortcomings identified.</li></ul>\n  <h3>Recruiter Review Recommendation</h3>\n  <p><strong>Suggested Action:</strong> PROCEED_TO_FINAL_ROUND</p>\n</body>\n</html>",
+        "version": 1,
+        "recruiter_decision": null,
+        "recruiter_notes": null,
+        "created_at": "2026-11-15T10:49:06.606377+00:00",
+        "updated_at": "2026-11-15T10:49:06.606377+00:00"
+      },
+      {
+        "report_id": "HRREP_AECBC73C",
+        "interview_id": "49f6fd60-2e37-4435-a5cf-214f74cff9aa",
+        "candidate_id": "cand_0b8dad2d",
+        "opening_id": "job_fb5b1b8c",
+        "report_json": {
+          "interview_details": {
+            "interview_id": "49f6fd60-2e37-4435-a5cf-214f74cff9aa",
+            "candidate_id": "cand_0b8dad2d",
+            "candidate_name": "Jane Doe",
+            "job_id": "job_fb5b1b8c",
+            "job_title": "Software Engineer",
+            "status": "COMPLETED",
+            "current_phase": "COMPLETED",
+            "experience_level": "EXPERIENCED",
+            "role_type": "TECHNICAL"
+          },
+          "candidate_summary": {
+            "name": "Jane Doe",
+            "skills": [
+              "Python",
+              "FastAPI"
+            ],
+            "experience_level": "EXPERIENCED"
+          },
+          "performance": {
+            "overall_hr_score": 90.5,
+            "score_status": "FINAL",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 95.0,
+                "weight": 0.4,
+                "weighted_contribution": 38.0
+              },
+              "communication": {
+                "raw_score": 83.0,
+                "weight": 0.25,
+                "weighted_contribution": 20.75
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "performance_breakdown": {
+            "overall_hr_score": 90.5,
+            "score_status": "FINAL",
+            "breakdown": {
+              "answer_relevance": {
+                "raw_score": 95.0,
+                "weight": 0.4,
+                "weighted_contribution": 38.0
+              },
+              "communication": {
+                "raw_score": 83.0,
+                "weight": 0.25,
+                "weighted_contribution": 20.75
+              },
+              "confidence": {
+                "raw_score": 85.0,
+                "weight": 0.15,
+                "weighted_contribution": 12.75
+              },
+              "consistency": {
+                "raw_score": 95.0,
+                "weight": 0.2,
+                "weighted_contribution": 19.0
+              }
+            }
+          },
+          "strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "identified_strengths": [
+            "Strong and articulated communication skills.",
+            "Maintained clear composure and confidence across responses.",
+            "Provided direct, highly relevant answers aligned with question topics.",
+            "Demonstrated factual consistency across all interview stages."
+          ],
+          "improvement_areas": [],
+          "areas_for_improvement": [],
+          "teamwork_workplace_responses": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "teamwork_and_culture": [
+            "Standard workplace collaboration principles acknowledged."
+          ],
+          "career_goals": [
+            "Aimed at progressive technical growth, ownership, and impactful delivery."
+          ],
+          "career_alignment": [
+            "Aimed at progressive technical growth, ownership, and impactful delivery."
+          ],
+          "availability_commitment": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "availability_and_expectations": {
+            "notice_period": "Not explicitly stated",
+            "immediate_joining": false
+          },
+          "aptitude_evaluation": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "aptitude_assessment": {
+            "evaluated_count": 0,
+            "evaluations": []
+          },
+          "risk_review_flags": [],
+          "review_flags_and_contradictions": [],
+          "recruiter_review": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "recruiter_review_and_decision": {
+            "suggested_action": "PROCEED_TO_FINAL_ROUND",
+            "recruiter_decision": null,
+            "recruiter_notes": null
+          },
+          "summary": "Jane Doe completed the structured AI HR interview session with an overall score of 90.5/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.",
+          "summary_recommendation": "PROCEED_TO_FINAL_ROUND"
+        },
+        "html_report": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>ZecPath AI HR Interview Report - Jane Doe</title>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; line-height: 1.6; color: #1e293b; max-width: 900px; margin: 30px auto; padding: 0 20px; }\n    .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-weight: 600; font-size: 0.85em; background: #e2e8f0; }\n    .score-badge { font-size: 1.4em; font-weight: bold; color: #2563eb; }\n    .card { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 18px; margin-bottom: 20px; }\n    h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; }\n    h3 { color: #334155; margin-top: 24px; }\n    ul { padding-left: 20px; }\n  </style>\n</head>\n<body>\n  <h2>ZecPath AI HR Interview Report</h2>\n  <div class=\"card\">\n    <p><strong>Candidate:</strong> Jane Doe (cand_0b8dad2d)</p>\n    <p><strong>Job Opening:</strong> Software Engineer (job_fb5b1b8c)</p>\n    <p><strong>Overall HR Score:</strong> <span class=\"score-badge\">90.5/100</span> (FINAL)</p>\n    <p><strong>Status:</strong> COMPLETED | <strong>Phase:</strong> COMPLETED</p>\n  </div>\n  <h3>Executive Summary</h3>\n  <p>Jane Doe completed the structured AI HR interview session with an overall score of 90.5/100. Key strengths observed: Strong and articulated communication skills.; Maintained clear composure and confidence across responses.; Provided direct, highly relevant answers aligned with question topics.; Demonstrated factual consistency across all interview stages.. Factual consistency was maintained throughout the session.</p>\n  <h3>Key Strengths</h3>\n  <ul><li>Strong and articulated communication skills.</li><li>Maintained clear composure and confidence across responses.</li><li>Provided direct, highly relevant answers aligned with question topics.</li><li>Demonstrated factual consistency across all interview stages.</li></ul>\n  <h3>Improvement Opportunities</h3>\n  <ul><li>No material shortcomings identified.</li></ul>\n  <h3>Recruiter Review Recommendation</h3>\n  <p><strong>Suggested Action:</strong> PROCEED_TO_FINAL_ROUND</p>\n</body>\n</html>",
+        "version": 1,
+        "recruiter_decision": null,
+        "recruiter_notes": null,
+        "created_at": "2026-11-15T10:47:01.530541+00:00",
+        "updated_at": "2026-11-15T10:47:01.530541+00:00"
+      }
+    ],
+    "note": ""
+  }
+]

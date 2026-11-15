@@ -23,6 +23,15 @@ class ScreeningPipeline:
     def __init__(self):
         self.dataset = load_dataset()
 
+    def process_candidate(
+        self, candidate_id: str, answers: dict[str, str]
+    ) -> dict[str, Any]:
+        """Process candidate answers through the consolidated Day 32 screening pipeline."""
+        from day32_screening_system_finalization.src.screening_pipeline import (
+            ScreeningPipeline as Day32ScreeningPipeline,
+        )
+        return Day32ScreeningPipeline().process_candidate(candidate_id, answers)
+
     def create_screening_session(
         self,
         candidate_id: str,

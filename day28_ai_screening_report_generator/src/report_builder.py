@@ -202,11 +202,11 @@ class ScreeningReportBuilder:
                 )
         }
 
-    def build_recruiter_report(self):
+    def build_recruiter_report(self) -> dict:
         """Build recruiter report (alias for build_report)."""
         return self.build_report()
 
-    def build_report(self):
+    def build_report(self) -> dict:
 
         return {
             "report_metadata": {

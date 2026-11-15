@@ -58,6 +58,22 @@ tags_metadata = [
         "description": "Recruiter-ready candidate screening reports, structured answer analysis, strengths, risks, and recommendations.",
     },
     {
+        "name": "HR Interview Engine",
+        "description": "AI HR interview session management, role/experience-based question bank generation, and conversation state machine.",
+    },
+    {
+        "name": "HR Dynamic Follow-Up",
+        "description": "Adaptive follow-up question triggers, completeness checks, deepening inquiries, and repetition control.",
+    },
+    {
+        "name": "HR Communication & Behavioral Evaluation",
+        "description": "Multi-factor communication fluency, grammar, vocabulary, filler penalties, hesitation tracking, and ethical safeguards.",
+    },
+    {
+        "name": "HR Interview Scoring & Reports",
+        "description": "4-factor scoring rubric, aptitude evaluation, 11-section recruiter report generation, HTML export, and hiring decisions.",
+    },
+    {
         "name": "ATS",
         "description": "Applicant Tracking System core: job openings, candidate ingestion, resume upload, parsing, and shortlisting.",
     },
@@ -111,7 +127,7 @@ def custom_openapi():
         tags=tags_metadata,
     )
     for path, methods in openapi_schema.get("paths", {}).items():
-        if "/screening" in path or "screening-reports" in path:
+        if "/screening" in path or "screening-reports" in path or "/hr-interviews" in path:
             for op in methods.values():
                 if isinstance(op, dict) and "tags" in op:
                     op["tags"] = [t for t in op["tags"] if t != "ATS"]

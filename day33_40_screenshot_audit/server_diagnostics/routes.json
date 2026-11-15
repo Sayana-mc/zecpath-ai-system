@@ -1,0 +1,1125 @@
+[
+  {
+    "path": "/openapi.json",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "name": "openapi",
+    "tags": []
+  },
+  {
+    "path": "/docs",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "name": "swagger_ui_html",
+    "tags": []
+  },
+  {
+    "path": "/docs/oauth2-redirect",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "name": "swagger_ui_redirect",
+    "tags": []
+  },
+  {
+    "path": "/redoc",
+    "methods": [
+      "GET",
+      "HEAD"
+    ],
+    "name": "redoc_html",
+    "tags": []
+  },
+  {
+    "path": "/api/v1/auth/session",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_recruiter_session",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "path": "/api/v1/auth/session",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_recruiter_session",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "path": "/api/v1/auth/session",
+    "methods": [
+      "DELETE"
+    ],
+    "name": "delete_recruiter_session",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "path": "/api/v1/health",
+    "methods": [
+      "GET"
+    ],
+    "name": "health_check",
+    "tags": [
+      "System"
+    ]
+  },
+  {
+    "path": "/api/v1/openings/parse-description",
+    "methods": [
+      "POST"
+    ],
+    "name": "parse_opening_description",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/openings",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_opening",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/openings",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_openings",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/openings/{opening_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_opening",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/openings/{opening_id}",
+    "methods": [
+      "PATCH"
+    ],
+    "name": "patch_opening",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/openings/{opening_id}",
+    "methods": [
+      "DELETE"
+    ],
+    "name": "remove_opening",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_candidate",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_candidates",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_candidate",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}",
+    "methods": [
+      "PATCH"
+    ],
+    "name": "patch_candidate",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}",
+    "methods": [
+      "DELETE"
+    ],
+    "name": "remove_candidate",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/screening-reports",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_screening_report",
+    "tags": [
+      "ATS",
+      "Intent and Information Extraction"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/screening-reports",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_screening_reports",
+    "tags": [
+      "ATS",
+      "Screening Reports"
+    ]
+  },
+  {
+    "path": "/api/v1/resumes/upload",
+    "methods": [
+      "POST"
+    ],
+    "name": "upload_resume",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/jobs/{job_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "job_status",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/resumes/parse",
+    "methods": [
+      "POST"
+    ],
+    "name": "parse_resume_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/score",
+    "methods": [
+      "POST"
+    ],
+    "name": "score_candidate",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/ats/score",
+    "methods": [
+      "POST"
+    ],
+    "name": "ats_score",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/openings/{opening_id}/eligibility-config",
+    "methods": [
+      "PUT"
+    ],
+    "name": "save_opening_eligibility_configuration",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/openings/{opening_id}/eligibility-config",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_opening_eligibility_configuration",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/eligibility/evaluate",
+    "methods": [
+      "POST"
+    ],
+    "name": "evaluate_candidate_eligibility",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/eligibility",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_candidate_eligibility",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/questions",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_screening_questions",
+    "tags": [
+      "ATS",
+      "Screening Questions"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_screening_session",
+    "tags": [
+      "ATS",
+      "Screening Sessions"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_screening_transcript",
+    "tags": [
+      "ATS",
+      "Audio and Transcription"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}",
+    "methods": [
+      "PATCH"
+    ],
+    "name": "update_screening_session",
+    "tags": [
+      "ATS",
+      "Screening Sessions"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/segments",
+    "methods": [
+      "POST"
+    ],
+    "name": "add_transcript_segments",
+    "tags": [
+      "ATS",
+      "Candidate Answers"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/interactions",
+    "methods": [
+      "POST"
+    ],
+    "name": "add_screening_interaction",
+    "tags": [
+      "ATS",
+      "Candidate Answers"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/interactions",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_screening_interactions",
+    "tags": [
+      "ATS",
+      "Candidate Answers"
+    ]
+  },
+  {
+    "path": "/api/v1/openings/{opening_id}/shortlist",
+    "methods": [
+      "POST"
+    ],
+    "name": "shortlist_opening",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/ats/shortlist",
+    "methods": [
+      "POST"
+    ],
+    "name": "ats_shortlist",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/shortlist",
+    "methods": [
+      "POST"
+    ],
+    "name": "shortlist_demo",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_screening_session_full",
+    "tags": [
+      "ATS",
+      "Screening Sessions"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/pipeline/sessions",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_screening_pipeline_session",
+    "tags": [
+      "ATS",
+      "Screening Sessions"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/status",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_screening_session_status",
+    "tags": [
+      "ATS",
+      "Screening Sessions"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/start",
+    "methods": [
+      "POST"
+    ],
+    "name": "start_screening_session",
+    "tags": [
+      "ATS",
+      "Screening Sessions"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/audio",
+    "methods": [
+      "POST"
+    ],
+    "name": "upload_screening_audio",
+    "tags": [
+      "ATS",
+      "Audio and Transcription"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/audio/{audio_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_audio_status",
+    "tags": [
+      "ATS",
+      "Audio and Transcription"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/audio/{audio_id}/transcribe",
+    "methods": [
+      "POST"
+    ],
+    "name": "transcribe_audio",
+    "tags": [
+      "ATS",
+      "Audio and Transcription"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/transcripts/{transcript_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_transcript",
+    "tags": [
+      "ATS",
+      "Audio and Transcription"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/answers/text",
+    "methods": [
+      "POST"
+    ],
+    "name": "submit_text_answer",
+    "tags": [
+      "ATS",
+      "Candidate Answers"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/complete",
+    "methods": [
+      "POST"
+    ],
+    "name": "complete_screening_session",
+    "tags": [
+      "ATS",
+      "Screening Evaluation"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/sessions/{session_id}/report",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_screening_report",
+    "tags": [
+      "ATS",
+      "Screening Reports"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/candidates/{candidate_id}/reports",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_candidate_screening_reports",
+    "tags": [
+      "ATS",
+      "Screening Reports"
+    ]
+  },
+  {
+    "path": "/api/v1/screening/questions/{role_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_questions_for_role",
+    "tags": [
+      "ATS",
+      "Screening Questions"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_hr_interview",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_hr_interviews",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hr_interview",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/status",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hr_interview_status",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/start",
+    "methods": [
+      "POST"
+    ],
+    "name": "start_hr_interview",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/pause",
+    "methods": [
+      "POST"
+    ],
+    "name": "pause_hr_interview",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/resume",
+    "methods": [
+      "POST"
+    ],
+    "name": "resume_hr_interview",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/questions",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hr_interview_questions",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/answers",
+    "methods": [
+      "POST"
+    ],
+    "name": "submit_hr_interview_answer",
+    "tags": [
+      "ATS",
+      "HR Communication & Behavioral Evaluation"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/follow-ups",
+    "methods": [
+      "POST"
+    ],
+    "name": "submit_hr_interview_followup",
+    "tags": [
+      "ATS",
+      "HR Dynamic Follow-Up"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/complete",
+    "methods": [
+      "POST"
+    ],
+    "name": "complete_hr_interview",
+    "tags": [
+      "ATS",
+      "HR Interview Engine"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/evaluation",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hr_interview_evaluation",
+    "tags": [
+      "ATS",
+      "HR Interview Scoring & Reports"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/report",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hr_interview_report",
+    "tags": [
+      "ATS",
+      "HR Interview Scoring & Reports"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/candidates/{candidate_id}/reports",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_candidate_hr_reports",
+    "tags": [
+      "ATS",
+      "HR Interview Scoring & Reports"
+    ]
+  },
+  {
+    "path": "/api/v1/hr-interviews/{interview_id}/decision",
+    "methods": [
+      "POST"
+    ],
+    "name": "record_hr_interview_decision",
+    "tags": [
+      "ATS",
+      "HR Interview Scoring & Reports"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_technical_interview",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_technical_interviews",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews/{session_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_technical_interview",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews/{session_id}/start",
+    "methods": [
+      "POST"
+    ],
+    "name": "start_technical_interview",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews/{session_id}/questions",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_technical_interview_questions",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews/{session_id}/answers",
+    "methods": [
+      "POST"
+    ],
+    "name": "submit_technical_interview_answer",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews/{session_id}/answers",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_technical_interview_answers",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/technical-interviews/{session_id}/complete",
+    "methods": [
+      "POST"
+    ],
+    "name": "complete_technical_interview",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/machine-tests/assignments",
+    "methods": [
+      "POST"
+    ],
+    "name": "create_machine_test",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/machine-tests/assignments",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_machine_tests",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/machine-tests/assignments/{assignment_id}",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_machine_test",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/machine-tests/assignments/{assignment_id}/submit",
+    "methods": [
+      "POST"
+    ],
+    "name": "submit_machine_test",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/machine-tests/assignments/{assignment_id}/submissions",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_machine_test_submissions",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/integrity-records",
+    "methods": [
+      "POST"
+    ],
+    "name": "record_candidate_integrity",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/integrity-records",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_candidate_integrity",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/behavioral-records",
+    "methods": [
+      "POST"
+    ],
+    "name": "record_candidate_behavioral",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/behavioral-records",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_candidate_behavioral",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/cross-round-evaluation",
+    "methods": [
+      "POST"
+    ],
+    "name": "evaluate_cross_round_scoring",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/cross-round-evaluation",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_candidate_cross_round_evaluations",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/final-recommendation",
+    "methods": [
+      "POST"
+    ],
+    "name": "generate_candidate_final_recommendation",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/final-recommendation",
+    "methods": [
+      "GET"
+    ],
+    "name": "list_candidate_final_recommendations",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/final-recommendations/{recommendation_id}/decision",
+    "methods": [
+      "POST"
+    ],
+    "name": "update_final_recommendation_recruiter_decision",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/hiring-intelligence-report",
+    "methods": [
+      "POST"
+    ],
+    "name": "generate_hiring_intelligence_report_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/hiring-intelligence-report",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_latest_hiring_intelligence_report_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/hiring-intelligence-report/history",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hiring_intelligence_report_history_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/hiring-intelligence-reports/{report_id}/html",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hiring_intelligence_report_html_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/hiring-intelligence-report/html",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_candidate_hiring_intelligence_report_html_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/hiring-intelligence-reports/{report_id}/markdown",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_hiring_intelligence_report_markdown_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/hiring-intelligence-report/markdown",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_candidate_hiring_intelligence_report_markdown_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/audit/events",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_audit_events_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/audit/verify",
+    "methods": [
+      "GET"
+    ],
+    "name": "verify_audit_trail_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/coaching",
+    "methods": [
+      "POST"
+    ],
+    "name": "generate_candidate_coaching_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/candidates/{candidate_id}/coaching",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_candidate_coaching_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/simulation/run",
+    "methods": [
+      "POST"
+    ],
+    "name": "run_simulation_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/simulation/benchmark",
+    "methods": [
+      "POST"
+    ],
+    "name": "compare_benchmark_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/resumes/batch-process",
+    "methods": [
+      "POST"
+    ],
+    "name": "batch_process_resumes_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/monitoring/dashboard",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_monitoring_dashboard_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/monitoring/alerts",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_monitoring_alerts_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/monitoring/decision-audit",
+    "methods": [
+      "GET"
+    ],
+    "name": "get_decision_audit_logs_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/api/v1/monitoring/log-event",
+    "methods": [
+      "POST"
+    ],
+    "name": "log_observability_event_endpoint",
+    "tags": [
+      "ATS"
+    ]
+  },
+  {
+    "path": "/",
+    "methods": [
+      "GET"
+    ],
+    "name": "root",
+    "tags": [
+      "System"
+    ]
+  }
+]

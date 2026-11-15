@@ -1475,6 +1475,7 @@ def get_questions_for_role(role_id: str, language: str = "en") -> list[dict]:
     "/hr-interviews",
     response_model=HRInterviewSessionResponse,
     status_code=201,
+    tags=["HR Interview Engine"],
 )
 def create_hr_interview(payload: HRInterviewSessionCreate) -> HRInterviewSessionResponse:
     _candidate_or_404(payload.candidate_id)
@@ -1495,6 +1496,7 @@ def create_hr_interview(payload: HRInterviewSessionCreate) -> HRInterviewSession
 @router.get(
     "/hr-interviews",
     response_model=list[HRInterviewSessionResponse],
+    tags=["HR Interview Engine"],
 )
 def list_hr_interviews(
     candidate_id: str | None = None, status: str | None = None
@@ -1506,6 +1508,7 @@ def list_hr_interviews(
 @router.get(
     "/hr-interviews/{interview_id}",
     response_model=HRInterviewSessionResponse,
+    tags=["HR Interview Engine"],
 )
 def get_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
     session = database.get_hr_interview_session(interview_id)
@@ -1517,6 +1520,7 @@ def get_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
 @router.get(
     "/hr-interviews/{interview_id}/status",
     response_model=dict,
+    tags=["HR Interview Engine"],
 )
 def get_hr_interview_status(interview_id: str) -> dict:
     session = database.get_hr_interview_session(interview_id)
@@ -1528,6 +1532,7 @@ def get_hr_interview_status(interview_id: str) -> dict:
 @router.post(
     "/hr-interviews/{interview_id}/start",
     response_model=HRInterviewSessionResponse,
+    tags=["HR Interview Engine"],
 )
 def start_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
     session = database.get_hr_interview_session(interview_id)
@@ -1547,6 +1552,7 @@ def start_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
 @router.post(
     "/hr-interviews/{interview_id}/pause",
     response_model=HRInterviewSessionResponse,
+    tags=["HR Interview Engine"],
 )
 def pause_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
     session = database.get_hr_interview_session(interview_id)
@@ -1559,6 +1565,7 @@ def pause_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
 @router.post(
     "/hr-interviews/{interview_id}/resume",
     response_model=HRInterviewSessionResponse,
+    tags=["HR Interview Engine"],
 )
 def resume_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
     session = database.get_hr_interview_session(interview_id)
@@ -1571,6 +1578,7 @@ def resume_hr_interview(interview_id: str) -> HRInterviewSessionResponse:
 @router.get(
     "/hr-interviews/{interview_id}/questions",
     response_model=list[HRInterviewQuestionResponse],
+    tags=["HR Interview Engine"],
 )
 def get_hr_interview_questions(interview_id: str) -> list[HRInterviewQuestionResponse]:
     session = database.get_hr_interview_session(interview_id)
@@ -1583,6 +1591,7 @@ def get_hr_interview_questions(interview_id: str) -> list[HRInterviewQuestionRes
 @router.post(
     "/hr-interviews/{interview_id}/answers",
     response_model=dict,
+    tags=["HR Communication & Behavioral Evaluation"],
 )
 def submit_hr_interview_answer(
     interview_id: str, payload: HRInterviewAnswerSubmit
@@ -1602,6 +1611,7 @@ def submit_hr_interview_answer(
     "/hr-interviews/{interview_id}/follow-ups",
     response_model=HRInterviewFollowUpResponse,
     status_code=201,
+    tags=["HR Dynamic Follow-Up"],
 )
 def submit_hr_interview_followup(
     interview_id: str, payload: HRInterviewFollowUpSubmit
@@ -1622,6 +1632,7 @@ def submit_hr_interview_followup(
 @router.post(
     "/hr-interviews/{interview_id}/complete",
     response_model=dict,
+    tags=["HR Interview Engine"],
 )
 def complete_hr_interview(interview_id: str) -> dict:
     session = database.get_hr_interview_session(interview_id)
@@ -1634,6 +1645,7 @@ def complete_hr_interview(interview_id: str) -> dict:
 @router.get(
     "/hr-interviews/{interview_id}/evaluation",
     response_model=dict,
+    tags=["HR Interview Scoring & Reports"],
 )
 def get_hr_interview_evaluation(interview_id: str) -> dict:
     session = database.get_hr_interview_session(interview_id)
@@ -1655,6 +1667,7 @@ def get_hr_interview_evaluation(interview_id: str) -> dict:
 
 @router.get(
     "/hr-interviews/{interview_id}/report",
+    tags=["HR Interview Scoring & Reports"],
 )
 def get_hr_interview_report(
     interview_id: str, format: str | None = None
@@ -1673,6 +1686,7 @@ def get_hr_interview_report(
 @router.get(
     "/hr-interviews/candidates/{candidate_id}/reports",
     response_model=list[HRInterviewReportResponse],
+    tags=["HR Interview Scoring & Reports"],
 )
 def list_candidate_hr_reports(candidate_id: str) -> list[HRInterviewReportResponse]:
     _candidate_or_404(candidate_id)
@@ -1683,6 +1697,7 @@ def list_candidate_hr_reports(candidate_id: str) -> list[HRInterviewReportRespon
 @router.post(
     "/hr-interviews/{interview_id}/decision",
     response_model=HRInterviewReportResponse,
+    tags=["HR Interview Scoring & Reports"],
 )
 def record_hr_interview_decision(
     interview_id: str, payload: HRInterviewDecisionRequest
