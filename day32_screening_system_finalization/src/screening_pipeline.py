@@ -298,7 +298,7 @@ class ScreeningPipeline:
                     }
                 }
                 builder = ScreeningReportBuilder(report_input)
-                screening_report = builder.build_recruiter_report()
+                screening_report = builder.build_report()
             except Exception:
                 screening_report = {"overall_score": avg_score, "candidate_id": candidate_id}
 

@@ -275,5 +275,20 @@ class ScreeningPipeline:
         }
         return mapping.get(category, "skills")
 
+    def process_candidate(
+        self,
+        candidate_id: str,
+        answers: dict[str, str],
+    ) -> dict[str, Any]:
+        """Process all answers for a candidate and produce screening results."""
+        from day32_screening_system_finalization.src.screening_pipeline import (
+            ScreeningPipeline as Day32ScreeningPipeline,
+        )
+
+        pipeline = Day32ScreeningPipeline()
+        return pipeline.process_candidate(
+            candidate_id=candidate_id, answers=answers
+        )
+
 
 screening_pipeline = ScreeningPipeline()

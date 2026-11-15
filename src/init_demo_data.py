@@ -40,7 +40,7 @@ def load_json(path: Path) -> Any:
 def seed_demo_environment(target_db: str | None = None, reset: bool = False) -> dict[str, Any]:
     """Populates the database with realistic synthetic demo data."""
     if target_db:
-        os.environ["ZECPATH_DB_PATH"] = str(target_db)
+        os.environ["ZECPATH_DB_PATH"] = target_db
 
     database.initialize_database()
 

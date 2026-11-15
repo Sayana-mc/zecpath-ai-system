@@ -99,7 +99,7 @@
     },
     "missing_information": [],
     "review_notes": [],
-    "timestamp": "2026-11-15T13:35:51.049639",
+    "timestamp": "2026-11-15T14:25:01.518310",
     "status": "completed",
     "total_questions": 4,
     "aggregate_score": 83.0,
@@ -270,7 +270,68 @@
         }
     ],
     "screening_report": {
-        "overall_score": 83.0,
-        "candidate_id": "C001"
+        "report_metadata": {
+            "candidate_id": "C001",
+            "candidate_name": null,
+            "job_id": null,
+            "job_title": null
+        },
+        "screening_summary": {
+            "total_score": 83.0,
+            "questions_evaluated": 4
+        },
+        "key_answers": [
+            {
+                "question_id": "Q001",
+                "question": "What technical skills do you have?",
+                "answer": "I have experience with Python, SQL, Excel and Power BI.",
+                "intent": "skills"
+            },
+            {
+                "question_id": "Q002",
+                "question": "Tell me about your experience.",
+                "answer": "I have completed data analyst and data science internships with 1 year of experience.",
+                "intent": "experience"
+            },
+            {
+                "question_id": "Q003",
+                "question": "When can you join?",
+                "answer": "I am available to join immediately.",
+                "intent": "availability"
+            },
+            {
+                "question_id": "Q004",
+                "question": "What is your salary expectation?",
+                "answer": "My expected salary is around 4 LPA.",
+                "intent": "salary_expectation"
+            }
+        ],
+        "strengths": [
+            "Candidate confirmed technical skills: Python, SQL, Excel, Power BI",
+            "Communication strength: Strong"
+        ],
+        "risks": [],
+        "missing_data": [],
+        "highlights": {
+            "skill_confirmations": [
+                "Python",
+                "SQL",
+                "Excel",
+                "Power BI"
+            ],
+            "availability": {
+                "status": "immediate",
+                "notice_period": null
+            },
+            "salary_expectation": null
+        },
+        "behavioral_summary": {
+            "communication_strength": "Strong",
+            "hesitation_count": 0,
+            "uncertainty_count": 0,
+            "average_response_length": null,
+            "sentiment": "neutral",
+            "contradictions_detected": false
+        }
     }
 }

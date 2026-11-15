@@ -202,6 +202,10 @@ class ScreeningReportBuilder:
                 )
         }
 
+    def build_recruiter_report(self):
+        """Build recruiter report (alias for build_report)."""
+        return self.build_report()
+
     def build_report(self):
 
         return {

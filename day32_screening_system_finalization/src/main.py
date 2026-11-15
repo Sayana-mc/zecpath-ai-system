@@ -1,7 +1,20 @@
 import json
+import sys
 from pathlib import Path
 
-from screening_pipeline import ScreeningPipeline
+# Ensure local and root directories are available for import
+_LOCAL_DIR = Path(__file__).resolve().parent
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+for _p in [str(_LOCAL_DIR), str(_PROJECT_ROOT)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+try:
+    from day32_screening_system_finalization.src.screening_pipeline import (
+        ScreeningPipeline,
+    )
+except ImportError:
+    from screening_pipeline import ScreeningPipeline
 
 
 def main():
