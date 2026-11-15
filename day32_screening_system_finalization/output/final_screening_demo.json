@@ -1,37 +1,276 @@
 {
+    "success": true,
     "candidate_id": "C001",
+    "session_id": "SCR-C001",
     "screening_id": "SCR-C001",
-    "timestamp": "2026-09-20T11:49:07.828407",
+    "screening_status": "COMPLETED",
+    "candidate_information": {
+        "name": "Candidate C001",
+        "skills": [
+            "Python",
+            "SQL",
+            "Excel",
+            "Power BI"
+        ],
+        "experience": {
+            "values": [
+                "1"
+            ],
+            "internship_mentioned": false
+        },
+        "education": null,
+        "location": null,
+        "expected_salary": {
+            "amount": 4.0,
+            "unit": "LPA"
+        },
+        "availability": {
+            "status": "immediate",
+            "notice_period": null
+        }
+    },
+    "answer_analysis": [
+        {
+            "question_id": "Q001",
+            "question": "What technical skills do you have?",
+            "answer": "I have experience with Python, SQL, Excel and Power BI.",
+            "intent": "skills",
+            "extracted_information": {
+                "skills": [
+                    "Python",
+                    "SQL",
+                    "Excel",
+                    "Power BI"
+                ]
+            },
+            "validation_status": "VALID"
+        },
+        {
+            "question_id": "Q002",
+            "question": "Tell me about your experience.",
+            "answer": "I have completed data analyst and data science internships with 1 year of experience.",
+            "intent": "experience",
+            "extracted_information": {
+                "experience": {
+                    "values": [
+                        "1"
+                    ],
+                    "internship_mentioned": false
+                }
+            },
+            "validation_status": "VALID"
+        },
+        {
+            "question_id": "Q003",
+            "question": "When can you join?",
+            "answer": "I am available to join immediately.",
+            "intent": "availability",
+            "extracted_information": {
+                "availability": {
+                    "status": "immediate",
+                    "notice_period": null
+                }
+            },
+            "validation_status": "VALID"
+        },
+        {
+            "question_id": "Q004",
+            "question": "What is your salary expectation?",
+            "answer": "My expected salary is around 4 LPA.",
+            "intent": "salary_expectation",
+            "extracted_information": {
+                "salary_expectation": {
+                    "amount": 4.0,
+                    "unit": "LPA"
+                }
+            },
+            "validation_status": "VALID"
+        }
+    ],
+    "screening_evaluation": {
+        "overall_score": 83.0,
+        "score_breakdown": {
+            "clarity": 4,
+            "relevance": 5,
+            "completeness": 5,
+            "consistency": 4
+        },
+        "recommendation": "SHORTLIST"
+    },
+    "missing_information": [],
+    "review_notes": [],
+    "timestamp": "2026-11-15T13:35:51.049639",
     "status": "completed",
     "total_questions": 4,
+    "aggregate_score": 83.0,
+    "behavioral_summary": {
+        "dominant_sentiment": "neutral",
+        "total_hesitations": 0,
+        "total_uncertainties": 0,
+        "communication_rating": "Strong"
+    },
     "answers": [
         {
             "question_id": "Q001",
             "category": "skills",
             "question": "What technical skills do you have?",
             "answer": "I have experience with Python, SQL, Excel and Power BI.",
-            "status": "processed"
+            "raw_answer": "I have experience with Python, SQL, Excel and Power BI.",
+            "status": "processed",
+            "intent": "skills",
+            "intent_confidence": 1.0,
+            "extracted_information": {
+                "skills": [
+                    "Python",
+                    "SQL",
+                    "Excel",
+                    "Power BI"
+                ]
+            },
+            "validation": {
+                "missing": false,
+                "vague": false,
+                "off_topic": false,
+                "status": "valid"
+            },
+            "scoring": {
+                "parameter_scores": {
+                    "clarity": 4,
+                    "relevance": 5,
+                    "completeness": 5,
+                    "consistency": 5
+                },
+                "weighted_score": 4.75,
+                "normalized_score": 95.0,
+                "explanation": [
+                    "The answer is clearly expressed.",
+                    "The answer is relevant to the expected topic.",
+                    "The answer contains sufficient information.",
+                    "The answer is consistent with the available candidate information."
+                ]
+            },
+            "score": 95.0,
+            "behavioral": {
+                "sentiment": "neutral",
+                "confidence_score": 60
+            }
         },
         {
             "question_id": "Q002",
             "category": "experience",
             "question": "Tell me about your experience.",
-            "answer": "I have completed data analyst and data science internships.",
-            "status": "processed"
+            "answer": "I have completed data analyst and data science internships with 1 year of experience.",
+            "raw_answer": "I have completed data analyst and data science internships with 1 year of experience.",
+            "status": "processed",
+            "intent": "experience",
+            "intent_confidence": 1.0,
+            "extracted_information": {
+                "experience": {
+                    "values": [
+                        "1"
+                    ],
+                    "internship_mentioned": false
+                }
+            },
+            "validation": {
+                "missing": false,
+                "vague": false,
+                "off_topic": false,
+                "status": "valid"
+            },
+            "scoring": {
+                "parameter_scores": {
+                    "clarity": 4,
+                    "relevance": 5,
+                    "completeness": 5,
+                    "consistency": 3
+                },
+                "weighted_score": 4.35,
+                "normalized_score": 87.0,
+                "explanation": [
+                    "The answer is clearly expressed.",
+                    "The answer is relevant to the expected topic.",
+                    "The answer contains sufficient information."
+                ]
+            },
+            "score": 87.0,
+            "behavioral": {
+                "sentiment": "neutral",
+                "confidence_score": 60
+            }
         },
         {
             "question_id": "Q003",
             "category": "availability",
             "question": "When can you join?",
             "answer": "I am available to join immediately.",
-            "status": "processed"
+            "raw_answer": "I am available to join immediately.",
+            "status": "processed",
+            "intent": "availability",
+            "intent_confidence": 1.0,
+            "extracted_information": {
+                "availability": {
+                    "status": "immediate",
+                    "notice_period": null
+                }
+            },
+            "validation": {
+                "missing": false,
+                "vague": false,
+                "off_topic": false,
+                "status": "valid"
+            },
+            "scoring": {},
+            "score": 80.0,
+            "behavioral": {
+                "sentiment": "neutral",
+                "confidence_score": 60
+            }
         },
         {
             "question_id": "Q004",
             "category": "salary",
             "question": "What is your salary expectation?",
             "answer": "My expected salary is around 4 LPA.",
-            "status": "processed"
+            "raw_answer": "My expected salary is around 4 LPA.",
+            "status": "processed",
+            "intent": "salary_expectation",
+            "intent_confidence": 1.0,
+            "extracted_information": {
+                "salary_expectation": {
+                    "amount": 4.0,
+                    "unit": "LPA"
+                }
+            },
+            "validation": {
+                "missing": false,
+                "vague": false,
+                "off_topic": false,
+                "status": "valid"
+            },
+            "scoring": {
+                "parameter_scores": {
+                    "clarity": 4,
+                    "relevance": 3,
+                    "completeness": 4,
+                    "consistency": 3
+                },
+                "weighted_score": 3.5,
+                "normalized_score": 70.0,
+                "explanation": [
+                    "The answer is clearly expressed.",
+                    "The answer contains sufficient information."
+                ]
+            },
+            "score": 70.0,
+            "behavioral": {
+                "sentiment": "neutral",
+                "confidence_score": 60
+            }
         }
-    ]
+    ],
+    "screening_report": {
+        "overall_score": 83.0,
+        "candidate_id": "C001"
+    }
 }

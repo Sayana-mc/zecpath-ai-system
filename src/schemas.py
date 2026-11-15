@@ -305,6 +305,18 @@ class ScreeningReportResponse(BaseModel):
     answers: list[dict[str, Any]]
     review_flags: list[str]
     human_review_required: Literal[True] = True
+    success: bool = True
+    session_id: str | None = None
+    screening_status: str = "COMPLETED"
+    overall_score: float | None = None
+    recommendation: str | None = None
+    scores: dict[str, Any] | None = None
+    notes: str | None = None
+    candidate_information: dict[str, Any] = Field(default_factory=dict)
+    answer_analysis: list[dict[str, Any]] = Field(default_factory=list)
+    screening_evaluation: dict[str, Any] = Field(default_factory=dict)
+    missing_information: list[str] = Field(default_factory=list)
+    review_notes: list[str] = Field(default_factory=list)
 
 
 class JobStatusResponse(BaseModel):

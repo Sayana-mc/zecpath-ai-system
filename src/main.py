@@ -28,13 +28,53 @@ async def lifespan(_: FastAPI):
     yield
 
 
+tags_metadata = [
+    {
+        "name": "Screening Questions",
+        "description": "Standardized HR screening question repository, role-based question filtering, and multilingual question templates.",
+    },
+    {
+        "name": "Screening Sessions",
+        "description": "Candidate screening session lifecycle, pipeline creation, session status tracking, and conversation start.",
+    },
+    {
+        "name": "Candidate Answers",
+        "description": "Candidate verbal and text answer ingestion, segment tagging, and conversational dialog interactions.",
+    },
+    {
+        "name": "Audio and Transcription",
+        "description": "Candidate voice audio upload, speech-to-text processing, Whisper model transcription, and transcript cleaning.",
+    },
+    {
+        "name": "Intent and Information Extraction",
+        "description": "Natural language intent classification, entity extraction (skills, experience, notice period, salary), and answer validation.",
+    },
+    {
+        "name": "Screening Evaluation",
+        "description": "4-factor scoring rubric (Clarity, Relevance, Completeness, Consistency), behavioral indicators, and session completion.",
+    },
+    {
+        "name": "Screening Reports",
+        "description": "Recruiter-ready candidate screening reports, structured answer analysis, strengths, risks, and recommendations.",
+    },
+    {
+        "name": "ATS",
+        "description": "Applicant Tracking System core: job openings, candidate ingestion, resume upload, parsing, and shortlisting.",
+    },
+    {
+        "name": "System",
+        "description": "System health checks, recruiter authentication session management, and metrics.",
+    },
+]
+
 app = FastAPI(
-    title="ZecPath ATS API",
+    title="ZecPath AI Screening & Hiring System API",
     description=(
-        "Local recruiter workflow API for job openings, candidate applications, "
-        "resume extraction, transparent skill matching, and human-reviewed shortlists."
+        "Production-grade local recruiter workflow API for ATS resume screening, "
+        "interactive AI candidate screening, multi-factor scoring, and verifiable hiring audits."
     ),
     version="1.0.0",
+    openapi_tags=tags_metadata,
     lifespan=lifespan,
 )
 
@@ -57,6 +97,29 @@ async def observability_middleware(request: Request, call_next):
 
 app.include_router(system_router)
 app.include_router(router)
+
+
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    from fastapi.openapi.utils import get_openapi
+    openapi_schema = get_openapi(
+        title=app.title,
+        version=app.version,
+        description=app.description,
+        routes=app.routes,
+        tags=tags_metadata,
+    )
+    for path, methods in openapi_schema.get("paths", {}).items():
+        if "/screening" in path or "screening-reports" in path:
+            for op in methods.values():
+                if isinstance(op, dict) and "tags" in op:
+                    op["tags"] = [t for t in op["tags"] if t != "ATS"]
+    app.openapi_schema = openapi_schema
+    return app.openapi_schema
+
+
+app.openapi = custom_openapi
 
 
 @app.get("/", tags=["System"])
