@@ -30,7 +30,9 @@ from .auth import (
     SESSION_LIFETIME_SECONDS,
     authentication_is_configured,
     is_configured_recruiter,
+    require_permission,
     require_recruiter,
+    require_recruiter_context,
     verify_recruiter_credentials,
 )
 from .errors import ATSAPIError, InvalidResumeError
@@ -113,9 +115,17 @@ from .schemas import (
     CandidateBehavioralRecordResponse,
     CrossRoundEvaluationRequest,
     CrossRoundEvaluationResponse,
+    RoleWeightConfigurationRequest,
+    RoleWeightConfigurationResponse,
+    RoleDecisionThresholdRequest,
+    RoleDecisionThresholdResponse,
     FinalRecommendationRequest,
     FinalRecommendationResponse,
     FinalRecommendationDecisionRequest,
+    CandidateConsentCreate,
+    CandidateConsentResponse,
+    RetentionPolicyUpdate,
+    OptimizationRunRequest,
     HiringIntelligenceReportResponse,
     AuditEventResponse,
     AuditVerificationResponse,
@@ -163,11 +173,15 @@ from .machine_test_engine import machine_test_engine
 from .integrity_engine import integrity_engine
 from .behavioral_ai_engine import behavioral_ai_engine
 from .cross_round_scoring_engine import cross_round_scoring_engine
-from .final_recommendation_engine import recommend_candidate
+from .final_recommendation_engine import (
+    get_decision_rules_for_role,
+    recommend_candidate,
+)
 from .hiring_intelligence_report_generator import (
     generate_candidate_hiring_report,
     render_report_html,
     render_report_markdown,
+    render_report_pdf,
 )
 from .optimization_engine import optimization_engine
 from .security_governance import security_governance
@@ -2053,67 +2067,136 @@ def list_candidate_behavioral(candidate_id: str) -> list[CandidateBehavioralReco
 # Day 41 & 51 + Day 42: Cross-Round Unified Scoring Routes
 # ---------------------------------------------------------------------------
 
+def _enforce_candidate_tenant(cand: dict[str, Any], ctx: dict[str, str]) -> None:
+    if not security_governance.verify_tenant_access(
+        actor_tenant_id=ctx["tenant_id"],
+        subject_record=cand,
+        actor_role=ctx["role"],
+    ):
+        raise HTTPException(status_code=403, detail="Cross-tenant access denied.")
+
+
+@router.get("/role-weights", response_model=list[RoleWeightConfigurationResponse])
+def list_role_weights_endpoint(
+    ctx: dict[str, str] = Depends(require_permission("view_candidates")),
+) -> list[RoleWeightConfigurationResponse]:
+    persisted = database.list_role_weight_configurations()
+    persisted_map = {item["role_key"]: item for item in persisted}
+    results = []
+    from .cross_round_scoring_engine import ROLE_ROUND_WEIGHTS
+    for role_key, default_w in ROLE_ROUND_WEIGHTS.items():
+        if role_key in persisted_map:
+            results.append(RoleWeightConfigurationResponse(**persisted_map[role_key]))
+        else:
+            results.append(
+                RoleWeightConfigurationResponse(
+                    role_key=role_key,
+                    weights=default_w,
+                    min_required_stages=3,
+                    updated_by="system_default",
+                    updated_at="",
+                )
+            )
+    for role_key, item in persisted_map.items():
+        if role_key not in ROLE_ROUND_WEIGHTS:
+            results.append(RoleWeightConfigurationResponse(**item))
+    return results
+
+
+@router.put("/role-weights/{role_key}", response_model=RoleWeightConfigurationResponse)
+def update_role_weights_endpoint(
+    role_key: str,
+    payload: RoleWeightConfigurationRequest,
+    ctx: dict[str, str] = Depends(require_permission("configure_weights")),
+) -> RoleWeightConfigurationResponse:
+    try:
+        validated = cross_round_scoring_engine.validate_weights(payload.weights)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    saved = database.save_role_weight_configuration(
+        role_key=role_key,
+        weights=validated,
+        min_required_stages=payload.min_required_stages,
+        updated_by=ctx["username"],
+    )
+    security_governance.log_audit_event(
+        event_type="ROLE_WEIGHTS_UPDATED",
+        actor_id=ctx["username"],
+        subject_id=role_key,
+        details={"weights": validated, "min_required_stages": payload.min_required_stages},
+    )
+    return RoleWeightConfigurationResponse(**saved)
+
+
 @router.post(
     "/candidates/{candidate_id}/cross-round-evaluation",
     response_model=CrossRoundEvaluationResponse,
     status_code=201,
 )
 def evaluate_cross_round_scoring(
-    candidate_id: str, payload: CrossRoundEvaluationRequest
+    candidate_id: str,
+    payload: CrossRoundEvaluationRequest,
+    ctx: dict[str, str] = Depends(require_permission("score_candidate")),
 ) -> CrossRoundEvaluationResponse:
     cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     op_id = payload.opening_id or cand.get("opening_id", "default_opening")
-    target_role = payload.target_role or "software_engineer"
+    opening = database.get_opening(op_id) if op_id else None
+    target_role = payload.target_role or (opening.get("title") if opening else "software_engineer")
 
-    scores = dict(payload.round_scores or {})
-    if not scores:
-        if cand.get("score") is not None:
-            scores["ats"] = float(cand["score"])
-        screening_sessions = database.list_screening_sessions(candidate_id)
-        if screening_sessions:
-            reports = database.list_screening_reports_full(screening_sessions[0]["session_id"])
-            if reports:
-                scores["screening"] = float(reports[0]["report_json"].get("overall_score", 75.0))
-        hr_sessions = database.list_hr_interview_sessions(candidate_id=candidate_id)
-        if hr_sessions:
-            hr_sc = database.get_hr_interview_score(hr_sessions[0]["interview_id"])
-            if hr_sc:
-                scores["hr_interview"] = float(hr_sc["overall_hr_score"])
-        tech_sessions = database.list_technical_interview_sessions(candidate_id=candidate_id)
-        if tech_sessions and tech_sessions[0]["overall_score"]:
-            scores["technical_interview"] = float(tech_sessions[0]["overall_score"])
-        mt_assigns = database.list_machine_test_assignments(candidate_id=candidate_id)
-        if mt_assigns:
-            subs = database.list_machine_test_submissions(mt_assigns[0]["assignment_id"])
-            if subs:
-                scores["machine_test"] = float(subs[0]["total_score"])
+    stage_data = cross_round_scoring_engine.collect_candidate_stage_data(candidate_id)
+    scores = dict(payload.round_scores) if payload.round_scores else dict(stage_data["stage_scores"])
+    stage_status = dict(payload.stage_status) if payload.stage_status else dict(stage_data["stage_status"])
+    min_req = (
+        payload.min_required_stages
+        if payload.min_required_stages is not None
+        else cross_round_scoring_engine.get_min_required_stages(target_role)
+    )
+    if payload.round_scores:
+        # Backward compatibility: direct round_scores payload shouldn't fail gate unless explicitly asked
+        min_req = payload.min_required_stages if payload.min_required_stages is not None else 1
 
-    unified = cross_round_scoring_engine.calculate_unified_fit(
-        round_scores=scores,
-        target_role=target_role,
-        role_weights=payload.role_weights,
-        missing_strategy=payload.missing_strategy,
+    try:
+        unified = cross_round_scoring_engine.calculate_hiring_fit(
+            candidate_id=candidate_id,
+            target_role=target_role,
+            round_scores=scores,
+            opening_id=op_id,
+            stage_status=stage_status,
+            role_weights=payload.role_weights,
+            min_required_stages=min_req,
+            recalculation_reason=payload.recalculation_reason or "API evaluation request",
+            save_to_db=True,
+            force_recalculate=payload.force_recalculate,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    security_governance.log_audit_event(
+        event_type="CROSS_ROUND_EVALUATED",
+        actor_id=ctx["username"],
+        subject_id=candidate_id,
+        details={
+            "evaluation_id": unified.get("evaluation_id"),
+            "target_role": target_role,
+            "hiring_fit_percentage": unified.get("hiring_fit_percentage"),
+            "calculation_status": unified.get("calculation_status"),
+            "duplicate_prevented": unified.get("duplicate_prevented", False),
+        },
     )
-    saved = database.save_cross_round_evaluation(
-        candidate_id=candidate_id,
-        opening_id=op_id,
-        target_role=target_role,
-        hiring_fit_percentage=unified["hiring_fit_percentage"],
-        round_scores=scores,
-        effective_weights=unified["effective_weights"],
-        completed_rounds=unified["completed_rounds_count"],
-        missing_rounds=unified["missing_rounds"],
-        anomalies=unified["anomalies"],
-    )
-    return CrossRoundEvaluationResponse(**saved)
+    return CrossRoundEvaluationResponse(**unified)
 
 
 @router.get(
     "/candidates/{candidate_id}/cross-round-evaluation",
     response_model=list[CrossRoundEvaluationResponse],
 )
-def list_candidate_cross_round_evaluations(candidate_id: str) -> list[CrossRoundEvaluationResponse]:
-    _candidate_or_404(candidate_id)
+def list_candidate_cross_round_evaluations(
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_candidates")),
+) -> list[CrossRoundEvaluationResponse]:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     evals = database.list_cross_round_evaluations(candidate_id)
     return [CrossRoundEvaluationResponse(**e) for e in evals]
 
@@ -2122,17 +2205,79 @@ def list_candidate_cross_round_evaluations(candidate_id: str) -> list[CrossRound
 # Day 52: Final Recommendation AI Routes
 # ---------------------------------------------------------------------------
 
+@router.get("/decision-thresholds", response_model=list[RoleDecisionThresholdResponse])
+def list_decision_thresholds_endpoint(
+    ctx: dict[str, str] = Depends(require_permission("view_candidates")),
+) -> list[RoleDecisionThresholdResponse]:
+    from .final_recommendation_engine import ROLE_DECISION_RULES
+    persisted = {item["role_key"]: item for item in database.list_role_decision_thresholds()}
+    results = []
+    for role_key, preset in ROLE_DECISION_RULES.items():
+        if role_key in persisted:
+            item = persisted[role_key]
+            results.append(RoleDecisionThresholdResponse(**item))
+        else:
+            results.append(
+                RoleDecisionThresholdResponse(
+                    role_key=role_key,
+                    selected_min=preset["selected_min"],
+                    review_min=preset["review_min"],
+                    confidence_selected_min=preset["confidence_selected_min"],
+                    confidence_review_min=preset["confidence_review_min"],
+                    minimum_completed_rounds=preset["minimum_completed_rounds"],
+                    require_complete_for_selected=preset["require_complete_assessment_for_selection"],
+                    updated_by="system_default",
+                    updated_at="",
+                )
+            )
+    for role_key, item in persisted.items():
+        if role_key not in ROLE_DECISION_RULES:
+            results.append(RoleDecisionThresholdResponse(**item))
+    return results
+
+
+@router.put("/decision-thresholds/{role_key}", response_model=RoleDecisionThresholdResponse)
+def update_decision_threshold_endpoint(
+    role_key: str,
+    payload: RoleDecisionThresholdRequest,
+    ctx: dict[str, str] = Depends(require_permission("configure_weights")),
+) -> RoleDecisionThresholdResponse:
+    if payload.review_min >= payload.selected_min:
+        raise HTTPException(status_code=422, detail="review_min must be lower than selected_min.")
+    saved = database.save_role_decision_threshold(
+        role_key=role_key,
+        selected_min=payload.selected_min,
+        review_min=payload.review_min,
+        confidence_selected_min=payload.confidence_selected_min,
+        confidence_review_min=payload.confidence_review_min,
+        minimum_completed_rounds=payload.minimum_completed_rounds,
+        require_complete_for_selected=payload.require_complete_for_selected,
+        updated_by=ctx["username"],
+    )
+    security_governance.log_audit_event(
+        event_type="DECISION_THRESHOLD_UPDATED",
+        actor_id=ctx["username"],
+        subject_id=role_key,
+        details=saved,
+    )
+    return RoleDecisionThresholdResponse(**saved)
+
+
 @router.post(
     "/candidates/{candidate_id}/final-recommendation",
     response_model=FinalRecommendationResponse,
     status_code=201,
 )
 def generate_candidate_final_recommendation(
-    candidate_id: str, payload: FinalRecommendationRequest
+    candidate_id: str,
+    payload: FinalRecommendationRequest,
+    ctx: dict[str, str] = Depends(require_permission("score_candidate")),
 ) -> FinalRecommendationResponse:
     cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     op_id = payload.opening_id or cand.get("opening_id", "default_opening")
-    target_role = payload.target_role or "Software Engineer"
+    opening = database.get_opening(op_id) if op_id else None
+    target_role = payload.target_role or (opening.get("title") if opening else "Software Engineer")
     session_id = payload.session_id or f"sess_{candidate_id}"
 
     cross_evals = database.list_cross_round_evaluations(candidate_id)
@@ -2141,10 +2286,16 @@ def generate_candidate_final_recommendation(
         unified_score = last_eval["hiring_fit_percentage"]
         round_scores = last_eval["round_scores"]
         completed_rounds = last_eval["completed_rounds"]
+        stage_status = last_eval.get("stage_status") or {}
     else:
         unified_score = float(cand.get("score") or 75.0)
         round_scores = {"ats": unified_score}
         completed_rounds = 1
+        stage_status = {"ats": "COMPLETED"}
+
+    elig_eval = database.get_candidate_eligibility_evaluation(candidate_id, op_id)
+    eligibility_status = getattr(payload, "eligibility_status", None) or (elig_eval.get("status") if elig_eval else None) or cand.get("eligibility_status")
+    eligibility_reason = getattr(payload, "eligibility_reason", None) or (elig_eval.get("decision_explanation") if elig_eval else None) or cand.get("eligibility_explanation")
 
     integrity_records = database.get_candidate_integrity_records(candidate_id)
     integrity_flagged = any(r["risk_level"] == "HIGH" or r["requires_human_review"] for r in integrity_records)
@@ -2155,9 +2306,15 @@ def generate_candidate_final_recommendation(
 
     behav_records = database.get_candidate_behavioral_records(candidate_id)
     behav_flagged = any(r["consistency_index"] < 50.0 or r["requires_human_review"] for r in behav_records)
-    behav_evidence = [obs.get("note", "Inconsistent observation") for r in behav_records for obs in r.get("observations", []) if obs.get("impact") == "negative"]
+    behav_evidence = [
+        obs.get("note", "Inconsistent observation")
+        for r in behav_records
+        for obs in r.get("observations", [])
+        if obs.get("impact") == "negative"
+    ]
 
-    assessment_status = "COMPLETE" if completed_rounds >= 3 else "INCOMPLETE"
+    assessment_status = "COMPLETE" if completed_rounds >= 4 else "INCOMPLETE"
+    active_rules = payload.custom_rules or get_decision_rules_for_role(target_role)
 
     assessment_payload = {
         "candidate_id": candidate_id,
@@ -2169,6 +2326,9 @@ def generate_candidate_final_recommendation(
         "expected_rounds": 5,
         "evidence_quality": payload.evidence_quality,
         "data_consistency": payload.data_consistency,
+        "eligibility_status": eligibility_status,
+        "eligibility_reason": eligibility_reason,
+        "stage_status": stage_status,
         "rounds": round_scores,
         "risk_factors": {
             "integrity": {
@@ -2184,7 +2344,14 @@ def generate_candidate_final_recommendation(
         },
     }
 
-    rec_result = recommend_candidate(assessment_payload, rules=payload.custom_rules)
+    rec_result = recommend_candidate(assessment_payload, rules=active_rules)
+    explanation = rec_result.get("explanation", {})
+    raw_cm = rec_result.get("confidence_methodology")
+    cm_str = (
+        raw_cm.get("formula", json.dumps(raw_cm))
+        if isinstance(raw_cm, dict)
+        else (str(raw_cm) if raw_cm else "Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)")
+    )
     saved = database.save_final_recommendation(
         candidate_id=candidate_id,
         opening_id=op_id,
@@ -2194,8 +2361,27 @@ def generate_candidate_final_recommendation(
         confidence=rec_result["confidence"],
         completed_rounds=completed_rounds,
         expected_rounds=5,
-        reasons=rec_result["explanation"]["reasons"],
+        reasons=explanation.get("reasons", []),
         risk_factors=rec_result["risk_factors"],
+        reason_codes=rec_result.get("reason_codes", explanation.get("reason_codes", [])),
+        strengths=rec_result.get("strengths", []),
+        weaknesses=rec_result.get("weaknesses", []),
+        missing_evidence=rec_result.get("missing_evidence", []),
+        threshold_config=active_rules,
+        confidence_methodology=cm_str,
+        eligibility_status=eligibility_status or "UNKNOWN",
+    )
+    security_governance.log_audit_event(
+        event_type="FINAL_RECOMMENDATION_GENERATED",
+        actor_id=ctx["username"],
+        subject_id=candidate_id,
+        details={
+            "recommendation_id": saved["recommendation_id"],
+            "decision": saved["decision"],
+            "score": saved["score"],
+            "confidence": saved["confidence"],
+            "eligibility_status": eligibility_status,
+        },
     )
     return FinalRecommendationResponse(**saved)
 
@@ -2204,10 +2390,27 @@ def generate_candidate_final_recommendation(
     "/candidates/{candidate_id}/final-recommendation",
     response_model=list[FinalRecommendationResponse],
 )
-def list_candidate_final_recommendations(candidate_id: str) -> list[FinalRecommendationResponse]:
-    _candidate_or_404(candidate_id)
+def list_candidate_final_recommendations(
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_candidates")),
+) -> list[FinalRecommendationResponse]:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     recs = database.list_final_recommendations(candidate_id=candidate_id)
     return [FinalRecommendationResponse(**r) for r in recs]
+
+
+@router.get("/final-recommendations/{recommendation_id}/history")
+def list_final_recommendation_history(
+    recommendation_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_candidates")),
+) -> list[dict[str, Any]]:
+    rec = database.get_final_recommendation(recommendation_id)
+    if not rec:
+        raise HTTPException(status_code=404, detail="Final recommendation not found.")
+    cand = _candidate_or_404(rec["candidate_id"])
+    _enforce_candidate_tenant(cand, ctx)
+    return database.list_recommendation_decision_history(recommendation_id=recommendation_id)
 
 
 @router.post(
@@ -2215,23 +2418,48 @@ def list_candidate_final_recommendations(candidate_id: str) -> list[FinalRecomme
     response_model=FinalRecommendationResponse,
 )
 def update_final_recommendation_recruiter_decision(
-    recommendation_id: str, payload: FinalRecommendationDecisionRequest
+    recommendation_id: str,
+    payload: FinalRecommendationDecisionRequest,
+    ctx: dict[str, str] = Depends(require_permission("make_recommendation_decision")),
 ) -> FinalRecommendationResponse:
     rec = database.get_final_recommendation(recommendation_id)
     if not rec:
         raise HTTPException(status_code=404, detail="Final recommendation not found.")
+    cand = _candidate_or_404(rec["candidate_id"])
+    _enforce_candidate_tenant(cand, ctx)
+
+    action_map = {
+        "APPROVED": "APPROVED",
+        "REJECTED": "REJECTED",
+        "OVERRIDDEN": "OVERRIDDEN",
+    }
+    is_override = payload.recruiter_decision == "OVERRIDDEN" or (
+        payload.recruiter_decision == "APPROVED" and rec["decision"] != "SELECTED"
+    )
+    if is_override and not security_governance.check_permission(ctx["role"], "override_recommendation"):
+        # Standard recruiters can approve/reject; overriding AI decision or approving HOLD requires senior_recruiter/admin
+        if payload.recruiter_decision == "OVERRIDDEN":
+            raise HTTPException(
+                status_code=403,
+                detail="Role 'recruiter' cannot override AI recommendations; requires senior_recruiter or admin.",
+            )
+
+    decision_status = f"HUMAN_{action_map.get(payload.recruiter_decision, payload.recruiter_decision)}"
     updated = database.update_final_recommendation_decision(
         recommendation_id=recommendation_id,
         recruiter_decision=payload.recruiter_decision,
         recruiter_notes=payload.notes,
+        actor_id=ctx["username"],
     )
     security_governance.log_audit_event(
         event_type="RECRUITER_DECISION_UPDATED",
-        actor_id="recruiter",
+        actor_id=ctx["username"],
         subject_id=rec["candidate_id"],
         details={
             "recommendation_id": recommendation_id,
-            "decision": payload.recruiter_decision,
+            "ai_decision": rec["decision"],
+            "recruiter_decision": payload.recruiter_decision,
+            "decision_status": decision_status,
             "notes": payload.notes,
         },
     )
@@ -2239,7 +2467,7 @@ def update_final_recommendation_recruiter_decision(
 
 
 # ============================================================================
-# Days 53-60: Hiring Intelligence Reports, Security, Simulation, Coaching & Batching
+# Days 53-60: Hiring Intelligence Reports, Optimization, Security & Governance
 # ============================================================================
 
 @router.post(
@@ -2248,18 +2476,19 @@ def update_final_recommendation_recruiter_decision(
     status_code=201,
 )
 def generate_hiring_intelligence_report_endpoint(
-    candidate_id: str, request: Request
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_reports")),
 ) -> HiringIntelligenceReportResponse:
     cand = _candidate_or_404(candidate_id)
-    recruiter_id = request.cookies.get(SESSION_COOKIE_NAME, "recruiter_session")
+    _enforce_candidate_tenant(cand, ctx)
     report = generate_candidate_hiring_report(
         candidate_id=candidate_id,
-        recruiter_id=recruiter_id,
+        recruiter_id=ctx["username"],
         save_to_db=True,
     )
     security_governance.log_audit_event(
         event_type="HIRING_REPORT_GENERATED",
-        actor_id=recruiter_id,
+        actor_id=ctx["username"],
         subject_id=candidate_id,
         details={"report_id": report.get("report_id"), "version": report.get("version", 1)},
     )
@@ -2272,11 +2501,15 @@ def generate_hiring_intelligence_report_endpoint(
 )
 def get_latest_hiring_intelligence_report_endpoint(
     candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_reports")),
 ) -> HiringIntelligenceReportResponse:
-    _candidate_or_404(candidate_id)
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     report_record = database.get_latest_hiring_intelligence_report(candidate_id)
     if not report_record:
-        report_data = generate_candidate_hiring_report(candidate_id, save_to_db=True)
+        report_data = generate_candidate_hiring_report(
+            candidate_id, recruiter_id=ctx["username"], save_to_db=True
+        )
         return HiringIntelligenceReportResponse(**report_data)
     rep = dict(report_record["report_json"])
     rep["report_id"] = report_record["report_id"]
@@ -2291,8 +2524,10 @@ def get_latest_hiring_intelligence_report_endpoint(
 )
 def get_hiring_intelligence_report_history_endpoint(
     candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_reports")),
 ) -> list[HiringIntelligenceReportResponse]:
-    _candidate_or_404(candidate_id)
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     records = database.list_hiring_intelligence_reports(candidate_id)
     results = []
     for r in records:
@@ -2305,18 +2540,28 @@ def get_hiring_intelligence_report_history_endpoint(
 
 
 @router.get("/hiring-intelligence-reports/{report_id}/html")
-def get_hiring_intelligence_report_html_endpoint(report_id: str) -> Response:
+def get_hiring_intelligence_report_html_endpoint(
+    report_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_reports")),
+) -> Response:
     record = database.get_hiring_intelligence_report(report_id)
     if not record:
         raise HTTPException(status_code=404, detail="Hiring report not found.")
+    cand = _candidate_or_404(record["candidate_id"])
+    _enforce_candidate_tenant(cand, ctx)
     return Response(content=record["html_content"], media_type="text/html")
 
 
 @router.get("/candidates/{candidate_id}/hiring-intelligence-report/html")
-def get_candidate_hiring_intelligence_report_html_endpoint(candidate_id: str) -> Response:
+def get_candidate_hiring_intelligence_report_html_endpoint(
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_reports")),
+) -> Response:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     record = database.get_latest_hiring_intelligence_report(candidate_id)
     if not record:
-        generate_candidate_hiring_report(candidate_id, save_to_db=True)
+        generate_candidate_hiring_report(candidate_id, recruiter_id=ctx["username"], save_to_db=True)
         record = database.get_latest_hiring_intelligence_report(candidate_id)
     if not record:
         raise HTTPException(status_code=404, detail="Hiring report not found for candidate.")
@@ -2324,22 +2569,91 @@ def get_candidate_hiring_intelligence_report_html_endpoint(candidate_id: str) ->
 
 
 @router.get("/hiring-intelligence-reports/{report_id}/markdown")
-def get_hiring_intelligence_report_markdown_endpoint(report_id: str) -> Response:
+def get_hiring_intelligence_report_markdown_endpoint(
+    report_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_reports")),
+) -> Response:
     record = database.get_hiring_intelligence_report(report_id)
     if not record:
         raise HTTPException(status_code=404, detail="Hiring report not found.")
+    cand = _candidate_or_404(record["candidate_id"])
+    _enforce_candidate_tenant(cand, ctx)
     return Response(content=record["markdown_content"], media_type="text/markdown")
 
 
 @router.get("/candidates/{candidate_id}/hiring-intelligence-report/markdown")
-def get_candidate_hiring_intelligence_report_markdown_endpoint(candidate_id: str) -> Response:
+def get_candidate_hiring_intelligence_report_markdown_endpoint(
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_reports")),
+) -> Response:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
     record = database.get_latest_hiring_intelligence_report(candidate_id)
     if not record:
-        generate_candidate_hiring_report(candidate_id, save_to_db=True)
+        generate_candidate_hiring_report(candidate_id, recruiter_id=ctx["username"], save_to_db=True)
         record = database.get_latest_hiring_intelligence_report(candidate_id)
     if not record:
         raise HTTPException(status_code=404, detail="Hiring report not found for candidate.")
     return Response(content=record["markdown_content"], media_type="text/markdown")
+
+
+@router.get("/hiring-intelligence-reports/{report_id}/pdf")
+def get_hiring_intelligence_report_pdf_endpoint(
+    report_id: str,
+    ctx: dict[str, str] = Depends(require_permission("export_reports")),
+) -> Response:
+    record = database.get_hiring_intelligence_report(report_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Hiring report not found.")
+    cand = _candidate_or_404(record["candidate_id"])
+    _enforce_candidate_tenant(cand, ctx)
+    rep_payload = dict(record["report_json"])
+    rep_payload["report_id"] = record["report_id"]
+    rep_payload["version"] = record["version"]
+    rep_payload["created_at"] = record["created_at"]
+    pdf_bytes = render_report_pdf(rep_payload)
+    security_governance.log_audit_event(
+        event_type="REPORT_EXPORTED_PDF",
+        actor_id=ctx["username"],
+        subject_id=record["candidate_id"],
+        details={"report_id": report_id, "bytes": len(pdf_bytes)},
+    )
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'inline; filename="hiring-report-{report_id}.pdf"'},
+    )
+
+
+@router.get("/candidates/{candidate_id}/hiring-intelligence-report/pdf")
+def get_candidate_hiring_intelligence_report_pdf_endpoint(
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("export_reports")),
+) -> Response:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
+    record = database.get_latest_hiring_intelligence_report(candidate_id)
+    if not record:
+        generate_candidate_hiring_report(candidate_id, recruiter_id=ctx["username"], save_to_db=True)
+        record = database.get_latest_hiring_intelligence_report(candidate_id)
+    if not record:
+        raise HTTPException(status_code=404, detail="Hiring report not found for candidate.")
+    rep_payload = dict(record["report_json"])
+    rep_payload["report_id"] = record["report_id"]
+    rep_payload["version"] = record["version"]
+    rep_payload["created_at"] = record["created_at"]
+    pdf_bytes = render_report_pdf(rep_payload)
+    security_governance.log_audit_event(
+        event_type="REPORT_EXPORTED_PDF",
+        actor_id=ctx["username"],
+        subject_id=candidate_id,
+        details={"report_id": record["report_id"], "bytes": len(pdf_bytes)},
+    )
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'inline; filename="hiring-report-{candidate_id}.pdf"'},
+    )
 
 
 @router.get("/audit/events", response_model=list[AuditEventResponse])
@@ -2347,15 +2661,183 @@ def get_audit_events_endpoint(
     limit: int = 100,
     event_type: str | None = None,
     subject_id: str | None = None,
+    ctx: dict[str, str] = Depends(require_permission("view_audit_logs")),
 ) -> list[AuditEventResponse]:
     events = database.list_audit_events(limit=limit, event_type=event_type, subject_id=subject_id)
     return [AuditEventResponse(**e) for e in events]
 
 
 @router.get("/audit/verify", response_model=AuditVerificationResponse)
-def verify_audit_trail_endpoint() -> AuditVerificationResponse:
+def verify_audit_trail_endpoint(
+    ctx: dict[str, str] = Depends(require_permission("verify_audit_integrity")),
+) -> AuditVerificationResponse:
     res = database.verify_audit_log_integrity()
+    res.setdefault("status", "VALID" if res.get("verified") else "TAMPER_DETECTED")
+    res.setdefault("event_count", len(database.list_audit_events(limit=10000)))
     return AuditVerificationResponse(**res)
+
+
+# ---------------------------------------------------------------------------
+# Day 54: Optimization & Refinement Routes
+# ---------------------------------------------------------------------------
+
+@router.post("/optimization/run")
+def run_optimization_analysis_endpoint(
+    payload: OptimizationRunRequest,
+    ctx: dict[str, str] = Depends(require_permission("view_optimization")),
+) -> dict[str, Any]:
+    if payload.potential_threshold >= payload.strong_threshold:
+        raise HTTPException(
+            status_code=422,
+            detail="potential_threshold must be lower than strong_threshold.",
+        )
+    result = optimization_engine.run_full_optimization_analysis(
+        strong_threshold=payload.strong_threshold,
+        potential_threshold=payload.potential_threshold,
+        actor_id=ctx["username"],
+        tenant_id=ctx["tenant_id"],
+        save_to_db=True,
+    )
+    security_governance.log_audit_event(
+        event_type="OPTIMIZATION_ANALYSIS_RUN",
+        actor_id=ctx["username"],
+        subject_id="system_optimization",
+        details={
+            "run_id": result.get("run_id"),
+            "strong_threshold": payload.strong_threshold,
+            "potential_threshold": payload.potential_threshold,
+            "accuracy": result.get("metrics", {}).get("accuracy"),
+        },
+    )
+    return result
+
+
+@router.get("/optimization/history")
+def list_optimization_history_endpoint(
+    limit: int = 20,
+    ctx: dict[str, str] = Depends(require_permission("view_optimization")),
+) -> list[dict[str, Any]]:
+    return database.list_optimization_runs(limit=limit)
+
+
+# ---------------------------------------------------------------------------
+# Day 55: Security, Consent, Retention & Governance Routes
+# ---------------------------------------------------------------------------
+
+@router.get("/governance/whoami")
+def get_actor_governance_context_endpoint(
+    ctx: dict[str, str] = Depends(require_recruiter_context),
+) -> dict[str, Any]:
+    matrix = security_governance.get_role_matrix()
+    return {
+        "username": ctx["username"],
+        "role": ctx["role"],
+        "tenant_id": ctx["tenant_id"],
+        "permissions": matrix.get(ctx["role"], []),
+    }
+
+
+@router.get("/governance/rbac-matrix")
+def get_rbac_matrix_endpoint(
+    ctx: dict[str, str] = Depends(require_recruiter_context),
+) -> dict[str, Any]:
+    return {
+        "current_actor": ctx,
+        "roles": security_governance.get_role_matrix(),
+    }
+
+
+@router.post(
+    "/candidates/{candidate_id}/consent",
+    response_model=CandidateConsentResponse,
+    status_code=201,
+)
+def record_candidate_consent_endpoint(
+    candidate_id: str,
+    payload: CandidateConsentCreate,
+    ctx: dict[str, str] = Depends(require_permission("manage_consent")),
+) -> CandidateConsentResponse:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
+    saved = database.record_candidate_consent(
+        candidate_id=candidate_id,
+        purpose=payload.purpose,
+        granted=payload.granted,
+        actor_id=ctx["username"],
+        consent_version=payload.consent_version,
+        notes=payload.notes,
+    )
+    security_governance.log_audit_event(
+        event_type="CONSENT_RECORDED",
+        actor_id=ctx["username"],
+        subject_id=candidate_id,
+        details={
+            "consent_id": saved["consent_id"],
+            "purpose": payload.purpose,
+            "granted": payload.granted,
+            "consent_version": payload.consent_version,
+        },
+    )
+    return CandidateConsentResponse(**saved)
+
+
+@router.get(
+    "/candidates/{candidate_id}/consent",
+    response_model=list[CandidateConsentResponse],
+)
+def list_candidate_consents_endpoint(
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("view_candidates")),
+) -> list[CandidateConsentResponse]:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
+    rows = database.list_candidate_consents(candidate_id)
+    return [CandidateConsentResponse(**r) for r in rows]
+
+
+@router.get("/governance/retention-policies")
+def list_retention_policies_endpoint(
+    ctx: dict[str, str] = Depends(require_permission("view_candidates")),
+) -> list[dict[str, Any]]:
+    return database.get_retention_policies()
+
+
+@router.put("/governance/retention-policies/{data_category}")
+def update_retention_policy_endpoint(
+    data_category: str,
+    payload: RetentionPolicyUpdate,
+    ctx: dict[str, str] = Depends(require_permission("purge_retention")),
+) -> dict[str, Any]:
+    saved = database.save_retention_policy(
+        data_category=data_category,
+        retention_days=payload.retention_days,
+        auto_anonymize=payload.auto_anonymize,
+        description=payload.description,
+    )
+    security_governance.log_audit_event(
+        event_type="RETENTION_POLICY_UPDATED",
+        actor_id=ctx["username"],
+        subject_id=data_category,
+        details=saved,
+    )
+    return saved
+
+
+@router.post("/governance/candidates/{candidate_id}/anonymize")
+def anonymize_candidate_endpoint(
+    candidate_id: str,
+    ctx: dict[str, str] = Depends(require_permission("purge_retention")),
+) -> dict[str, Any]:
+    cand = _candidate_or_404(candidate_id)
+    _enforce_candidate_tenant(cand, ctx)
+    updated = database.anonymize_candidate_for_retention(candidate_id)
+    security_governance.log_audit_event(
+        event_type="CANDIDATE_ANONYMIZED",
+        actor_id=ctx["username"],
+        subject_id=candidate_id,
+        details={"status": "ANONYMIZED", "candidate_id": candidate_id},
+    )
+    return {"status": "ANONYMIZED", "candidate_id": candidate_id, "candidate": updated}
 
 
 @router.post(
@@ -2449,7 +2931,7 @@ async def batch_process_resumes_endpoint(payload: BatchResumeProcessRequest) -> 
 
 @router.get("/monitoring/dashboard", response_model=MonitoringDashboardResponse)
 def get_monitoring_dashboard_endpoint(
-    recruiter: dict = Depends(require_recruiter),
+    recruiter: dict = Depends(require_recruiter_context),
 ) -> MonitoringDashboardResponse:
     summary = observability.get_dashboard_summary()
     return MonitoringDashboardResponse(**summary)
@@ -2457,7 +2939,7 @@ def get_monitoring_dashboard_endpoint(
 
 @router.get("/monitoring/alerts", response_model=list[MonitoringAlertItem])
 def get_monitoring_alerts_endpoint(
-    recruiter: dict = Depends(require_recruiter),
+    recruiter: dict = Depends(require_recruiter_context),
 ) -> list[MonitoringAlertItem]:
     active_alerts = observability.evaluate_alerts()
     return [MonitoringAlertItem(**a) for a in active_alerts]
@@ -2466,7 +2948,7 @@ def get_monitoring_alerts_endpoint(
 @router.get("/monitoring/decision-audit", response_model=list[DecisionAuditLogResponse])
 def get_decision_audit_logs_endpoint(
     limit: int = 50,
-    recruiter: dict = Depends(require_recruiter),
+    recruiter: dict = Depends(require_recruiter_context),
 ) -> list[DecisionAuditLogResponse]:
     events = read_jsonl(observability.log_dir / "decision_audit.jsonl", max_records=limit)
     return [DecisionAuditLogResponse(**e) for e in events]
@@ -2475,7 +2957,7 @@ def get_decision_audit_logs_endpoint(
 @router.post("/monitoring/log-event", status_code=201)
 def log_observability_event_endpoint(
     payload: MonitoringLogEventRequest,
-    recruiter: dict = Depends(require_recruiter),
+    recruiter: dict = Depends(require_recruiter_context),
 ) -> dict[str, Any]:
     event_type = payload.event_type
     p = payload.payload

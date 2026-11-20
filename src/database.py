@@ -622,6 +622,65 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
             created_at TEXT NOT NULL
         );
         CREATE INDEX IF NOT EXISTS coaching_records_cand_idx ON candidate_coaching_records(candidate_id);
+
+        CREATE TABLE IF NOT EXISTS role_weight_configurations (
+            role_key TEXT PRIMARY KEY,
+            weights_json TEXT NOT NULL,
+            min_required_stages INTEGER NOT NULL DEFAULT 3,
+            updated_by TEXT,
+            updated_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS role_decision_thresholds (
+            role_key TEXT PRIMARY KEY,
+            selected_min REAL NOT NULL DEFAULT 80.0,
+            review_min REAL NOT NULL DEFAULT 60.0,
+            confidence_selected_min REAL NOT NULL DEFAULT 75.0,
+            confidence_review_min REAL NOT NULL DEFAULT 50.0,
+            minimum_completed_rounds INTEGER NOT NULL DEFAULT 3,
+            require_complete_for_selected INTEGER NOT NULL DEFAULT 1,
+            updated_by TEXT,
+            updated_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS recommendation_decision_history (
+            history_id TEXT PRIMARY KEY,
+            recommendation_id TEXT NOT NULL REFERENCES final_recommendations(recommendation_id) ON DELETE CASCADE,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            actor_id TEXT NOT NULL,
+            previous_decision TEXT,
+            new_decision TEXT NOT NULL,
+            notes TEXT,
+            created_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS rec_dec_hist_rec_idx ON recommendation_decision_history(recommendation_id, created_at);
+        CREATE TABLE IF NOT EXISTS optimization_runs (
+            run_id TEXT PRIMARY KEY,
+            dataset_name TEXT NOT NULL,
+            strong_threshold REAL NOT NULL,
+            potential_threshold REAL NOT NULL,
+            metrics_json TEXT NOT NULL,
+            benchmark_json TEXT NOT NULL,
+            created_by TEXT,
+            created_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS candidate_consents (
+            consent_id TEXT PRIMARY KEY,
+            candidate_id TEXT NOT NULL REFERENCES candidates(candidate_id) ON DELETE CASCADE,
+            purpose TEXT NOT NULL,
+            granted INTEGER NOT NULL CHECK (granted IN (0, 1)),
+            consent_version TEXT NOT NULL DEFAULT 'consent-v1',
+            actor_id TEXT NOT NULL,
+            tenant_id TEXT NOT NULL DEFAULT 'default_tenant',
+            notes TEXT,
+            created_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS candidate_consents_cand_idx ON candidate_consents(candidate_id, purpose, created_at);
+        CREATE TABLE IF NOT EXISTS retention_policies (
+            data_category TEXT PRIMARY KEY,
+            retention_days INTEGER NOT NULL,
+            action TEXT NOT NULL DEFAULT 'delete_or_anonymize_after_expiry',
+            legal_hold_exempt INTEGER NOT NULL DEFAULT 0,
+            updated_at TEXT NOT NULL
+        );
         """
     )
     opening_columns = {
@@ -632,6 +691,10 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
     if "minimum_years_experience" not in opening_columns:
         connection.execute(
             "ALTER TABLE openings ADD COLUMN minimum_years_experience REAL"
+        )
+    if "tenant_id" not in opening_columns:
+        connection.execute(
+            "ALTER TABLE openings ADD COLUMN tenant_id TEXT NOT NULL DEFAULT 'default_tenant'"
         )
     candidate_columns = {
         row["name"] for row in connection.execute("PRAGMA table_info(candidates)")
@@ -645,10 +708,57 @@ def _connection() -> Generator[sqlite3.Connection, None, None]:
         ("relocation_willingness", "INTEGER"),
         ("work_mode_preference", "TEXT"),
         ("availability_date", "TEXT"),
+        ("tenant_id", "TEXT NOT NULL DEFAULT 'default_tenant'"),
     ):
         if column not in candidate_columns:
             connection.execute(
                 f"ALTER TABLE candidates ADD COLUMN {column} {definition}"
+            )
+    recruiter_columns = {
+        row["name"] for row in connection.execute("PRAGMA table_info(recruiter_accounts)")
+    }
+    for column, definition in (
+        ("role", "TEXT NOT NULL DEFAULT 'admin'"),
+        ("tenant_id", "TEXT NOT NULL DEFAULT 'default_tenant'"),
+    ):
+        if column not in recruiter_columns:
+            connection.execute(
+                f"ALTER TABLE recruiter_accounts ADD COLUMN {column} {definition}"
+            )
+    cross_round_columns = {
+        row["name"] for row in connection.execute("PRAGMA table_info(cross_round_evaluations)")
+    }
+    for column, definition in (
+        ("score_version", "TEXT NOT NULL DEFAULT 'day51-v1'"),
+        ("stage_status_json", "TEXT NOT NULL DEFAULT '{}'"),
+        ("normalized_weights_json", "TEXT NOT NULL DEFAULT '{}'"),
+        ("calculation_status", "TEXT NOT NULL DEFAULT 'COMPLETED'"),
+        ("recalculation_reason", "TEXT"),
+        ("version", "INTEGER NOT NULL DEFAULT 1"),
+        ("tenant_id", "TEXT NOT NULL DEFAULT 'default_tenant'"),
+        ("input_fingerprint", "TEXT"),
+    ):
+        if column not in cross_round_columns:
+            connection.execute(
+                f"ALTER TABLE cross_round_evaluations ADD COLUMN {column} {definition}"
+            )
+    final_rec_columns = {
+        row["name"] for row in connection.execute("PRAGMA table_info(final_recommendations)")
+    }
+    for column, definition in (
+        ("reason_codes_json", "TEXT NOT NULL DEFAULT '[]'"),
+        ("strengths_json", "TEXT NOT NULL DEFAULT '[]'"),
+        ("weaknesses_json", "TEXT NOT NULL DEFAULT '[]'"),
+        ("missing_evidence_json", "TEXT NOT NULL DEFAULT '[]'"),
+        ("threshold_config_json", "TEXT NOT NULL DEFAULT '{}'"),
+        ("confidence_methodology", "TEXT NOT NULL DEFAULT 'Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)'"),
+        ("eligibility_status", "TEXT NOT NULL DEFAULT 'UNKNOWN'"),
+        ("decided_by_actor", "TEXT"),
+        ("tenant_id", "TEXT NOT NULL DEFAULT 'default_tenant'"),
+    ):
+        if column not in final_rec_columns:
+            connection.execute(
+                f"ALTER TABLE final_recommendations ADD COLUMN {column} {definition}"
             )
     try:
         yield connection
@@ -751,7 +861,7 @@ def get_recruiter_account(username: str) -> dict[str, str] | None:
     with _connection() as connection:
         row = connection.execute(
             """
-            SELECT username, password_salt, password_hash
+            SELECT username, password_salt, password_hash, role, tenant_id, created_at
             FROM recruiter_accounts WHERE username = ?
             """,
             (username,),
@@ -770,7 +880,11 @@ def has_recruiter_accounts() -> bool:
 
 
 def create_first_recruiter_account(
-    username: str, password_salt: str, password_hash: str
+    username: str,
+    password_salt: str,
+    password_hash: str,
+    role: str = "admin",
+    tenant_id: str = "default_tenant",
 ) -> None:
     with _connection() as connection:
         connection.execute("BEGIN IMMEDIATE")
@@ -781,11 +895,57 @@ def create_first_recruiter_account(
         connection.execute(
             """
             INSERT INTO recruiter_accounts (
-                username, password_salt, password_hash, created_at
-            ) VALUES (?, ?, ?, ?)
+                username, password_salt, password_hash, role, tenant_id, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?)
             """,
-            (username, password_salt, password_hash, _now()),
+            (username, password_salt, password_hash, role, tenant_id, _now()),
         )
+
+
+def upsert_recruiter_account(
+    username: str,
+    password_salt: str,
+    password_hash: str,
+    role: str = "recruiter",
+    tenant_id: str = "default_tenant",
+) -> dict[str, str]:
+    now = _now()
+    with _connection() as connection:
+        existing = connection.execute(
+            "SELECT username FROM recruiter_accounts WHERE username = ?",
+            (username,),
+        ).fetchone()
+        if existing:
+            connection.execute(
+                """
+                UPDATE recruiter_accounts
+                SET password_salt = ?, password_hash = ?, role = ?, tenant_id = ?
+                WHERE username = ?
+                """,
+                (password_salt, password_hash, role, tenant_id, username),
+            )
+        else:
+            connection.execute(
+                """
+                INSERT INTO recruiter_accounts (
+                    username, password_salt, password_hash, role, tenant_id, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (username, password_salt, password_hash, role, tenant_id, now),
+            )
+    return {
+        "username": username,
+        "role": role,
+        "tenant_id": tenant_id,
+    }
+
+
+def list_recruiter_accounts() -> list[dict[str, str]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            "SELECT username, role, tenant_id, created_at FROM recruiter_accounts ORDER BY created_at"
+        ).fetchall()
+        return [dict(r) for r in rows]
 
 
 def reset_recruiter_account(
@@ -933,8 +1093,8 @@ def create_opening(data: dict[str, Any]) -> dict[str, Any]:
             INSERT INTO openings (
                 opening_id, title, description, required_skills,
                 preferred_skills, minimum_education,
-                minimum_years_experience, status, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, 'OPEN', ?, ?)
+                minimum_years_experience, status, tenant_id, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, 'OPEN', ?, ?, ?)
             """,
             (
                 opening_id,
@@ -944,6 +1104,7 @@ def create_opening(data: dict[str, Any]) -> dict[str, Any]:
                 json.dumps(data.get("preferred_skills", [])),
                 data.get("minimum_education"),
                 data.get("minimum_years_experience"),
+                data.get("tenant_id") or "default_tenant",
                 now,
                 now,
             ),
@@ -979,17 +1140,24 @@ def save_opening(
     })
 
 
-def list_openings(status: str | None = None) -> list[dict[str, Any]]:
+def list_openings(
+    status: str | None = None,
+    tenant_id: str | None = None,
+) -> list[dict[str, Any]]:
+    conditions = []
+    params: list[str] = []
+    if status:
+        conditions.append("status = ?")
+        params.append(status)
+    if tenant_id:
+        conditions.append("tenant_id = ?")
+        params.append(tenant_id)
+    where_clause = f" WHERE {' AND '.join(conditions)}" if conditions else ""
     with _connection() as connection:
-        if status:
-            rows = connection.execute(
-                "SELECT * FROM openings WHERE status = ? ORDER BY created_at",
-                (status,),
-            ).fetchall()
-        else:
-            rows = connection.execute(
-                "SELECT * FROM openings ORDER BY created_at"
-            ).fetchall()
+        rows = connection.execute(
+            f"SELECT * FROM openings{where_clause} ORDER BY created_at",
+            tuple(params),
+        ).fetchall()
         return [_opening(row) or {} for row in rows]
 
 
@@ -1093,14 +1261,23 @@ def create_candidate(data: dict[str, Any] | None = None, **kwargs) -> dict[str, 
     candidate_id = payload.get("candidate_id") or _generate_id("cand")
     now = _now()
     with _connection() as connection:
+        op_row = connection.execute(
+            "SELECT tenant_id FROM openings WHERE opening_id = ?",
+            (payload["opening_id"],),
+        ).fetchone()
+        resolved_tenant = (
+            payload.get("tenant_id")
+            or (op_row["tenant_id"] if op_row and "tenant_id" in op_row.keys() else None)
+            or "default_tenant"
+        )
         connection.execute(
             """
             INSERT INTO candidates (
                 candidate_id, name, email, opening_id, skills, resume_text,
                 resume_data, location, relocation_willingness,
                 work_mode_preference, availability_date, application_status,
-                created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, '{}', ?, ?, ?, ?, 'APPLIED', ?, ?)
+                tenant_id, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, '{}', ?, ?, ?, ?, 'APPLIED', ?, ?, ?)
             """,
             (
                 candidate_id,
@@ -1117,6 +1294,7 @@ def create_candidate(data: dict[str, Any] | None = None, **kwargs) -> dict[str, 
                 ),
                 payload.get("work_mode_preference"),
                 payload.get("availability_date"),
+                resolved_tenant,
                 now,
                 now,
             ),
@@ -1132,6 +1310,7 @@ def create_candidate(data: dict[str, Any] | None = None, **kwargs) -> dict[str, 
 def list_candidates(
     opening_id: str | None = None,
     application_status: str | None = None,
+    tenant_id: str | None = None,
 ) -> list[dict[str, Any]]:
     conditions = []
     parameters: list[str] = []
@@ -1141,6 +1320,9 @@ def list_candidates(
     if application_status:
         conditions.append("application_status = ?")
         parameters.append(application_status)
+    if tenant_id:
+        conditions.append("tenant_id = ?")
+        parameters.append(tenant_id)
     where_clause = f" WHERE {' AND '.join(conditions)}" if conditions else ""
     with _connection() as connection:
         rows = connection.execute(
@@ -3401,6 +3583,21 @@ def get_candidate_behavioral_records(candidate_id: str) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 
 
+def _hydrate_cross_round_row(row: sqlite3.Row | dict[str, Any]) -> dict[str, Any]:
+    rec = dict(row)
+    rec["round_scores"] = json.loads(rec.get("round_scores_json") or "{}")
+    rec["effective_weights"] = json.loads(rec.get("effective_weights_json") or "{}")
+    rec["missing_rounds"] = json.loads(rec.get("missing_rounds_json") or "[]")
+    rec["anomalies"] = json.loads(rec.get("anomalies_json") or "[]")
+    rec["stage_status"] = json.loads(rec.get("stage_status_json") or "{}")
+    rec["normalized_weights"] = json.loads(rec.get("normalized_weights_json") or "{}")
+    rec["score_version"] = rec.get("score_version") or "day51-v1"
+    rec["calculation_status"] = rec.get("calculation_status") or "COMPLETED"
+    rec["version"] = int(rec.get("version") or 1)
+    rec["tenant_id"] = rec.get("tenant_id") or "default_tenant"
+    return rec
+
+
 def save_cross_round_evaluation(
     candidate_id: str | dict[str, Any],
     opening_id: str = "",
@@ -3412,30 +3609,61 @@ def save_cross_round_evaluation(
     missing_rounds: list[str] | None = None,
     anomalies: list[str] | None = None,
     evaluation_id: str | None = None,
+    score_version: str = "day51-v1",
+    stage_status: dict[str, str] | None = None,
+    normalized_weights: dict[str, float] | None = None,
+    calculation_status: str = "COMPLETED",
+    recalculation_reason: str | None = None,
+    tenant_id: str = "default_tenant",
+    input_fingerprint: str | None = None,
 ) -> dict[str, Any]:
     if isinstance(candidate_id, dict):
         d = candidate_id
         candidate_id = d.get("candidate_id", "")
         opening_id = d.get("opening_id", "")
         target_role = d.get("target_role", "")
-        hiring_fit_percentage = float(d.get("hiring_fit_percentage", 0.0))
+        _hf_val = d.get("hiring_fit_percentage", d.get("hiring_fit_score"))
+        hiring_fit_percentage = float(_hf_val) if _hf_val is not None else 0.0
         round_scores = d.get("round_scores", {})
         effective_weights = d.get("effective_weights", {})
         completed_rounds = int(d.get("completed_rounds", 0))
         missing_rounds = d.get("missing_rounds", [])
         anomalies = d.get("anomalies", [])
         evaluation_id = d.get("evaluation_id")
+        score_version = d.get("score_version", score_version)
+        stage_status = d.get("stage_status", stage_status)
+        normalized_weights = d.get("normalized_weights", normalized_weights)
+        calculation_status = d.get("calculation_status", calculation_status)
+        recalculation_reason = d.get("recalculation_reason", recalculation_reason)
+        tenant_id = d.get("tenant_id", tenant_id)
+        input_fingerprint = d.get("input_fingerprint", input_fingerprint)
 
     evaluation_id = evaluation_id or _generate_id("cross_eval")
     now = _now()
     with _connection() as connection:
+        cand_row = connection.execute(
+            "SELECT tenant_id FROM candidates WHERE candidate_id = ?",
+            (candidate_id,),
+        ).fetchone()
+        if cand_row and "tenant_id" in cand_row.keys() and cand_row["tenant_id"]:
+            tenant_id = cand_row["tenant_id"]
+
+        prev = connection.execute(
+            "SELECT MAX(version) as max_v FROM cross_round_evaluations WHERE candidate_id = ?",
+            (candidate_id,),
+        ).fetchone()
+        version = (int(prev["max_v"]) if prev and prev["max_v"] is not None else 0) + 1
+
         connection.execute(
             """
             INSERT INTO cross_round_evaluations (
                 evaluation_id, candidate_id, opening_id, target_role,
                 hiring_fit_percentage, round_scores_json, effective_weights_json,
-                completed_rounds, missing_rounds_json, anomalies_json, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                completed_rounds, missing_rounds_json, anomalies_json,
+                score_version, stage_status_json, normalized_weights_json,
+                calculation_status, recalculation_reason, version, tenant_id,
+                input_fingerprint, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 evaluation_id,
@@ -3443,11 +3671,19 @@ def save_cross_round_evaluation(
                 opening_id,
                 target_role,
                 hiring_fit_percentage,
-                json.dumps(round_scores),
-                json.dumps(effective_weights),
+                json.dumps(round_scores or {}),
+                json.dumps(effective_weights or {}),
                 completed_rounds,
-                json.dumps(missing_rounds),
-                json.dumps(anomalies),
+                json.dumps(missing_rounds or []),
+                json.dumps(anomalies or []),
+                score_version,
+                json.dumps(stage_status or {}),
+                json.dumps(normalized_weights or effective_weights or {}),
+                calculation_status,
+                recalculation_reason,
+                version,
+                tenant_id,
+                input_fingerprint,
                 now,
             ),
         )
@@ -3462,34 +3698,57 @@ def get_cross_round_evaluation(evaluation_id: str) -> dict[str, Any] | None:
         ).fetchone()
         if not row:
             return None
-        rec = dict(row)
-        rec["round_scores"] = json.loads(rec.get("round_scores_json") or "{}")
-        rec["effective_weights"] = json.loads(rec.get("effective_weights_json") or "{}")
-        rec["missing_rounds"] = json.loads(rec.get("missing_rounds_json") or "[]")
-        rec["anomalies"] = json.loads(rec.get("anomalies_json") or "[]")
-        return rec
+        return _hydrate_cross_round_row(row)
 
 
 def list_cross_round_evaluations(candidate_id: str) -> list[dict[str, Any]]:
     with _connection() as connection:
         rows = connection.execute(
-            "SELECT * FROM cross_round_evaluations WHERE candidate_id = ? ORDER BY created_at DESC",
+            "SELECT * FROM cross_round_evaluations WHERE candidate_id = ? ORDER BY version DESC, created_at DESC",
             (candidate_id,),
         ).fetchall()
-        results = []
-        for r in rows:
-            rec = dict(r)
-            rec["round_scores"] = json.loads(rec.get("round_scores_json") or "{}")
-            rec["effective_weights"] = json.loads(rec.get("effective_weights_json") or "{}")
-            rec["missing_rounds"] = json.loads(rec.get("missing_rounds_json") or "[]")
-            rec["anomalies"] = json.loads(rec.get("anomalies_json") or "[]")
-            results.append(rec)
-        return results
+        return [_hydrate_cross_round_row(r) for r in rows]
+
+
+def get_cross_round_evaluation_by_fingerprint(
+    candidate_id: str, opening_id: str, input_fingerprint: str
+) -> dict[str, Any] | None:
+    with _connection() as connection:
+        row = connection.execute(
+            """
+            SELECT * FROM cross_round_evaluations
+            WHERE candidate_id = ? AND opening_id = ? AND input_fingerprint = ?
+            ORDER BY version DESC, created_at DESC LIMIT 1
+            """,
+            (candidate_id, opening_id, input_fingerprint),
+        ).fetchone()
+        return _hydrate_cross_round_row(row) if row else None
 
 
 # ---------------------------------------------------------------------------
 # Day 52: Final Recommendation Database Functions
 # ---------------------------------------------------------------------------
+
+
+def _hydrate_final_recommendation_row(row: sqlite3.Row | dict[str, Any]) -> dict[str, Any]:
+    rec = dict(row)
+    rec["reasons"] = json.loads(rec.get("reasons_json") or "[]")
+    rec["risk_factors"] = json.loads(rec.get("risk_factors_json") or "{}")
+    rec["reason_codes"] = json.loads(rec.get("reason_codes_json") or "[]")
+    rec["strengths"] = json.loads(rec.get("strengths_json") or "[]")
+    rec["weaknesses"] = json.loads(rec.get("weaknesses_json") or "[]")
+    rec["missing_evidence"] = json.loads(rec.get("missing_evidence_json") or "[]")
+    rec["threshold_config"] = json.loads(rec.get("threshold_config_json") or "{}")
+    rec["confidence_methodology"] = (
+        rec.get("confidence_methodology")
+        or "Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)"
+    )
+    rec["eligibility_status"] = rec.get("eligibility_status") or "UNKNOWN"
+    rec["tenant_id"] = rec.get("tenant_id") or "default_tenant"
+    rec["confidence_interpretation"] = (
+        "Evidence completeness indicator; not a probability of job success."
+    )
+    return rec
 
 
 def save_final_recommendation(
@@ -3506,20 +3765,39 @@ def save_final_recommendation(
     recruiter_decision: str = "PENDING_REVIEW",
     recruiter_notes: str | None = None,
     recommendation_id: str | None = None,
+    reason_codes: list[str] | None = None,
+    strengths: list[str] | None = None,
+    weaknesses: list[str] | None = None,
+    missing_evidence: list[str] | None = None,
+    threshold_config: dict[str, Any] | None = None,
+    confidence_methodology: str = "Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)",
+    eligibility_status: str = "UNKNOWN",
+    tenant_id: str = "default_tenant",
 ) -> dict[str, Any]:
     recommendation_id = recommendation_id or _generate_id("final_rec")
     now = _now()
     reasons_list = reasons or []
     risks_dict = risk_factors or {}
     with _connection() as connection:
+        cand_row = connection.execute(
+            "SELECT tenant_id FROM candidates WHERE candidate_id = ?",
+            (candidate_id,),
+        ).fetchone()
+        if cand_row and "tenant_id" in cand_row.keys() and cand_row["tenant_id"]:
+            tenant_id = cand_row["tenant_id"]
+
         connection.execute(
             """
             INSERT INTO final_recommendations (
                 recommendation_id, candidate_id, opening_id, target_role,
                 decision, score, confidence, completed_rounds, expected_rounds,
                 reasons_json, risk_factors_json, recruiter_decision,
-                recruiter_notes, recruiter_decided_at, created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                recruiter_notes, recruiter_decided_at,
+                reason_codes_json, strengths_json, weaknesses_json,
+                missing_evidence_json, threshold_config_json,
+                confidence_methodology, eligibility_status, tenant_id,
+                created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 recommendation_id,
@@ -3536,6 +3814,14 @@ def save_final_recommendation(
                 recruiter_decision,
                 recruiter_notes,
                 now if recruiter_decision != "PENDING_REVIEW" else None,
+                json.dumps(reason_codes or []),
+                json.dumps(strengths or []),
+                json.dumps(weaknesses or []),
+                json.dumps(missing_evidence or []),
+                json.dumps(threshold_config or {}),
+                confidence_methodology,
+                eligibility_status,
+                tenant_id,
                 now,
                 now,
             ),
@@ -3551,11 +3837,7 @@ def get_final_recommendation(recommendation_id: str) -> dict[str, Any] | None:
         ).fetchone()
         if not row:
             return None
-        rec = dict(row)
-        rec["reasons"] = json.loads(rec.get("reasons_json") or "[]")
-        rec["risk_factors"] = json.loads(rec.get("risk_factors_json") or "{}")
-        rec["confidence_interpretation"] = "Evidence completeness indicator; not a probability of job success."
-        return rec
+        return _hydrate_final_recommendation_row(row)
 
 
 def list_final_recommendations(candidate_id: str | None = None) -> list[dict[str, Any]]:
@@ -3569,32 +3851,74 @@ def list_final_recommendations(candidate_id: str | None = None) -> list[dict[str
             rows = connection.execute(
                 "SELECT * FROM final_recommendations ORDER BY created_at DESC"
             ).fetchall()
-        results = []
-        for r in rows:
-            rec = dict(r)
-            rec["reasons"] = json.loads(rec.get("reasons_json") or "[]")
-            rec["risk_factors"] = json.loads(rec.get("risk_factors_json") or "{}")
-            rec["confidence_interpretation"] = "Evidence completeness indicator; not a probability of job success."
-            results.append(rec)
-        return results
+        return [_hydrate_final_recommendation_row(r) for r in rows]
 
 
 def update_final_recommendation_decision(
     recommendation_id: str,
     recruiter_decision: str,
     recruiter_notes: str | None = None,
+    actor_id: str = "recruiter",
 ) -> dict[str, Any] | None:
     now = _now()
+    history_id = _generate_id("rec_hist")
     with _connection() as connection:
+        prev = connection.execute(
+            "SELECT candidate_id, recruiter_decision FROM final_recommendations WHERE recommendation_id = ?",
+            (recommendation_id,),
+        ).fetchone()
+        if prev is None:
+            return None
         connection.execute(
             """
             UPDATE final_recommendations
-            SET recruiter_decision = ?, recruiter_notes = ?, recruiter_decided_at = ?, updated_at = ?
+            SET recruiter_decision = ?, recruiter_notes = ?, decided_by_actor = ?,
+                recruiter_decided_at = ?, updated_at = ?
             WHERE recommendation_id = ?
             """,
-            (recruiter_decision, recruiter_notes, now, now, recommendation_id),
+            (recruiter_decision, recruiter_notes, actor_id, now, now, recommendation_id),
+        )
+        connection.execute(
+            """
+            INSERT INTO recommendation_decision_history (
+                history_id, recommendation_id, candidate_id, actor_id,
+                previous_decision, new_decision, notes, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                history_id,
+                recommendation_id,
+                prev["candidate_id"],
+                actor_id,
+                prev["recruiter_decision"],
+                recruiter_decision,
+                recruiter_notes,
+                now,
+            ),
         )
     return get_final_recommendation(recommendation_id)
+
+
+def list_recommendation_decision_history(
+    recommendation_id: str | None = None,
+    candidate_id: str | None = None,
+) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        if recommendation_id:
+            rows = connection.execute(
+                "SELECT * FROM recommendation_decision_history WHERE recommendation_id = ? ORDER BY created_at DESC",
+                (recommendation_id,),
+            ).fetchall()
+        elif candidate_id:
+            rows = connection.execute(
+                "SELECT * FROM recommendation_decision_history WHERE candidate_id = ? ORDER BY created_at DESC",
+                (candidate_id,),
+            ).fetchall()
+        else:
+            rows = connection.execute(
+                "SELECT * FROM recommendation_decision_history ORDER BY created_at DESC LIMIT 100"
+            ).fetchall()
+        return [dict(r) for r in rows]
 
 
 def save_hiring_intelligence_report(
@@ -3864,3 +4188,366 @@ def get_latest_coaching_record(candidate_id: str) -> dict[str, Any] | None:
         rec["recommended_preparation"] = json.loads(rec.get("recommended_preparation_json") or "[]")
         rec["practice_questions"] = json.loads(rec.get("practice_questions_json") or "[]")
         return rec
+
+
+# ---------------------------------------------------------------------------
+# Days 51–55 Extensions: Role Configs, Optimization Runs, Consents, Retention
+# ---------------------------------------------------------------------------
+
+
+def save_role_weight_configuration(
+    role_key: str,
+    weights: dict[str, float],
+    min_required_stages: int = 3,
+    updated_by: str = "system",
+) -> dict[str, Any]:
+    clean_role = role_key.lower().strip().replace(" ", "_")
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO role_weight_configurations (
+                role_key, weights_json, min_required_stages, updated_by, updated_at
+            ) VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT(role_key) DO UPDATE SET
+                weights_json = excluded.weights_json,
+                min_required_stages = excluded.min_required_stages,
+                updated_by = excluded.updated_by,
+                updated_at = excluded.updated_at
+            """,
+            (clean_role, json.dumps(weights), int(min_required_stages), updated_by, now),
+        )
+    return get_role_weight_configuration(clean_role)  # type: ignore[return-value]
+
+
+def get_role_weight_configuration(role_key: str) -> dict[str, Any] | None:
+    clean_role = role_key.lower().strip().replace(" ", "_")
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM role_weight_configurations WHERE role_key = ?",
+            (clean_role,),
+        ).fetchone()
+        if not row:
+            return None
+        rec = dict(row)
+        rec["weights"] = json.loads(rec.get("weights_json") or "{}")
+        return rec
+
+
+def list_role_weight_configurations() -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            "SELECT * FROM role_weight_configurations ORDER BY role_key"
+        ).fetchall()
+        results = []
+        for r in rows:
+            rec = dict(r)
+            rec["weights"] = json.loads(rec.get("weights_json") or "{}")
+            results.append(rec)
+        return results
+
+
+def save_role_decision_threshold(
+    role_key: str,
+    selected_min: float = 80.0,
+    review_min: float = 60.0,
+    confidence_selected_min: float = 75.0,
+    confidence_review_min: float = 50.0,
+    minimum_completed_rounds: int = 3,
+    require_complete_for_selected: bool = True,
+    updated_by: str = "system",
+) -> dict[str, Any]:
+    clean_role = role_key.lower().strip().replace(" ", "_")
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO role_decision_thresholds (
+                role_key, selected_min, review_min, confidence_selected_min,
+                confidence_review_min, minimum_completed_rounds,
+                require_complete_for_selected, updated_by, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(role_key) DO UPDATE SET
+                selected_min = excluded.selected_min,
+                review_min = excluded.review_min,
+                confidence_selected_min = excluded.confidence_selected_min,
+                confidence_review_min = excluded.confidence_review_min,
+                minimum_completed_rounds = excluded.minimum_completed_rounds,
+                require_complete_for_selected = excluded.require_complete_for_selected,
+                updated_by = excluded.updated_by,
+                updated_at = excluded.updated_at
+            """,
+            (
+                clean_role,
+                float(selected_min),
+                float(review_min),
+                float(confidence_selected_min),
+                float(confidence_review_min),
+                int(minimum_completed_rounds),
+                1 if require_complete_for_selected else 0,
+                updated_by,
+                now,
+            ),
+        )
+    return get_role_decision_threshold(clean_role)  # type: ignore[return-value]
+
+
+def get_role_decision_threshold(role_key: str) -> dict[str, Any] | None:
+    clean_role = role_key.lower().strip().replace(" ", "_")
+    with _connection() as connection:
+        row = connection.execute(
+            "SELECT * FROM role_decision_thresholds WHERE role_key = ?",
+            (clean_role,),
+        ).fetchone()
+        if not row:
+            return None
+        rec = dict(row)
+        rec["require_complete_for_selected"] = bool(rec["require_complete_for_selected"])
+        return rec
+
+
+def list_role_decision_thresholds() -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            "SELECT * FROM role_decision_thresholds ORDER BY role_key"
+        ).fetchall()
+        results = []
+        for r in rows:
+            rec = dict(r)
+            rec["require_complete_for_selected"] = bool(rec["require_complete_for_selected"])
+            results.append(rec)
+        return results
+
+
+def list_all_cross_round_evaluations(
+    tenant_id: str | None = None,
+    limit: int = 200,
+) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        if tenant_id:
+            rows = connection.execute(
+                "SELECT * FROM cross_round_evaluations WHERE tenant_id = ? ORDER BY created_at DESC LIMIT ?",
+                (tenant_id, limit),
+            ).fetchall()
+        else:
+            rows = connection.execute(
+                "SELECT * FROM cross_round_evaluations ORDER BY created_at DESC LIMIT ?",
+                (limit,),
+            ).fetchall()
+        return [_hydrate_cross_round_row(r) for r in rows]
+
+
+def save_optimization_run(
+    dataset_name: str,
+    strong_threshold: float,
+    potential_threshold: float,
+    metrics: dict[str, Any],
+    benchmark: dict[str, Any],
+    created_by: str = "system",
+    run_id: str | None = None,
+) -> dict[str, Any]:
+    run_id = run_id or _generate_id("opt_run")
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO optimization_runs (
+                run_id, dataset_name, strong_threshold, potential_threshold,
+                metrics_json, benchmark_json, created_by, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                run_id,
+                dataset_name,
+                float(strong_threshold),
+                float(potential_threshold),
+                json.dumps(metrics),
+                json.dumps(benchmark),
+                created_by,
+                now,
+            ),
+        )
+    return {
+        "run_id": run_id,
+        "dataset_name": dataset_name,
+        "strong_threshold": strong_threshold,
+        "potential_threshold": potential_threshold,
+        "metrics": metrics,
+        "benchmark": benchmark,
+        "created_by": created_by,
+        "created_at": now,
+    }
+
+
+def list_optimization_runs(limit: int = 20) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            "SELECT * FROM optimization_runs ORDER BY created_at DESC LIMIT ?",
+            (limit,),
+        ).fetchall()
+        results = []
+        for r in rows:
+            rec = dict(r)
+            rec["metrics"] = json.loads(rec.get("metrics_json") or "{}")
+            rec["benchmark"] = json.loads(rec.get("benchmark_json") or "{}")
+            results.append(rec)
+        return results
+
+
+def record_candidate_consent(
+    candidate_id: str,
+    purpose: str,
+    granted: bool,
+    actor_id: str,
+    consent_version: str = "consent-v1",
+    notes: str | None = None,
+    consent_id: str | None = None,
+) -> dict[str, Any]:
+    consent_id = consent_id or _generate_id("consent")
+    now = _now()
+    with _connection() as connection:
+        cand = connection.execute(
+            "SELECT tenant_id FROM candidates WHERE candidate_id = ?",
+            (candidate_id,),
+        ).fetchone()
+        tenant_id = (
+            cand["tenant_id"]
+            if cand and "tenant_id" in cand.keys() and cand["tenant_id"]
+            else "default_tenant"
+        )
+        connection.execute(
+            """
+            INSERT INTO candidate_consents (
+                consent_id, candidate_id, purpose, granted, consent_version,
+                actor_id, tenant_id, notes, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                consent_id,
+                candidate_id,
+                purpose,
+                1 if granted else 0,
+                consent_version,
+                actor_id,
+                tenant_id,
+                notes,
+                now,
+            ),
+        )
+    return {
+        "consent_id": consent_id,
+        "candidate_id": candidate_id,
+        "purpose": purpose,
+        "granted": bool(granted),
+        "consent_version": consent_version,
+        "actor_id": actor_id,
+        "tenant_id": tenant_id,
+        "notes": notes,
+        "created_at": now,
+    }
+
+
+def list_candidate_consents(candidate_id: str) -> list[dict[str, Any]]:
+    with _connection() as connection:
+        rows = connection.execute(
+            "SELECT * FROM candidate_consents WHERE candidate_id = ? ORDER BY created_at DESC",
+            (candidate_id,),
+        ).fetchall()
+        results = []
+        for r in rows:
+            rec = dict(r)
+            rec["granted"] = bool(rec["granted"])
+            results.append(rec)
+        return results
+
+
+def has_active_candidate_consent(candidate_id: str, purpose: str) -> bool:
+    with _connection() as connection:
+        row = connection.execute(
+            """
+            SELECT granted FROM candidate_consents
+            WHERE candidate_id = ? AND purpose = ?
+            ORDER BY created_at DESC, rowid DESC LIMIT 1
+            """,
+            (candidate_id, purpose),
+        ).fetchone()
+        return bool(row and row["granted"] == 1)
+
+
+def get_retention_policies() -> list[dict[str, Any]]:
+    defaults = [
+        ("transcripts", 90, "delete_or_anonymize_after_expiry", 0),
+        ("reports", 365, "archive_or_anonymize_after_expiry", 0),
+        ("audit_logs", 730, "preserve_for_compliance_audit", 1),
+        ("consent_records", 730, "preserve_proof_of_consent", 1),
+        ("resumes", 180, "delete_or_anonymize_after_expiry", 0),
+    ]
+    now = _now()
+    with _connection() as connection:
+        for cat, days, action, exempt in defaults:
+            connection.execute(
+                """
+                INSERT OR IGNORE INTO retention_policies (
+                    data_category, retention_days, action, legal_hold_exempt, updated_at
+                ) VALUES (?, ?, ?, ?, ?)
+                """,
+                (cat, days, action, exempt, now),
+            )
+        rows = connection.execute(
+            "SELECT * FROM retention_policies ORDER BY data_category"
+        ).fetchall()
+        results = []
+        for r in rows:
+            rec = dict(r)
+            rec["legal_hold_exempt"] = bool(rec["legal_hold_exempt"])
+            results.append(rec)
+        return results
+
+
+def save_retention_policy(
+    data_category: str,
+    retention_days: int,
+    action: str = "delete_or_anonymize_after_expiry",
+    legal_hold_exempt: bool = False,
+) -> dict[str, Any]:
+    now = _now()
+    with _connection() as connection:
+        connection.execute(
+            """
+            INSERT INTO retention_policies (
+                data_category, retention_days, action, legal_hold_exempt, updated_at
+            ) VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT(data_category) DO UPDATE SET
+                retention_days = excluded.retention_days,
+                action = excluded.action,
+                legal_hold_exempt = excluded.legal_hold_exempt,
+                updated_at = excluded.updated_at
+            """,
+            (data_category, int(retention_days), action, 1 if legal_hold_exempt else 0, now),
+        )
+    policies = [p for p in get_retention_policies() if p["data_category"] == data_category]
+    return policies[0]
+
+
+def anonymize_candidate_for_retention(candidate_id: str) -> bool:
+    """Controlled deletion/anonymization of PII while preserving hash-chained audit logs."""
+    now = _now()
+    with _connection() as connection:
+        cursor = connection.execute(
+            """
+            UPDATE candidates
+            SET name = '[REDACTED_BY_RETENTION]',
+                email = NULL,
+                resume_text = '[PURGED]',
+                resume_data = '{}',
+                location = NULL,
+                updated_at = ?
+            WHERE candidate_id = ?
+            """,
+            (now, candidate_id),
+        )
+        connection.execute(
+            "UPDATE processing_jobs SET result = NULL, error = NULL WHERE candidate_id = ?",
+            (candidate_id,),
+        )
+        return cursor.rowcount > 0

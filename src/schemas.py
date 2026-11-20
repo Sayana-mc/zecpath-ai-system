@@ -1060,7 +1060,11 @@ class CrossRoundEvaluationRequest(BaseModel):
     opening_id: str | None = None
     target_role: str | None = None
     round_scores: dict[str, float] | None = None
+    stage_status: dict[str, str] | None = None
     role_weights: dict[str, float] | None = None
+    min_required_stages: int = 1
+    recalculation_reason: str | None = None
+    force_recalculate: bool = False
     missing_strategy: Literal["exclude_and_renormalize", "strict_zero", "flag_review"] = "exclude_and_renormalize"
 
 
@@ -1070,12 +1074,57 @@ class CrossRoundEvaluationResponse(BaseModel):
     opening_id: str
     target_role: str
     hiring_fit_percentage: float
+    hiring_fit_score: float | None = None
+    score_version: str = "day51-v1"
     round_scores: dict[str, Any]
+    stage_status: dict[str, str] = Field(default_factory=dict)
     effective_weights: dict[str, Any]
+    normalized_weights: dict[str, Any] = Field(default_factory=dict)
+    configured_weights: dict[str, Any] = Field(default_factory=dict)
     completed_rounds: int
     missing_rounds: list[str]
     anomalies: list[str]
+    calculation_status: str = "COMPLETED"
+    recalculation_reason: str | None = None
+    version: int = 1
+    duplicate_prevented: bool = False
     created_at: str
+
+
+class RoleWeightConfigurationRequest(BaseModel):
+    role_key: str | None = None
+    weights: dict[str, float]
+    min_required_stages: int = Field(default=3, ge=1, le=5)
+
+
+class RoleWeightConfigurationResponse(BaseModel):
+    role_key: str
+    weights: dict[str, float]
+    min_required_stages: int
+    updated_by: str | None = None
+    updated_at: str
+
+
+class RoleDecisionThresholdRequest(BaseModel):
+    role_key: str | None = None
+    selected_min: float = Field(default=80.0, ge=0, le=100)
+    review_min: float = Field(default=60.0, ge=0, le=100)
+    confidence_selected_min: float = Field(default=75.0, ge=0, le=100)
+    confidence_review_min: float = Field(default=50.0, ge=0, le=100)
+    minimum_completed_rounds: int = Field(default=3, ge=1, le=5)
+    require_complete_for_selected: bool = True
+
+
+class RoleDecisionThresholdResponse(BaseModel):
+    role_key: str
+    selected_min: float
+    review_min: float
+    confidence_selected_min: float
+    confidence_review_min: float
+    minimum_completed_rounds: int
+    require_complete_for_selected: bool
+    updated_by: str | None = None
+    updated_at: str
 
 
 class FinalRecommendationRequest(BaseModel):
@@ -1084,6 +1133,8 @@ class FinalRecommendationRequest(BaseModel):
     session_id: str | None = None
     evidence_quality: float = 85.0
     data_consistency: float = 85.0
+    eligibility_status: str | None = None
+    eligibility_reason: str | None = None
     custom_rules: dict[str, Any] | None = None
 
 
@@ -1095,13 +1146,21 @@ class FinalRecommendationResponse(BaseModel):
     decision: Literal["SELECTED", "HOLD_REVIEW", "REJECTED"]
     score: float
     confidence: float
+    confidence_methodology: str = "Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)"
     confidence_interpretation: str = "Evidence completeness indicator; not a probability of job success."
     completed_rounds: int
     expected_rounds: int
     reasons: list[str]
+    reason_codes: list[str] = Field(default_factory=list)
+    strengths: list[str] = Field(default_factory=list)
+    weaknesses: list[str] = Field(default_factory=list)
+    missing_evidence: list[str] = Field(default_factory=list)
+    eligibility_status: str = "UNKNOWN"
+    threshold_config: dict[str, Any] = Field(default_factory=dict)
     risk_factors: dict[str, Any]
     recruiter_decision: Literal["PENDING_REVIEW", "APPROVED", "OVERRIDDEN", "REJECTED"]
     recruiter_notes: str | None = None
+    decided_by_actor: str | None = None
     created_at: str
     updated_at: str
 
@@ -1109,6 +1168,37 @@ class FinalRecommendationResponse(BaseModel):
 class FinalRecommendationDecisionRequest(BaseModel):
     recruiter_decision: Literal["APPROVED", "OVERRIDDEN", "REJECTED"]
     notes: str | None = None
+
+
+class CandidateConsentCreate(BaseModel):
+    purpose: str = "ai_evaluation"
+    granted: bool
+    consent_version: str = "consent-v1"
+    notes: str | None = None
+
+
+class CandidateConsentResponse(BaseModel):
+    consent_id: str
+    candidate_id: str
+    purpose: str
+    granted: bool
+    consent_version: str
+    actor_id: str
+    tenant_id: str
+    notes: str | None = None
+    created_at: str
+
+
+class RetentionPolicyUpdate(BaseModel):
+    retention_days: int = Field(ge=1, le=3650)
+    action: str = "delete_or_anonymize_after_expiry"
+    legal_hold_exempt: bool = False
+
+
+class OptimizationRunRequest(BaseModel):
+    strong_threshold: float = Field(default=80.0, ge=0, le=100)
+    potential_threshold: float = Field(default=60.0, ge=0, le=100)
+    save_run: bool = True
 
 
 # ============================================================================

@@ -12,24 +12,25 @@ PERMITTED_ROLES: dict[str, list[str]] = {
     "recruiter": [
         "view_candidates", "score_candidate", "conduct_screening",
         "conduct_interview", "assign_machine_test", "view_reports",
-        "make_recommendation_decision",
+        "make_recommendation_decision", "manage_consent",
     ],
     "senior_recruiter": [
         "view_candidates", "score_candidate", "conduct_screening",
         "conduct_interview", "assign_machine_test", "view_reports",
-        "make_recommendation_decision", "override_recommendation",
-        "delete_candidate",
+        "export_reports", "make_recommendation_decision", "override_recommendation",
+        "delete_candidate", "manage_consent", "view_optimization",
     ],
     "admin": [
         "view_candidates", "score_candidate", "conduct_screening",
         "conduct_interview", "assign_machine_test", "view_reports",
-        "make_recommendation_decision", "override_recommendation",
+        "export_reports", "make_recommendation_decision", "override_recommendation",
         "delete_candidate", "manage_users", "purge_retention",
-        "view_audit_logs",
+        "view_audit_logs", "verify_audit_integrity", "manage_consent",
+        "configure_weights", "view_optimization",
     ],
     "auditor": [
         "view_candidates", "view_reports", "view_audit_logs",
-        "verify_audit_integrity",
+        "verify_audit_integrity", "view_optimization",
     ],
 }
 
@@ -44,14 +45,26 @@ class SecurityGovernanceEngine:
         return action in allowed_actions
 
     @staticmethod
-    def verify_tenant_access(recruiter_id: str, candidate_record: dict[str, Any]) -> bool:
+    def get_role_matrix() -> dict[str, list[str]]:
+        """Returns the full RBAC role-permission matrix."""
+        return {role: list(perms) for role, perms in PERMITTED_ROLES.items()}
+
+    @staticmethod
+    def verify_tenant_access(
+        actor_tenant_id: str,
+        subject_record: dict[str, Any],
+        actor_role: str = "recruiter",
+    ) -> bool:
         """
         Enforces candidate ownership and tenant isolation.
-        Candidate can only be accessed if recruiter belongs to the same organization/tenant.
+        Candidate can only be accessed if actor belongs to the same tenant (unless auditor/admin).
         """
-        cand_tenant = candidate_record.get("tenant_id") or "default_tenant"
-        # In multi-tenant environments, recruiter must share tenant_id
-        return bool(recruiter_id and cand_tenant)
+        if not actor_tenant_id:
+            return False
+        cand_tenant = subject_record.get("tenant_id") or "default_tenant"
+        if actor_role == "auditor":
+            return True
+        return actor_tenant_id == cand_tenant
 
     @staticmethod
     def log_audit_event(

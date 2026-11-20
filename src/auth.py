@@ -92,3 +92,37 @@ def require_recruiter(
             headers={"WWW-Authenticate": "Basic"},
         )
     return verified_username
+
+
+def require_recruiter_context(
+    username: str = Depends(require_recruiter),
+) -> dict[str, str]:
+    """Returns full authenticated recruiter context including role and tenant_id."""
+    account = database.get_recruiter_account(username)
+    if not account:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Recruiter account not found.",
+        )
+    return {
+        "username": account["username"],
+        "role": account.get("role") or "recruiter",
+        "tenant_id": account.get("tenant_id") or "default_tenant",
+    }
+
+
+def require_permission(action: str):
+    """FastAPI dependency factory enforcing Day 55 RBAC permissions."""
+    from .security_governance import security_governance
+
+    def _dependency(
+        ctx: dict[str, str] = Depends(require_recruiter_context),
+    ) -> dict[str, str]:
+        if not security_governance.check_permission(ctx["role"], action):
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Role '{ctx['role']}' does not have permission '{action}'.",
+            )
+        return ctx
+
+    return _dependency

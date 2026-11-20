@@ -130,6 +130,86 @@ def calculate_confidence(assessment: dict[str, Any]) -> float:
     return round(confidence, 2)
 
 
+ROLE_DECISION_RULES: dict[str, dict[str, Any]] = {
+    "python_developer": {
+        "selected_min": 80.0,
+        "review_min": 62.0,
+        "confidence_selected_min": 75.0,
+        "confidence_review_min": 50.0,
+        "minimum_completed_rounds": 3,
+        "require_complete_assessment_for_selection": True,
+    },
+    "senior_python_developer": {
+        "selected_min": 82.0,
+        "review_min": 65.0,
+        "confidence_selected_min": 75.0,
+        "confidence_review_min": 50.0,
+        "minimum_completed_rounds": 3,
+        "require_complete_assessment_for_selection": True,
+    },
+    "data_analyst": {
+        "selected_min": 78.0,
+        "review_min": 60.0,
+        "confidence_selected_min": 75.0,
+        "confidence_review_min": 50.0,
+        "minimum_completed_rounds": 3,
+        "require_complete_assessment_for_selection": True,
+    },
+    "data_analyst_&_bi_specialist": {
+        "selected_min": 78.0,
+        "review_min": 60.0,
+        "confidence_selected_min": 75.0,
+        "confidence_review_min": 50.0,
+        "minimum_completed_rounds": 3,
+        "require_complete_assessment_for_selection": True,
+    },
+    "mern_developer": {
+        "selected_min": 80.0,
+        "review_min": 60.0,
+        "confidence_selected_min": 75.0,
+        "confidence_review_min": 50.0,
+        "minimum_completed_rounds": 3,
+        "require_complete_assessment_for_selection": True,
+    },
+    "mern_stack_developer": {
+        "selected_min": 80.0,
+        "review_min": 60.0,
+        "confidence_selected_min": 75.0,
+        "confidence_review_min": 50.0,
+        "minimum_completed_rounds": 3,
+        "require_complete_assessment_for_selection": True,
+    },
+}
+
+
+def get_decision_rules_for_role(role: str | None = None) -> dict[str, Any]:
+    """Loads configurable per-role thresholds from DB or role presets."""
+    rules = json.loads(json.dumps(DEFAULT_DECISION_RULES))
+    clean_role = str(role or "default").lower().strip().replace(" ", "_")
+
+    preset = ROLE_DECISION_RULES.get(clean_role)
+    if preset:
+        rules["score_thresholds"]["selected_min"] = preset["selected_min"]
+        rules["score_thresholds"]["review_min"] = preset["review_min"]
+        rules["confidence_thresholds"]["selected_min"] = preset["confidence_selected_min"]
+        rules["confidence_thresholds"]["review_min"] = preset["confidence_review_min"]
+        rules["minimum_completed_rounds"] = preset["minimum_completed_rounds"]
+        rules["require_complete_assessment_for_selection"] = preset["require_complete_assessment_for_selection"]
+
+    try:
+        persisted = database.get_role_decision_threshold(clean_role)
+        if persisted:
+            rules["score_thresholds"]["selected_min"] = float(persisted["selected_min"])
+            rules["score_thresholds"]["review_min"] = float(persisted["review_min"])
+            rules["confidence_thresholds"]["selected_min"] = float(persisted["confidence_selected_min"])
+            rules["confidence_thresholds"]["review_min"] = float(persisted["confidence_review_min"])
+            rules["minimum_completed_rounds"] = int(persisted["minimum_completed_rounds"])
+            rules["require_complete_assessment_for_selection"] = bool(persisted["require_complete_for_selected"])
+    except Exception:
+        pass
+    return rules
+
+
 def _validate_risk_factor(
     risk_factors: dict[str, Any], name: str
 ) -> dict[str, Any]:
@@ -250,6 +330,11 @@ def recommend_candidate(
 
     reasons: list[str] = []
     review_reasons: list[str] = []
+    reason_codes: list[str] = []
+
+    eligibility_status = str(assessment.get("eligibility_status") or "UNKNOWN").upper()
+    eligibility_failures = assessment.get("eligibility_failures") or []
+    eligibility_review_reasons = assessment.get("eligibility_review_reasons") or []
 
     if integrity["flag"] and risk_policy.get(
         "integrity_flag_requires_review", True
@@ -257,6 +342,7 @@ def recommend_candidate(
         review_reasons.append(
             "Integrity flag requires human verification."
         )
+        reason_codes.append("INTEGRITY_FLAG_REQUIRES_REVIEW")
 
     if behavior["flag"] and risk_policy.get(
         "behavior_flag_requires_review", True
@@ -264,30 +350,53 @@ def recommend_candidate(
         review_reasons.append(
             "Job-related behavior flag requires human review."
         )
+        reason_codes.append("BEHAVIOR_FLAG_REQUIRES_REVIEW")
 
     if completed < minimum_rounds:
         review_reasons.append(
             f"Only {completed} evaluation rounds are complete; "
             f"at least {minimum_rounds} are required."
         )
+        reason_codes.append("INSUFFICIENT_COMPLETED_ROUNDS")
 
     if completed < expected and risk_policy.get(
         "missing_rounds_require_review", True
     ):
         review_reasons.append("One or more evaluation rounds are missing.")
+        reason_codes.append("MISSING_ASSESSMENT_STAGES")
 
     if assessment["assessment_status"] != "COMPLETE":
         review_reasons.append(
             "Assessment status is not COMPLETE."
         )
+        if "INCOMPLETE_ASSESSMENT" not in reason_codes:
+            reason_codes.append("INCOMPLETE_ASSESSMENT")
 
     if confidence < confidence_selected_min:
         review_reasons.append(
             f"Confidence {confidence:.2f} is below the "
             f"selection threshold {confidence_selected_min:.2f}."
         )
+        reason_codes.append("LOW_EVIDENCE_CONFIDENCE")
 
-    if review_reasons:
+    if eligibility_status == "REJECTED":
+        decision = "REJECTED"
+        reason_codes.append("MANDATORY_ELIGIBILITY_FAILED")
+        reasons.append(
+            "Mandatory job-specific qualification rule was not satisfied; a high aggregate score cannot override mandatory eligibility."
+        )
+        for fail_msg in eligibility_failures:
+            reasons.append(str(fail_msg))
+        reasons.append("Recruiter human review is required before final rejection.")
+    elif eligibility_status == "REVIEW":
+        decision = "HOLD_REVIEW"
+        reason_codes.append("MANDATORY_ELIGIBILITY_REVIEW_REQUIRED")
+        review_reasons.extend(str(r) for r in eligibility_review_reasons)
+        reasons.extend(review_reasons)
+        if not eligibility_review_reasons:
+            reasons.append("Mandatory eligibility rules require recruiter verification.")
+        reasons.append("Human review is required before an employment decision.")
+    elif review_reasons:
         decision = "HOLD_REVIEW"
         reasons.extend(review_reasons)
         reasons.append(
@@ -295,6 +404,7 @@ def recommend_candidate(
         )
     elif score >= selected_min:
         decision = "SELECTED"
+        reason_codes.extend(["SCORE_MEETS_SELECTED_THRESHOLD", "ALL_REQUIRED_STAGES_COMPLETED"])
         reasons.append(
             f"Score {score:.2f} meets the selection threshold "
             f"of {selected_min:.2f}."
@@ -305,6 +415,7 @@ def recommend_candidate(
         )
     elif score >= review_min:
         decision = "HOLD_REVIEW"
+        reason_codes.append("SCORE_IN_REVIEW_BAND")
         reasons.append(
             f"Score {score:.2f} falls in the review range "
             f"({review_min:.2f} to below {selected_min:.2f})."
@@ -314,6 +425,7 @@ def recommend_candidate(
         )
     else:
         decision = "REJECTED"
+        reason_codes.append("SCORE_BELOW_REVIEW_THRESHOLD")
         reasons.append(
             f"Score {score:.2f} is below the configured review threshold "
             f"of {review_min:.2f}."
@@ -328,10 +440,25 @@ def recommend_candidate(
         raise DecisionInputError("rounds must be a JSON object.")
 
     validated_round_scores = {}
+    strengths: list[str] = []
+    weaknesses: list[str] = []
     for round_name, round_score in round_scores.items():
-        validated_round_scores[round_name] = _validate_number(
-            round_score, f"rounds.{round_name}"
-        )
+        if round_score is None:
+            continue
+        val = _validate_number(round_score, f"rounds.{round_name}")
+        validated_round_scores[round_name] = val
+        label = round_name.replace("_", " ").title()
+        if val >= selected_min:
+            strengths.append(f"Strong {label} performance ({val:.1f}/100).")
+        elif val < review_min:
+            weaknesses.append(f"{label} score ({val:.1f}/100) is below the review threshold ({review_min:.0f}).")
+
+    expected_stage_keys = ("ats", "screening", "hr_interview", "technical_interview", "machine_test")
+    missing_evidence = [
+        f"Missing or incomplete '{k}' stage evaluation."
+        for k in expected_stage_keys
+        if validated_round_scores.get(k) is None
+    ]
 
     flagged_risks = []
     if integrity["flag"]:
@@ -349,9 +476,12 @@ def recommend_candidate(
         "target_role": assessment["target_role"],
         "decision_version": rules.get("decision_version", "day52-v1"),
         "assessment_status": assessment["assessment_status"],
+        "eligibility_status": eligibility_status,
         "decision": decision,
+        "decision_status": "PENDING_RECRUITER_APPROVAL",
         "score": score,
         "confidence": confidence,
+        "confidence_methodology": "Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)",
         "confidence_interpretation": (
             "Evidence completeness indicator; not a probability of job success."
         ),
@@ -361,6 +491,10 @@ def recommend_candidate(
             "coverage_percent": round((completed / expected) * 100.0, 2),
         },
         "round_scores": validated_round_scores,
+        "reason_codes": list(dict.fromkeys(reason_codes)),
+        "strengths": strengths,
+        "weaknesses": weaknesses,
+        "missing_evidence": missing_evidence,
         "risk_factors": {
             "integrity": integrity,
             "behavior": behavior,
@@ -370,6 +504,7 @@ def recommend_candidate(
         "explanation": {
             "reasons": reasons,
             "review_reasons": review_reasons,
+            "reason_codes": list(dict.fromkeys(reason_codes)),
             "score_thresholds": {
                 "selected_min": selected_min,
                 "review_min": review_min,

@@ -99,6 +99,60 @@
       main { margin-top: 14px; padding: 0 12px 32px; }
       .panel { padding: 16px; }
     }
+    .tabs-bar {
+      display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 20px;
+      border-bottom: 2px solid var(--border); padding-bottom: 10px;
+    }
+    .tab-btn {
+      margin: 0; padding: 8px 14px; font-size: 13px; border-radius: 6px;
+      background: #fff; color: var(--ink); border: 1px solid var(--border);
+    }
+    .tab-btn.active {
+      background: #0f766e; color: #ffffff; border-color: #0f766e;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .card-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 12px; margin: 12px 0;
+    }
+    .kpi-card {
+      background: #f9fbfc; border: 1px solid var(--border);
+      border-radius: 6px; padding: 12px;
+    }
+    .kpi-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
+    .kpi-value { font-size: 22px; font-weight: 700; margin-top: 4px; color: var(--ink); }
+    .badge {
+      display: inline-block; padding: 3px 9px; border-radius: 999px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
+    }
+    .badge-selected { background: #dcfce7; color: #166534; }
+    .badge-hold { background: #fef3c7; color: #92400e; }
+    .badge-rejected { background: #fee2e2; color: #991b1b; }
+    .badge-neutral { background: #e2e8f0; color: #334155; }
+    .stage-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 10px; margin: 12px 0;
+    }
+    .stage-box {
+      border: 1px solid var(--border); border-radius: 6px; padding: 10px; background: #fff;
+    }
+    .two-col {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px;
+    }
+    .two-col > * { min-width: 0; overflow-x: auto; }
+    .tab-panel:not(#tab-ats) table { min-width: 0; width: 100%; font-size: 13px; }
+    .tab-panel:not(#tab-ats) th, .tab-panel:not(#tab-ats) td { padding: 7px 6px; word-break: break-word; }
+    @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; } }
+    .report-section-card {
+      border: 1px solid var(--border); border-radius: 6px; padding: 12px;
+      margin-bottom: 10px; background: #fcfdfe;
+    }
+    .report-section-card h4 { margin: 0 0 6px; font-size: 14px; color: var(--accent); }
+    pre.code-box {
+      background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 6px;
+      font-size: 12px; overflow-x: auto; max-height: 280px;
+    }
   </style>
 </head>
 <body>
@@ -134,6 +188,15 @@
       available experience and education evidence, and local semantic similarity when a resume is present.
       Missing components contribute zero and are identified in the evidence. Review every result; no score makes an employment decision.
     </div>
+    <nav class="tabs-bar" aria-label="Hiring Intelligence Modules">
+      <button type="button" class="tab-btn active" data-tab="tab-ats">ATS &amp; Candidates</button>
+      <button type="button" class="tab-btn" data-tab="tab-cross-round">Day 51: Cross-Round Evaluation</button>
+      <button type="button" class="tab-btn" data-tab="tab-recommendation">Day 52: Recommendation Review</button>
+      <button type="button" class="tab-btn" data-tab="tab-report">Day 53: Hiring Intelligence Report</button>
+      <button type="button" class="tab-btn" data-tab="tab-optimization">Day 54: Optimization Analytics</button>
+      <button type="button" class="tab-btn" data-tab="tab-governance">Day 55: Security &amp; Governance</button>
+    </nav>
+    <div id="tab-ats" class="tab-panel active">
     <div class="grid">
       <section class="panel" aria-labelledby="createOpeningHeading">
         <h2 id="createOpeningHeading">Create a job opening</h2>
@@ -298,7 +361,197 @@
       <div id="monitoringMetricsCards" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 12px;"></div>
       <div id="monitoringAlertsList" style="margin-top: 12px;" hidden></div>
     </section>
+    </div><!-- /tab-ats -->
+
+    <!-- DAY 51: CROSS-ROUND EVALUATION -->
+    <div id="tab-cross-round" class="tab-panel">
+      <section class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0;">Cross-Round Unified Aggregation Engine (Day 51)</h2>
+            <p class="muted" style="margin:4px 0 0;">Aggregates ATS, Screening, HR, Technical, and Machine Test scores with role-specific weights and explicit stage statuses.</p>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <select id="d51CandidateSelect" style="width:240px;"></select>
+            <select id="d51RoleSelect" style="width:190px;">
+              <option value="python_developer">Python Developer</option>
+              <option value="data_analyst">Data Analyst</option>
+              <option value="mern_developer">MERN Developer</option>
+              <option value="software_engineer">Software Engineer</option>
+            </select>
+            <button id="d51EvaluateBtn" type="button">Evaluate Cross-Round</button>
+            <button id="d51RecalcBtn" type="button" class="secondary">Force Recalculate</button>
+          </div>
+        </div>
+        <div id="d51SummaryCards" class="card-grid"></div>
+        <h3 style="margin-top:14px;">Stage Breakdown &amp; Status</h3>
+        <div id="d51StageGrid" class="stage-grid"></div>
+        <div class="two-col" style="margin-top:16px;">
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Role Weight Configuration</h3>
+            <p class="muted" style="font-size:12px;">Weights must sum to 100%. Missing rounds are excluded and remaining weights renormalized.</p>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <label>ATS % <input id="wAts" type="number" min="0" max="100" step="1"></label>
+              <label>Screening % <input id="wScreening" type="number" min="0" max="100" step="1"></label>
+              <label>HR Interview % <input id="wHr" type="number" min="0" max="100" step="1"></label>
+              <label>Technical % <input id="wTech" type="number" min="0" max="100" step="1"></label>
+              <label>Machine Test % <input id="wMt" type="number" min="0" max="100" step="1"></label>
+              <label>Min Required Stages <input id="wMinStages" type="number" min="1" max="5" value="3"></label>
+            </div>
+            <div class="actions">
+              <button id="d51SaveWeightsBtn" type="button" class="secondary">Save Role Weights</button>
+            </div>
+          </div>
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Evaluation History &amp; Anomalies</h3>
+            <div id="d51AnomaliesBox" class="muted" style="margin-bottom:10px;"></div>
+            <div id="d51HistoryTable"></div>
+          </div>
+        </div>
+      </section>
     </div>
+
+    <!-- DAY 52: FINAL RECOMMENDATION REVIEW -->
+    <div id="tab-recommendation" class="tab-panel">
+      <section class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0;">Final Recommendation AI &amp; Human Review (Day 52)</h2>
+            <p class="muted" style="margin:4px 0 0;">Hybrid score + eligibility gate + non-punitive risk review. Final hiring decisions require human recruiter sign-off.</p>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <select id="d52CandidateSelect" style="width:240px;"></select>
+            <button id="d52GenerateBtn" type="button">Generate Recommendation</button>
+          </div>
+        </div>
+        <div id="d52SummaryCards" class="card-grid"></div>
+        <div class="two-col" style="margin-top:14px;">
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Explainable Evidence &amp; Risk Safeguards</h3>
+            <div id="d52ExplanationBox"></div>
+          </div>
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Recruiter Decision &amp; Audit History</h3>
+            <label for="d52DecisionAction">Action</label>
+            <select id="d52DecisionAction">
+              <option value="APPROVED">APPROVE AI Recommendation</option>
+              <option value="OVERRIDDEN">OVERRIDE (Requires Senior Recruiter / Admin)</option>
+              <option value="REJECTED">REJECT Candidate</option>
+            </select>
+            <label for="d52DecisionNotes">Reviewer Notes</label>
+            <textarea id="d52DecisionNotes" placeholder="Enter rationale for approval, override, or rejection..."></textarea>
+            <div class="actions">
+              <button id="d52SubmitDecisionBtn" type="button">Submit Recruiter Decision</button>
+            </div>
+            <div id="d52HistoryBox" style="margin-top:12px;"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- DAY 53: HIRING INTELLIGENCE REPORT -->
+    <div id="tab-report" class="tab-panel">
+      <section class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0;">Hiring Intelligence Report Generator (Day 53)</h2>
+            <p class="muted" style="margin:4px 0 0;">14-section structured decision intelligence report built from persisted DB records. Missing rounds are explicitly marked.</p>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <select id="d53CandidateSelect" style="width:230px;"></select>
+            <button id="d53GenerateBtn" type="button">Generate Report</button>
+            <a id="d53HtmlLink" href="#" target="_blank" class="secondary" style="padding:9px 12px; border:1px solid var(--border); border-radius:4px; text-decoration:none; color:var(--ink);">Open HTML</a>
+            <a id="d53MdLink" href="#" target="_blank" class="secondary" style="padding:9px 12px; border:1px solid var(--border); border-radius:4px; text-decoration:none; color:var(--ink);">Markdown</a>
+            <a id="d53PdfLink" href="#" target="_blank" class="secondary" style="padding:9px 12px; border:1px solid var(--accent); border-radius:4px; text-decoration:none; color:var(--accent); font-weight:600;">Export PDF</a>
+          </div>
+        </div>
+        <div id="d53ReportMeta" class="card-grid"></div>
+        <div id="d53ReportSections" style="margin-top:12px;"></div>
+      </section>
+    </div>
+
+    <!-- DAY 54: OPTIMIZATION & REFINEMENT ANALYTICS -->
+    <div id="tab-optimization" class="tab-panel">
+      <section class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0;">Optimization, Calibration &amp; Latency Analytics (Day 54)</h2>
+            <p class="muted" style="margin:4px 0 0;">Evaluates decision thresholds against the labelled validation dataset, computes confusion matrix &amp; F1, and measures inference latency.</p>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <label style="margin:0; font-size:12px;">Selected Min <input id="d54StrongMin" type="number" value="80" min="50" max="95" style="width:70px;"></label>
+            <label style="margin:0; font-size:12px;">Review Min <input id="d54PotentialMin" type="number" value="60" min="30" max="85" style="width:70px;"></label>
+            <button id="d54RunBtn" type="button">Run Optimization Analysis</button>
+          </div>
+        </div>
+        <div id="d54MetricsCards" class="card-grid"></div>
+        <div class="two-col" style="margin-top:14px;">
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Threshold Comparison Sweep</h3>
+            <div id="d54SweepTable"></div>
+          </div>
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Confusion Matrix &amp; Latency Benchmarks</h3>
+            <div id="d54ConfusionBox"></div>
+            <div id="d54LatencyBox" style="margin-top:12px;"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- DAY 55: SECURITY & AI GOVERNANCE -->
+    <div id="tab-governance" class="tab-panel">
+      <section class="panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h2 style="margin:0;">Security, RBAC, Consent &amp; Tamper-Evident Audit (Day 55)</h2>
+            <p class="muted" style="margin:4px 0 0;">Role-based access control, tenant isolation, candidate consent ledger, retention policies, and SHA-256 hash-chained audit logs.</p>
+          </div>
+          <div id="d55ActorBadge" class="badge badge-neutral">Loading actor context...</div>
+        </div>
+        <div class="two-col" style="margin-top:14px;">
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Candidate Consent Ledger</h3>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:end;">
+              <label style="flex:1; margin:0;">Candidate <select id="d55ConsentCandidate"></select></label>
+              <label style="width:170px; margin:0;">Purpose
+                <select id="d55ConsentPurpose">
+                  <option value="ai_assessment">AI Assessment</option>
+                  <option value="integrity_monitoring">Integrity Monitoring</option>
+                  <option value="audio_recording">Audio Recording</option>
+                </select>
+              </label>
+              <button id="d55GrantConsentBtn" type="button">Grant</button>
+              <button id="d55RevokeConsentBtn" type="button" class="danger">Revoke</button>
+            </div>
+            <div id="d55ConsentTable" style="margin-top:12px;"></div>
+          </div>
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">Data Retention &amp; Anonymization</h3>
+            <div id="d55RetentionTable"></div>
+            <div style="display:flex; gap:8px; margin-top:10px; align-items:center;">
+              <select id="d55AnonCandidate" style="flex:1;"></select>
+              <button id="d55AnonBtn" type="button" class="danger">Anonymize Candidate PII</button>
+            </div>
+          </div>
+        </div>
+        <div class="two-col" style="margin-top:14px;">
+          <div class="panel" style="padding:14px;">
+            <h3 style="margin-top:0;">RBAC Role-Permission Matrix</h3>
+            <div id="d55RbacTable"></div>
+          </div>
+          <div class="panel" style="padding:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <h3 style="margin:0;">Tamper-Evident Hash-Chained Audit Trail</h3>
+              <button id="d55VerifyAuditBtn" type="button" class="secondary" style="margin:0;">Verify Hash Chain</button>
+            </div>
+            <div id="d55AuditVerifyBanner" style="margin-top:8px;"></div>
+            <div id="d55AuditTable" style="margin-top:10px; max-height:280px; overflow-y:auto;"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    </div><!-- /workspace -->
   </main>
 
   <script>
@@ -1094,6 +1347,7 @@
         await loadEligibilityConfiguration();
         await loadCandidates();
         await loadMonitoringDashboard();
+        await loadDays51_55Workspace();
       }
 
       async function loadEligibilityConfiguration() {
@@ -1535,6 +1789,10 @@
         byId("workspace").hidden = true;
         byId("loginPanel").hidden = false;
         byId("signOutButton").hidden = true;
+        byId("d55ActorBadge").textContent = "Signed out";
+        byId("d55AuditVerifyBanner").innerHTML = "";
+        byId("d55AuditTable").innerHTML = "";
+        byId("d55ConsentTable").innerHTML = "";
         setApiStatus(apiAvailable ? "API connected — sign-in required" : "API unavailable — retrying automatically", apiAvailable);
         renderOpening();
         renderCandidates();
@@ -1544,6 +1802,513 @@
             : "Signed out.",
           Boolean(signOutError)
         );
+      });
+
+      // =========================================================================
+      // Days 51-55: Cross-Round, Recommendation, Report, Optimization & Governance
+      // =========================================================================
+      let allWorkspaceCandidates = [];
+      let cachedRoleWeights = [];
+      let currentRecommendationId = null;
+
+      function escHtml(val) {
+        return String(val ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function badgeClassForDecision(decision) {
+        const d = String(decision || "").toUpperCase();
+        if (d === "SELECTED" || d === "APPROVED" || d === "STRONG_HIRE" || d === "STRONG") return "badge badge-selected";
+        if (d === "REJECTED") return "badge badge-rejected";
+        if (d.includes("HOLD") || d.includes("REVIEW") || d === "OVERRIDDEN" || d === "POTENTIAL") return "badge badge-hold";
+        return "badge badge-neutral";
+      }
+
+      // Tab switching
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+          document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+          btn.classList.add("active");
+          const target = byId(btn.dataset.tab);
+          if (target) target.classList.add("active");
+          if (btn.dataset.tab === "tab-governance" && recruiterAuthenticated) {
+            loadGovernancePanel();
+          }
+        });
+      });
+
+      async function collectAllCandidates() {
+        const list = [];
+        for (const op of state.openings) {
+          try {
+            const cands = await request(`/candidates?opening_id=${encodeURIComponent(op.opening_id)}`);
+            for (const c of cands) {
+              list.push({ ...c, opening_title: op.title });
+            }
+          } catch (_) {}
+        }
+        allWorkspaceCandidates = list;
+        const selectors = ["d51CandidateSelect", "d52CandidateSelect", "d53CandidateSelect", "d55ConsentCandidate", "d55AnonCandidate"];
+        for (const id of selectors) {
+          const sel = byId(id);
+          if (!sel) continue;
+          const prev = sel.value;
+          sel.innerHTML = "";
+          if (!list.length) {
+            const opt = document.createElement("option");
+            opt.value = "";
+            opt.textContent = "No candidates available";
+            sel.append(opt);
+          } else {
+            for (const c of list) {
+              const opt = document.createElement("option");
+              opt.value = c.candidate_id;
+              opt.textContent = `${c.name} (${c.opening_title || c.opening_id})`;
+              sel.append(opt);
+            }
+            if (prev && list.some((c) => c.candidate_id === prev)) {
+              sel.value = prev;
+            }
+          }
+        }
+      }
+
+      function inferRoleKeyFromCandidate(candidateId) {
+        const c = allWorkspaceCandidates.find((x) => x.candidate_id === candidateId);
+        const title = String(c?.opening_title || "").toLowerCase();
+        if (title.includes("python")) return "python_developer";
+        if (title.includes("data")) return "data_analyst";
+        if (title.includes("mern")) return "mern_developer";
+        return "software_engineer";
+      }
+
+      async function loadRoleWeightsPanel() {
+        try {
+          cachedRoleWeights = await request("/role-weights");
+          syncRoleWeightInputs();
+        } catch (_) {}
+      }
+
+      function syncRoleWeightInputs() {
+        const roleKey = byId("d51RoleSelect").value;
+        const match = cachedRoleWeights.find((w) => w.role_key === roleKey) || cachedRoleWeights[0];
+        if (!match) return;
+        const w = match.weights || {};
+        byId("wAts").value = w.ats ?? 15;
+        byId("wScreening").value = w.screening ?? 15;
+        byId("wHr").value = w.hr_interview ?? 15;
+        byId("wTech").value = w.technical_interview ?? 30;
+        byId("wMt").value = w.machine_test ?? 25;
+        byId("wMinStages").value = match.min_required_stages ?? 3;
+      }
+
+      async function loadCrossRoundForCandidate(candidateId) {
+        if (!candidateId) return;
+        const inferred = inferRoleKeyFromCandidate(candidateId);
+        if ([...byId("d51RoleSelect").options].some((o) => o.value === inferred)) {
+          byId("d51RoleSelect").value = inferred;
+          syncRoleWeightInputs();
+        }
+        try {
+          const evals = await request(`/candidates/${encodeURIComponent(candidateId)}/cross-round-evaluation`);
+          renderCrossRoundView(evals);
+        } catch (err) {
+          byId("d51SummaryCards").innerHTML = `<div class="muted">${escHtml(err.message)}</div>`;
+        }
+      }
+
+      function renderCrossRoundView(evals) {
+        const cards = byId("d51SummaryCards");
+        const stageGrid = byId("d51StageGrid");
+        const anomaliesBox = byId("d51AnomaliesBox");
+        const histBox = byId("d51HistoryTable");
+        if (!evals || !evals.length) {
+          cards.innerHTML = `<div class="muted">No cross-round evaluation yet. Click "Evaluate Cross-Round".</div>`;
+          stageGrid.innerHTML = "";
+          anomaliesBox.textContent = "None";
+          histBox.innerHTML = "";
+          return;
+        }
+        const latest = evals[0];
+        const statusCls = String(latest.calculation_status || "").startsWith("INSUFFICIENT") ? "badge badge-hold" : "badge badge-selected";
+        cards.innerHTML = `
+          <div class="kpi-card"><div class="kpi-label">Hiring Fit %</div><div class="kpi-value">${latest.hiring_fit_percentage != null ? Number(latest.hiring_fit_percentage).toFixed(2) + "%" : "N/A"}</div></div>
+          <div class="kpi-card"><div class="kpi-label">Calculation Status</div><div class="kpi-value" style="font-size:15px;"><span class="${statusCls}">${escHtml(latest.calculation_status)}</span></div></div>
+          <div class="kpi-card"><div class="kpi-label">Completed Stages</div><div class="kpi-value">${latest.completed_rounds} / 5</div></div>
+          <div class="kpi-card"><div class="kpi-label">Target Role &amp; Version</div><div class="kpi-value" style="font-size:15px;">${escHtml(latest.target_role)} (v${latest.version || 1})</div></div>
+        `;
+        const stageNames = { ats: "ATS", screening: "Screening", hr_interview: "HR Interview", technical_interview: "Technical", machine_test: "Machine Test" };
+        const scores = latest.round_scores || {};
+        const statuses = latest.stage_status || {};
+        const effW = latest.effective_weights || {};
+        stageGrid.innerHTML = Object.keys(stageNames).map((k) => {
+          const sc = scores[k];
+          const st = statuses[k] || (sc != null ? "COMPLETED" : "NOT_STARTED");
+          const wPct = effW[k] != null ? (Number(effW[k]) * 100).toFixed(1) + "%" : "0.0%";
+          return `<div class="stage-box">
+            <div style="font-weight:600; font-size:13px;">${stageNames[k]}</div>
+            <div style="font-size:20px; font-weight:700; margin:4px 0;">${sc != null ? Number(sc).toFixed(1) : "—"}</div>
+            <div><span class="badge ${st === "COMPLETED" ? "badge-selected" : "badge-hold"}">${escHtml(st)}</span></div>
+            <div class="muted" style="font-size:11px; margin-top:4px;">Effective Weight: ${wPct}</div>
+          </div>`;
+        }).join("");
+        const anomalies = latest.anomalies || [];
+        anomaliesBox.innerHTML = anomalies.length
+          ? `<strong>Detected Anomalies:</strong><ul>${anomalies.map((a) => `<li>${escHtml(a)}</li>`).join("")}</ul>`
+          : `<span class="muted">No cross-round score anomalies detected.</span>`;
+        histBox.innerHTML = `<table><thead><tr><th>Ver</th><th>Fit %</th><th>Status</th><th>Reason</th></tr></thead><tbody>` +
+          evals.slice(0, 5).map((e) => `<tr><td>v${e.version || 1}</td><td>${e.hiring_fit_percentage ?? "N/A"}</td><td>${escHtml(e.calculation_status)}</td><td>${escHtml(e.recalculation_reason || "Initial")}</td></tr>`).join("") +
+          `</tbody></table>`;
+      }
+
+      async function loadRecommendationForCandidate(candidateId) {
+        if (!candidateId) return;
+        try {
+          const recs = await request(`/candidates/${encodeURIComponent(candidateId)}/final-recommendation`);
+          await renderRecommendationView(recs);
+        } catch (err) {
+          byId("d52SummaryCards").innerHTML = `<div class="muted">${escHtml(err.message)}</div>`;
+        }
+      }
+
+      async function renderRecommendationView(recs) {
+        const cards = byId("d52SummaryCards");
+        const expBox = byId("d52ExplanationBox");
+        const histBox = byId("d52HistoryBox");
+        if (!recs || !recs.length) {
+          currentRecommendationId = null;
+          cards.innerHTML = `<div class="muted">No recommendation yet. Click "Generate Recommendation".</div>`;
+          expBox.innerHTML = "";
+          histBox.innerHTML = "";
+          return;
+        }
+        const rec = recs[0];
+        currentRecommendationId = rec.recommendation_id;
+        const confVal = Number(rec.confidence || 0);
+        const confPct = confVal <= 1 ? (confVal * 100).toFixed(1) : confVal.toFixed(1);
+        cards.innerHTML = `
+          <div class="kpi-card"><div class="kpi-label">AI Decision</div><div class="kpi-value" style="font-size:16px;"><span class="${badgeClassForDecision(rec.decision)}">${escHtml(rec.decision)}</span></div></div>
+          <div class="kpi-card"><div class="kpi-label">Unified Score</div><div class="kpi-value">${Number(rec.score).toFixed(2)}%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Confidence</div><div class="kpi-value">${confPct}%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Human Review Status</div><div class="kpi-value" style="font-size:15px;"><span class="${badgeClassForDecision(rec.recruiter_decision)}">${escHtml(rec.recruiter_decision)}</span></div></div>
+        `;
+        const risk = rec.risk_factors || {};
+        expBox.innerHTML = `
+          <p><strong>Eligibility Status:</strong> <span class="badge badge-neutral">${escHtml(rec.eligibility_status || "ELIGIBLE")}</span></p>
+          <p><strong>Confidence Methodology:</strong> <span class="muted">${escHtml(rec.confidence_methodology || "")}</span></p>
+          <p><strong>Decision Reasons:</strong></p>
+          <ul>${(rec.reasons || []).map((r) => `<li>${escHtml(r)}</li>`).join("")}</ul>
+          <p><strong>Strengths:</strong> ${(rec.strengths || []).map((s) => `<span class="badge badge-selected" style="margin:2px;">${escHtml(s)}</span>`).join(" ") || "<span class='muted'>None recorded</span>"}</p>
+          <p><strong>Weaknesses / Missing Evidence:</strong> ${[...(rec.weaknesses || []), ...(rec.missing_evidence || [])].map((w) => `<span class="badge badge-hold" style="margin:2px;">${escHtml(w)}</span>`).join(" ") || "<span class='muted'>None</span>"}</p>
+          <p><strong>Risk Safeguards:</strong> Integrity Flagged = <code>${Boolean(risk.integrity?.flag)}</code> | Behavioral Flagged = <code>${Boolean(risk.behavior?.flag)}</code> (Non-punitive: flags trigger review only)</p>
+        `;
+        try {
+          const hist = await request(`/final-recommendations/${encodeURIComponent(rec.recommendation_id)}/history`);
+          histBox.innerHTML = hist.length
+            ? `<h4>Decision Audit Trail</h4><table><thead><tr><th>Actor</th><th>Previous</th><th>New</th><th>Notes</th></tr></thead><tbody>` +
+              hist.map((h) => `<tr><td>${escHtml(h.actor_id)}</td><td>${escHtml(h.previous_decision)}</td><td>${escHtml(h.new_decision)}</td><td>${escHtml(h.notes || "")}</td></tr>`).join("") +
+              `</tbody></table>`
+            : `<div class="muted">No human recruiter decisions recorded yet.</div>`;
+        } catch (_) {
+          histBox.innerHTML = "";
+        }
+      }
+
+      async function loadReportForCandidate(candidateId) {
+        if (!candidateId) return;
+        byId("d53HtmlLink").href = `${api}/candidates/${encodeURIComponent(candidateId)}/hiring-intelligence-report/html`;
+        byId("d53MdLink").href = `${api}/candidates/${encodeURIComponent(candidateId)}/hiring-intelligence-report/markdown`;
+        byId("d53PdfLink").href = `${api}/candidates/${encodeURIComponent(candidateId)}/hiring-intelligence-report/pdf`;
+        try {
+          const rep = await request(`/candidates/${encodeURIComponent(candidateId)}/hiring-intelligence-report`);
+          renderFullReportPanel(rep);
+        } catch (err) {
+          byId("d53ReportMeta").innerHTML = `<div class="muted">${escHtml(err.message)}</div>`;
+        }
+      }
+
+      function renderFullReportPanel(rep) {
+        const meta = byId("d53ReportMeta");
+        const secBox = byId("d53ReportSections");
+        const exec = rep.evaluation_summary || {};
+        const rec = rep.final_recommendation || {};
+        const stageKeys = ["ats", "screening", "hr_interview", "technical_interview", "machine_test"];
+        const completedCount = stageKeys.filter((k) => exec[k] && exec[k].score != null).length;
+        meta.innerHTML = `
+          <div class="kpi-card"><div class="kpi-label">Report ID &amp; Version</div><div class="kpi-value" style="font-size:15px;">${escHtml(rep.report_id)} (v${rep.version || 1})</div></div>
+          <div class="kpi-card"><div class="kpi-label">Hiring Fit Score</div><div class="kpi-value">${rep.unified_hiring_fit_score != null ? Number(rep.unified_hiring_fit_score).toFixed(2) + "%" : "N/A"}</div></div>
+          <div class="kpi-card"><div class="kpi-label">Recommendation</div><div class="kpi-value" style="font-size:15px;"><span class="${badgeClassForDecision(rec.decision)}">${escHtml(rec.decision || "PENDING")}</span></div></div>
+          <div class="kpi-card"><div class="kpi-label">Completed Rounds</div><div class="kpi-value">${completedCount} / 5</div></div>
+        `;
+        const sections = [
+          ["1. Report Overview & Candidate", { report_id: rep.report_id, candidate_id: rep.candidate_id, opening_id: rep.opening_id, title: rep.report_title, created_at: rep.created_at }],
+          ["2. Evaluation Summary & Round Breakdown", rep.evaluation_summary],
+          ["3. Key Strengths", rep.strengths],
+          ["4. Weaknesses & Skill Gaps", rep.weaknesses_and_skill_gaps],
+          ["5. Missing Evaluation Evidence", rep.missing_evaluation_evidence],
+          ["6. Behavioral & Integrity Risk Indicators", rep.risk_indicators],
+          ["7. Final Recommendation & Decision Logic", rep.final_recommendation],
+          ["8. Recruiter Decision Workflow", rep.recruiter_decision_workflow],
+          ["9. Governance Disclaimer", rep.disclaimer],
+        ];
+        secBox.innerHTML = sections.map(([title, data]) => `
+          <div class="report-section-card">
+            <h4>${escHtml(title)}</h4>
+            <pre class="code-box" style="margin:0; max-height:150px;">${escHtml(JSON.stringify(data ?? {}, null, 2))}</pre>
+          </div>
+        `).join("");
+      }
+
+      async function runOptimizationPanel() {
+        try {
+          const strongMin = Number(byId("d54StrongMin").value || 80);
+          const potentialMin = Number(byId("d54PotentialMin").value || 60);
+          const data = await request("/optimization/run", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ strong_threshold: strongMin, potential_threshold: potentialMin }),
+          });
+          renderOptimizationPanel(data);
+        } catch (err) {
+          showNotice(err.message, true);
+        }
+      }
+
+      function renderOptimizationPanel(data) {
+        const m = data.metrics || data.metrics_json || {};
+        const cm = m.confusion_matrix || {};
+        byId("d54MetricsCards").innerHTML = `
+          <div class="kpi-card"><div class="kpi-label">Accuracy</div><div class="kpi-value">${((m.accuracy || 0) * 100).toFixed(1)}%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Precision</div><div class="kpi-value">${((m.precision || 0) * 100).toFixed(1)}%</div></div>
+          <div class="kpi-card"><div class="kpi-label">Recall</div><div class="kpi-value">${((m.recall || 0) * 100).toFixed(1)}%</div></div>
+          <div class="kpi-card"><div class="kpi-label">F1 Score</div><div class="kpi-value">${((m.f1_score || 0) * 100).toFixed(1)}%</div></div>
+        `;
+        const sweep = data.threshold_comparisons || [];
+        byId("d54SweepTable").innerHTML = sweep.length
+          ? `<table><thead><tr><th>Threshold &ge;</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1</th><th>FP / FN</th></tr></thead><tbody>` +
+            sweep.map((row) => `<tr><td>${row.threshold}</td><td>${(row.accuracy * 100).toFixed(1)}%</td><td>${(row.precision * 100).toFixed(1)}%</td><td>${(row.recall * 100).toFixed(1)}%</td><td>${(row.f1_score * 100).toFixed(1)}%</td><td>${row.fp} / ${row.fn}</td></tr>`).join("") +
+            `</tbody></table>`
+          : `<div class="muted">Click "Run Optimization Analysis" to compute threshold sweep.</div>`;
+        byId("d54ConfusionBox").innerHTML = `
+          <table><thead><tr><th>Metric</th><th>Count</th></tr></thead><tbody>
+            <tr><td>True Positives (TP)</td><td>${cm.tp ?? 0}</td></tr>
+            <tr><td>False Positives (FP)</td><td>${cm.fp ?? 0}</td></tr>
+            <tr><td>True Negatives (TN)</td><td>${cm.tn ?? 0}</td></tr>
+            <tr><td>False Negatives (FN)</td><td>${cm.fn ?? 0}</td></tr>
+          </tbody></table>`;
+        const lat = data.benchmark || data.benchmark_json || {};
+        const live = data.live_system_analytics || {};
+        byId("d54LatencyBox").innerHTML = `<p><strong>Measured Latency &amp; Live Counts:</strong></p><ul>
+          <li>Dataset Evaluation Time: <code>${lat.dataset_eval_ms ?? 0} ms</code> (${lat.avg_per_candidate_ms ?? 0} ms/sample)</li>
+          <li>DB Query Time: <code>${lat.db_query_ms ?? 0} ms</code></li>
+          <li>Live Cross-Round Evaluations: <code>${live.total_cross_round_evaluations ?? 0}</code></li>
+          <li>Validation Samples: <code>${(data.cases || []).length}</code></li>
+        </ul>`;
+      }
+
+      async function loadGovernancePanel() {
+        try {
+          const who = await request("/governance/whoami");
+          byId("d55ActorBadge").textContent = `Actor: ${who.username} | Role: ${who.role} | Tenant: ${who.tenant_id}`;
+          const rbac = await request("/governance/rbac-matrix");
+          const roles = rbac.roles || {};
+          byId("d55RbacTable").innerHTML = `<table><thead><tr><th>Role</th><th>Permitted Actions</th></tr></thead><tbody>` +
+            Object.entries(roles).map(([r, perms]) => `<tr><td><strong>${escHtml(r)}</strong></td><td style="font-size:12px;">${escHtml(perms.join(", "))}</td></tr>`).join("") +
+            `</tbody></table>`;
+          const policies = await request("/governance/retention-policies");
+          byId("d55RetentionTable").innerHTML = `<table><thead><tr><th>Category</th><th>Days</th><th>Auto Anonymize</th></tr></thead><tbody>` +
+            policies.map((p) => `<tr><td>${escHtml(p.data_category)}</td><td>${p.retention_days}</td><td>${p.auto_anonymize ? "Yes" : "No"}</td></tr>`).join("") +
+            `</tbody></table>`;
+          await loadConsentsForCandidate(byId("d55ConsentCandidate").value);
+          await loadAuditEventsPanel();
+        } catch (err) {
+          byId("d55ActorBadge").textContent = err.message;
+        }
+      }
+
+      async function loadConsentsForCandidate(candidateId) {
+        if (!candidateId) return;
+        try {
+          const rows = await request(`/candidates/${encodeURIComponent(candidateId)}/consent`);
+          byId("d55ConsentTable").innerHTML = rows.length
+            ? `<table><thead><tr><th>Purpose</th><th>Status</th><th>Version</th><th>Actor</th></tr></thead><tbody>` +
+              rows.map((r) => `<tr><td>${escHtml(r.purpose)}</td><td><span class="badge ${r.granted ? "badge-selected" : "badge-rejected"}">${r.granted ? "GRANTED" : "REVOKED"}</span></td><td>${escHtml(r.consent_version)}</td><td>${escHtml(r.actor_id)}</td></tr>`).join("") +
+              `</tbody></table>`
+            : `<div class="muted">No consent records for this candidate yet.</div>`;
+        } catch (err) {
+          byId("d55ConsentTable").innerHTML = `<div class="muted">${escHtml(err.message)}</div>`;
+        }
+      }
+
+      async function loadAuditEventsPanel() {
+        try {
+          const events = await request("/audit/events?limit=25");
+          byId("d55AuditTable").innerHTML = `<table><thead><tr><th>Event ID</th><th>Event</th><th>Actor</th><th>Subject</th><th>Hash</th></tr></thead><tbody>` +
+            events.map((e) => `<tr><td style="font-family:monospace; font-size:11px;">${escHtml((e.event_id || "").slice(0, 14))}</td><td>${escHtml(e.event_type)}</td><td>${escHtml(e.actor_id)}</td><td>${escHtml(e.subject_id)}</td><td style="font-family:monospace; font-size:11px;">${escHtml((e.event_hash || "").slice(0, 12))}...</td></tr>`).join("") +
+            `</tbody></table>`;
+        } catch (err) {
+          byId("d55AuditTable").innerHTML = `<div class="notice error">${escHtml(err.message)}</div>`;
+        }
+      }
+
+      async function loadDays51_55Workspace() {
+        await collectAllCandidates();
+        await loadRoleWeightsPanel();
+        const c1 = byId("d51CandidateSelect").value;
+        if (c1) await loadCrossRoundForCandidate(c1);
+        const c2 = byId("d52CandidateSelect").value;
+        if (c2) await loadRecommendationForCandidate(c2);
+        const c3 = byId("d53CandidateSelect").value;
+        if (c3) await loadReportForCandidate(c3);
+        try {
+          const hist = await request("/optimization/history?limit=1");
+          if (hist.length && hist[0].results_json) {
+            renderOptimizationPanel(hist[0].results_json);
+          } else {
+            await runOptimizationPanel();
+          }
+        } catch (_) {}
+        await loadGovernancePanel();
+      }
+
+      // Wire Day 51-55 event listeners
+      byId("d51CandidateSelect").addEventListener("change", (e) => loadCrossRoundForCandidate(e.target.value));
+      byId("d51RoleSelect").addEventListener("change", syncRoleWeightInputs);
+      byId("d51EvaluateBtn").addEventListener("click", async () => {
+        const cid = byId("d51CandidateSelect").value;
+        const role = byId("d51RoleSelect").value;
+        if (!cid) return;
+        try {
+          await request(`/candidates/${encodeURIComponent(cid)}/cross-round-evaluation`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ target_role: role, force_recalculate: false }),
+          });
+          await loadCrossRoundForCandidate(cid);
+          showNotice("Cross-round evaluation updated.");
+        } catch (err) { showNotice(err.message, true); }
+      });
+      byId("d51RecalcBtn").addEventListener("click", async () => {
+        const cid = byId("d51CandidateSelect").value;
+        const role = byId("d51RoleSelect").value;
+        if (!cid) return;
+        try {
+          await request(`/candidates/${encodeURIComponent(cid)}/cross-round-evaluation`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ target_role: role, force_recalculate: true, recalculation_reason: "Recruiter manual recalculation" }),
+          });
+          await loadCrossRoundForCandidate(cid);
+          showNotice("Cross-round score recalculated.");
+        } catch (err) { showNotice(err.message, true); }
+      });
+      byId("d51SaveWeightsBtn").addEventListener("click", async () => {
+        const roleKey = byId("d51RoleSelect").value;
+        const weights = {
+          ats: Number(byId("wAts").value),
+          screening: Number(byId("wScreening").value),
+          hr_interview: Number(byId("wHr").value),
+          technical_interview: Number(byId("wTech").value),
+          machine_test: Number(byId("wMt").value),
+        };
+        try {
+          await request(`/role-weights/${encodeURIComponent(roleKey)}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ weights, min_required_stages: Number(byId("wMinStages").value || 3) }),
+          });
+          await loadRoleWeightsPanel();
+          showNotice(`Saved weights for ${roleKey}.`);
+        } catch (err) { showNotice(err.message, true); }
+      });
+
+      byId("d52CandidateSelect").addEventListener("change", (e) => loadRecommendationForCandidate(e.target.value));
+      byId("d52GenerateBtn").addEventListener("click", async () => {
+        const cid = byId("d52CandidateSelect").value;
+        if (!cid) return;
+        try {
+          await request(`/candidates/${encodeURIComponent(cid)}/final-recommendation`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({}),
+          });
+          await loadRecommendationForCandidate(cid);
+          showNotice("Final recommendation generated.");
+        } catch (err) { showNotice(err.message, true); }
+      });
+      byId("d52SubmitDecisionBtn").addEventListener("click", async () => {
+        if (!currentRecommendationId) return showNotice("Generate a recommendation first.", true);
+        try {
+          await request(`/final-recommendations/${encodeURIComponent(currentRecommendationId)}/decision`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              recruiter_decision: byId("d52DecisionAction").value,
+              notes: byId("d52DecisionNotes").value || "Reviewed in Recruiter UI",
+            }),
+          });
+          await loadRecommendationForCandidate(byId("d52CandidateSelect").value);
+          showNotice("Recruiter decision recorded in audit trail.");
+        } catch (err) { showNotice(err.message, true); }
+      });
+
+      byId("d53CandidateSelect").addEventListener("change", (e) => loadReportForCandidate(e.target.value));
+      byId("d53GenerateBtn").addEventListener("click", async () => {
+        const cid = byId("d53CandidateSelect").value;
+        if (!cid) return;
+        try {
+          const rep = await request(`/candidates/${encodeURIComponent(cid)}/hiring-intelligence-report`, { method: "POST" });
+          renderFullReportPanel(rep);
+          showNotice(`Generated report ${rep.report_id}.`);
+        } catch (err) { showNotice(err.message, true); }
+      });
+
+      byId("d54RunBtn").addEventListener("click", runOptimizationPanel);
+
+      byId("d55ConsentCandidate").addEventListener("change", (e) => loadConsentsForCandidate(e.target.value));
+      async function submitConsent(granted) {
+        const cid = byId("d55ConsentCandidate").value;
+        if (!cid) return;
+        try {
+          await request(`/candidates/${encodeURIComponent(cid)}/consent`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              purpose: byId("d55ConsentPurpose").value,
+              granted,
+              consent_version: "consent-v2",
+              notes: granted ? "Granted via Governance UI" : "Revoked via Governance UI",
+            }),
+          });
+          await loadConsentsForCandidate(cid);
+          await loadAuditEventsPanel();
+          showNotice(`Consent ${granted ? "granted" : "revoked"}.`);
+        } catch (err) { showNotice(err.message, true); }
+      }
+      byId("d55GrantConsentBtn").addEventListener("click", () => submitConsent(true));
+      byId("d55RevokeConsentBtn").addEventListener("click", () => submitConsent(false));
+      byId("d55VerifyAuditBtn").addEventListener("click", async () => {
+        try {
+          const res = await request("/audit/verify");
+          byId("d55AuditVerifyBanner").innerHTML = res.verified
+            ? `<div class="notice success">Hash Chain Verified: ${res.event_count} events intact (${escHtml(res.status)}).</div>`
+            : `<div class="notice error">Tamper Detected at index ${res.tampered_at_index}: ${escHtml(res.status)}</div>`;
+        } catch (err) {
+          byId("d55AuditVerifyBanner").innerHTML = `<div class="notice error">${escHtml(err.message)}</div>`;
+        }
+      });
+      byId("d55AnonBtn").addEventListener("click", async () => {
+        const cid = byId("d55AnonCandidate").value;
+        if (!cid) return;
+        try {
+          await request(`/governance/candidates/${encodeURIComponent(cid)}/anonymize`, { method: "POST" });
+          await loadDays51_55Workspace();
+          showNotice("Candidate PII anonymized per retention policy.");
+        } catch (err) { showNotice(err.message, true); }
       });
 
       checkApiHealth();
