@@ -1,0 +1,40 @@
+{
+  "fixed_issues": [
+    {
+      "id": "BUG-57-01",
+      "file": "src/batch_processing.py",
+      "description": "Replaced hardcoded peak_memory_bytes (51200) with real tracemalloc measurement in run_scalability_benchmark().",
+      "status": "FIXED"
+    },
+    {
+      "id": "BUG-57-02",
+      "file": "src/api.py",
+      "description": "Added status and event_count defaults in verify_audit_trail_endpoint so tampered audit chains return valid AuditVerificationResponse.",
+      "status": "FIXED"
+    },
+    {
+      "id": "BUG-57-03",
+      "file": "src/api.py",
+      "description": "Fixed monitoring endpoints using require_recruiter_context instead of require_recruiter.",
+      "status": "FIXED"
+    },
+    {
+      "id": "BUG-57-04",
+      "file": "src/cross_round_scoring_engine.py",
+      "description": "Passed opening_id into calculate_hiring_fit() to prevent SQLite foreign-key constraint failures.",
+      "status": "FIXED"
+    }
+  ],
+  "pending_limitations": [
+    {
+      "id": "LIM-57-01",
+      "file": "src/batch_processing.py",
+      "description": "batch_process_resumes() processes items sequentially within chunks rather than concurrent asyncio.gather() tasks."
+    },
+    {
+      "id": "LIM-57-02",
+      "file": "src/machine_test_engine.py",
+      "description": "No OS/container sandbox isolation for untrusted candidate code execution."
+    }
+  ]
+}

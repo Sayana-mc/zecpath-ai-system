@@ -1,0 +1,48 @@
+{
+  "total_evaluated": 4,
+  "decision_alignment_rate_percent": 75.0,
+  "average_score_gap": 2.65,
+  "max_score_gap": 5.6,
+  "comparisons": [
+    {
+      "candidate_id": "cand_699358cd261e",
+      "ai_score": 90.3,
+      "human_score": 90.0,
+      "score_gap": 0.3,
+      "ai_decision": "SELECTED",
+      "human_decision": "SELECTED",
+      "decisions_aligned": true,
+      "discrepancy_note": null
+    },
+    {
+      "candidate_id": "cand_df9c55843993",
+      "ai_score": 65.6,
+      "human_score": 68.0,
+      "score_gap": 2.4,
+      "ai_decision": "HOLD_REVIEW",
+      "human_decision": "HOLD_REVIEW",
+      "decisions_aligned": true,
+      "discrepancy_note": null
+    },
+    {
+      "candidate_id": "cand_3c18e6edc330",
+      "ai_score": 50.7,
+      "human_score": 53.0,
+      "score_gap": 2.3,
+      "ai_decision": "REJECTED",
+      "human_decision": "REJECTED",
+      "decisions_aligned": true,
+      "discrepancy_note": null
+    },
+    {
+      "candidate_id": "cand_ffe1cb5e0e41",
+      "ai_score": 87.6,
+      "human_score": 82.0,
+      "score_gap": 5.6,
+      "ai_decision": "SELECTED",
+      "human_decision": "HOLD_REVIEW",
+      "decisions_aligned": false,
+      "discrepancy_note": "AI recommended SELECTED (Score 87.6) whereas human reviewer concluded HOLD_REVIEW (Score 82.0)."
+    }
+  ]
+}

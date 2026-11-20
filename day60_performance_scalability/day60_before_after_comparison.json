@@ -1,0 +1,94 @@
+{
+  "batch_cache_comparison": {
+    "cold_run_ms": 253.38,
+    "cold_cache_hits": 15,
+    "warm_run_ms": 231.86,
+    "warm_cache_hits": 20,
+    "warm_cache_hit_rate": 0.875
+  },
+  "local_scalability_benchmark": {
+    "benchmark_title": "ZecPath Resume Processing Scalability Benchmark",
+    "total_items_per_test": 50,
+    "concurrency_cases": [
+      {
+        "items": 50,
+        "max_concurrency": 1,
+        "elapsed_seconds": 0.0003,
+        "throughput_items_per_sec": 150105.07,
+        "cache_hit_rate": 0.8,
+        "peak_memory_bytes": 10937,
+        "success_rate": 100.0
+      },
+      {
+        "items": 50,
+        "max_concurrency": 5,
+        "elapsed_seconds": 0.0002,
+        "throughput_items_per_sec": 235626.77,
+        "cache_hit_rate": 0.8,
+        "peak_memory_bytes": 3193,
+        "success_rate": 100.0
+      },
+      {
+        "items": 50,
+        "max_concurrency": 10,
+        "elapsed_seconds": 0.0002,
+        "throughput_items_per_sec": 217013.89,
+        "cache_hit_rate": 0.8,
+        "peak_memory_bytes": 3193,
+        "success_rate": 100.0
+      },
+      {
+        "items": 50,
+        "max_concurrency": 25,
+        "elapsed_seconds": 0.0002,
+        "throughput_items_per_sec": 217675.23,
+        "cache_hit_rate": 0.8,
+        "peak_memory_bytes": 3193,
+        "success_rate": 100.0
+      }
+    ],
+    "optimal_concurrency": 5,
+    "limitations": [
+      "Local in-process benchmark using synthetic test resumes.",
+      "Production latency depends on underlying disk I/O, database concurrency, and CPU cores."
+    ]
+  },
+  "live_http_load_test": [
+    {
+      "concurrency": 1,
+      "total_requests": 2,
+      "successful": 2,
+      "failed": 0,
+      "avg_latency_ms": 258.88,
+      "p95_latency_ms": 259.01,
+      "throughput_rps": 3.85
+    },
+    {
+      "concurrency": 5,
+      "total_requests": 10,
+      "successful": 10,
+      "failed": 0,
+      "avg_latency_ms": 370.25,
+      "p95_latency_ms": 473.27,
+      "throughput_rps": 12.25
+    },
+    {
+      "concurrency": 10,
+      "total_requests": 20,
+      "successful": 20,
+      "failed": 0,
+      "avg_latency_ms": 634.91,
+      "p95_latency_ms": 925.29,
+      "throughput_rps": 13.84
+    },
+    {
+      "concurrency": 25,
+      "total_requests": 50,
+      "successful": 50,
+      "failed": 0,
+      "avg_latency_ms": 1483.13,
+      "p95_latency_ms": 2245.11,
+      "throughput_rps": 14.49
+    }
+  ]
+}

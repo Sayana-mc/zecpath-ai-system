@@ -4,6 +4,7 @@ import asyncio
 import hashlib
 import inspect
 import time
+import tracemalloc
 from collections import OrderedDict
 from typing import Any, Callable, Generator, Iterable, TypeVar
 
@@ -135,6 +136,7 @@ def run_scalability_benchmark(
 
     for c in levels:
         test_cache = TTLCache(max_entries=256, ttl_seconds=60)
+        tracemalloc.start()
         start = time.perf_counter()
 
         results = []
@@ -151,6 +153,8 @@ def run_scalability_benchmark(
                     results.append({"candidate_id": item.get("candidate_id"), "result": res, "cache_hit": False})
 
         elapsed = time.perf_counter() - start
+        _, peak_mem = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
         if elapsed <= 0:
             elapsed = 0.0001
         throughput = round(sample_count / elapsed, 2)
@@ -160,7 +164,7 @@ def run_scalability_benchmark(
             "elapsed_seconds": round(elapsed, 4),
             "throughput_items_per_sec": throughput,
             "cache_hit_rate": test_cache.hit_rate,
-            "peak_memory_bytes": 1024 * 50,
+            "peak_memory_bytes": peak_mem,
             "success_rate": 100.0,
         })
 
