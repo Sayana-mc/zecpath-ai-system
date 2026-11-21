@@ -1,0 +1,11 @@
+ZecPath Day 67 Mock Demo Rehearsal Log
+Server: http://127.0.0.1:8000 | DB: zecpath_day65_70_demo.sqlite3
+1. Health check: HTTP 200
+2. Loaded openings: 248 | Day 63 candidates: 8
+3. Live Upload + ATS Score (e6c1c8d6-9ee2-4744-9034-55eef1bd03f1): HTTP 202/200 -> ATS=83.17
+4. Eligibility: HTTP 409 -> None
+5. Cross-Round Aggregation: 77.94%
+6. Final Recommendation: HOLD_REVIEW (confidence=82.5)
+7. Human Review Decision: APPROVED -> APPROVED
+8. Hiring Intelligence Report: report_id=report_20a28b8f4031
+9. Error Scenarios: bad upload=400, missing cand=404, unauth=401

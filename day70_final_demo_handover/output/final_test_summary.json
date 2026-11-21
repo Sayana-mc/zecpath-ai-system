@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "live_e2e_candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+  "ats_score": 83.17,
+  "cross_round_score": 77.94,
+  "recommendation": "HOLD_REVIEW",
+  "human_review_status": "APPROVED",
+  "report_id": "report_20a28b8f4031",
+  "scenarios_evaluated": 8,
+  "fast_suite_returncode": 0
+}

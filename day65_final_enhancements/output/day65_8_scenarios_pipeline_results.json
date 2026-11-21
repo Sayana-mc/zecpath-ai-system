@@ -1,0 +1,74 @@
+[
+  {
+    "candidate_id": "cand_8f0210da1c0e",
+    "name": "Aarav Sharma",
+    "ats_score": 100.0,
+    "cross_round_score": 73.6,
+    "recommendation": "HOLD_REVIEW",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  },
+  {
+    "candidate_id": "cand_99a18c502f9e",
+    "name": "Meera Patel",
+    "ats_score": 60.0,
+    "cross_round_score": 56.6,
+    "recommendation": "REJECTED",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  },
+  {
+    "candidate_id": "cand_3c782747f362",
+    "name": "Rohan Verma",
+    "ats_score": 0.0,
+    "cross_round_score": 32.6,
+    "recommendation": "REJECTED",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  },
+  {
+    "candidate_id": "cand_42df37644c91",
+    "name": "Dev Kapoor",
+    "ats_score": 100.0,
+    "cross_round_score": 52.6,
+    "recommendation": "REJECTED",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  },
+  {
+    "candidate_id": "cand_103ee072ef64",
+    "name": "Isha Iyer",
+    "ats_score": 40.0,
+    "cross_round_score": 40.6,
+    "recommendation": "REJECTED",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  },
+  {
+    "candidate_id": "cand_da451991d349",
+    "name": "Vikram Sen",
+    "ats_score": 100.0,
+    "cross_round_score": 52.6,
+    "recommendation": "REJECTED",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  },
+  {
+    "candidate_id": "cand_2f0f3ccbad14",
+    "name": "Pooja Hegde",
+    "ats_score": 100.0,
+    "cross_round_score": 73.6,
+    "recommendation": "HOLD_REVIEW",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  },
+  {
+    "candidate_id": "cand_cab261add7c0",
+    "name": "Dr. Fatima Al-Mansoor",
+    "ats_score": 100.0,
+    "cross_round_score": 73.6,
+    "recommendation": "HOLD_REVIEW",
+    "confidence": 92.5,
+    "human_review_status": "PENDING_REVIEW"
+  }
+]

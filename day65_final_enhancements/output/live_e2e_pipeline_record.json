@@ -1,0 +1,625 @@
+{
+  "candidate": {
+    "candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+    "name": "Aarav Live Demo",
+    "email": "aarav.live.1795235772@example.synthetic",
+    "opening_id": "op_c56398baf8e3",
+    "skills": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Docker",
+      "REST API",
+      "Redis"
+    ],
+    "resume_text": "",
+    "resume_data": {},
+    "resume_filename": null,
+    "application_status": "APPLIED",
+    "score": null,
+    "score_evidence": null,
+    "location": null,
+    "relocation_willingness": null,
+    "work_mode_preference": null,
+    "availability_date": null,
+    "created_at": "2026-11-21T04:36:12.526493+00:00",
+    "updated_at": "2026-11-21T04:36:12.526493+00:00"
+  },
+  "ats": {
+    "job_id": "op_c56398baf8e3",
+    "candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+    "score": 83.17,
+    "evidence": {
+      "method": "day9_12_13_configured_weighted_score",
+      "job_id": "op_c56398baf8e3",
+      "candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+      "job_title": "Senior Python Backend Architect",
+      "candidate_name": "Aarav Live Demo",
+      "extracted_skills": [
+        "Python",
+        "SQL",
+        "FastAPI",
+        "Git",
+        "GitHub",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "PostgreSQL",
+        "REST API"
+      ],
+      "scoring_skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "REST API",
+        "Redis",
+        "SQL",
+        "Git",
+        "GitHub",
+        "Kubernetes",
+        "AWS"
+      ],
+      "matching_required_skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "REST API"
+      ],
+      "matched_required_skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "REST API"
+      ],
+      "missing_required_skills": [],
+      "matching_preferred_skills": [
+        "Kubernetes",
+        "Redis",
+        "AWS"
+      ],
+      "education_details": [
+        {
+          "degree_type": "BACHELOR",
+          "degree_name": "Bachelor of Technology (B.Tech) in Computer Science & Engineering",
+          "field_of_study": "Computer Science & Engineering",
+          "institution": "",
+          "graduation_year": null
+        }
+      ],
+      "experience_details": {
+        "years": 2.08,
+        "roles": [
+          {
+            "job_title": "- Mentored a team of 6 engineers in asynchronous programming patterns and clean architecture standards.",
+            "company": null,
+            "start_date": "2019-01-01",
+            "end_date": "2021-01-01",
+            "duration_months": 25
+          }
+        ]
+      },
+      "components": {
+        "skill_match": {
+          "score": 1.0,
+          "reason": "Score is matched required skills divided by total required skills.",
+          "matched_skills": [
+            "docker",
+            "fastapi",
+            "postgresql",
+            "python",
+            "rest api"
+          ],
+          "missing_skills": []
+        },
+        "experience_relevance": {
+          "score": 0.416,
+          "reason": "Score is candidate experience divided by required experience, capped at 1.0.",
+          "candidate_years": 2.08,
+          "required_years": 5.0
+        },
+        "education_alignment": {
+          "score": 1.0,
+          "reason": "Score compares candidate education level with required education level.",
+          "candidate_education": "Bachelor of Technology (B.Tech) in Computer Science & Engineering",
+          "required_education": "Bachelor's Degree in Computer Science or related field"
+        },
+        "semantic_similarity": {
+          "score": 0.8284,
+          "reason": "Cosine similarity of Day 12 all-MiniLM-L6-v2 embeddings.",
+          "personal_data_masking": "Contact details and labeled personal attributes are excluded from matching input."
+        }
+      },
+      "weights": {
+        "skill_match": 0.35,
+        "experience_relevance": 0.2,
+        "education_alignment": 0.15,
+        "semantic_similarity": 0.3
+      },
+      "breakdown": {
+        "skill_match": {
+          "score": 100.0,
+          "weight": 0.35,
+          "weighted_contribution": 35.0
+        },
+        "experience_relevance": {
+          "score": 41.6,
+          "weight": 0.2,
+          "weighted_contribution": 8.32
+        },
+        "education_alignment": {
+          "score": 100.0,
+          "weight": 0.15,
+          "weighted_contribution": 15.0
+        },
+        "semantic_similarity": {
+          "score": 82.84,
+          "weight": 0.3,
+          "weighted_contribution": 24.85
+        }
+      },
+      "classification": "EXCELLENT",
+      "formula": "sum(component_score_0_to_100 * configured_role_weight)",
+      "scoring_explanation": "Day 9-11 extract skills, dated work history, and education; Day 8 section segmentation scopes extraction when recognized sections exist. Day 12 compares a resume representation with the job title, description, required/preferred skills, and specified education/experience requirements using sentence-embedding cosine similarity; Day 13 applies its configured, role-specific weighted formula. Missing experience or education inputs are represented as unavailable by their component helper and contribute zero under Day 13's existing score normalization. Contact details and labeled personal attributes are excluded from semantic matching.",
+      "fairness_safeguards": {
+        "personal_attributes_used_for_scoring": false,
+        "semantic_input_masking": true,
+        "human_review_required": true
+      },
+      "human_review_required": true,
+      "required_skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "REST API"
+      ],
+      "profile_skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "REST API",
+        "Redis",
+        "SQL",
+        "Git",
+        "GitHub",
+        "Kubernetes",
+        "AWS"
+      ],
+      "resume_evidence_skills": [
+        "Python",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "REST API"
+      ],
+      "resume_evidence": [
+        {
+          "skill": "Python",
+          "excerpt": "Senior Python Backend Architect with 7 years of experience designing, bui"
+        },
+        {
+          "skill": "FastAPI",
+          "excerpt": "and deploying fault-tolerant distributed systems. Expert in FastAPI, PostgreSQL performance tuning, Docker containerization, an"
+        },
+        {
+          "skill": "PostgreSQL",
+          "excerpt": "ying fault-tolerant distributed systems. Expert in FastAPI, PostgreSQL performance tuning, Docker containerization, and REST API m"
+        },
+        {
+          "skill": "Docker",
+          "excerpt": " systems. Expert in FastAPI, PostgreSQL performance tuning, Docker containerization, and REST API microservices architecture. "
+        },
+        {
+          "skill": "REST API",
+          "excerpt": "PostgreSQL performance tuning, Docker containerization, and REST API microservices architecture. Proven track record leading eng"
+        }
+      ],
+      "scored_at": "2026-11-21T04:36:24.141492+00:00",
+      "scoring_version": "day9-12-13-v1"
+    },
+    "job_title": "Senior Python Backend Architect",
+    "candidate_name": "Aarav Live Demo",
+    "extracted_skills": [
+      "Python",
+      "SQL",
+      "FastAPI",
+      "Git",
+      "GitHub",
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "PostgreSQL",
+      "REST API"
+    ],
+    "matching_required_skills": [
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Docker",
+      "REST API"
+    ],
+    "missing_required_skills": [],
+    "education_details": [
+      {
+        "degree_type": "BACHELOR",
+        "degree_name": "Bachelor of Technology (B.Tech) in Computer Science & Engineering",
+        "field_of_study": "Computer Science & Engineering",
+        "institution": "",
+        "graduation_year": null
+      }
+    ],
+    "experience_details": {
+      "years": 2.08,
+      "roles": [
+        {
+          "job_title": "- Mentored a team of 6 engineers in asynchronous programming patterns and clean architecture standards.",
+          "company": null,
+          "start_date": "2019-01-01",
+          "end_date": "2021-01-01",
+          "duration_months": 25
+        }
+      ]
+    },
+    "components": {
+      "skill_match": {
+        "score": 1.0,
+        "reason": "Score is matched required skills divided by total required skills.",
+        "matched_skills": [
+          "docker",
+          "fastapi",
+          "postgresql",
+          "python",
+          "rest api"
+        ],
+        "missing_skills": []
+      },
+      "experience_relevance": {
+        "score": 0.416,
+        "reason": "Score is candidate experience divided by required experience, capped at 1.0.",
+        "candidate_years": 2.08,
+        "required_years": 5.0
+      },
+      "education_alignment": {
+        "score": 1.0,
+        "reason": "Score compares candidate education level with required education level.",
+        "candidate_education": "Bachelor of Technology (B.Tech) in Computer Science & Engineering",
+        "required_education": "Bachelor's Degree in Computer Science or related field"
+      },
+      "semantic_similarity": {
+        "score": 0.8284,
+        "reason": "Cosine similarity of Day 12 all-MiniLM-L6-v2 embeddings.",
+        "personal_data_masking": "Contact details and labeled personal attributes are excluded from matching input."
+      }
+    },
+    "ranking": 5,
+    "human_review_required": true,
+    "status": "SCORED",
+    "message": "Day 9-13 ATS score calculated from available evidence; human review is required."
+  },
+  "eligibility": {
+    "detail": "Configure eligibility rules before evaluating a candidate."
+  },
+  "screening": "Internal Server Error",
+  "hr_evaluation": {
+    "score": {
+      "score_id": "HRSCR_0FBA8BCF",
+      "interview_id": "6b164f17-e0f0-48b5-af06-f9e12c69114b",
+      "candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+      "relevance_score": 80.0,
+      "communication_score": 77.5,
+      "confidence_score": 85.0,
+      "consistency_score": 95.0,
+      "overall_hr_score": 83.12,
+      "score_status": "REVIEW_REQUIRED",
+      "breakdown": {
+        "answer_relevance": {
+          "raw_score": 80.0,
+          "weight": 0.4,
+          "weighted_contribution": 32.0
+        },
+        "communication": {
+          "raw_score": 77.5,
+          "weight": 0.25,
+          "weighted_contribution": 19.38
+        },
+        "confidence": {
+          "raw_score": 85.0,
+          "weight": 0.15,
+          "weighted_contribution": 12.75
+        },
+        "consistency": {
+          "raw_score": 95.0,
+          "weight": 0.2,
+          "weighted_contribution": 19.0
+        }
+      },
+      "human_review_required": true,
+      "created_at": "2026-11-21T04:36:27.174176+00:00",
+      "updated_at": "2026-11-21T04:36:27.174176+00:00"
+    },
+    "communication": [
+      {
+        "evaluation_id": "HREVAL_F7F1A7BF",
+        "interview_id": "6b164f17-e0f0-48b5-af06-f9e12c69114b",
+        "response_id": "HRRSP_8C0C3D40",
+        "fluency_score": 60.0,
+        "grammar_score": 90.0,
+        "vocabulary_score": 90.0,
+        "clarity_score": 75.0,
+        "structure_score": 80.0,
+        "filler_control_score": 100.0,
+        "total_communication_score": 77.5,
+        "fillers_detected": [],
+        "evidence": [
+          "Fluency evaluated at 60.0 based on pacing and length (11 words).",
+          "Clarity evaluated at 75.0; directness of response confirmed.",
+          "Answer structure scored at 80.0."
+        ],
+        "created_at": "2026-11-21T04:36:26.824552+00:00"
+      }
+    ],
+    "signals": [
+      {
+        "signal_id": "HRSIG_FF1F4132",
+        "interview_id": "6b164f17-e0f0-48b5-af06-f9e12c69114b",
+        "response_id": "HRRSP_8C0C3D40",
+        "hesitation_count": 0,
+        "pause_count": 0,
+        "uncertainty_count": 0,
+        "repeated_word_count": 0,
+        "sentiment": "NEUTRAL",
+        "sentiment_score": 0.0,
+        "stress_score": 0.0,
+        "confidence_score": 85.0,
+        "contradiction_detected": false,
+        "contradiction_reason": null,
+        "disclaimer": "Behavioral signals reflect observable communication markers (fillers, qualifiers, pacing). They do NOT constitute psychological diagnosis, emotion evaluation, or internal stress measurement.",
+        "created_at": "2026-11-21T04:36:26.839255+00:00"
+      }
+    ],
+    "aptitude": []
+  },
+  "technical_interview": {
+    "session_id": "tech_sess_a0abd01222ac",
+    "status": "COMPLETED",
+    "overall_score": 60.0,
+    "rubric_breakdown": {
+      "total_responses": 1,
+      "average_score": 60.0,
+      "shallow_count": 1,
+      "moderate_count": 0,
+      "deep_count": 0
+    },
+    "total_questions": 1,
+    "completed_at": "2026-11-21T04:36:28.842372+00:00"
+  },
+  "machine_test": {
+    "submission_id": "mt_sub_0a4a9a2f3a13",
+    "assignment_id": "mt_assign_19188be56e76",
+    "code_content": "def two_sum(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        if target - n in seen:\n            return [seen[target - n], i]\n        seen[n] = i\n    return []\n",
+    "language": "python",
+    "time_spent_minutes": 12.5,
+    "total_score": 85.45,
+    "rubric_scores": {
+      "correctness": 81.0,
+      "efficiency": 85.0,
+      "code_quality": 88.0,
+      "problem_solving": 90.0,
+      "time_management": 100.0
+    },
+    "execution_details": {
+      "task_type": "coding",
+      "lines_analyzed": 7,
+      "time_spent": 12.5,
+      "time_limit": 30
+    },
+    "status": "EVALUATED",
+    "submitted_at": "2026-11-21T04:36:29.329527+00:00"
+  },
+  "cross_round": {
+    "evaluation_id": "AGG_AE2E1542",
+    "candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+    "opening_id": "op_c56398baf8e3",
+    "target_role": "Senior Python Backend Architect",
+    "hiring_fit_percentage": 77.94,
+    "hiring_fit_score": 77.94,
+    "score_version": "day51-v1",
+    "round_scores": {
+      "ats": 83.17,
+      "screening": null,
+      "hr_interview": 83.12,
+      "technical_interview": 60.0,
+      "machine_test": 85.45
+    },
+    "stage_status": {
+      "ats": "COMPLETED",
+      "screening": "PENDING",
+      "hr_interview": "COMPLETED",
+      "technical_interview": "COMPLETED",
+      "machine_test": "COMPLETED"
+    },
+    "effective_weights": {
+      "ats": 0.25,
+      "hr_interview": 0.25,
+      "technical_interview": 0.25,
+      "machine_test": 0.25
+    },
+    "normalized_weights": {
+      "ats": 0.25,
+      "hr_interview": 0.25,
+      "technical_interview": 0.25,
+      "machine_test": 0.25
+    },
+    "configured_weights": {
+      "ats": 20.0,
+      "screening": 20.0,
+      "hr_interview": 20.0,
+      "technical_interview": 20.0,
+      "machine_test": 20.0
+    },
+    "completed_rounds": 4,
+    "missing_rounds": [
+      "screening"
+    ],
+    "anomalies": [],
+    "calculation_status": "COMPLETED",
+    "recalculation_reason": "API evaluation request",
+    "version": 1,
+    "duplicate_prevented": false,
+    "created_at": "2026-11-21T04:36:29.697318+00:00"
+  },
+  "final_recommendation": {
+    "recommendation_id": "final_rec_2bd55c0bafbf",
+    "candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+    "opening_id": "op_c56398baf8e3",
+    "target_role": "Senior Python Backend Architect",
+    "decision": "HOLD_REVIEW",
+    "score": 77.94,
+    "confidence": 82.5,
+    "confidence_methodology": "Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)",
+    "confidence_interpretation": "Evidence completeness indicator; not a probability of job success.",
+    "completed_rounds": 4,
+    "expected_rounds": 5,
+    "reasons": [
+      "One or more evaluation rounds are missing.",
+      "Human review is required before an employment decision."
+    ],
+    "reason_codes": [
+      "MISSING_ASSESSMENT_STAGES"
+    ],
+    "strengths": [
+      "Strong Ats performance (83.2/100).",
+      "Strong Hr Interview performance (83.1/100).",
+      "Strong Machine Test performance (85.5/100)."
+    ],
+    "weaknesses": [],
+    "missing_evidence": [
+      "Missing or incomplete 'screening' stage evaluation."
+    ],
+    "eligibility_status": "UNKNOWN",
+    "threshold_config": {
+      "decision_version": "day52-v1",
+      "score_thresholds": {
+        "selected_min": 80.0,
+        "review_min": 60.0
+      },
+      "confidence_thresholds": {
+        "selected_min": 75.0,
+        "review_min": 50.0
+      },
+      "minimum_completed_rounds": 3,
+      "require_complete_assessment_for_selection": true,
+      "risk_policy": {
+        "integrity_flag_requires_review": true,
+        "behavior_flag_requires_review": true,
+        "missing_rounds_require_review": true,
+        "low_confidence_requires_review": true,
+        "automatic_rejection_from_risk_flags": false
+      },
+      "risk_weights": {
+        "integrity": 0.6,
+        "behavior": 0.4
+      }
+    },
+    "risk_factors": {
+      "integrity": {
+        "flag": false,
+        "evidence": [],
+        "source": "Integrity Monitoring Subsystem"
+      },
+      "behavior": {
+        "flag": false,
+        "evidence": [],
+        "source": "Behavioral Signals Subsystem"
+      },
+      "flagged_risks": [],
+      "automatic_rejection_from_risk_flags": false
+    },
+    "recruiter_decision": "PENDING_REVIEW",
+    "recruiter_notes": null,
+    "decided_by_actor": null,
+    "created_at": "2026-11-21T04:36:29.990737+00:00",
+    "updated_at": "2026-11-21T04:36:29.990737+00:00"
+  },
+  "human_review": {
+    "recommendation_id": "final_rec_2bd55c0bafbf",
+    "candidate_id": "e6c1c8d6-9ee2-4744-9034-55eef1bd03f1",
+    "opening_id": "op_c56398baf8e3",
+    "target_role": "Senior Python Backend Architect",
+    "decision": "HOLD_REVIEW",
+    "score": 77.94,
+    "confidence": 82.5,
+    "confidence_methodology": "Coverage (50%) + Evidence Quality (30%) + Data Consistency (20%)",
+    "confidence_interpretation": "Evidence completeness indicator; not a probability of job success.",
+    "completed_rounds": 4,
+    "expected_rounds": 5,
+    "reasons": [
+      "One or more evaluation rounds are missing.",
+      "Human review is required before an employment decision."
+    ],
+    "reason_codes": [
+      "MISSING_ASSESSMENT_STAGES"
+    ],
+    "strengths": [
+      "Strong Ats performance (83.2/100).",
+      "Strong Hr Interview performance (83.1/100).",
+      "Strong Machine Test performance (85.5/100)."
+    ],
+    "weaknesses": [],
+    "missing_evidence": [
+      "Missing or incomplete 'screening' stage evaluation."
+    ],
+    "eligibility_status": "UNKNOWN",
+    "threshold_config": {
+      "decision_version": "day52-v1",
+      "score_thresholds": {
+        "selected_min": 80.0,
+        "review_min": 60.0
+      },
+      "confidence_thresholds": {
+        "selected_min": 75.0,
+        "review_min": 50.0
+      },
+      "minimum_completed_rounds": 3,
+      "require_complete_assessment_for_selection": true,
+      "risk_policy": {
+        "integrity_flag_requires_review": true,
+        "behavior_flag_requires_review": true,
+        "missing_rounds_require_review": true,
+        "low_confidence_requires_review": true,
+        "automatic_rejection_from_risk_flags": false
+      },
+      "risk_weights": {
+        "integrity": 0.6,
+        "behavior": 0.4
+      }
+    },
+    "risk_factors": {
+      "integrity": {
+        "flag": false,
+        "evidence": [],
+        "source": "Integrity Monitoring Subsystem"
+      },
+      "behavior": {
+        "flag": false,
+        "evidence": [],
+        "source": "Behavioral Signals Subsystem"
+      },
+      "flagged_risks": [],
+      "automatic_rejection_from_risk_flags": false
+    },
+    "recruiter_decision": "APPROVED",
+    "recruiter_notes": "Verified complete 10-stage pipeline evidence.",
+    "decided_by_actor": "recruiter-d41-52",
+    "created_at": "2026-11-21T04:36:29.990737+00:00",
+    "updated_at": "2026-11-21T04:36:30.293699+00:00"
+  },
+  "report_meta": {
+    "report_id": "report_20a28b8f4031",
+    "sections": 0
+  }
+}

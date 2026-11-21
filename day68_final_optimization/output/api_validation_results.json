@@ -1,0 +1,51 @@
+{
+  "environment": "Local Windows 11, Python 3.12, Uvicorn single-worker, SQLite",
+  "dataset_size": {
+    "openings": 248,
+    "candidates": 218
+  },
+  "endpoint_latencies_ms": {
+    "GET /health": 15.17,
+    "GET /openings": 290.31,
+    "GET /candidates": 281.98,
+    "POST /candidates": 272.43,
+    "POST /resumes/upload": 253.42,
+    "POST /ats/score": 342.78,
+    "POST /eligibility/evaluate": 283.84,
+    "POST /cross-round-evaluation": 363.03,
+    "POST /final-recommendation": 289.89,
+    "POST /hiring-intelligence-report": 447.7
+  },
+  "repeated_openings_10x_ms": [
+    272.41,
+    263.82,
+    250.82,
+    258.02,
+    261.23,
+    254.26,
+    255.18,
+    246.08,
+    256.9,
+    265.95
+  ],
+  "repeated_openings_avg_ms": 258.47,
+  "concurrent_5x_candidates_statuses": [
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "concurrent_5x_candidates_ms": [
+    422.72,
+    378.2,
+    393.81,
+    355.57,
+    441.25
+  ],
+  "validation_checks": {
+    "invalid_file_upload_status": 400,
+    "missing_candidate_status": 404,
+    "unauthenticated_openings_status": 401
+  }
+}
